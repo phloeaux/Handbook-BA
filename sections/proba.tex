@@ -1,0 +1,604 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Cours}
+Plusieurs types de variables : \\
+\begin{enumerate}
+    \item quantitative : discrètes (1,2,$\dots$), continue\\
+    \item qualitative : ordinale (un peu, $\dots$), nominale (homme, femme, $\dots$)\\
+\end{enumerate}
+
+On définit la moyenne arithmétique comme :\\
+\begin{equation}
+    \overline{x} = \frac{1}{n} \sum x_i
+\end{equation}
+La médiane est quant à elle plus subtile : \\
+\begin{equation}
+    \begin{split}
+        med(x) = x_{(\frac{n+1}{2})} \textrm{si n est impair}\\
+        med(x) = \frac{1}{2}(x_{(\frac{n}{2})} + x_{(\frac{n}{2}+1)}) \textrm{si n est pair}
+    \end{split}
+\end{equation}
+Cette définition utilise la notion de quantile d'ordre $\alpha$ : $\hat{q}(\alpha) = x_{(\lceil n\alpha \rceil)}$.\\
+De ce fait, l'écart inter-quartile est donné par : $EIQ = \hat{q}(.75)-\hat{q}(.25)$\\
+
+On définit aussi l'écart-type empirique : \\
+\begin{equation}
+    S = \sqrt{\frac{1}{n-1} \sum (x_i-\overline{x})^2}
+\end{equation}
+
+Ainsi, on peut définir plusieurs sortes de statistiques :\\
+$\bullet$ les statistiques de lieu : si les données sont décalées le lieu se décale dans le même sens et par la même distance\\
+$\bullet$ les statistiques d'échelle : l'étendue recouverte par la majorité des données\\
+
+Le meilleur moyen de faire passer une information : \textbf{le boxplot}. Il possède des moustaches ayant une taille de $1.5\cdot EIQ$, puis une boîte de largeur EIQ.\\
+
+\subsubsection{Probabilités fondamentales}
+Soit $\Omega$ l'ensemble fondamental. $\Omega = \{\omega_1, \dots\}$, avec $\omega_i$ des événements élémentaires.\\
+
+Plusieurs axiomes sont à accepter :\\
+\begin{enumerate}
+    \item $0 \leq Pr(A) \leq 1$\\
+    \item $Pr(\Omega) = 1$\\
+    \item Pour tout ensemble disjoints $Pr(\cup^{\infty} A_n) = \sum^{\infty} Pr(A_n)$\\
+\end{enumerate}
+
+De plus : \\
+\begin{enumerate}
+    \item $A\cup B = B\cup A$\\
+    \item $A\cap B = B\cap A$\\
+    \item $A/B = A\cap B^\complement$ (A sans B)\\
+\end{enumerate}
+
+\begin{enumerate}
+    \item $Pr(\emptyset) = 0$\\
+    \item $Pr(A^\complement) = 1-Pr(A)$\\
+    \item $Pr(A\cup B) = Pr(A)+Pr(B) - Pr(A\cap B)$\\
+    \item $A\subset B \Rightarrow Pr(A)<Pr(B)$\\
+    \item $Pr(A^\complement \cap B^\complement) = 1-Pr(A\cup B)$\\
+    \item $Pr(A\cap B^\complement) = Pr(A)-Pr(A\cap B)$\\
+\end{enumerate}
+
+On définit une probabilité comme $Pr(A) = \frac{\textrm{nombre événements favorables à A}}{\textrm{nombre événements totaux}}$\\
+
+\quad \underline{Arrangements et combinaisons :}\\
+Si l'ordre compte alors le nombre d'événements possible équivaut : $A_n^k = \frac{n!}{(n-k)!}$\\
+Si l'ordre ne compte pas (combinaisons) : $C_k^n = \begin{pmatrix} n\\
+k\\
+\end{pmatrix} = \frac{n!}{(n-k)! k!}$\\
+
+\quad \underline{Probabilités conditionnelle :}\\
+On les écrit comme : $Pr(A\mid B) = \frac{Pr(A\cap B)}{Pr(B)}$\\
+Pour tester l'indépendance de deux variables, on regarde si $Pr(A\cap B) = Pr(A)Pr(B)$, si cela est vrai alors elles sont indépendantes.\\
+
+Selon \textbf{Bayes} : \\
+\begin{equation}
+    \begin{split}
+        Pr(A) = \sum Pr(A\cap B_i) = \sum Pr(A\mid B_i) Pr(B_i)\\
+        Pr(B_i\mid A) = \frac{Pr(A\mid B_i)}{\sum Pr(A\mid B_j) Pr(B_j)} = \frac{Pr(A\mid B_i) Pr(B_i)}{Pr(A)}
+    \end{split}
+\end{equation}
+Notamment, il est bon de noter que $Pr(A^\complement \mid B) = 1-Pr(A\mid B)$\\
+
+\subsubsection{Les fonctions probabilistes}
+Définissons tout d'abord quelques termes.\\
+\textbf{La fonction de masse(discrète)/densité(continue)} : \\
+$0\leq f_x \leq 1$\\
+$f_x = 0$ pour tout valeur en dehors de l'ensemble\\
+$\sum f_x = 1 \Rightarrow \int_{-\infty}^{\infty} f_x = 1$\\
+$f_x = Pr(X=x_i)$\\
+
+\textbf{La fonction répartition} : \\
+$\lim_{x\rightarrow \infty} F_x = 1$, $\lim_{x\rightarrow -\infty} = 0$\\
+Elle doit être monotone croissante. De plus, $F_x = \int_{-\infty}^x f_xdx$ et $F_x = Pr(X \leq x_i)$\\
+Enfin on a que $F_x^{-1} = q_{\alpha}$\\
+
+De la, on peut définit les \textbf{fonctions conjointes} : \\
+$F_{x,y} = Pr(X\leq x_i, Y\leq y_i) = \iint f_{xy} dxdy$\\
+Ces deux variables sont indépendantes si $f_{xy} = f_xf_y$\\
+On a aussi la \textbf{fonction conditionnelle} :\\
+$f_{x\mid y} = \frac{f_{x,y}}{f_y}$\\
+
+Le \textbf{changement de variable} : \\
+$f_y = f_x(h(\vec{y})) \lvert J_h(\vec{y})\rvert$\\
+$F(y) = F_x(h(y))$\\
+On a les relations : $\vec{y} = g(\vec{x})$, $h = g^{-1}$ soit $h(\vec{y}) = g^{-1}(\vec{y}) = \vec{x}$\\
+
+
+\textbf{L'espérance d'une variable} est donnée par : \\
+\begin{equation}
+    \mathbb{E} = \left\{
+    \begin{array}{cc}
+        \sum x_if_x = \sum x_i Pr(X=x_i) & \textrm{distribution discrète} \\
+        \int_{-\infty}^{\infty}xf_xdx & \textrm{distribution continue}\\
+    \end{array}
+    \right.
+\end{equation}
+Elle est linéaire et possède les propriétés suivantes : $\mathbb{E}[aX+b] = a\mathbb{E}[X] +b$\\
+$\mathbb{E}[\sum x_i] = \sum \mathbb{E}[x_i]$\\
+Si X et Y sont indépendantes, alors $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ \warning Pas vrai dans l'autre sens\\
+
+De la même manière $\mathbb{E}[g(X)] = \left\{\begin{array}{c}
+    \sum g(x_i) f_x\\
+    \int_{-\infty}^{\infty} g(x)f_xdx\\
+\end{array}\right.$\\
+
+Pour des lois conditionnelles, on a : \\
+$\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X\mid Y]] = \sum Pr(y_i)\mathbb{E}[X\mid Y=i]$\\
+avec $\mathbb{E}[X\mid Y] = \left\{\begin{array}{c}
+    \sum x_i f_{x\mid y}(x_i, y) \\
+    \int_{-\infty}^{\infty}xf_{x\mid y} dx 
+\end{array}\right.$
+
+On définit aussi la \textbf{variance} : c'est une mesure de la dispersion.\\
+$var(x) = \mathbb{E}[(X-\mathbb{E}[X])^2] = \mathbb{E}[X^2] - \mathbb{E}[X]^2$\\
+
+On a $var(ax+b) = a^2var(x)$\\
+
+Pour des lois conditionnelles, on a : 
+$var(x) = var(\mathbb{E}[X\mid Y]) + \mathbb{E}[var(X\mid Y)]$\\
+$var(X\mid Y) = \mathbb{E}[(X-\mathbb{E}[X\mid Y])^2\mid X]$\\
+
+Désormais, la \textbf{covariance} : mesure de la dépendance linéaire de deux variables\\
+$cov(X,Y) = \mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])] = \mathbb{E}[XY]\mathbb{E}[X]\mathbb{E}[Y]$\\
+
+On a les propriétés suivantes :\\
+$cov(X,X) = var(x)$; $cov(X+Y,Z) = cov(X,Z) + cov(Y,Z)$\\
+$cos(aX+b, cY+d) = ac cov(X,Y)$; $var(X+Y) = var(X)+var(Y) + 2cov(Y,X)$\\
+
+La covariance empirique est donnée par : $\frac{1}{n-1} \sum(x_i-\overline{x})(y_i-\overline{y})$\\
+
+Enfin, \textbf{la corrélation} (normalisation de la covariance) : \\
+$corr(X,Y) = \frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$\\
+
+\subsubsection{Loi utilisées}
+
+\quad \underline{Loi normale}
+\begin{equation}
+    f_x = \frac{1}{(2\pi \sigma^2)^{\frac{1}{2}}} \exp{(-\frac{(X-\mu)^2}{2\sigma^2})}
+\end{equation}
+On écrit alors $X \sim \mathcal{N}(\mu, \sigma^2)$\\
+On peut standardiser cette variable pour avoir une loi normale centrée réduite : \\
+$Z = \frac{x-\mu}{\sigma}$ $Z \sim \mathcal{N}(0,1)$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+\hline
+      $\phi(-z) = 1-\phi(z)$   & $\Phi^{-1}(z) = -\Phi^{-1}(1-z)$ \\
+    \hline
+    \end{tabular}
+    \caption{Relations importantes}
+\end{table}
+On a d'ailleurs la relation : $\phi(z) = \int_{-\infty}^z \Phi(t)dt$\\
+
+\textbf{Par ailleurs :} $Pr(x<a) = \phi(a)$ et $\Phi(a) = Pr(x=a)$\\
+
+\quad \underline{Chi2 :}\\
+\begin{equation}
+    f = \frac{(\frac{1}{2})^{\frac{k}{2}}}{\Gamma(\frac{k}{2})} x^{\frac{k}{2}-1} e^{-\frac{x}{2}}
+\end{equation}
+$var(x) = 2k$, $\mathbb{E} = k$, avec k le degré de liberté\\
+
+\quad \underline{Bernoulli :}\\
+\begin{equation}
+    X = \left\{
+    \begin{array}{cc}
+        x_1 = 0 & \textrm{avec probabilité 1-p} \\
+        x_2 = 1 & \textrm{avec probabilité p}\\
+    \end{array}
+    \right.
+\end{equation}
+
+On a deux issues. var(x) = $p(1-p)$, $\mathbb{E} = p$\\
+On peut traduire la fonction de masse : $f = p^{x_i}(1-p)^{1-x_i}$\\
+
+\quad \underline{Binomial :}\\
+\begin{equation}
+    f = \begin{pmatrix}
+        n\\x\\
+    \end{pmatrix} p^x (1-p)^{n-x}
+\end{equation}
+Somme de plusieurs bernoulli.\\
+var(x) = $np(1-p)$, $\mathbb{E} = p$\\
+$X\sim \mathcal{B}(n,p)$\\
+
+\quad \underline{Poisson($\lambda>0$) : }\\
+\begin{equation}
+    f = \frac{\lambda^x}{x!} e^{-\lambda}
+\end{equation}
+$\mathcal{E} = \lambda = var(x)$\\
+$X\sim Poiss(\lambda)$\\
+Si $X\sim \mathcal{B}(n,p)$, avec n grand et p petit alors $X\sim Poiss(\lambda = np)$\\
+
+\quad \underline{Loi exponentielle ($\lambda>0$):}\\
+\begin{equation}
+    f = \left\{
+    \begin{array}{cc}
+        \lambda \exp(-\lambda x) & x>0 \\
+        0 & \textrm{sinon}\\
+    \end{array}
+    \right.
+\end{equation}
+$var(x) = \frac{1}{\lambda^2}$, $\mathbb{E} = \frac{1}{\lambda}$\\
+
+\quad \underline{Variable de Cauchy :}\\
+\begin{equation}
+    f = \frac{1}{\pi} \frac{1}{1+x^2}
+\end{equation}
+L'espérance et la variance n'existent pas.\\
+
+\quad \underline{Loi Gamma :}\\
+$X\sim \Gamma (k, \theta)$, $\theta = \frac{1}{\beta}$, k un paramètre d'échelle et $\theta$ un paramètre de forme\\
+\begin{equation}
+    f = \frac{x^{k-1}}{\Gamma(k) \theta^k} \exp(-\frac{x}{\theta})
+\end{equation}
+$\mathbb{E} = k\theta$, $var(x) = k\theta^2$\\
+
+\quad \underline{Loi Beta :}\\
+$B(\alpha, \beta) = \frac{(\alpha-1)! (\beta-1)!}{(\alpha+\beta-1)!}$\\
+\begin{equation}
+    f = \frac{x^{\alpha-1} (1-x)^{\beta-1}}{B(\alpha, \beta)}
+\end{equation}
+$\mathbb{E} = \frac{\alpha}{\alpha+\beta}$, $var(x) = \frac{\alpha \beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$\\
+
+\quad \underline{Student :}\\
+\begin{equation}
+    f = \frac{\Gamma(\frac{\nu+1}{2}}{\sqrt{\nu \pi}\Gamma(\frac{\nu}{2})} (1+\frac{x^2}{\nu})^{-\frac{\nu+1}{2}}
+\end{equation}
+Si $\nu >1$ : $\mathbb{E} = 0$, sinon indéterminée\\
+Si $\nu > 2$ var(x) $=\frac{\nu}{\nu-2}$ sinon indéterminée\\
+
+\quad \underline{Loi uniforme continue :}\\
+\begin{equation}
+    f = \left\{
+    \begin{array}{cc}
+        \frac{1}{b-a} & a\leq x\leq b \\
+        0 & \textrm{sinon}\\
+    \end{array}
+    \right.
+\end{equation}
+$X\sim \mathcal{U}(a,b)$\\
+$\mathbb{E} = \frac{a+b}{2}$, var(x)$=\frac{(b-a)^2}{12}$\\
+
+\quad \underline{Loi uniforme discrète :}\\
+\begin{equation}
+    f = \left\{
+    \begin{array}{cc}
+        \frac{1}{b-a+1} & a\leq x\leq b \\
+        0 & \textrm{sinon}\\
+    \end{array}
+    \right.
+\end{equation}
+$X\sim \mathcal{U}(a,b)$\\
+$\mathbb{E} = \frac{a+b}{2}$, var(x)$=\frac{(b-a+1)^2-1}{12}$\\
+
+\quad \underline{Loi géométrique :}\\
+\begin{equation}
+    f = p(1-p)^{k-1}
+\end{equation}
+$\mathbb{E} = \frac{1}{p}$, var(x)=$\frac{1-p}{p^2}$\\
+On fait une expérience jusqu'à y arriver.\\
+
+
+\subsubsection{Tests et hypothèses}
+Tout d'abord attaquons avec la \textbf{loi des grands nombres} :\\
+Si on possède un nombre conséquent de données (>1), que l'espérance et la variance sont finies.\\
+On a alors : $\lim_{n\rightarrow \infty} Pr(\lvert \overline{X_n}-\mu \rvert > \varepsilon) = 0$\\
+
+\quad \underline{Théorème centrale limite : (TCL)}\\
+On suppose ici que les variables $X_i \stackrel{iid}{\sim} \mathcal{N}(\mu, \sigma^2)$\\
+On a donc $\overline{Z_n} = \frac{\overline{X_n}-\mathbb{E}[\overline{X_n}]}{\sqrt{var(\overline{X_n})}} = \sqrt{n} \frac{\overline{X_n}-\mu}{\sigma}$\\
+
+Pour n grand, on a donc $Z\stackrel{iid}{\sim} \mathcal{N}(0,1)$\\
+
+\quad \underline{Inégalité de Markov :}\\
+Soit $Pr(X>\varepsilon) \leq \frac{\mathbb{E}[X]}{\varepsilon}$\\
+
+\quad \underline{TCL non asymptotique de Berry-Essen :}\\
+$\mathbb{E}[\lvert X-\mu\rvert^3] = \kappa \Rightarrow \lvert Pr(Z_n \leq z) - \phi(z) \rvert \leq \frac{0.5\kappa}{\sigma^3 \sqrt{n}} $ C'est ici une borne pessimiste.\\
+
+\quad \underline{Inégalités de Tchebychev :}\\
+$Pr(\lvert X-\mu \rvert c> \varepsilon) \leq \frac{\sigma^2}{\varepsilon^2}$\\
+Équivalent à $Pr(\lvert \overline{X} - \mu\rvert > \varepsilon) \leq \frac{\sigma_{\overline{X}^2}}{\varepsilon^2}$\\
+
+\quad \underline{Estimation de paramètres :}\\
+Trois méthodes : \\
+\begin{enumerate}
+    \item Méthode des moments : $m_k = \mathbb{E}[X^k]$, avec pour estimateur $\hat{m_k} = \frac{1}{n} \sum x_i^k$. La loi des grands nombres justifie cette utilisation\\
+    \item Moindre carrés : on minimise $S(p) = \sum(x_i-p)^2$\\
+    \item Le maximum de vraisemblance, plus général et plus juste en moyenne\\
+\end{enumerate}
+
+Soit la vraisemblance : $L(\theta) = \Pi_{i=0}^n f_x \Rightarrow l(\theta) = \ln{L(\theta)}$\\
+Ensuite, on pose $l'(\theta) = 0$. On a le maximum si $l"(\theta) <0$\\
+
+On a maintenant : $\hat{\theta_{ML}} \stackrel{.}{\sim} \mathcal{N}(\theta, \frac{1}{J(\hat{\theta})})$\\
+Avec $J(\hat{\theta}) = -\frac{\partial^2}{\partial \theta^2}(l(\theta))$, l'information observée.\\
+
+Pour vérifier la validité d'un estimateur, on utilise le \textbf{biais} : $b(\hat{\theta}) = \mathbb{E}[\hat{\theta}] - \theta$\\
+On utilise de plus \textbf{l'erreur quadratique moyenne EQM} : \\
+EQM$(\hat{\theta}) = \mathbb{E}[(\hat{\theta}-\theta)^2] = var(\hat{\theta}) + b(\hat{\theta})^2$\\
+
+\quad \underline{Intervalle de confiance IC :}\\
+Un intervalle de confiance à un niveau de confiance $1-\alpha$ tel que $Pr(I \leq \theta \leq S) = 1-\alpha$\\
+
+A partir de cela, on peut créer un intervalle de confiance, ici \textbf{l'intervalle de Wald}: \\
+On suppose que $\hat{\theta}$ est un estimateur non biaisé de $\theta$. On suppose connaître la variance.\\
+IC=[$\hat{\theta}-s_{\alpha} \sqrt{v}; \hat{\theta}+s_{\alpha} \sqrt{v}$] où $s_{\alpha} = q_{1-\frac{\alpha}{2}}$, le quantile de la loi normale.\\
+
+Si l'on ne connaît pas la variance, alors il faut utiliser la théorie de student.\\
+On pose $\mu \simeq \hat{\mu} = \overline{X} = \frac{1}{n}\sum x_i$\\
+Ainsi que $\sigma^2 \simeq S^2 = \frac{1}{n-1}\sum(x_i-\overline{x})^2$\\
+
+
+\begin{equation}
+    T = \sqrt{n} \frac{\overline{X}-\mu}{S^2} \sim t_{n-1; 1-\frac{\alpha}{2}} \rightarrow \mathcal{N}(0,1)
+\end{equation}
+
+Par cela, on a l'intervalle : \\
+IC = [$\overline{X}-s_{\alpha} \frac{S}{\sqrt{n}}; \overline{X}+s_{\alpha} \frac{S}{\sqrt{n}}$]\\
+
+Avec $s_{\alpha} = t_{1-\frac{\alpha}{2}, n-1}$
+
+\quad \underline{Rejet/non rejet d'une hypothèse :}\\
+\warning Non rejet est différent de la confirmation\\
+
+$H_0 : $ hypothèse nulle, celle attendue\\
+$H_1 : $ hypothèse alternative\\
+Soit $\alpha$ le niveau de signification.\\
+
+Il est dès lors possible de faire deux types d'erreurs possibles : \\
+\begin{enumerate}
+    \item Type I : grave $\rightarrow$ rejet de $H_0$ alors qu'elle est vraie\\
+    \item Type II : moins grave $\rightarrow$ on garde $H_0$ alors qu'elle est fausse\\
+\end{enumerate}
+
+La \textbf{puissance d'un test} est alors définit comme : $\pi (H_1) = 1-Pr(\textrm{erreur de type II})$\\
+Où Pr(erreur de type I)= $\alpha$
+
+\underline{Cas unilatéral :}  $H_0 : \theta = \theta_0$, $H_1 \neq \theta_0$ rejet si $\lvert t_{obs}\rvert > t_{n-1; 1-\frac{\alpha}{2}}$ \\
+\underline{Cas bilatéral :} $H_0 : \theta = \theta_0$, $H_1 > \theta_0$ rejet si $t_{obs} > t_{n-1; 1-\frac{\alpha}{2}}$ \\
+
+Un autre moyen pour savoir est $p_{obs}$ : \\
+$p_{obs} = Pr(\lvert T \rvert > t_{obs})$. On rejette si $p_{obs} < \alpha$\\
+
+Finalement, on peut tester avec un intervalle de confiance :\\
+Si $\theta_0 \in$ IC : on ne rejette pas $H_0$ (cas bilatéral)\\
+Cas unilatéral : $H_1 : \theta > \theta_0$, on rejette si $\theta_0 \notin ]-\infty; S[$\\
+
+\subsubsection{Tests à plusieurs dimensions}
+\quad \underline{Deux listes, interdépendance :}\\
+On procède d'abord à un test Fisher :\\
+$\frac{S_1^2}{S_2^2} \sim F_{n_1-1; n_2-1}$\\
+Si on veut vérifier $\sigma_1^2 = \sigma_2^2$\\
+Ensuite, on procède : $S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}$\\
+
+Enfin, $T = \frac{\overline{X_1}-\overline{X_2}}{S_p \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim t_{n_1+n_2-2}$\\
+
+\quad \underline{Test $\chi^2$ :}\\
+Adéquation d'une distribution avec des données : fréquences observées $ o_i$, fréquence théoriques $e_i$.\\
+Il est nécessaire que $e_i > 5$. On rejette $H_0$ si $t_{obs} > \chi^2_{\nu; 1-\alpha}$\\
+Avec $T = \sum \frac{(o_i-e_i)^2}{e_i}$.\\
+Sous $H_0 : T\sim \chi_{\nu}^2$ avec $\nu = k-1-c$, k le nombre de classe et c le nombre de paramètres estimés.\\
+
+\quad \underline{Tableau de contingence :}\\
+On veut tester l'indépendance entre A et B.\\
+\begin{equation}
+    t_{obs} = \sum_1^k \sum_1^h \frac{(n_{ij} - \frac{n_{i.}n_{.j}}{n})^2}{\frac{n_{i.}n_{.j}}{n}}
+\end{equation}
+Si $t_{obs} > \chi^2_{(h-1)(k-1)}$ on rejette l'hypothèse.\\
+
+On suppose ici N variables indépendantes, et $Pr(h=1) = \frac{n_{i.}}{n}$, $Pr(k = j) = \frac{n_{.j}}{n}$, $e_{ij} = \frac{n_{i.}n_{.j}}{n}$\\
+
+\subsubsection{Régression linéaire}
+On veut minimiser l'erreur : $SC (\alpha, \beta) = \sum (y_i - (\alpha + \beta x_j))^2$\\
+On a $y = \alpha + \beta x$\\
+On estime donc cela par les moindres carrés : $\hat{y} = \hat{\alpha} + \hat{\beta}x$\\
+\begin{equation}
+    \hat{\beta} = \frac{\sum (x_j-\overline{x})y_i}{\sum(x_j-\overline{x})^2} = \frac{\sum (x_j-\overline{x})(y_i-\overline{y})}{\sum(x_j-\overline{x})^2}
+\end{equation}
+
+\begin{equation}
+    \hat{\alpha} = \overline{y}-\hat{\beta}\overline{x}
+\end{equation}
+On définit donc maintenant les résidus : $r_j = y_j - (\hat{\alpha} + \hat{\beta}x_j)$\\
+
+On peut aussi passer par des relations vectorielles :\\
+$\vec{X} \sim \mathcal{N}(\vec{\mu}, \vec{\Sigma})$\\
+\begin{equation}
+    f(\vec{x}) = (2\pi)^{-\frac{1}{2}} \det(\vec{\Sigma})^{-\frac{1}{2}} \exp{(-\frac{1}{2} (\vec{x} - \vec{\mu})^T \vec{\Sigma}^{-1}(\vec{x}-\vec{\mu}))}
+\end{equation}
+Avec $var(\vec{\Sigma}) = \sigma^2 I_n$\\
+$\vec{\Sigma} = \vec{A} \vec{A}^T$, $\Sigma_{ij} = cov(x_i, x_j)$\\
+
+$\vec{X} = \vec{A} \vec{Z} + \vec{\mu}$\\
+Avec $ \vec{Z} \in \mathbb{R}^k \sim \mathcal{N}(0,I_k)$\\
+On a donc $\vec{y} = \vec{X} \vec{\beta} + \vec{\varepsilon}$\\
+$\varepsilon \in \mathbb{R} \sim \mathcal{N}(\vec{0}, \sigma^2 I_n)$\\
+
+On a $\vec{X} = \begin{pmatrix}
+    1 & x_1\\
+    \dots & \dots\\
+    1 & x_n\\
+\end{pmatrix}$, ainsi que $\vec{\beta} = (\beta_0, \beta_1)^T = (\vec{X}^T\vec{X})^{-1} \vec{X}^T \vec{y} $\\
+
+On définit donc les valeurs ajustées : $\hat{y} = \vec{X}(\vec{X}^T\vec{X})^{-1} \vec{X}^T \vec{y} = \vec{H} \vec{y}$\\
+Ainsi H est la hat matrice. Elle est symétrique et $\vec{H} = \vec{H}^T$, $\vec{H}^2 = \vec{H}$\\
+
+
+\quad \underline{Tests :}\\
+On peut maintenant tester les valeurs pour $\beta$ et $\alpha$\\
+Tout d'abord il faut déterminer la variance : \\
+\begin{equation}
+    S^2 = \frac{n-p}{\parallel \vec{y} - \hat{y} \parallel^2} = \frac{1}{n-p} \sum (y_i - \hat{y_i})^2
+\end{equation}
+
+Tous deux sont réaliser avec des tests de Student.\\
+$T_{\beta} = \frac{\hat{\beta_i} - \beta_i}{S\sqrt{v_{ii}}} = \frac{\hat{\beta_i} - \beta_i}{\sqrt{\frac{S^2}{\sum (x_i-\overline{x})^2}}} \sim t_{n-p; 1-\frac{\alpha}{2}}$
+Avec $v_{ii}$ le i-ème élément diagonale de la matrice $\vec{v} = (\vec{X}^T\vec{X})^{-1}$\\
+
+$T_{\alpha} = \frac{\hat{\alpha} - \alpha_0}{S ( \frac{1}{n}+ \frac{\overline{x}^2}{\sum (x_i-\overline{x})^2})^{\frac{1}{2}}}$\\
+
+On a IC = [$\hat{\beta_i}-s_{\alpha} S \sqrt{v_{ii}}; \hat{\beta_i}+s_{\alpha} S \sqrt{v_{ii}}$]
+
+\quad \underline{Influence des variables :}\\
+On a p variables, on se demande si les q premières ne sont pas suffisantes.\\
+Soit $\overline{X_1} \in \mathbb{R}^{nxp}$ et $\overline{X_2} \in \mathbb{R}^{n(p-q)}$\\
+Soit M: $\vec{y} = \vec{X_1}\beta_1 + \vec{X_2} \beta_2 + \varepsilon$\\
+m:$\vec{y} = \vec{X_1} \beta_1 + \varepsilon$\\
+$H_0 : \beta_2 \in \vec{0}$\\
+$H_1 : \beta_2 \notin \vec{0}$\\
+On fait un test de fisher : \\
+$SCH(\hat{\beta}) = \parallel \vec{y} - \hat{y}\parallel^2 $\\
+$F = \frac{\frac{SCH(\hat{\beta_1})-SCH(\hat{\beta})}{p-q}}{\frac{SCH(\hat{\beta})}{n-p}}$\\
+
+On définit les résidus standardisées comme : $r_i = \frac{y_i-\hat{y_i}}{s\sqrt{1-H_i}}$\\
+Pour de la régression linéaire, on a besoin de quelques hypothèses :\\
+\begin{enumerate}
+    \item linéarité : les résidus sont à 95$\%$ dans l'intervalle $[-2;2]$\\
+    \item homoscedasticité : la variance des $\varepsilon_i$ est constante\\
+    \item indépendance : les résidus sont indépendante et identiquement distribuées\\
+    \item normale : $\varepsilon \sim \mathcal{N}$\\
+    \item X est de plein rang ($\det(X^TX) = 0$)\\
+\end{enumerate}
+
+Pour le diagnostique de normalité, on compare à l'aide d'un QQ plot les quantiles théoriques avec les empirique. Il s'agit d'un nuage de point :\\
+($F^{-1}(c_1, x_1), \dots$) avec $C_k = \frac{k-c_0}{n+1-c_0}$ où $c_0 = \frac{3}{8}$ si n < 10, sinon $c_0 = \frac{1}{2}$\\
+
+Il existe deux types de valeurs qui exercent une grande influence sur les données : \\
+\begin{enumerate}
+    \item valeurs aberrantes : si les résidus sont en dehors de l'intervalle $[-2; 2]$ (loin des valeurs observées)\\
+    \item point levier : loin sur l'axe des covariables : $\sum h_{ii} = p$, si $h_{ii} > \frac{2p}{n}$ alors le point influence grandement la régression.\\
+\end{enumerate}
+
+Finalement, on a la \textbf{distance de Cook} :\\
+L'influence d'une observation peut être évaluée, soit $\vec{y_{-j}}$ la liste sans la valeur j\\
+\begin{equation}
+    C_j = \frac{1}{pS^2}\parallel \hat{y}-\hat{y_{-j}}\parallel^2 = r_i^2 \frac{h_{ii}}{p(1-h_{ii})}
+\end{equation}
+
+
+\subsection{Python}
+
+\subsubsection{Global}
+\begin{enumerate}
+    \item longueur : len(tableau)\\
+    \item moyenne : tab.mean()\\
+    \item mediane : tab.median()\\
+    \item ecart type : tab.std() ou np.std(tab, ddof=1)\\
+    \item min/max : tab.min()\\
+    \item mettre au carré : **2\\
+    \item transposer : .transpose()\\
+    \item somme dans matrice : .sum(axis=1) : les lignes (tous les coefficients d'une ligne s'additionnent), .sum(axis=0) : les colonnes\\
+\end{enumerate}
+\subsubsection{Numpy}
+\begin{enumerate}
+    \item quantile : np.quantile(nomtab, position)\\
+    \item tableau : np.array([x,x,x.....])\\
+    \item exponentiel : np.exp(x)\\
+    \item tableau de zeros : np.zeros(n)\\
+    \item racine carré : np.sqrt(x)\\
+    \item moyenne : np.mean()
+    
+\end{enumerate}
+
+\subsubsection{Pandas}
+\quad \textbf{Essentiellement pour tableau à plusieurs dimensions!}
+\begin{enumerate}
+    \item on def la fonction quantile : quantile = data.Taille.quantile((0.25,0.75), interpolation = "inverted\_cdf").rename("Quantiles") .to\_frame(), puis on trouve le bon : quant=quantile[tab][\%]\\
+    \item tableau : data = pd.DataFrame(np.array([147 , 59 , 152]).transpose(), 
+                     columns=["Taille"], index=["..."] (nom ligne), \textbf{Ou meilleur :}
+                     data = pd.DataFrame(data = \{"Nom col 1" = [x,x,...], "Nom col 2" = [x,x,x,...]\})\\
+    \item On appel les tableaux : data.Nomcol1 (i.e.)
+    \item Si from scipy.stats import bootstrap : \textbf{IC} : bootstrap\_Poids = bootstrap(Poids, np.median, confidence\_level=0.80,
+                         random\_state=1, method='percentile')\\
+\end{enumerate}
+
+\subsubsection{Les différentes fonctions}
+\begin{enumerate}
+    \item Normal : st.norm((data = tab, loc = mean(0), moments=blc, scale = ecart-type (1))\\
+    \item Chi2 : st.chi2(f$_{obs}$(tab de f obs), ddof = y, f$_{exp}$(f attendu))\\
+    \item beta : st.beta\\
+    \item uniforme : st.uniform(size, loc(min value), scale(étendue)\\
+    \item binomial : st.binom(k, n, p)\\
+\end{enumerate}
+
+\subsubsection{Les extensions}
+\begin{itemize}
+    \item .cdf : cumulative distrib fonction : proba intégré\\
+    \item .pdf : fonction densité\\
+    \item .rvs(size = n) : chiffre hasard voulu\\
+    \item .ppf(1-$\alpha$) : quantile voulu\\
+\end{itemize}
+
+\subsubsection{Graphes}
+\quad\textbf{ Le mieux :\\}
+fig, (ax1) = plt.subplots(1, 1,figsize = (6,4))
+
+ax1.plot(np.arange(1,n+1),np.divide(np.cumsum(X),np.arange(1,n+1)))
+
+ax1.set\_title("Plot de la proportion de succès pour un nombre croissant de variables générées")
+
+ax1.set(xlabel='Nombre de variable générée',ylabel="Proportion de succès")
+
+plt.show()
+
+\textbf{Ou alors, boxplot + hist} :\\
+fig, (ax1, ax2) = plt.subplots(1, 2,figsize = (12,3))
+
+ax1.boxplot(data.Taille, vert = 0)
+
+ax1.vlines(mean,0.5,1.5,linestyles="dashed",label="moyenne")
+
+ax1.vlines(median,0.5,1.5,linestyles="dotted",label="médiane")
+
+\textbf{ax1.legend(shadow=True, fancybox=True,loc="upper left")}
+
+ax1.set\_title('Boxplot des tailles observées')
+
+ax2.hist(data.Taille,range = (50,190), bins = 10, color = 'white', edgecolor = 'black')
+            
+ax2.vlines(mean,-0.2,5.2,linestyles="dashed",label="moyenne")
+
+ax2.vlines(median,-0.2,5.2,linestyles="dotted",label="médiane")
+
+ax2.legend(shadow=True, fancybox=True)
+
+ax2.set\_title('Histogramme des tailles observées')
+
+plt.scatter(x = datas.Taille, y = datas.Poids)
+
+ax1.plot(datas["Taille"], datas["Poids"])
+
+ax1.set(xlabel = 'nom', ylabel='nom')
+
+ax1.pie(tab, labels=[""])
+
+ax1.bar(x=[""], height =)
+
+\textbf{Si plusieurs bars :}
+n = np.arange(4)
+
+r=.2
+
+ax1.bar(n, data["Brun"], label="Brun", width=r)
+
+ax1.bar(n+r, data["Bleu"], label="Bleu", width=r)
+
+ax1.bar(n+2*r, data["Hazel"], width=r, label="Hazel")
+
+ax1.bar(n+3*r, data["Vert"], width=r, label="Vert")
+
+ax1.legend(fancybox=True, shadow=True)
+
+ax1.set(xlabel="Couleur des yeux", ylabel="Effectif")
+
+ax1.set\_xticks(n+r,["Noir", "Brun", "Roux", "Blond"])
+
+
+plt.show()
+
+\end{document}

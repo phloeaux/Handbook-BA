@@ -1,0 +1,284 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Propriétés fondamental}
+
+
+Pour tout système on a l'énergie E : $\dot{E} = P^{ext} + P_c + P_Q + P_w = P^{ext} + \dot{U} = F^{ext}v + M^{ext} \omega + \dot{U}$\\
+$E =\frac{p^2}{2m} + \frac{L^2}{2I} + U = \frac{1}{2} v \cdot p + \frac{1}{2} \omega \cdot L + U$\\
+A l'équilibre, on a $T_1 = T_2 = \dots$; $P_1 = P_2 = \dots$; $\mu_1 = \mu_2 = \dots$.\\
+De plus, on a toujours que :$P_Q^{12} = -P_Q^{21}$\\
+
+Pour tous les systèmes, on a : si fermé $P_c = 0$. Si diatherme : $P_Q = 0$. Si isolé : $\dot{U} = 0$. Si adiabatiquement fermé : $P_Q = P_c = 0$\\
+$T[K] = T[^{\circ}C] + 273$\\
+$R = 8.314[J.kg^{-1}.mol^{-1}]$\\
+$P_0 = 1[bar] = 10^5[Pa]$\\
+
+\begin{minipage}{.5\textwidth}
+    $\delta W = P_wdt = -PdV$\\
+    $\delta C = P_c dt = \sum \mu_A dN_A$\\
+    $\delta Q = P_Q dt = TdS$\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    $W_{if} = \int P_wdt = -\int PdV$\\
+    $Q_{if} = \int P_wdt = \int TdS$\\
+    $C_{if} = \int P_cdt = \int \mu dN$\\
+\end{minipage}
+
+\begin{equation}
+    U = -PV + TS + \sum \mu_A N_A \Rightarrow \dot{U} = T\dot{S} - P\dot{V} + \sum \mu_A \dot{N_A}
+\end{equation}
+On définit l'entropie $S$ telle que :$\dot{S} = \pi_s + I_s[J.K^{-1}] = \pi_s + \frac{P_Q}{T}$\\
+Avec $\pi_s$ le taux de production d'entropie irréversible (si > 0 : irréversible, sinon l'événement est réversible) et $I_s$ le taux d'échange d'entropie.\\
+
+Pour un système stationnaire, on a que toutes les équations de la forme des fonctions d'états : $\frac{d}{dt} = 0$ (soit U et S).\\
+
+Pour un système adiabatiquement fermé, on a : $\pi_s = \frac{1}{T}(P_w + P\dot{V} - \sum \mu_A \dot{N_A}) \geq 0$.\\
+
+\quad \underline{Loi de Fourier : (transfert de chaleur dans une paroi)}\\
+Si la paroi est fixe, diatherme et imperméable :\\
+\begin{equation}
+    \kappa \frac{A}{l} (T_2-T_1) = P_Q^{21} \Rightarrow \pi_s = (\sqrt{\kappa \frac{A}{l}} \frac{T_2-T_1}{\sqrt{T_2T_1}})^2
+\end{equation}
+Avec $\kappa$ le coefficient de conductivité thermique de la paroi.\\
+
+\quad \underline{Loi de Fick : (diffusion)}
+Si paroi fixe, diatherme et imperméable :\\
+\begin{equation}
+    \dot{N}_1 = F \frac{A}{l}(\mu_2 - \mu_1) \Rightarrow \pi_s = (\sqrt{\frac{FA}{lT}}(\mu_2 - \mu_1))^2
+\end{equation}
+
+\quad \underline{Loi de Poiseuille :(Frottement lors d'un écoulement)}\\
+Si la paroi est mobile, diatherme et imperméable :
+\begin{equation}
+    \dot{V_1} = \frac{1}{\xi}(P_1-P_2) \Rightarrow \pi_s = (\sqrt{\frac{1}{\xi T}}(p_1-p_2))^2
+\end{equation}
+Avec $\xi$ le coefficient de frottement thermoélastique de la paroi.\\
+
+On définit les courants de matière : $\dot{N_i} = \sum_{j=1}^n I^{ij}$\\
+Si plusieurs blocs : $\pi_s = \frac{1}{2} \sum_{i,j=1}^n (\frac{1}{T_i} - \frac{1}{T_j}) (P_Q^{ji} + P_c^{ji}) - \frac{1}{2} \sum_{i,j=1}^n (\frac{\mu_i}{T_i} - \frac{\mu_j}{T_j})I^{ji} $\\
+$\dot{S_i} = \sum I_s^{ji}$; $P_Q^{ji} = T_i I^{ji}$; $P_c^{ji} = \mu_i I^{ji}$\\
+$\pi_s^{ij} = \pi_s^{ji}$\\
+
+\subsection{Équations élémentaires}
+Selon Euler : $U = TS - PV + \sum \mu_A N_A$\\
+Selon Gibbs : $dU = TdS - PdV + \sum \mu_A dN_A$\\
+Ainsi on obtient l'équation de Gibbs-Duhem : $SdT - VdP + \sum N_A d\mu_A = 0$\\
+
+\subsubsection{Transformée de Legendre}
+\begin{equation}
+    \phi (T,V, \{N_A\}) = U(S,V,\{\mu_A\}) - \frac{\partial U}{\partial S}S - \frac{\partial U}{\partial \mu_A} \mu_A
+\end{equation}
+On a donc : $F(T,V, \{N_A\} = U -TS = -PV + \sum \mu_A N_A \Rightarrow dF = -SdT - PdV + \sum \mu_A dN_A = dU - TdS - SdT$ \\
+$H(S,P, \{N_A\}) = U + PV = TS + \sum \mu_A N_A \Rightarrow dH = TdS + VdP + \sum \mu_A dN_a = dU + PdV + VdP$\\
+$G(T,P,\{N_A\}) = U-TS + PV = H-TS = F+PV \Rightarrow dG = -SdT + VdP + \sum \mu_A dN_A = dU - TdS - SdT$\\
+
+Si T et V sont constants : $\dot{F} = -T\pi_s$\\
+Si P et S constants : $\dot{H} = P_Q$\\
+Si P constant sans échange de matière : $Q_{if} = \Delta H_{if}$\\
+Si T constant sans $P_c$ : $W_{if} = \Delta F_{if}$\\
+Si T et P constants : $C_{if} = \Delta G_{if}$\\
+
+\quad \underline{Identité cyclique :} $\frac{\partial x}{\partial y} \frac{\partial y}{\partial z} \frac{\partial z}{\partial x} = -1$\\
+
+
+\subsubsection{Définitions des chaleurs}
+Chaleur spécifique : à volume constant : $C_v = \frac{\partial U}{\partial T}\rvert_v = T \frac{\partial S(T,V)}{\partial T}$\\
+Chaleur latente : $L_v = T(V;P) \frac{\partial S(V,P)}{\partial V} = T \frac{\partial P(T,V)}{\partial T}$\\
+Chaleur spécifique : à pression constante : $C_p = \frac{\partial U}{\partial T}\rvert_p = T\frac{\partial S(T,V)}{\partial T}$\\
+Chaleur latente : $L_p = T(V,P) \frac{\partial S(V,P)}{\partial P} = -T\frac{\partial V(T,P)}{\partial T}$\\
+
+Coefficient d'expansion thermique : $\alpha_v = \frac{1}{V} \frac{\partial V}{\partial T}$\\
+
+
+\subsubsection{Théorème de Schwartz}
+\begin{equation}
+    \frac{\partial}{\partial x} (\frac{\partial f}{\partial y}) = \frac{\partial}{\partial y} (\frac{\partial f}{\partial x})
+\end{equation}
+Les valeurs sur les diagonales sont des grandeurs conjuguées.\\
+\begin{minipage}{.5\textwidth}
+    $\frac{\partial P(S,V)}{\partial S} = -\frac{\partial T(S,V)}{\partial V}$\\
+    $\frac{\partial P(T,V)}{\partial T} = \frac{\partial S(T,V)}{\partial V}$\\
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+    $\frac{\partial V(S,P)}{\partial S} = \frac{\partial T(S,P)}{\partial P}$\\
+    $\frac{\partial V(T,P)}{\partial T} = -\frac{\partial S(T,P)}{\partial P}$\\
+\end{minipage}
+
+\quad \underline{Détente Joule-Thomson :}\\
+$\frac{\partial T}{\partial P} = \frac{\alpha_vT-1)V}{C_p} = \frac{1}{C_p}(\frac{4a}{R(T_1+T_2)}-b)$\\
+
+\quad \underline{Détente de Joule :}\\
+$\frac{\partial T}{\partial V} = \frac{1}{C_v}(P-T\frac{\partial P}{\partial T}) = -\frac{1}{C_v} \frac{N^2a}{V_12V_2}$\\
+
+On a : \\
+\begin{equation}
+    P_Q = C_p \dot{T} + L_v \dot{V} = C_p \dot{T} + L-p \dot{P} \Rightarrow \delta Q = C_v dT + L_v dV = L_vdV + L_p dP = C_pdT + L_pdP
+\end{equation}
+
+De plus : \\
+\begin{equation}
+    C_p = C_v + T\frac{\partial P(T,V)}{\partial T} \frac{\partial V(T,P)}{\partial T}
+\end{equation}
+A température élevée, on a $C_v \simeq 3R$\\
+
+
+\subsection{Gaz parfait}
+On a les relations suivantes :\\
+$dU = C_v dT$; $dH = C_pdT$\\
+$C_p = C_v + NR = (c+1)NR \Rightarrow C_v = cNR$\\
+$U = cNRT$; $H = NRT(c+1)$\\
+On définit aussi le rapport $\gamma = \frac{C_p}{C_v} = \frac{c+1}{c}$\\
+
+\subsubsection{Relations isentropiques}
+$TV^{\gamma -1} =$cste; $PV^{\gamma} =$cste \\
+$T^{\gamma}P^{1-\gamma} =$cste; $PV =$cste\\
+
+\quad \underline{Coefficient de compression :}
+Isentropique : $\kappa_s = -\frac{1}{V} \frac{\partial V(S,P)}{\partial P}$\\
+Isotherme : $-\frac{1}{V} \frac{\partial V(T,P)}{\partial P}$\\
+
+\subsection{Changement de phase}
+Domaine qui minimise $\mu$ en deux voire trois états. On a donc :\\
+$P_Q = l_{sl} \dot{N}$ Avec $\mu [J.kg^{-1}]$ la chaleur latente molaire.\\
+De plus, $Q_{\alpha \beta} = T \Delta S_{\alpha \beta}$\\
+\begin{equation}
+    l_{\alpha \beta} = \frac{Q_{\alpha \beta}}{N} = T(s_{\beta} - s_{\alpha})
+\end{equation}\\
+$d\mu = vdP-sdT$\\
+
+On obtient donc :\\
+\begin{equation}
+    \frac{dP}{dT} = \frac{s_{\beta}-s_{\alpha}}{v_{\beta}-v_{\alpha}} = \frac{q_{\alpha \beta}}{T(v_{\beta} - v_{\alpha})}
+\end{equation}
+Pour un solide, on a : $\Delta U = m l_{sl}^* + mc_v^*\Delta T$\\
+
+\quad \underline{Concentration de phase}
+On a la concentration molaire : $c_A^{\alpha} = \frac{N_A^{\alpha}}{N^{\alpha}}$\\
+$g^{\alpha}(T,P, \{N_A\}) = \sum_{A=1}^r \mu_A^{\alpha} c_A^{\alpha}$\\
+On a aussi : $N_l (c_1^C - c_1^A) = N_g(c_1^B-c_1^C)$\\
+Règle de phase de Gibbs : $f=r-m+2$ avec $r$ :nombre de substances; $m$ :nombre de phases\\
+Si il y a réaction : $v = r-m-n+2$ n :nombre de réaction.\\
+
+\subsection{Gaz de Van der Waalz}
+\begin{equation}
+    (P+\frac{N^2}{V^2}a)(V-Nb) = RT
+\end{equation}
+$H(S,P) = (c+1)NRT - NP(\frac{2a}{RT}-b)$\\
+$U = U_{parfait} - a\frac{N^2}{V}$\\
+
+\quad \underline{Variable critique :}
+$v_c = 3b$; $p_c = \frac{a}{27b^2}$\\
+$T_c = \frac{8a}{27Rb}$\\
+
+\subsection{Cycles}
+Pendant un cycle, toute fonction d'état possède un $\Delta$ nul! (U, S, H....)\\
+On a aussi $W = -Q$\\
+\quad \underline{Cycle moteur :} On doit donner de la chaleur au système : il nous restitue du travail. Diagramme TS dans le sens des aiguille d'une montre.\\
+
+\quad \underline{Cycle calorifique :} On doit donner un travail au système pour qu'il nous restitue de la chaleur. Diagramme TS dans le sens trigonométrique.\\
+
+Isotherme : T=cste; Isentropique : S=cste; Adiabatique : $P_Q =$cste\\
+Isobare : P=cste; Isochore : V=cste\\
+
+On applique toutes les formules connues à ce jour pour résoudre chacune des étapes.\\
+
+On peut rajouter : $\Delta U_{ij} = \frac{1}{\gamma} (H_j - H_i)$\\
+
+\quad \underline{Rendement :}\\
+$\eta = -\frac{W}{Q^+} = \frac{Q}{Q^+}$ (processus entrant/sortant)\\
+Pour le cycle moteur de carnot : $\eta_c = 1-\frac{T^-}{T^+} = -\frac{P_w}{P_Q}$\\
+
+On définit aussi l'efficacité de chauffage : $\varepsilon^+ = -\frac{Q^+}{W} = \frac{1}{\eta}$\\
+Ainsi que de refroidissement : $\varepsilon^- = -\frac{Q^-}{Q} = \frac{1-\eta}{\eta}$
+Cycle calorifique de carnot : $\varepsilon^+ = \frac{T^+}{T^+-T^-} = \frac{Q^+}{Q}$\\
+$\varepsilon^- = \frac{T^-}{T^+-T^-} = -\frac{P_Q}{P_w}= \frac{Q^-}{Q}$
+
+
+\subsubsection{Cycle endoréversible}
+Source de chaleur à température plus élevé que $T_{max}$ du système.\\
+Ainsi : $Q^+ = \kappa \frac{A}{l}(T^+-T_0^+) \Delta t^+$\\
+$Q^- = \kappa \frac{A}{l}(T^- - T_0^-) \Delta t^-$
+$\Rightarrow \Delta t = \Delta t^- + \Delta t^+ = \frac{l}{\kappa A} (\frac{Q^+}{T^+-T_0^+} + \frac{Q^-}{T^--T_0^-}) = -\frac{lW}{\kappa A} \frac{1}{T_0^+-T_0^-} (\frac{T_0^+}{T^+-T_0^+} + \frac{T_0^-}{T^--T_0^-})$\\
+De ce fait le rendement optimal ne change pas. Cependant on peut trouver une meilleure approximation de celui-ci :\\
+$\eta_{EC} = -\frac{W}{Q^+} = 1-\sqrt{\frac{T^-}{T^+}}< \eta_c$\\
+On a donc : $\frac{T_0^-}{T_0^+} = \sqrt{\frac{T^-}{T^+}}$\\
+Les températures optimales sont données par : $T_0^+ = \frac{T^+}{2}(1-\sqrt{\frac{T^-}{T^+}})$ et $T_0^- = \frac{T^-}{2}(1+\frac{T^-}{T^+})$\\
+
+\subsection{Domaine de saturation}
+Modèle de Duprè : $l_{lg} = A-BT$\\
+La pression de saturation est définie comme la pression d'un gaz lorsque $\mu_g = \mu_l$\\
+\begin{equation}
+    P^{\circ}(T)= P^{\circ}(T_0) (\frac{T_0}{T})^{\frac{B}{R}} \exp{[\frac{A}{R}(\frac{1}{T_0}-\frac{1}{T})]}
+\end{equation}
+
+
+\quad \underline{Humidité relative :}\\
+Pression d'un gaz par rapport à sa pression de saturation : $\phi(T) = \frac{P(T)}{P^{\circ}(T)}$\\
+
+\subsection{Équations chimiques}
+$N_A(t) = N_A(0) + \sum \nu_{aA} \xi_a(t)$\\
+$\dot{N_A} = \sum \nu_{aA} \Omega_A \Rightarrow \frac{d\xi}{dt} = \Omega$\\
+Avec $\nu$ les coefficients stoechiométriques où les réactifs sont en négatifs.\\
+On a toujours l'égalité : $d\xi_a = \frac{dN_1}{\nu_{a1}} = \frac{dN_2}{\nu_{a2}} = \dots$ Si >0 : réaction spontanée dans le sens normal; =0 : à l'équilibre; <0 : sens opposé\\
+
+On pose aussi : $dG = -SdT + VdP + \sum_a (\sum_A \mu_A \nu_{aA})d\xi_a$\\
+Équilibre chimique : $\frac{\partial G}{\partial \xi_a} = 0 \Rightarrow \sum_A \mu_A \nu_{aA}=0$\\
+Si T et P sont constants, on a alors l'énergie libre de Gibbs : $\Delta_a G = \frac{\partial G}{\partial \xi_a} = \sum_A \mu_A \nu_{aA}$\\
+Si <0 : sens direct; si =0 : équilibre; si >0 : sens opposé\\
+
+\subsubsection{Affinité}
+\begin{equation}
+    \mathcal{A}_a = -\frac{\partial G}{\partial \xi_a}
+\end{equation}
+Équivalent à une force. \\
+On a donc une enthalpie de réaction : $\Delta_a H = -\frac{\partial \Delta_a G}{\partial T} = Q_a$ avec $Q_a$ la chaleur fournit au système. Si <0 :exothermique et la réaction va dans le sens naturel. Si >0 :endothermique et la réaction va dans le sens opposé. Si =0 : à l'équilibre.\\
+On a donc finalement : $\sum \mu_A \dot{N}_A = P_c + \sum_A \mu_A(\sum_a \nu_{aA} \Omega_a) \Rightarrow P_c = \sum_A \mu_A \dot{N}_A + \sum_a \mathcal{A}_a \Omega_a$.\\
+Avec a : la réaction et A la substance.\\
+
+Soit le volume molaire $v_A = \frac{\partial V}{\partial N_a}$ De même pour entropie et enthalpie molaire.\\
+La concentration est donc définit : $c_A = \frac{N_A}{\sum N_B}$.\\
+On a aussi : $V= \sum v_A N_A$ Valable pour les autres fonctions aussi.\\
+
+\begin{equation}
+    \mu_A = h_A-Ts_A
+\end{equation}
+Soit l'enthalpie de réaction : $\Delta_a H = \sum \nu_{aA} h_A$\\
+On a les équations suivantes : $P_w = \Delta p \dot{N} v = \Delta \mu \dot{N} \Rightarrow \Delta p = \frac{R_H \dot{N}}{v}$\\
+
+\subsubsection{Mélange}
+\quad \underline{Entropie molaire de mélange :}\\
+\begin{equation}
+    \Delta s(\{c_A\}) = -R \sum_A ln(c_A) \Rightarrow \Delta S = -NR \sum c_A ln(c_A)
+\end{equation}
+Soit : $\frac{\partial G}{\partial \xi_a} = \sum \nu_a \mu_A + RTln(\Pi_A c_A^{\nu_{aA}})$\\
+Et $k_a = \Pi_A c_A^{\nu_{aA}}$\\
+
+\quad \underline{Gaz parfait pur :}\\
+On a $\frac{P_A}{P} = \frac{N_A}{N} = c_A$\\
+\begin{equation}
+    \mu(T,P) = \mu(T,P_0) + RT ln(\frac{P}{P_0}) \Rightarrow \mu(T,P,c_A) = \mu(T,P) + RT ln(c_A)
+\end{equation}
+
+\subsubsection{Osmose}
+\begin{equation}
+    P_f - p_{ext} = \frac{N_E RT}{V} \Rightarrow \mu(P_1) = \mu(P_0) + v(P_1-P_01) \Rightarrow v(p_f-p_{ext}) = cRT
+\end{equation}
+
+\quad \underline{Cellule osmotique :}\\
+Temps caractéristique : $\tau = \frac{l}{FARTN_s} = $cste\\
+Avec en plus :$\frac{dN_1(t)}{dt} = \frac{1}{N_1(t) \tau} \Rightarrow N_1(t) = \sqrt{N_1(0)^2 + 2\frac{t}{\tau}}$\\
+
+\quad \underline{Effet Seebeck :} $\Delta \varphi = -\varepsilon \Delta T \Rightarrow \varepsilon = \frac{1}{q_e T}(\frac{LNQ}{LNN}-\mu_c)$ Avec LNN et LNQ deux coefficients de matrices.\\
+
+\subsection{Électrochimie}
+Constante de Faraday : $F_f = -\mathcal{N}_A e = 96487C.mol^{-1}$\\
+On a aussi : $q=zF_f$\\
+On définit les coefficients électrique avec une barre au dessus.\\
+$\overline{\mu} = \mu + q \varphi = \mu + z F_f \varphi$\\
+Potentiel de Nerst : $\Delta \varphi = \varphi_e^+ - \varphi_e^- = \frac{RT}{2F_f} ln(\frac{c^+}{c^-})$ Valable si même substance avec concentration différente\\
+Si différente substance : $U = \Delta \varphi > 0 \Rightarrow \varphi_e^- = \frac{1}{2F_f} (\mu_{Zn^{2+}} - \mu_{Zn}) + \frac{RT}{2F_f} ln(c_{Zn^{2+}})$\\
+\end{document}

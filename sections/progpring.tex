@@ -1,0 +1,152 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Matlab}
+\subsubsection{Array/matrix}
+Indexes start at 1\\
+Line vector : $[x_1 x_2 \dots x_n]$(or with ,in between);
+Column vector : $[x_1; x_2; \dots ; x_n]$;
+Accessing array element : X(n);
+Create array with start and end values : $X=start:pas:end$\\
+Create evenly spaced values in array : linspace(start, end, number of values)\\
+Accessing multiple element at once : $X([x_n x_m \dots])$\\
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+    \item longueur : length(X);\\
+    \item somme : sum(X);\\
+    \item moyenne : mean(X);\\
+    \item trier : sort(X), if matrix, we can sort by rows sortrows(X);\\
+\end{itemize}
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+    We can also have a polynom declared as an array :\\
+    $p=[1, -6, -72, -27]$ which means $x^3 - 6x^2 -72x - 27$\\
+    To find roots, r=roots(p)\\
+    We can find back the polynom from roots $poly(r)$\\
+\end{minipage}
+In an array we have the following :$\begin{pmatrix}
+1 & 4 & 7\\
+2 & 5 & 8\\
+3 & 6 & 9\\
+\end{pmatrix}$
+To delete a case : X(position) = []\\
+
+Create a matrix filled with 0 : zeros(dimension)\\
+Filled with 1 : ones(dimension)\\
+Identity matrix : eye(dimension)\\
+Get diagonal elements : diag(matrix)\\
+
+Create a string with numbers and string : X = ['phrase 1'+value 'phrase 2'+string(number if it doesn't work the other way)]\\
+
+Get indexes of special element in array : find(condition, number of element, which elements (ie 'last'))\\
+
+If we need multiple types of values in an array : myCell={$\dots$; $\dots$};\\
+To change a cell in array : cell2mat(myCell);\\
+(inverse : mat2cell)\\
+
+
+
+
+\subsubsection{Operations}
+Transpose : X'\\
+If the matrix contains imaginary number, X' will transpose the matrix and take the conjugate of each number. If you only want the transpose of the matrix : X.'\\
+If you want to work on each value of a matrix then add a point before any operation :\\
+\begin{itemize}
+    \item multiply : X.*Y\\
+    \item division : X./Y\\
+    \item exponant : X.\^{} 3\\
+\end{itemize}
+Otherwise, it will do a basic matrix operation.\\
+
+To get a timer : tic to start it\\
+toc to finish and get the time difference.\\
+
+\subsubsection{Function}
+syntax : \\
+function out1 = funcname(in1);\\
+end
+
+\warning name file has to be the same as function name\\
+
+Define global variable : global c\\
+
+if cond1\\
+\quad command\\
+elseif cond2\\
+\quad command\\
+end\\
+
+for n=1:0.5:10 (n prend les valeurs du tableau créé)\\
+\quad command\\
+end\\
+
+\quad \underline{Anonymous function :}\\
+name = @(param) core;\\
+to plot them : ezplot(eq, [x1, x2]); (x1, x2 can be omitted)\\
+
+\quad \underline{Integral}
+to integrate : integral(function, x1, x2);\\
+trapz(x,y);(with x the step)\\
+symbolic integral : int(sin(x));\\
+
+
+
+\subsubsection{Plot}
+plot(x,y,options)\\
+
+if multiple plots : \\
+hold on;\\
+plot(x1, y1, '-b'); (in blue with line)\\
+plot(x2,y2, 'color', '\#colornumber', 'LineStyle', '-');(same)\\
+hold off;\\
+
+to let multiple plot appear in different windows : figure\\
+if we need to modify a plot afterwards, use the set(namefig, 'which data', new data)\\
+
+3D plot :[x y]= meshgrid(minval:maxval) (create a 2D grid for both X and Y to increase speed of calcul)\\
+mesh : points are linked, stem : only points, contour : creates line between surfaces, surf: creates a surface between points\\
+
+\subsubsection{Interpolation}
+find outliers : isoutlier(tab, 'movmedian', numvalues);\\
+numvalues is the number of values over which we are doing the median.\\
+
+to interpolate : interp1(x, y, newpoint, 'linear');\\
+newpoint should be an array containing the position where we need to inteprolate\\
+
+\subsubsection{Polynômes}
+find roots : roots(p);\\
+find polynom from roots : poly(r);\\
+evaluate polynom defined by x : polyval(p,x);(gives us the value of p at points x)\\
+
+adjust a polynom to some values : polyfit(p,x, order);\\
+
+\subsection{C}
+\subsubsection{Memory allocation}
+int *tab= malloc(size*size element);\\
+free(tab);(memory is freed not deleted)\\
+(calloc does the same but initialise the array to zero)\\
+
+\subsubsection{Numbers}
+At the beginning of the file we need to include : $\#$include <limits.h> in order to be able to do bit wise operations\\
+
+\quad \underline{Bit wise operations :}\\
+\begin{itemize}
+    \item and : $\&$\\
+    \item or : |\\
+    \item xor : $\hat{}$ \\
+
+    \item 0x00115533 $\&$ 0x00FF0000 = 0x00110000\\
+    \item 0x00110000>>16 = 11\\
+\end{itemize}
+
+\subsubsection{Files}
+int ferror(FILE *fp); (is there any error?)\\
+int perror(const char *s); (print string s and gives a description of an error)\\
+
+
+
+\end{document}

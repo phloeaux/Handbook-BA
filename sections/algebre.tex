@@ -1,0 +1,374 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Introduction}
+
+Soit A : matrice de taille mxn : m lignes, n colonnes.\\
+Deux systèmes sont équivalents (par les lignes) si ont peut passer de l'un à l'autre par une opération élémentaire. Deux systèmes équivalents ont la même solution. \\
+Opération élémentaires : Permuter deux lignes; multiplier une ligne par un réel; ajouter deux lignes entre elles.\\
+Une matrice est échelonnée si toutes lignes de 0 n'est suivi que de lignes de 0; l'indice de colonne j du premier terme non nul d'une ligne est celui du premier terme non nul de la ligne précédente.\\
+Une matrice est échelonnée réduite si elle est échelonnée et si les pivots sont 1 et sont les seuls coefficients de la colonne.\\
+Variables de base : valeur pivot\\
+Variables libre : celles qui ne sont pas des colonnes pivots. \\
+Le système est inconsistant/incompatible si ligne du type : (0 ....|*). \\Quand un système est compatible, il existe soit une unique de solution (pas de variable libre), soit une infinité de solutions (une ou plusieurs variables libres). \\
+Un système est \textbf{homogène} si tous les termes de droite sont nuls, la solution triviale est alors toujours valable. \textbf{Tout système homogène possède au moins une solution}.\\
+
+Propriété : sur $\vec{u} - \vec{w} = 0$, alors w est l'inverse de u.\\
+L'ensemble des combinaisons linéaires de $\vec{v_1}, \dots, \vec{v_p}$ s'appelle le \textbf{span}.\\
+\begin{equation}
+    span\{\vec{v_1}, \dots, \vec{v_p}\}= \{\lambda_1 \vec{v_1}+ \dots+ \lambda_p \vec{v_p}|\lambda_1, \dots, \lambda_p \in \mathbb{R}\}
+\end{equation}
+Si un des vecteur est une combinaison linéaire des autres : il est superflu.\\
+
+\subsubsection{Équation matricielle}
+$A\vec{x} = \vec{b}$, A est mxn, $\vec{x}$ est nx1, $\vec{b}$ est mx1.\\
+Cette équation est valide \textbf{si et seulement si} $\vec{b}$ est une combinaison linéaire des colonnes de A.\\
+On a équivalence des énoncés suivants :
+\begin{enumerate}
+    \item $\forall \vec{b} \in \mathbb{R}^m$, $A\vec{x} = \vec{b}$ admet au moins une solution\\
+    \item $\forall \vec{b} \in \mathbb{R}^m$ $\vec{b}$ est une combinaisons linéaire des colonnes de A\\
+    \item Le span des colonnes de A génèrent $\mathbb{R}^m$\\
+    \item Chaque ligne de A possède un pivot.
+\end{enumerate}
+\warning A ne possède pas forcément 1 pivot par colonne.\\
+
+Soit A, une matrice mxn et $\vec{b} \in \mathbb{R}^m$ tel que $A\vec{x} = \vec{b}$ admet une solution. Soit P une solution particulière de $A\vec{x} = \vec{b}$ et $\vec{v_t}$ une solution de $A\vec{x} = 0$. Alors l'ensemble de solution est l'ensemble des vecteurs : $\vec{w} = \vec{P} + \vec{v_t}$.\\
+
+Une famille de vecteurs est linéairement indépendante si l'unique solution de $x1\vec{v_1} + \dots + x_p \vec{v_p} = \vec{0}$. Sinon la famille est linéairement dépendante.\\
+
+$\vec{v_1}$ et $\vec{v_2}$ sont colinéaires s'il existe $\mu \in \mathbb{R}$ tel que $\vec{v_1} = \mu \vec{v_2}$.\\
+
+Toute famille de $\mathbb{R}^n$ est linéairement indépendante si p>n. \\
+
+
+\subsubsection{Base}
+On cherche une famille de vecteur de $\mathbb{R}^n$ tel que : tout vecteur de $\mathbb{R}^n$ s'écrit comme une combinaison linéaire des vecteurs de la famille; la famille est linéairement indépendante.\\
+
+\subsection{Applications linéaires}
+But : Interpréter une matrice comme application linéaire, comme un objet qui agit/transforme des vecteurs. On veut donc trouver $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ tel que $T(\vec{x}) = A\vec{x}$\\
+Une transformation T de $\mathbb{R}^n$ vers $\mathbb{R}^m$ est une opération qui assigne à chaque vecteur de $\mathbb{R}^n$ un vecteur de $\mathbb{R}^m$.\\
+Une transformation T est linéaire si $T( \vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v})$ et $T(\lambda \vec{u}) = \lambda T(\vec{u})$.\\
+\color{gray} Remarque : si l'ordre doit être respecté, les valeurs sont entre parenthèses, sinon entre crochets.\color{black}\\
+
+Soit T : $\mathbb{R}^n \rightarrow \mathbb{R}^m$ une transformation linéaire alors il existe une matrice A, mxn, \textbf{unique} tel que $T(\vec{x}) = A\vec{x}$ $\forall \vec{x} \in \mathbb{R}^n$ où $A = (T(\vec{e_1}) \dots T(\vec{e_n}))$. \textbf{A s'appelle la matrice canoniquement associée à T.}
+
+\subsubsection{Transformations injectives et surjectives}
+\quad \underline{Surjective :}\\
+Une transformation linéaire est surjective si tout vecteur $\vec{b} \in \mathbb{R}^m$ est l'image d'au moins un vecteur de $\mathbb{R}^n$.\\
+
+\quad \underline{Injective :}\\
+Une transformation linéaire est injective si tout vecteur $\vec{b} \in \mathbb{R}^m$ est l'image d'au plus un vecteur de $\mathbb{R}^n$.\\
+
+\quad \underline{Bijective}
+Si T est injective et surjective, alors elle est bijective.\\
+
+On a les relations équivalentes: \\
+\begin{minipage}{.5\textwidth}
+    \begin{enumerate}
+    \item T est surjective\\
+    \item $\forall \vec{b} \in \mathbb{R}^m$, $\vec{b}$ est une combinaison linéaire des colonnes de A\\
+    \item A possède un pivot par ligne\\
+\end{enumerate}
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+    \begin{enumerate}
+        \item A est la matrice des coefficients\\
+        \item $Im(T) = \mathbb{R}^m$\\
+        \item $span\{\vec{a_1}, \dots,\vec{a_n}\} = \mathbb{R}^m$
+    \end{enumerate}
+\end{minipage}
+
+\subsubsection{Noyau et Image d'une application}
+\quad \underline{Noyau et image}
+Soit $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ une application linéaire. Le \textbf{noyau de T noté Ker(T)} est l'ensemble des vecteur de $\mathbb{R}^n$ tel que $T(\vec{x} = \vec{0}$. On note :
+\begin{equation}
+    Ker(T) = \{\vec{x} \in \mathbb{R}^n | T(\vec{x}) = \vec{0}\}
+\end{equation}
+\textbf{L'image de T noté Im(T)} est donnée par :
+\begin{equation}
+    Im(T) = \{\vec{b} \in \mathbb{R}^m | \exists \vec{x} \in \mathbb{R}^n : T(\vec{x}) = \vec{b} \}
+\end{equation}
+
+\subsection{Calcul matriciel}
+\quad \underline{Produit matriciel}
+Soient A, mxn, B, nxp: AB = $(A\vec{b_1} \dots A\vec{b_p})$, mxp\\
+ou alors : $c_{ij} = \sum_{k=1}^m a_{ik} b_{kj}$\\
+
+\quad \underline{Transposée}
+\begin{enumerate}
+    \item $(A^T)^T = A$\\
+    \item $(A+B)^T = A^T + B^T$\\
+    \item $\lambda \in \mathbb{R}$, $(\lambda A)^T = \lambda A^T$\\
+    \item $(AB)^T = B^TA^T$\\
+\end{enumerate}
+
+
+\quad \underline{Symétrique/anti-symétrique}\\
+A est symétrique si $A^T = A$, anti-symétrique si $A^T = -A$\\
+
+\quad \underline{Inverse}
+Soit A, nxn est inversible s'il existe B, nxn tel que : $AB = BA = I_n$. L'inverse est unique, notée $A^{-1}$. Si A n'est pas inversible, elle est singulière/non-inversible.\\
+
+\quad \underline{Formule pour matrice 2x2 :}\\
+$A = \begin{pmatrix}
+    a & b\\
+    c & d\\
+\end{pmatrix}$, $A^{-1} = \frac{1}{ad-bc} \begin{pmatrix}
+    d & -b\\
+    -c & a
+\end{pmatrix}$, \textbf{det(A) = ad-bc}.\\
+Une matrice est inversible si det(A) $\neq 0$\\
+
+Si A est inversible alors l'équation : $A \vec{x} = \vec{b}$ admet une unique solution. \\
+\begin{enumerate}
+    \item $(A^{-1})^{-1} = A$\\
+    \item $(AB)^{-1} = B^{-1} A^{-1}$\\
+    \item $(A^T)^{-1} = (A^{-1})^T\\$
+\end{enumerate}
+
+Une matrice E est dite élémentaire si elle s'obtient pas une seule opération élémentaire sur les lignes de $I_n$. Toute matrice A' peut s'écrire comme multiplication $EA = A'$. \textbf{Si par la droite, on change les colonnes.} Les matrices élémentaires sont inversibles. \\
+Pour trouver $A^{-1}$, on échelonne avec $I_n$ :
+\begin{equation}
+    (A|I_n) \sim \dots \sim (I_n| A^{-1})
+\end{equation}
+
+\begin{enumerate}
+    \item A est inversible\\
+    \item $A\vec{x} = \vec{b}$ admet une solution unique donnée par $A^{-1} \vec{b}$\\
+    \item Les colonnes de A engendrent $\mathbb{R}^n$\\
+    \item A possède un pivot par ligne et un par colonne\\
+    \item Les colonnes sont linéairement indépendantes\\
+    \item $A\vec{x} = \vec{0}$ n'admet que la solution triviale\\
+    \item A est un produit de matrices élémentaires\\
+    \item T est bijective\\
+    \item $A^T$ est inversible\\
+\end{enumerate}
+
+\subsubsection{Matrice par blocs}
+$\begin{pmatrix}
+    a1 & \dots & a_{1n}\\
+    \dots & & \dots\\
+    a_{m1} & \dots & a_{mn}\\
+\end{pmatrix} = 
+\begin{pmatrix}
+    A_1 & A_2\\
+    B_1 & B_2\\
+\end{pmatrix}$
+
+\quad \underline{Triangulaire supérieure et inférieure}\\
+Triangulaire supérieure si : $A = \begin{pmatrix}
+    A_1 & A_2 \\
+    0 & B_2\\
+\end{pmatrix}$\\
+Triangulaire inférieure si : $A = \begin{pmatrix}
+    A_1 & 0\\
+    B_1 & B_2\\
+\end{pmatrix}$\\
+Diagonale : $A = \begin{pmatrix}
+    A_1 & 0\\
+    0 & B_2\\
+\end{pmatrix}$
+
+
+A est triangulaire supérieure par bloc, si $A_1$ et $A_2$ sont inversibles alors A est inversible.
+
+\subsection{Déterminant}
+Méthode 1 :$\begin{pmatrix}
+    + & -&+&-\\
+    -&+&-&+\\
+    + &\dots & \dots & \dots \\
+    - & \dots & \dots & \dots\\
+\end{pmatrix}$
+On choisit une ligne/colonne puis on garde le nombre et on fait le déterminant sur la matrice restante.\\
+$det(A) = \begin{vmatrix}
+    a_1 & a_2 & a_3\\
+    b_1 & b_2 & b_3\\
+    c_1 & c_2 & c_3\\
+\end{vmatrix}$
+ = $a_1 \begin{vmatrix}
+     b_2 & b_3\\
+     c_2 & c_3\\
+ \end{vmatrix} - a_2 \begin{vmatrix}
+     b_1 & b_3\\
+     c_1 & c_3\\
+ \end{vmatrix} + a_3 \begin{vmatrix}
+     b_1 & b_2\\
+     c_1 & c_2\\
+ \end{vmatrix}$ \\
+
+\quad \underline{Matrice élémentaire}
+$E_1$ : échange de 2 lignes. det = -1\\
+$E_2$ : Multiplication par $\alpha$ d'une ligne. det = $\alpha$\\
+$E_3$ : Ajout de $\alpha$ fois une autre ligne. det=1\\
+
+\begin{enumerate}
+    \item $det(A+B) \neq det(A)+det(B)$\\
+    \item $det(A) = det(A^T)$\\
+    \item $det(A) = \frac{1}{det(A^{-1})}$
+\end{enumerate}
+
+\subsection{Espace-vectoriel}
+Le noyau d'une matrice est un sous espace vectoriel de $\mathbb{R}^n$. \\
+On a $Im(T) = Im(A)$\\
+
+\quad \underline{Base :}\\
+Soit V, un espace vectoriel. Soit $\mathcal{B} = \{v_1 \dots v_p\}$ une famille d'éléments de V. Alors $\mathcal{B}$ est une base de V si $\mathcal{B}$ est linéairement indépendant et si c'est une famille génératrice : V = $span\{v_1 \dots v_p\}$.\\
+
+\quad \underline{Méthode pour trouver une base de Im(A) :}\\
+On échelonne A; on trouve les colonnes pivots puis on prend les colonnes de A correspondantes.\\
+Soit $V$ un espace vectoriel et $\mathcal{B} = (b_1 \dots b_n) $ une base de V. alors $\forall v \in V$, $\exists \alpha_1, \dots, \alpha_n \in \mathbb{R}$, unique tel que $v = \alpha_1 b_1 + \dots + \alpha_n b_n$\\
+On note chaque vecteurs $v$ dans la base $\mathcal{B}$ : $[v]_{\mathcal{B}} = (\alpha_1 \dots \alpha_n)^T$
+
+
+\quad \underline{Généralisation à $\mathbb{R}^n$ :}\\
+
+Soient E=$(\vec{e_1} \vec{e_2})$ et $\mathcal{B} = (\vec{b_1} \dots \vec{b_n})$ une base de $\mathbb{R}^2$ et $\vec{v} = (v_1 \dots v_n)^T \in \mathbb{R}^n$.\\
+On résout :
+\begin{equation}
+    P_{E\mathcal{B}} [\vec{v}]_{\mathcal{B}} = [\vec{v}]_E
+\end{equation}
+Avec : $P_{EB} = ([\vec{b_1}]_E \dots [\vec{b_n}]_E)$\\
+
+\quad \underline{Généralisation à $V$ :}\\
+
+Soient c=$(\vec{c_1} \dots \vec{c_2})$ et $\mathcal{B} = (\vec{b_1} \dots \vec{b_n})$ deux bases de V.\\
+Si on veut : $[\vec{v}]_{\mathcal{B}}$ et on connaît $[\vec{v}]_{\mathcal{c}} = (\gamma_1 \dots \gamma_n)^T$
+On résout :
+\begin{equation}
+    P_{C\mathcal{B}} [\vec{v}]_{\mathcal{B}} = [\vec{v}]_c
+\end{equation}
+Avec : $P_{C\mathcal{B}} = ([\vec{b_1}]_c \dots [\vec{b_n}]_c)$\\
+On a aussi : $P_{C\mathcal{B}} = P_{\mathcal{B}c}^{-1}$\\
+
+Si une base de V possède n éléments alors toute autre base possède aussi n éléments. dim(V) correspond au nombre d'éléments dans chaque base. \\
+On a $dim(Im A) =$ nombre de colonnes pivots.\\
+
+\quad \underline{Rang :}
+Le rang de T est la dimension de Im(T) : $rang(T) = dim(ImT)$. On a aussi (A : mxn) : $dim(KerA) + rang(A) = n$\\
+$lgn(A) = Im(A^T)$ et $rang(A^T) = rang(A)$\\
+De plus, $[T(\vec{v})]_c = M[\vec{v}]_{\mathcal{B}}$ Avec M, matrice qui représente T dans les bases de départ ($\mathcal{B}$) et d'arrivée (c).\\
+
+\subsection{Vecteurs propres}
+$\vec{v}$ est un vecteur propre de A si $\exists  \lambda \in \mathbb{R}$ tel que $A\vec{v} = \lambda \vec{v}$\\
+Pour trouver $\lambda$ et $\vec{v}$ : \begin{equation}
+    det(A-\lambda I) = 0 \Rightarrow (A-\lambda I) \vec{v} = \vec{0}
+\end{equation}
+Polynôme caractéristique : $P_A(\lambda) = det(A-\lambda I_n)$\\
+A, nxn, admet au plus n valeurs propres distinctes. $P_A(\lambda)$ est un polynôme de degré n et admet n racines.\\
+Multiplicité algébrique : nombre de fois qu'une valeur $\lambda$ est racine.\\
+
+\quad \underline{Trace :}
+Somme des éléments diagonaux. \\
+
+\textbf{Si $\lambda = 0$ est une racine, A est singulière}
+
+\subsubsection{Matrices semblables}
+Soit A et B. On dit qu'elles sont semblables si $B = P^{-1}AP$. Deux matrices semblables ont le même polynôme caractéristique et les mêmes valeurs propres.\\
+
+
+\quad \underline{Diagonalisation :}
+Si A est semblable à une matrice diagonale D. Alors A est diagonalisable. On a :$D = P^{-1}AP$. A est diagonalisable si elle admet n vecteurs propres linéairement indépendants. \\
+P est composée des vecteurs propres de A et D est diagonale avec les $\lambda$ de A. \\
+Si A est symétrique alors A est diagonalisable.\\
+
+\subsection{Orthogonalité et moindres carrés}
+\quad \underline{Ensemble orthogonal :}
+Soient W un sous espace vectoriel de $\mathbb{R}^n$ et $\vec{v} \in \mathbb{R}^n$. Si $\vec{v}$ est tel que $\vec{v}\cdot \vec{w} = 0, \forall \vec{w} \in W$. On a alors $\vec{v}$ orthogonal à W. L'ensemble de tous les vecteurs orthogonaux à W s'appelle l'ensemble orthogonal : $W^{\perp} = \{\vec{v} \in \mathbb{R}^n | \vec{v}\cdot \vec{w}\} = 0, \forall \vec{w} \in W$.\\
+$dim(W) + dim(W^{\perp}) = n$.\\
+
+\quad \underline{Famille orthogonal}
+Une famille de vecteurs $\{\vec{v_1} \dots \vec{v_p}\}$ est dite orthogonal si $\vec{v_i} \cdot \vec{v_j} = 0, \forall i\neq j = 1,\dots, p$.\\
+
+\quad \underline{Base orthogonal}
+Soit W un sous espace vectoriel de $\mathbb{R}^n$. On appelle base orthogonal tout base qui est composée d'une famille orthogonal linéairement indépendante.\\
+
+De ce fait, on a : soient W un sous espace vectoriel de $\mathbb{R}^n$ et $\{\vec{v_1} \dots \vec{v_p}\}$ une base orthogonal de W. Alors $\forall \vec{w} \in W$, on a : $\vec{w} = \alpha_1\vec{v_1} + \dots + \alpha_p \vec{v_p}$.\\
+Avec $\alpha_i = \frac{\vec{w}\cdot \vec{v_i}}{\vec{v_i}\cdot \vec{v_i}}$\\
+
+On peut toujours décomposer un vecteur $\vec{v}$ en une somme d'un vecteur perpendiculaire à un sous espace vectoriel et d'un vecteur sur ce même sous espace vectoriel : $\vec{v} = \alpha \vec{u} + \vec{z}$, avec $\vec{z} \perp \vec{u}$.\\
+Ainsi la projection de $\vec{v}$ sur le sous espace vectoriel W vaut :\\
+\begin{equation}
+    proj_W(\vec{v}) = \sum_{i=1}^p\frac{\vec{v}\cdot \vec{u_i}}{\vec{u_i}\cdot \vec{u_i}} \vec{u_i}
+\end{equation}
+Et la composition perpendiculaire à W vaut :\\
+\begin{equation}
+    \vec{z} = \vec{v} - proj_W (\vec{v})
+\end{equation}
+
+Famille orthonormale si $\rVert \vec{u_i} \rVert = 1, \forall i=1,\dots,p$\\
+
+
+\warning : $U^TU \neq UU^T$\\
+
+On a aussi : soit W un sous espace vectoriel de $\mathbb{R}^n$ et soit W = span{$\vec{u_1} \dots \vec{u_p}$} alors $\forall \vec{v}\in \mathbb{R}^n$ :\\
+\begin{equation}
+    proj_W(\vec{v}) = UU^T\vec{v}
+\end{equation}
+
+Une matrice orthonormale est tel que : nxn, et inversible : $U^TU=I_n$ et $U^{-1} = U^T$. Les lignes et colonnes d'une telle matrice sont orthonormales.\\
+
+\subsubsection{Théorème de Granm-Schmidt}
+Soient W un sous espace vectoriel de $\mathbb{R}^n$ et {$\vec{v_1} \dots \vec{v_p}$} une base de W. Alors on peut construire une base orthogonale de W en suivant le procédé :\\
+\begin{enumerate}
+    \item $\vec{u_1} = \vec{v_1}$, $W_1 = span\{\vec{u_1}\}$\\
+    \item $\vec{u_2} = \vec{v_2} - proj_{W_1}(\vec{v_2})$, $W_2 = span\{\vec{u_1}, \vec{u_2}\}$\\
+    \item $\dots$\\
+    \item $\vec{u_p} = \vec{v_p} - proj_{W_{p-1}}(\vec{v_p})$, $W_p = span\{\vec{u_1},\dots, \vec{u_p}\}$\\
+\end{enumerate}
+
+
+
+\subsubsection{Factorisation QR}
+Soit A; mxn dont ses colonnes sont linéairement indépendantes, alors $\exists$ une factorisation : \textbf{A=QR} avec :\\
+Q est mxn, ses colonnes sont orthonormés et forment une base de Im(A)\\
+R est nxn, triangulaire supérieure, inversible et ses coefficients diagonaux sont strictement positifs.\\
+Pour trouver Q, on orthonormalise les colonnes de A puis $R=Q^TA$\\
+
+\subsubsection{Moindres carrés}
+Si l'équation $A\vec{x} = \vec{b}$ est incompatible alors on veut approximer au plus proche le résultat. \\
+Soient A, mxn et $\vec{b}\in \mathbb{R}^m$. On appelle solution au sens des moindres carrés de $A\vec{x} = \vec{b}$ le vecteur : \\
+\begin{equation}
+    \hat{x}\in \mathbb{R}^n \Rightarrow \rVert \vec{b} - A\hat{x} \rVert \leq \rVert \vec{b} - A\vec{x} \rVert \forall \vec{x} \in \mathbb{R}^n
+\end{equation}
+
+On calcul donc $proj_{Im(A)}(\vec{b})$ et on résout : $A\vec{x} = proj_{Im(A)}(\vec{b})$\\
+Si compliqué : on a aussi : $A^T\vec{b} = A^TA\vec{x}$ c'est : \textbf{l'équation normale}.\\
+Ainsi la solution est donnée par :\\
+\begin{equation}
+    \hat{x} = (A^TA)^{-1}A^T\vec{b}
+\end{equation}
+Ou encore :\\
+\begin{equation}
+    \hat{x} = R^{-1}Q^T\vec{b}
+\end{equation}
+
+\subsection{Matrices symétriques}
+\quad \underline{Théorème spectral :} Soit A nxn symétrique. On a :\\
+\begin{enumerate}
+    \item A admet n valeurs propres réelles\\
+    \item pour chaque valeurs propres distinctes on a dim($E_{\lambda}$) = $m_i$, avec $m_i$ la multiplicité de $\lambda_i$\\
+    \item A est diagonalisable en une base orthonormale\\
+    \item les espaces propres sont deux à deux orthogonaux.\\
+\end{enumerate}
+
+\quad \underline{Décomposition spectrale}
+soit $P = (\vec{u_1} \dots \vec{u_n})$ et $D = \begin{pmatrix}
+    \lambda_1 &0\\
+    0& \lambda_n\\
+\end{pmatrix}$ Alors on a : $A=PDP^T = \sum_{i=1}^n \lambda_i \vec{u_i}\vec{u_i}^T$\\
+
+
+\quad \underline{Décomposition valeurs singulière SVD :}\\
+Si A, mxn ($m\neq n$) alors il n'existe pas de décomposition A=$PDP^T$. Mais on a : $A = U\Sigma V^T$. Avec $\Sigma$ une matrice diagonale par bloc, U et V des matrices diagonales. \\
+
+Les valeurs singulières sont les racines des $\lambda$ de $A^TA$ classés par ordre décroissant. \\
+On a donc $\Sigma = \begin{pmatrix}
+    D & 0\\
+    0 & 0\\
+\end{pmatrix}$ de taille mxn, avec D contenant les valeurs singulières sur la diagonale.\\
+Pour trouver U, on normalise {$A\vec{v_1} \dots A\vec{v_r}$} Et on étend cette famille pour obtenir une base orthonormée de $\mathbb{R}^m$. Pour V, on orthonormalise ($\vec{v_1}\dots \vec{v_n})$, nxn.
+
+\end{document}

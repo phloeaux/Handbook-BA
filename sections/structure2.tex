@@ -1,0 +1,288 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Fondations}
+On a les différentes relations : \\
+\begin{itemize}
+    \item $N = \iint_F \sigma dF$\\
+    \item $T_y = \iint_F \tau_y dF$\\
+    \item $M_t = \iint \tau_z y - \tau_y z dF$\\
+    \item $M_{fy} = \iint \sigma z dF$\\
+\end{itemize}
+On a les moment de premier ordre : \\
+\begin{equation}
+    S_x = \iint_F ydF \Rightarrow S_x = \sum yF
+\end{equation}
+On a donc pour trouver le centre de masse : $\mu = \frac{S_x}{F}$\\
+La rigidité d'une barre est donnée par $k = \frac{N}{\Delta l}$. Si on a plusieurs barres : \\
+Diamètre variable : $\Delta l_{tot} = \sum \Delta l_i$ et $\frac{1}{k_{tot}} = \sum \frac{1}{k_i}$\\
+Plusieurs matériaux en série : (les mêmes équations)\\
+En parallèle : $N_{tot} = \sum N_i$, $\Delta l = \Delta l_i$, $k_{tot} = \sum k_i$\\
+
+La déformation due à une augmentation de la température : $\Delta l = l \alpha \Delta T$\\
+
+On a donc maintenant : \\
+\begin{equation}
+    \begin{pmatrix}
+    \varepsilon_{xx}\\
+    \varepsilon_{yy}\\
+    \varepsilon_{zz}\\
+    \gamma_{xy}\\
+    \gamma_{yz}\\
+    \gamma_{zx}\\
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{1}{E} & -\frac{\mu}{E} & -\frac{\mu}{E} & 0& 0&0\\
+        -\frac{\mu}{E} & \frac{1}{E} & -\frac{\mu}{E} &0&0&0\\
+        -\frac{\mu}{E}&-\frac{\mu}{E}&\frac{1}{E}&0&0&0\\
+        0&0&0&\frac{1}{G}&0&0\\
+        0&0&0&0&\frac{1}{G}&0\\
+        0&0&0&0&0&\frac{1}{G}\\
+    \end{pmatrix} \begin{pmatrix}
+    \sigma_{xx}\\
+    \sigma_{yy}\\
+    \sigma_{zz}\\
+    \tau_{xy}\\
+    \tau_{yz}\\
+    \tau_{zx}\\
+    \end{pmatrix}
+\end{equation}
+
+\subsection{Traction simple}
+On a $\sigma = \frac{N}{F}$.\\
+Suivant l'orientation des faces, on aura des contraintes différentes. Pour pallier à cela, on a le cercle de Mohr. Dans le cas ci présent, on a l'équation :\\
+\begin{equation}
+    \sigma_{\varphi} = \frac{\sigma_x + \sigma_y}{2} + \frac{\sigma_x - \sigma_y}{2}\cos(2\varphi) + \tau_x \sin(2\varphi) = \frac{\sigma_x + \sigma_y}{2} + R \cos(2(\varphi-\varphi_0))
+\end{equation}
+\begin{equation}
+    \tau_{\varphi} = -\frac{\sigma_x - \sigma_y}{2} \sin(2\varphi) + \tau_x \cos(2\varphi) = -R\sin(2(\varphi-\varphi_0))
+\end{equation}
+On a aussi $R = ((\frac{\sigma_x - \sigma_y}{2})^2+\tau_x^2)^{\frac{1}{2}}$ et $\tan(2\varphi_0) = \frac{2\tau_x}{\sigma_x - \sigma_y}$\\
+
+On a une variation de volume : $v = \frac{V-V_0}{V_0} = \frac{1}{E}(\sigma_x + \sigma_y)(1-2\mu)$.\\
+
+\subsection{Cisaillement simple}
+On définit le \textbf{module de cisaillement G} : $G = \frac{E}{2(1+\mu)}$\\
+On a une variation de volume nulle et un cercle de Mohr définit comme :\\
+
+\begin{equation}
+    \sigma_{\varphi} = \tau \sin(2\varphi) = \tau \cos(2(\varphi-\varphi_0))
+\end{equation}
+\begin{equation}
+    \tau_{\varphi} = \tau \cos(2\varphi) = -\tau \sin(2(\varphi-\varphi_0))
+\end{equation}
+On a $\gamma$, l'angle créé : $\gamma = \frac{\tau}{G}$\\
+
+\subsection{Torsion simple}
+\begin{equation}
+    \tau = \frac{M_t}{I_p}r
+\end{equation}
+Une torsion simple ne crée ni de tensions ni de compression. Seulement un couple interne. De plus, les sections planaires restent planes. Théorie non valide sur des sections rectangulaires. On a le même cercle de Mohr que pour du cisaillement simple.\\
+
+En circulaire, on a un angle de torsion : \\
+\begin{equation}
+    \varphi = \frac{M_t l}{G I_p}
+\end{equation}
+
+Quelques résultats possibles :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|}
+    \hline
+        Volume & Ellipse & Triangle & Rectangle \\
+        \hline
+        $\tau$ & $\frac{16 M_t}{\pi HB^2}$ & $\frac{20 M_t}{B^3}$ & $\frac{M_t}{\alpha (HB^2)}$ \\
+        $\theta$ & $\frac{16 M_t}{\pi G (HB)^3} (H^2+B^2)$ & $\frac{10 M_t}{6 G I_p}$ & $\frac{M_t}{\beta G (HB^3)}$ \\
+        \hline
+    \end{tabular}
+    \caption{Formes possibles}
+\end{table}
+Avec : $0.2< \alpha < 0.3$, $0.1 < \beta < 0.3$
+
+\subsection{Flexion poutre droite}
+On trouve par calcul que :\\
+\begin{equation}
+    \sigma = \frac{M_{fz}}{I_z} y
+\end{equation}
+\begin{equation}
+    \tau = \frac{TS'}{I_z b}
+\end{equation}
+Avec $S' = \iint_{F'} ydF'$ et b la profondeur de la poutre. \\
+On définit aussi le moment de résistance $W_i = \frac{I_z}{d_i}$\\
+
+Il peut cependant, avoir un gauchissement des sections. On a donc un coefficient :\\
+$\eta = \frac{F}{I_z^2} \iint_F \frac{S^{'2}}{b^2}dF$ Avec pour un rectangle : $\eta = \frac{6}{5}$ et pour une surface circulaire : $\eta = \frac{10}{9}$\\
+Par approximation, on peut trouver l'angle moyen par lequel la section gauchit : $\overline{\gamma} = \eta \frac{T}{GF}$\\
+
+Par le cercle de Mohr, on trouve que les angles où l'on trouve le maximum de cisaillement pour $\varphi = 45^{\circ}$. \\
+\begin{equation}
+    \sigma_{\varphi} = \frac{\sigma_x}{2} +R \cos(2(\varphi-\varphi_0))
+\end{equation}
+\begin{equation}
+    \tau_{\varphi} = -R\sin(2(\varphi-\varphi_0))
+\end{equation}
+\begin{equation}
+    R = \sqrt{(\frac{\sigma_x}{2})^2+\tau_x^2} \Rightarrow \tan(2\varphi_0) = \frac{2\tau_x}{\sigma_x}
+\end{equation}
+
+\subsection{Déformée des poutres droites}
+On suppose des petites déformations élastiques linéaire.\\
+Soit les conditions limites :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|}
+    \hline
+      & Encastrement & Articulation & Appui simple \\
+        \hline
+        y & 0 & 0 & 0\\
+        y' & 0 & NA & NA\\
+        \hline
+    \end{tabular}
+    \caption{Déformée}
+\end{table}
+
+NB : une poutre est dite d'égale résistance à la traction si le moment ne dépend pas de x.\\
+
+Superposition des flèches $M(x) = \sum M_i(x)$ $y'' = \sum y_i''$ et $y=\sum y_i$\\
+En général, y' est faible.\\
+
+Pour la flexion : \\
+\begin{equation}
+    y''(x) = -\frac{M(x)}{EI}
+\end{equation}
+Et pour l'effort tranchant (souvent négligée) :\\
+\begin{equation}
+    y_t'' = \eta \frac{T'}{GF} = -\eta \frac{P}{GF} = \eta \frac{M''}{GF}
+\end{equation}
+
+\warning Si on fait des coupes à gauche et à droite, on a la où ils se rencontrent que $y_1 = y_2$ et $y_1' = -y_2'$.\\
+
+\subsection{Flexion déviée/composée}
+On suppose $\sigma = \frac{M_{fz}}{I_z} y - \frac{M_{fy}}{I_y} z$\\
+\warning $\sigma$ est nul sur l'axe neutre.\\
+Si on a une force au lieu d'un moment appliqué : $\sigma = \frac{N}{F} + \frac{u N}{I_z}y + \frac{v N}{I_y}z$ Avec v: distance par rapport à l'axe y et u : distance par rapport à l'axe z.\\
+
+\subsection{Énergie déformation élastique}
+Chaque élément possède une énergie caractéristique.\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|c|c|c|c|}
+        \hline
+         & Normal & Cisaillement simple & Torsion & Flexion pure & Effort tranchant & Ressort &  Rtorsion \\
+        dU & $\frac{N^2}{2EF}$dx & $\frac{1}{2}\tau^2 \frac{F}{G}dx$ & $\frac{M_t^2}{2GI_p}$dx&$\frac{M_f^2}{2EI}$dx & $\eta \frac{T^2}{2GF}$dx & $U = \frac{1}{2}kx^2$ & $U = \frac{1}{2} k \alpha^2$\\
+        \hline
+     \end{tabular}
+    \caption{Énergie}
+\end{table}
+
+Pour résoudre des problèmes, on peut utiliser le \textbf{théorème de Castigliano :}\\
+\begin{equation}
+    \delta_a = \frac{\partial U}{\partial P_A}
+\end{equation}
+Si vis à vis d'un moment, on obtient un angle. Pour avoir le déplacement d'un point, soit si une force existe déjà on dérive juste l'énergie vis à vis de ce point, sinon on crée une force fictive que l'on met à zéro après.\\
+
+\subsection{Hyperstatisme}
+Extérieur : $k = p-6$ avec p : le nombre de liaisons extérieures\\
+Intérieur : $k = m+p-2n$, m : le nombre de barres, n : le nombre de noeud.\\
+\warning La connaissance des réactions externes ne permet pas forcément de connaître les efforts internes.\\
+Une boucle fermée dans un plan : k=3 mais deux symétries donc k=1.\\
+\textbf{Théorème de Ménabréa :}\\
+\begin{equation}
+    \frac{\partial U}{\partial R_A} = 0
+\end{equation}
+Pour chaque réactions hyperstatiques, on effectue Ménabréa.\\
+
+\subsection{Flambage}
+On a deux méthodes : \\
+
+\textbf{Euler :}\\
+\begin{equation}
+    N_c = \frac{\pi^2 EI}{l_0^2}
+\end{equation}
+Pour cela, il faut vérifier l'élancement de la poutre :\\
+Soit $\lambda = \frac{l_0}{\sqrt{\frac{I}{F}}}$ et $\lambda_p = \pi \sqrt{\frac{E}{\sigma_p}}$
+Euler est valide si $\lambda > \lambda_p$\\
+Avec $l_0$, la demi-longueur d'onde. \\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|}
+       \hline
+       Clamp-free& Pin-pin & clamp-clamp & clamp-pin \\
+       $l_0 = 2l$ & $l_0 = l$ & $l_0 = \frac{l}{2}$ & $l_0 \simeq 0.7l$\\
+    \hline
+    \end{tabular}
+    \caption{Demi-longueur d'onde}
+\end{table}
+
+\textbf{Timoshenko :}\\
+\begin{equation}
+    N_c = \frac{U}{t} = EI\frac{\int_0^l y''^2dx}{\int_0^l y'^2dx} = \frac{U}{\frac{1}{2} \int_0^ly'^2dx}
+\end{equation}
+La déformation n'est plus négligeable dans le moment de flexion : $y"=ky$. On a une équation différente.\\
+
+Si Euler n'est pas valide, on applique la méthode de Tetmayer : \\
+\begin{equation}
+    \sigma_c = \sigma_{BC} - \frac{\lambda}{\lambda_p}(\sigma_{BC}-\sigma_p)
+\end{equation}
+Avec $\sigma_p$ la limite de proportionnalité et $\sigma_{BC}$ la limite en compression.\\
+
+\subsection{Critère de rupture}
+On définit le facteur de sécurité comme : \\
+\begin{equation}
+    n = \frac{\sigma_p}{\sigma_{max}}
+\end{equation}
+Plusieurs critères : \\
+\subsubsection{Tresca, grand cisaillement}
+Valable pour les matériaux ductiles. On a ici $\sigma_{et} = \sigma_{ec}$\\
+Il y a rupture lorsque $\tau_{13} = \frac{\sigma_1-\sigma_3}{2} > \tau_{max}$\\
+On a $N = \frac{\sigma_e}{\sigma_1-\sigma_3} = \frac{\sigma_e}{\sigma_g} = \frac{\tau_e}{\tau_{13}}$\\
+
+\subsubsection{Mohr-Coulomb}
+La rupture se produit quand le plus grand des cercles de Mohr est tangent à une courbe du plan ($\sigma, \tau$). $\sigma_g = \sigma_1-\frac{\sigma_{et}}{\sigma_{ec}}\sigma_3$. \\
+Le coefficient de sécurité : $n = \frac{\sigma_{et}}{\sigma_g}$\\
+
+\subsubsection{Von Mises}
+Ce critère n'est vrai que pour les matériaux isotropes. Critère du plus grand travail de distorsion. \\
+$\sigma_g = \frac{1}{\sqrt{2}}((\sigma_x - \sigma_y)^2 + (\sigma_y - \sigma_z)^2 + (\sigma_z - \sigma_x)^2 + 6(\tau_{xy}^2 + \tau_{yz}^2 + \tau_{zx}^2))^{\frac{1}{2}}$\\
+$\sigma_g = \frac{1}{\sqrt{2}}((\sigma_1 - \sigma_2)^2 + (\sigma_2 - \sigma_3)^2 + (\sigma_1 - \sigma_3)^2)^{\frac{1}{2}} $\\
+$\sigma_g = \sqrt{2} (\tau_{xy}^2 + \tau_{yz}^2 + \tau_{zx}^2)^{\frac{1}{2}}$\\
+
+\subsection{Annexes}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|}
+    \hline
+    Forme & $I_p$ & $I_x$ & $I_y$\\
+    \hline
+       Rectangle, largeur B hauteur H  & $\frac{BH}{12}(B^2+H^2)$ & $\frac{BH^3}{12}$ & $\frac{B^3H}{12}$\\
+        Carré & $\frac{D^4}{6}$ & $\frac{D^4}{12}$ & $\frac{D^4}{12}$\\
+        Triangle base B & $\frac{BH}{144}(3B^2+4H^2)$ & $\frac{BH^3}{36}$ & $\frac{HB^3}{48}$\\
+        Losange & $\frac{BH}{48}(B^2+H^2)$ & $\frac{BH^3}{48}$ & $\frac{HB^3}{48}$\\
+        Cercle & $\frac{\pi D^4}{32}$ & $\frac{\pi D^4}{64}$ & $\frac{\pi D^4}{64}$\\
+        Ellipse & $\frac{\pi BH}{64}(B^2+H^2)$ & $\frac{\pi BH^3}{64}$ & $\frac{\pi HB^3}{64}$\\
+        Poutre I & & $\frac{BH^3}{12}-\frac{h^3(B-b)}{12}$ & $\frac{B^3H}{12}-\frac{h(B^3-b^3)}{12}$\\
+        \hline
+     \end{tabular}
+    \caption{Moment inertie}
+\end{table}
+Avec pour la poutre en I : H la hauteur totale, h la hauteur sans matière et b la petite largeur de la poutre.\\
+
+On a :\\
+\begin{minipage}{.5\textwidth}
+$I_p = \iint r^2dr = I_x + I_y$\\
+$I_x = y^2dy$\\
+Par la relation de Steiner : $I_{x'} = I_x + \sum y^2 F$\\
+$I_1 = \frac{1}{2}(I_x+I_y) + \frac{1}{2}\sqrt{(I_x-I_y)^2+4I_{xy}^2} = \frac{1}{2}(I_x+I_y) + R$\\
+$I_2 = \frac{1}{2}(I_x+I_y) - R$\\
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+On définit les moments de girations : $i_k = \sqrt{\frac{I_k}{F}}$\\
+Ellipse d'inertie : $\frac{x^2}{i_2^2} + \frac{y^2}{i_1^2} = 1$\\
+$u = \frac{1}{2}(\sigma_x \varepsilon_x + \sigma_y \varepsilon_y + \sigma_z \varepsilon_z + \tau_{xy}\gamma_{xy} + \tau_{yz}\gamma_{yz} + \tau_{xz}\gamma_{xz})$\\
+\end{minipage}
+
+
+\end{document}

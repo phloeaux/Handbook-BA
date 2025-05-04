@@ -1,0 +1,1064 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Frottement}
+On a un contact statique jusqu'à un angle $\delta_0$ tel que $0< T < T_{max} = \tan(\delta_0) N = \mu_0 N$\\
+S'il y a mouvement initial, on a alors un contact dynamique et un angle $\delta < \delta_0$ tel que $T=\tan(\delta) N = \mu N$\\
+
+En général : \\
+\begin{equation}
+    \mu = \tan(\delta)
+\end{equation}
+Ceci est décrit par la loi de Coulomb. Celle-ci est une simplification de la réalité et est valable uniquement si les frottement visqueux sont négligeables.\\
+En réalité, on a une relation non linéaire :\\
+\begin{itemize}
+    \item V = 0 : $0< T < \mu_0 N$\\
+    \item V>0(faible vitesse) : $T\rightarrow \mu N$\\
+    \item V>0(haute vitesse) : $T>\mu N$\\
+\end{itemize}
+
+On peut alors définir un cône de frottement : si statique alors la force résultante $F_{\frac{1}{2}}$ se situe dans le plus grand des cônes. Si dynamique alors cette force se trouve sur le petit cône.\\
+
+\subsection{Assemblage boulonnés I}
+Les premiers filets reprennent l'essentiel de la charge. \\
+\subsubsection{Filetages normalisés principaux}
+\quad \underline{métrique M :}\\
+Un seul filet. Le plus utilisé. Il existe des pas normaux et pas fins. \\
+\textbf{Profil triangulaire à 60$^{\circ}$}.\\
+Écriture : Md ou MdxP (pas fin)\\
+
+\begin{itemize}
+    \item d : diamètre nominal\\
+    \item P : pas\\
+    \item vis et écrou : \begin{itemize}
+        \item diamètre sur flancs : $d_2 = D_2 = d-0.64952*P$\\
+        \item hauteur de contact : $H_1 = 0.54127*P$\\
+    \end{itemize}
+    \item écrou : \begin{itemize}
+        \item diamètre interne : $D_1 = d-1.08253*P$\\
+    \end{itemize}
+    \item vis : \begin{itemize}
+        \item diamètre noyau : $d_3 = d-1.22687*P$\\
+        \item hauteur filet : $h_3 = 0.61343*P$\\
+        \item rayon fond de filet : $r_1 = 0.14434*P$\\
+    \end{itemize}
+\end{itemize}
+
+\quad \underline{Métrique trapézoïdal Tr :}\\
+Pour de fortes charges. Contient un ou plusieurs filets. Profil trapèze à 30$^{\circ}$. \\
+Dénoté : Tr dxP. Il y a aussi le jeu $a_c$. Si n filets, on se déplace de n pas à chaque tour.\\
+
+\begin{itemize}
+    \item d : diamètre nominal\\
+    \item P : pas\\
+    \item vis et écrou : \begin{itemize}
+        \item diamètre sur flancs : $d_2 = D_2 = d-0.5*P$\\
+        \item hauteur de contact : $H_1 = 0.5*P$\\
+        \item hauteur de filet : $h_3 = H_4 = 0.5*P+a_c$\\
+    \end{itemize}
+    \item écrou : \begin{itemize}
+        \item diamètre interne : $D_1 = d-P$\\
+    \end{itemize}
+    \item vis : \begin{itemize}
+        \item diamètre noyau : $d_3 = d-(P+2a_c)$\\
+    \end{itemize}
+\end{itemize}
+
+Pour les deux types, on définit \textbf{la section résistante $A_s$} comme $A_s = \frac{\pi}{4} d_s^2$ avec $d_s = \frac{d_2+d_3}{2}$. \\
+On définit aussi \textbf{l'angle de montée $\alpha$} comme $\alpha = \arctan(\frac{P}{\pi d})$\\
+
+\subsubsection{Comportement en serrage}
+\begin{equation}
+    M_s = M_{as}+M_{fs}
+\end{equation}
+Ici, on a $F_{an}$ la force de traction dans la vis, $r_m = 0.7d$. 
+Avec $M_{as} = r_m \mu_A F_{an}$ le frottement avec la face d'appui (coefficient dynamique).\\
+$M_{fs} = \frac{d_2}{2}F_{fs}$, le frottement avec les filets.
+\begin{itemize}
+    \item Profil rectangulaire : $F_{fs} = F_{an} \tan(\alpha_2 + \delta)$, $\delta = \arctan(\mu)$\\
+    \item Profil triangulaire (ou trapézoïdal) : $F_{fs} = F_{an} \tan(\delta'+\alpha_2)$, $\delta' = \arctan(\frac{\mu}{\cos(\frac{\beta}{2})})$\\
+\end{itemize}
+Dès lors, on a \\
+\begin{equation}
+    M_s = F(\frac{d_2}{2} \tan(\alpha_2 + \delta') + r_m \mu_A)
+\end{equation}
+
+\subsubsection{Desserrage}
+\begin{equation}
+    M_d = M_{ad}+M_{fd}
+\end{equation}
+Ici, on a $F_{an}$ la force de traction dans la vis, $r_m = 0.7d$. 
+Avec $M_{ad} = r_m \mu_{A0} F_{an}$ le frottement avec la face d'appui (coefficient statique).\\
+$M_{fd} = \frac{d_2}{2}F_{fs}$, le frottement avec les filets. \begin{itemize}
+    \item Profil rectangulaire : $F_{fd} = F_{an} \tan(\delta_0-\alpha_2)$, $\delta_0 = \arctan(\mu_0)$\\
+    \item Profil triangulaire (ou trapézoïdal) : $F_{fd} = F_{an} \tan(\delta'-\alpha_2)$, $\delta' = \arctan(\frac{\mu_0}{\cos(\frac{\beta}{2})})$\\
+\end{itemize}
+Dès lors, on a \\
+\begin{equation}
+    M_d = F(\frac{d_2}{2} \tan(\delta'_0 + \alpha_2) + r_m \mu_{A0})
+\end{equation}
+
+En serrage, la vis s'allonge de $\Delta L_{10}$ et le matériaux se contracte de $\Delta L_{20}$\\
+
+Si on applique un effort extérieur axial, la vis subit alors $F_0+\Delta F_1$ et le matériaux $F_0-\Delta F_2$\\
+
+En utilisant des modèles équivalent, on a que pour les précontraintes, l'ensemble réagit tel des ressorts en série : $k_{eq} = \frac{k_1k_2}{k_1+k_2}$\\
+Si on applique une force externe axiale, les éléments se comportent comme des ressorts en parallèle : $\Delta L = \Delta L_1 = \Delta L_2$ et $k_{eq} = k_1+k_2$\\
+
+L'effort repris par le vis : $\Delta F_1 = F \cdot \phi$ soit $F_1 = F_0 + F\cdot \phi$\\
+Avec $\phi = \frac{k_1}{k_1+k_2}$\\
+
+L'effort repris par le matériaux vaut : $\Delta F_2 = (1-\phi)F$ soit $F_2 = F_0-(1-\phi)F$\\
+
+Il y a décollement des pièces lorsque $F = \frac{F_0}{1-\phi}$\\
+
+Si la charge agit à une distance $n l_k$ (0<n<1) alors :\\
+$\Delta F_1 = n\phi F$ et $\Delta F_2 = (1-n\phi)F$\\
+
+\subsubsection{Rigidité vis}
+On a $k_{vis} = \frac{AE}{l}$ et $\Delta L_v = \sum(\Delta L_i)$ $k_v = (\sum k_i^{-1})^{-1}$\\
+
+Plusieurs valeurs possibles : \\
+\begin{itemize}
+    \item Tête de vis/section filetée visée (écrou/taraudage) : $k_{TV} = \frac{A_N E}{l_e}$ avec $A_N = \frac{\pi d^2}{4}$ et $l_e = 0.4d$\\
+    \item Section cylindrique (lisse) : $k_i = \frac{A_i E}{l_i}$\\
+    \item Section filetée non vissée : $k_{F-NV} = \frac{A_S E}{l}$\\
+    \item Section filetée visée (vis) : $k_{F-V} = \frac{A_3 E}{0.5 d}$\\
+\end{itemize}
+
+\subsubsection{Rigidité empilement pièces}
+De la même manière $\Delta L_b = \sum \Delta L_i$, $k_b = (\sum k_j^{-1})^{-1}$, $k_j = \frac{A_b E_j}{l_j}$\\
+
+Si la section AB n'est pas constante :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        $D_A$ : diamètre extérieur pièce & $d_w$ diamètre appui tête de vis \\
+        $d_h$ diamètre trou de passage vis & $l_k$ épaisseur pièce\\
+    \end{tabular}
+\end{table}
+Il existe alors 3 cas différents :\\
+\begin{itemize}
+    \item $D_A < d_w$ : $A_{sub} = \frac{\pi}{4}(D_A^2-d_h^2)$\\
+    \item $d_w \leq D_A \leq d_w+l_k$ : $A_{sub} = \frac{\pi}{4}(d_w^2-d_h^2)+\frac{\pi}{8} d_w (D_A-d_w) ((\sqrt[3]{\frac{l_k d_w}{D_A^2}}+1)^2-1)$\\
+    \item $D_A > d_w+l_k$ : $A_{sub} = \frac{\pi}{4}(d_w^2-d_h^2)+\frac{\pi}{8} d_w l_k ((\sqrt[3]{\frac{l_k d_w}{(d_w+l_k)^2}}+1)^2-1)$\\
+\end{itemize}
+
+\quad \underline{Cas de charge et force d'appui $F_b$ limite :}\\
+\begin{itemize}
+    \item si $F_{ext}$ est axiale : $F_b>0$\\
+    \item si $F_{ext}$ est radiale : $F_b > \frac{F_{ext}}{\mu_0}$\\
+\end{itemize}
+\quad \underline{Condition de serrage initial :}\\
+La valeur de $F_0$ doit être maîtrisée. On a la relation en fonction du couple de serrage $M_s$ : \\
+$F_0 = \frac{M_s}{r_m \mu_A + \frac{d_2}{2} \tan(\alpha_2+\delta')} = f(d;P;\beta; \mu; \mu_A; M_s)$\\
+
+La précontrainte $F_0$ diminue lorsque les frottements augmentent. La lubrification permet de diminuer les frottements. Si le niveaux des frottements est élevé, il y a alors un risque de détérioration des surfaces \textbf{grippage}.\\
+
+Pour maîtriser le couple de serrage, on a plusieurs moyens :\\
+\begin{itemize}
+    \item outils à main :\begin{itemize}
+        \item clé à tube, à fourche, allen, à pipe, à douilles, polygonales, $\dots$\\
+        \item Il n'y a aucune maîtrise du couple avec une clé à main. \\
+    \end{itemize}
+    \item outils de serrage : \begin{itemize}
+        \item visseuse (avec ou sans choc, domestique ou professionnel, $\dots$)\\
+        \item dynamométrique (clé à douille avec réglage couple de déclenchement)\\
+    \end{itemize}
+\end{itemize}
+
+\quad \underline{Précision du couple appliquée :}\\
+On définit le \textbf{facteur de dispersion :}\\
+\begin{equation}
+    \gamma = \frac{F_{0max}}{F_{0min}}
+\end{equation}
+La précision dépend du type de clé, de la qualité du matériel voire encore de l'usage adéquat ou non. \\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c}
+        moyen de serrage & précision & $\gamma$ \\
+        \hline
+        visseuse sans étalonnage & $\pm 60\%$ & 4\\
+        \hline
+        visseuse avec étalonnage périodique & $\pm 40\%$ & 2.5\\
+        \hline
+        clé dynamométrique & $\pm 20\%$ & 1.5\\
+    \end{tabular}
+\end{table}
+$\gamma$ restreint la plage d'utilisation du boulonnage. Soit $F_{0nom}$ la force que l'on pense appliquer. La force réelle dans la vis est alors comprise entre : $F_{0inf} = \frac{F_{0nom}}{\sqrt{\gamma}}$ et $F_{0sup} = \sqrt{\gamma} F_{0nom}$\\
+
+La condition d'appui entre pièces est donc : $F_{0inf} \geq F_{0min} \Rightarrow F_{0nom} \geq \sqrt{\gamma}[F_{bmin} +(1-n\phi)F]$\\
+La condition de résistance de la vis : $F_{0sup}\leq F_{0max} \Rightarrow F_{0nom} \leq \frac{[F_{vmax}-n\phi F]}{\sqrt{\gamma}}$\\
+
+\quad \underline{Maîtriser les contraintes parasites :}\\
+\underline{origine :} \begin{itemize}
+    \item décalage entre tous pendant le serrage\\
+    \item défauts géométriques des pièces\\
+    \item glissements entre pièces\\
+\end{itemize}
+En conséquence, la contrainte dans la vis augmente et la capacité de charge de celle-ci diminue.\\
+\subsubsection{Contrainte dans la vis}
+On utilise ici la contrainte équivalente de Von Mises :\\
+\begin{equation}
+    \sigma_{eq} = \sqrt{\sigma^2 + 3\tau^2} = \sqrt{(\frac{F_0 + n\phi F}{A_s})^2 + 3(\frac{16 M_{fs}}{\pi d_s^3})^2}
+\end{equation}
+On utilise ici le fait que $\sigma = \frac{F_0 + n\phi F}{A_s}$ and $\tau = \frac{M_{fs}}{\frac{I_0}{\nu}} = \frac{16 M_{fs}}{\pi d_s^3}$\\
+
+On veut en général que $\sigma_{eq} \leq R_e$\\
+De plus, à la limite élastique, on a $F_{vmax} = A_s \sqrt{R_e^2 - 3(\frac{16M_{fs}}{\pi d_s^3})^2}$\\
+Toujours avec $M_{fs} = F_0 \frac{d_2}{2} \tan(\alpha_2 + \delta')$\\
+
+Ainsi $F_v$ diminue lorsque $M_{fs}$ augmente, à savoir lorsque les frottements augmentent. On veut donc les limiter sur le filetage pour pouvoir exploiter au maximum les capacités de charge.\\
+
+\subsubsection{Serrage par vérin hydraulique}
+\quad \underline{Principe :} précontrainte appliquée par traction directe\\
+
+\quad \underline{Avantages :} traction pure dans la vis, frottements n'ont aucun effets sur $\sigma_{eq}$ et le coefficient de dispersion $\gamma \simeq 1$\\
+
+\subsubsection{Tassement}
+Écrasements plastique des surfaces en contacts. Se produit lors de la mise en charge. Cause une chute de la précontrainte. \\
+Dans le diagramme des contraintes, on a :\\
+$\Delta L_0' = \Delta L_0 -f_T$\\
+$F_0' = k_{eq} (\Delta L_0 -f_T) = F_0 - k_B\phi f_T$\\
+
+\subsubsection{Dilatation thermique différentielle}
+\begin{enumerate}
+    \item serrage à température ambiante $T_a$\\
+    \item échauffement : \begin{itemize}
+        \item vis avec un facteur de dilatation thermique $\alpha_v \rightarrow T_v$\\
+        \item bride avec un facteur de dilatation thermique $\alpha_b \rightarrow T_b$\\
+    \end{itemize}
+    \item dilatation thermique différentielle avec dans le diagramme des contraintes $\Delta L_T = l_k(\alpha_b(T_b-T_b) - \alpha_v(T_v-T_a))$ et $F_{0T} = k_{eq} (\Delta L_0 + \Delta L_T) = F_0 + k_b \phi \Delta L_T$\\
+\end{enumerate}
+
+$F_{ext}$ varie entre $F_{min}$ et $F_{max}$\\
+La force moyenne vaut donc : $F_m = \frac{F_{min} + F_{max}}{2}$ et la demie-amplitude : $F_a = \frac{F_{max} - F_{min}}{2}$\\
+Enfin, le facteur d'ondulation : $R = \frac{F_{min}}{F_{max}}$\\
+Valeurs remarquables : \begin{itemize}
+    \item R = -1 : sollicitation alternée \\
+    \item R = 0 : sollicitation répétée\\
+    \item R = 1 : sollicitation statique\\
+\end{itemize}
+\color{gray}Si on a $F_{min}$ sur la vis alors on a $F_{max}$ sur la pièce\color{black}\\
+
+La rupture par fatigue se produit pour $\sigma<R_m$ voire pour $\sigma<R_e$\\
+
+\subsubsection{Diagramme de Wöhler}
+Donne le nombre de cycles à rupture N, en fonction de $\sigma_a$ (on suppose ici R=-1)\\
+$\sigma_{max}>\sigma_e$ : fatigue oligocyclique\\
+Puis on a une fatigue à grand nombre de cycles et enfin on atteint un stade où il n'y a pas de rupture.\\
+
+\subsubsection{Diagramme de Haigh}
+Il définit la limite d'endurance pour R quelconque. On a alors le coefficient de sécurité structurale : $S = \frac{\Vec{OL}}{\Vec{OE}}$\\
+Avec L un point à l'intersection entre l'approximation de la limite d'endurance et la droite de pente : $p = \frac{\sigma_a}{\sigma_m} = \frac{1-R}{1+R}$\\
+De plus, $OE = \sqrt{\sigma_a^2 + \sigma_m^2}$\\
+
+\subsubsection{Perturbation de la précontrainte sur la vis}
+\begin{itemize}
+    \item Charge extérieur statique : $\Delta F =n \phi F$\\
+    \item charge dynamique : $(F_v)_a = \frac{1}{2}n\phi \Delta F$\\
+    \item effet thermique : $F_{OT} = k_B \phi \Delta l_T$\\
+\end{itemize}
+Pour réduire la charge sur la vis, il faut minimiser $n$ ou $\phi$ (réduire la section, augmenter la longueur de la vis, insérer un ressort, $\dots$)\\
+
+Pour un maintien continu de l'appui il faut que la distance inter-vis : $B < d_w + 2e$, avec $d_w$ le diamètre de la tête de vis et $e$ l'épaisseur de la pièce.\\
+
+Les vibrations, tassement, fluage et fatigue mènent au desserrage d'écrous.\\
+
+\subsubsection{Liaisons vis/écrou non auto-bloquants}
+\underline{Principe :} utiliser l'interface hélicoïdale pour la transformation d'un mouvement rotation $\leftrightarrow$ translation\\
+
+\quad \underline{Rotation $\rightarrow$ Translation :}\\
+Le travail d'entrée est : $W_e = c_{mot} \Delta \theta$, en sortie $W_s = F_{res} \Delta x$\\
+Le travail investi sur un tour : $W_{in} = \lvert F \rvert \pi d_2 \tan(\alpha_2+\delta')$\\
+Le travail récupéré sur un pas : $W_{out} = \lvert F \rvert \pi d_2 \tan(\alpha_2)$\\
+
+Ainsi, le rendement de transformation vaut :\\
+\begin{equation}
+    \eta_{M\rightarrow F} = \frac{\tan(\alpha_2)}{\tan(\alpha_2+\delta')}
+\end{equation}
+
+\quad \underline{Translation $\rightarrow$ Rotation :}\\
+Hypothèse : $\delta_0' < \alpha_2$\\
+
+Le travail d'entrée est : $W_e = F_{mot} \Delta x$, en sortie $W_s = M_{res} \Delta \theta$\\
+Le travail investi sur un tour : $W_{in} = \lvert F \rvert \pi d_2 \tan(\alpha_2)$\\
+Le travail récupéré sur un pas : $W_{out} = \lvert F \rvert \pi d_2 \tan(\alpha_2-\delta')$\\
+
+Ainsi, le rendement de transformation vaut :\\
+\begin{equation}
+    \eta_{M\leftarrow F} = \frac{\tan(\alpha_2-\delta')}{\tan(\alpha_2)}
+\end{equation}
+
+\subsection{Transmission de Puissance}
+\quad \underline{Principe fondamentaux :} "Puissance = effort x vitesse déplacement"\\
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+    \item translation : $\dot{W} = Fv$\\
+    \item rotation : $\dot{W} = C\omega$\\
+\end{itemize}
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+    \begin{itemize}
+        \item pertes : $\dot{Q} = \dot{W_e}-\dot{W_s}$\\
+        \item rendement : $\eta = \frac{\dot{W_s}}{\dot{W_e}}$\\
+    \end{itemize}
+\end{minipage}
+\subsubsection{Rapport de transmission}
+\begin{equation}
+    i = \frac{\text{vitesse entrée}}{\text{vitesse sortie}} = \frac{\omega_e}{\omega_s} = \frac{V_e}{V_s} = \frac{\omega_e}{V_s} = \frac{V_e}{\omega_s}
+\end{equation}
+i peut donc être un rapport entre deux vitesses : linéaires, angulaires, ou un mélange des deux.\\
+
+\begin{itemize}
+    \item $\lvert i \rvert >1$ : réducteur de vitesse\\
+    \item $\lvert i \rvert <1$ : multiplicateur de vitesse\\
+    \item i<0 : inverseur de marche\\
+\end{itemize}
+
+Si i est constant, on parle de \textbf{transmission homocinétique}.\\
+
+\subsubsection{Transmission positive (ou par obstacle)}
+\begin{itemize}
+    \item Travail mécanique fourni par force normale\\
+    \item Vitesse relative au contact est à composante normale nulle : pas de décollement\\
+\end{itemize}
+
+\underline{Avantages :}
+la puissance transmise est grande, faible encombrement et synchronisation des vitesses\\
+
+\subsubsection{Transmission négative (par frottement)}
+\begin{itemize}
+    \item Travail mécanique fourni par la force tangentielle\\
+    \item Vitesse relative à composante normale nulle (pas de décollement)\\
+    \item Frottement statique  : $T_{max} = \mu_0 N$ ou frottement dynamique $T = \mu N$ plus frottement visqueux $T = kv$\\
+\end{itemize}
+
+\underline{Avantages :} glissement possible pour la sécurité, rapport de transmission variable\\
+
+\underline{Inconvénients :} échauffement local, densité de puissance faible\\
+
+
+\subsection{Transmission par engrenage}
+\quad \underline{Principe fondamentaux :} Rotation $\leftrightarrow$ Rotation \\
+Roue entrée : menante\\
+Roue sortie : menée\\
+Puissance entrée : $\dot{W_e} = C_e \omega_e$\\
+Puissance sortie : $\dot{W_s} = C_s \omega_s = \eta \dot{W_e}$\\
+
+\quad \underline{Transmission homocinétique :} On a les relations : \\
+$\omega_s = \frac{\omega_e}{i}$ et $C_s = \frac{\dot{W_s}}{\omega_s} = \eta \frac{\dot{W_e}}{\omega_s} = \eta i C_e$\\
+
+\quad \underline{Trois configurations d'axes :}\\
+\begin{itemize}
+    \item axes parallèles : engrenages cylindriques\\
+    \item axes concurrents : engrenages coniques\\
+    \item ni l'un ni l'autre : engrenage gauche\\
+\end{itemize}
+
+\quad \underline{Deux types d'orientation de la denture :}\\
+\begin{itemize}
+    \item droite : génératrice concourante avec l'axe de rotation de la roue dentée\\
+    \item hélicoïdale : roue cylindrique (ou spirale : roue conique)\\
+\end{itemize}
+
+\quad \underline{Cas particuliers :}\\
+\begin{itemize}
+    \item pignon-crémaillère : $d_{roue} = \infty$ : engrenage cylindrique\\
+    \item pignon-couronne intérieur : $i>0$ (denture intérieur sur la roue)\\
+    \item roue et vis sans fin : engrenage gauche dans lequel l'axe de rotation de chaque roue dentée est porté par le plan médian de l'autre\\
+\end{itemize}
+
+\subsubsection{Engrenages à développante de cercle}
+\quad \underline{Principe :} ensemble de deux roues munies sur leur circonférence respective de dents qui engrènent ensemble et dont le profil est celui d'une développante de cercle. De plus, les deux roues sont en tout temps en contact en au moins un point : profil de dents des deux roues sont dits \textbf{conjugués}.\\
+
+\quad \underline{Condition d'engrènement :} les longueurs d'arc séparant deux dents consécutives doivent être égales\\
+
+\quad \underline{Condition de continuité de la transmission :} la distance entre le point initial et le point de rupture doit être supérieur à la longueur d'arc séparant deux dents consécutives\\
+
+On a un point C où la vitesse relative entre deux roues est nulle.\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Nom & Valeur \\
+        \hline
+        diamètre de base & $d_b$\\
+        angle de pression & $\alpha = 20^\circ$\\
+        diamètre primitif & $d = \frac{d_b}{\cos{\alpha}}$\\
+        pas de base & $p_b$\\
+        pas primitif & $p = \frac{p_b}{\cos{\alpha}}$\\
+        nombre de dents & $Z = \frac{\pi d}{p}$\\
+        module (\warning valeur normalisée) & $m = \frac{p}{\pi}$\\
+        diamètre de tête & $d_a$\\
+        diamètre de pied & $d_f$\\
+        hauteur de saillie & $h_a = r_a-r = m$\\
+        hauteur de creux & $h_f = r-r_f = 1.25m$\\
+        hauteur de dent & $h_d = 2.25m$\\
+        entraxe de référence & $a = r_1+r_2 = \frac{m}{2}(Z_1+Z_2)$\\     
+        rapport de transmission & $i = \frac{Z_2}{Z_1} = \frac{\omega_e}{\omega_s}$\\
+    \end{tabular}
+\end{table}
+\vspace{5cm}
+
+\subsubsection{Rapport de conduite} deux roues dentées R1 et R2 en prise. Longueur de contact : $\overline{A_iA_f}$\\
+\begin{equation}
+    \varepsilon_\alpha = \frac{\overline{A_iA_f}}{p_b} = \frac{1}{\pi} [\sqrt{(\frac{Z_1+2}{2\cos{\alpha}})^2-\frac{Z_1^2}{4}}+\sqrt{(\frac{Z_2+2}{2\cos{\alpha}})^2-\frac{Z_2^2}{4}}-\frac{Z_1+Z_2}{2}\tan{\alpha}]
+\end{equation}
+Transmission continue ssi $\varepsilon_\alpha>1$\\
+
+Pour des dentures extérieures, on a $\overline{A_iA_f} = \sqrt{r_{a1}^2-r_{b1}^2}+\sqrt{r_{a2}^2-r_{b2}^2}-a\sin{\alpha}$\\
+
+La valeur maximale de $\varepsilon_\alpha$ s'obtient lorsque $r_{a1}$ et $r_{a2}\rightarrow \infty$. On a : $(\varepsilon_\alpha)_{max} = \frac{4}{\pi m \sin(2\alpha)}$.
+
+\subsubsection{Interférence}
+\quad \underline{Définition :} contact entre la surface en développante de la dent de la première roue et la base de la dent conjuguée. Il peut donc y avoir blocage de l'engrenage (interférence de fonctionnement). On rabote alors la base (interférence de taillage). \warning affaiblit la base de la dent.\\
+
+\quad \underline{Condition non-interférence :} il faut que $A_i \in N_1N_2$ et $A_f \in N_1N_2$\\
+
+\begin{itemize}
+    \item \underline{condition 1 : $A_f \in N_1N_2$} cas limite : $A_f=N_2$. On a donc une condition sur $(d_2)_{min}$ (si $d_1$ est fixé)\begin{equation}
+    \begin{gathered}
+        (Z_2)_{min} = \frac{1}{\sin{\alpha}} \sqrt{(Z_1+2)^2-(Z_1\cos{\alpha})^2}-Z_1 = \sqrt{Z_1^2+4 \frac{1+Z_1}{\sin^2(\alpha)}}-Z_1\\
+        (d_2)_{min} = \frac{1}{\sin{\alpha}} \sqrt{(d_1+2m)^2-(d_1\cos{\alpha})^2}-d_1
+    \end{gathered}
+    \end{equation} 
+    \item \underline{condition 2 : $A_i \in N_1N_2$} cas limite $A_i = N_1$\begin{equation}
+        (Z_2)_{max} = \frac{(\frac{Z_1\sin{\alpha}}{2})^2-1}{1-\frac{Z_1 \sin^2(\alpha)}{2}}
+    \end{equation}
+    Valable ssi $\frac{2}{3}\frac{\sqrt{1+3\sin^2(\alpha)}+1}{\sin^2(\alpha)}<Z_1<\frac{2}{\sin^2(\alpha)}$\\
+    \item \underline{condition non-interférence si $Z_1 = Z_2 = Z_{min}$} \begin{equation}
+        Z_0 = \frac{2}{3}\frac{\sqrt{1+3\sin^2(\alpha)+1}}{\sin^2(\alpha)}
+    \end{equation}
+\end{itemize}
+
+\quad \underline{Cas de la crémaillère :}\\
+\begin{minipage}{.5\textwidth}
+    Profil de dent rectiligne inclinée de $\frac{\pi}{2}-\alpha$\\
+    Hauteur de dent à pente constante $h' = 2m$\\
+    Nombre de dent minimum sur pignon : $d_{min} = \frac{2h_a}{\sin^2(\alpha)} \rightarrow Z_{min} = \frac{2}{\sin^2(\alpha)}$\\
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+    \begin{itemize}
+        \item hauteur dent : $h$\\
+        \item pas : $p = \pi m$\\
+        \item hauteur saillie : $h_a = m$\\
+        \item hauteur de creux : $h_f = 1.25m$\\
+    \end{itemize}
+\end{minipage}
+
+\subsubsection{Taillage de la denture}
+\quad \underline{Deux familles de procédés :}\\
+\begin{enumerate}
+    \item Taillage par génération : mouvement de translation/rotation simples de l'outil et ébauche. Utilisation d'un outil de forme sur une machine dédiée (crémaillère)\\
+    \item Taillage sur centre d'usinage : fraisage n-axes selon type de roue dentée\\
+\end{enumerate}
+
+\quad \underline{Taillage par génération :}\\
+\begin{itemize}
+    \item \underline{Par outil crémaillère :} \begin{itemize}
+        \item procédé lent pour petites séries\\
+        \item mortaisage avec outil en forme de crémaillère\\
+        \item valable pour la génération de dentures extérieures droites et hélicoïdale\\
+        \item mouvement relatif de translation et rotation combiné entre chaque passage de l'outil\\
+    \end{itemize}
+    \item \underline{Fraise-mère :} \begin{itemize}
+        \item outil en forme de vis sans fin (arêtes coupantes)\\
+        \item mouvement de translation axial de l'ébauche\\
+        \item valable pour génération de dentures extérieure droite et hélicoïdale\\
+    \end{itemize}
+    \item \underline{outil-pignon :}\begin{itemize}
+        \item mortaisage avec outil en forme de pignon\\
+        \item rapport des vitesses de rotation de l'outil et de l'ébauche définit le nombre de dent de l'ébauche\\
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Transmission d'effort}
+Efforts générés par l'engrenage : les dents de la roue menante génère $F_N$ à la denture. On la décompose en $F_T$ tangentielle aux cercles primitifs et $F_R$ radial.\\
+On a donc $F_T = F_N \cos{\alpha}$ et $F_R = F_N \sin{\alpha}$. $C_1 = F_T r_1$, $C_2 = F_T r_2$\\
+
+\quad \underline{Sollicitation sur la denture :}\\
+
+\underline{Flexion :} Types de rupture en flexion :\begin{itemize}
+    \item par surcharge : résultat d'une grande surcharge (uniquement pour matériaux fragiles)\\
+    \item fatigue : concentration de contrainte au pied de la dent combinée avec la nature cyclique de la charge\\
+    \item d'angle : surcharge local due en cas de non parallélisme des dents\\
+\end{itemize}
+
+État de contrainte d'une dent : $F_T$ engendre $\sigma_{fa}$ une contrainte de flexion et $\tau$ de cisaillement à la base de la dent. $F_R$ comprime et engendre une contrainte de compression $\sigma_c$. \\
+En pratique $\sigma_c < 0.1\sigma_{fa}$\\
+On a ici : $\sigma_{fa} = \frac{M_{fa}s_f}{2I}$, avec $I = \frac{bs_f^3}{12}$. Ainsi $\sigma_{fa} = \frac{6 h_{fa} F_T}{b s_f^2}$.\\
+
+Pour une dent normalisée, on a :\\
+\begin{itemize}
+    \item h = 2.25m\\
+    \item  $s_f = \frac{\pi m}{2}$\\
+    \item $b = \psi m$ (largeur de dent)\\
+    \item $F_T = \frac{2 C_1}{mZ_1} = \frac{C_1}{r_1}$\\
+\end{itemize}
+
+\begin{equation}
+    \sigma_{fa} = 10.9 \frac{C_1}{m^3 Z_1 \psi} \leq \sigma_{F,adm} \Rightarrow m \geq 2.22 \sqrt[3]{\frac{C_1}{Z_1 \psi \sigma_{F,adm}}}
+\end{equation}
+
+\quad \underline{Facteur de correction Y :} prend en compte des défauts : $m \geq 2.22 \sqrt[3]{\frac{C_1 Y}{Z_1 \psi \sigma_{F,adm}}}$\\
+
+Types de rupture par pression contact : \begin{itemize}
+    \item par piqûre (progressif)\\
+    \item grippage : rupture du film de lubrification, phénomène brutal\\
+\end{itemize}
+
+La détermination de la pression de contact est compliquée. On utilise le modèle de Hertz.\\
+Hypothèses : les déformations et pressions de contact sont connues. On a des déformations élastiques et le solide est sans mouvement relatif.\\
+Le cisaillement maximal est en profondeur. Rupture interne d'abord puis se propage vers l'extérieur.\\
+Contrainte équivalente : $\frac{1}{E} = \frac{1}{2}(\frac{1}{E_1}+\frac{1}{E_2})$, $\frac{1}{R} = \frac{1}{R_1}+\frac{1}{R_2} = \frac{2}{m\sin{\alpha}} (\frac{1}{Z_1}+\frac{1}{Z_2})$ le rayon de courbure\\
+\begin{equation}
+    \sigma_H = 0.418 \sqrt{\frac{F_nE}{bR}} = 0.418 \sqrt{\frac{2M_1}{m Z_1 \cos{\alpha}} \frac{1}{\psi m} \frac{2}{m\sin{\alpha}}E(\frac{1}{Z_1}+\frac{1}{Z_2})} \leq \sigma_{H,adm}
+\end{equation}
+
+Pour $\alpha = 20^\circ$, on a : \\
+\begin{equation}
+    m_{H,min} = 1.29 \sqrt[3]{\frac{C_1E}{Z_1 \psi \sigma_{H,adm}^2}(\frac{1}{Z_1}+\frac{1}{Z_2})}
+\end{equation}
+On utilise ici $C_1 = F_N r_{b1} = F_N \frac{mZ_1}{2}\cos{\alpha}$\\
+
+\subsubsection{Denture hélicoïdale}
+Denture inclinée d'un angle $\beta$ par rapport à l'axe de rotation. $\beta$ est l'angle d'hélice (mesuré sur rayon primitif), en général $15^\circ < \beta < 30^\circ$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+    \hline\hline
+    
+        pas normal(réel) & $p_n$ \\
+        \hline
+        angle d'hélice & $\beta$\\
+        \hline
+        pas apparent & $p_t = \frac{p_n}{\cos{\beta}}$\\
+        \hline
+        module normal (réel) & $m_n = \frac{p_n}{\pi}$\\
+        \hline
+        module apparent & $m_t = \frac{p_t}{\pi} = \frac{m_n}{\cos{\beta}}$\\
+        \hline
+        largeur de dent normalisée & $\psi = \frac{b}{m_n}$\\
+        \hline
+        diamètre primitif & $d = m_t Z = \frac{m_n Z}{\cos{\beta}}$\\
+        \hline
+        angle de pression apparent & $\alpha_t$\\
+        \hline
+        diamètre de base & $d_b = d \cos{\alpha_t}$\\
+        \hline
+        pas de base & $p_{b,t} = p_t \cos{\alpha_t}$\\
+        \hline
+        hauteur de saillie & $h_a = m_n$\\
+        \hline
+        diamètre de tête & $d_a = d+2m_n$\\
+        \hline
+        hauteur de creux & $h_f = 1.25 m_n$\\
+        \hline
+        diamètre de pied & $d_f = d-2.5m_n$\\
+        \hline\hline
+    \end{tabular}
+    \caption{Paramètres géométriques}
+    \label{tab:my_label}
+\end{table}
+
+\quad \underline{Conditions d'engrènement :} $m_{n1} = m_{n2}$\\
+Soit $\gamma$ l'angle entre les deux axes de rotation. Il faut $\beta_1+\beta_2 = \gamma$\\
+
+Entraxe : \begin{equation}
+    a = \frac{m_{t1}Z_1+m_{t2}Z2}{2} = \frac{m_n}{2}(\frac{Z_1}{\cos{\beta_1}}+\frac{Z2}{\cos{\beta_2}})
+\end{equation}
+
+\underline{Avantages \& inconvénients :} contact dent/dent plus doux, rapport de conduite plus grand, contraintes de contact réduites, configurations gauches possibles, forces axiales sur arbre de transmission.\\
+
+\quad \underline{Rapport de conduite $\varepsilon$ si axes parallèles :}\\
+On a maintenant : $\varepsilon = \varepsilon_{\alpha t} + \varepsilon_\beta$\\
+
+\begin{itemize}
+    \item $\varepsilon_{\alpha t}$ le rapport de conduite d'une largeur élémentaire de roue : \begin{equation}
+    \begin{gathered}
+        \varepsilon_{\alpha t} = \frac{1}{p_{b,t}}[\sqrt{r_{a1}^2-r_{b1}^2}+\sqrt{r_{a2}^2-r_{b2}^2}-a\sin{\alpha_t}]\\
+        \Rightarrow \varepsilon_{\alpha t} = \frac{1}{\pi} [\sqrt{(\frac{Z_1+2\cos{\beta}}{2\cos{\alpha_t}})^2-\frac{Z_1^2}{4}}+\sqrt{(\frac{Z_2+2\cos{\beta}}{2\cos{\alpha_t}})^2-\frac{Z_2^2}{4}} - \frac{Z_1+Z_2}{2}\tan{\alpha_t}]
+        \end{gathered}
+    \end{equation}
+    \item $\varepsilon_\beta$ la composante supplémentaire induite par l'angle d'hélice $\beta$ : \begin{equation}
+        \varepsilon_\beta = \frac{b\tan{\beta}}{p_t} = \frac{b \sin{\beta}}{\pi m_n} = \frac{\psi \sin{\beta}}{\pi}
+    \end{equation}
+\end{itemize}
+
+
+\quad \underline{Conditions de non-interférence :}\\
+\begin{itemize}
+    \item Si $Z_1$ est fixé, il faut $Z_{2min}<Z_2<Z_{2max}$ tel que : \begin{equation}
+        Z_{2min} = (\sqrt{Z_1^2+4\frac{1+Z_1}{\sin^2(\alpha_n)}}-Z_1)\cos^3(\beta) \Leftrightarrow Z_{2max} = \frac{(\frac{Z_1 \sin{\alpha_n}}{2\cos^3(\beta)})^2-1}{1-\frac{Z_1\sin^2(\alpha_n)}{2\cos^3(\beta)}}
+    \end{equation}
+    \item Si $Z_1=Z_2$, il faut $Z>Z_{min}$ : \begin{equation}
+        Z_{min} = \frac{2}{X} \frac{\sqrt{1+X \sin^2(\alpha_n)}+1}{\sin^2 (\alpha_n)} \Leftrightarrow X = \frac{2}{\cos^3(\beta)} + \frac{1}{\cos^6(\beta)}
+    \end{equation}
+    \item Si $Z_1 \rightarrow \infty$(crémaillère), il faut $Z_2>Z_{min}$ tel que :\begin{equation}
+        Z_{min} = \frac{2}{\sin^2(\alpha_n)}\cos^3(\beta)
+    \end{equation}
+\end{itemize}
+
+\quad \underline{Efforts de transmission :}\\
+On peut décomposer la force utile $F_n$ en trois composantes :\begin{itemize}
+    \item Force tangentielle $F_t = \frac{C}{r}$\\
+    \item Force axiale : $F_a = F_t \tan{\beta}$\\
+    \item Force radiale : $F_r = F_t \tan{\alpha_t} = F_n \sin{\alpha_n}$
+\end{itemize}
+
+On peut réécrire $F_n = \frac{C}{r\cos{\beta}\cos{\alpha_n}}$\\
+Dès lors : \begin{equation}
+    \alpha_t = \arctan(\frac{\tan{\alpha_n}}{\cos{\beta}})
+\end{equation}
+
+
+\quad \underline{Conditions sur $m_n$ :}\\
+\begin{itemize}
+    \item Résistance en flexion $m_n\geq m_{F,min} = 2.22\sqrt[3]{\frac{C_1 Y}{Z_1 \psi \sigma_{F,adm}}}$\\
+    \item Résistance au contact dent/dent : $m_n\geq m_{H,min} = 1.29 \sqrt[3]{\frac{C_1 E \cos^2(\beta)}{Z_1 \psi \sigma_{H,adm}^2} (\frac{1}{Z_1}+\frac{1}{Z_2})}$\\
+\end{itemize}
+
+\subsubsection{Roue et vis sans fin}
+Composé de roues cylindriques à denture hélicoïdale montées en configuration gauche (axe non concourants)\\
+La transmission est généralement irréversible. Système à fort rapport de réduction : $Z_{vis}<< Z_{roue}$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        Paramètre de la roue & \\
+        \hline
+        nombre de dents & $Z_R$ \\
+        \hline
+        pas normal & $p_{n,R}$\\
+        \hline
+        angle d'hélice & $\beta_R$\\
+        \hline
+        pas apparent & $p_{t,R} = \frac{p_{n,R}}{\cos{\beta_R}}$\\
+        \hline
+        diamètre primitif & $d_R = m_{t,R} Z_R$\\
+        \hline\hline
+        Paramètre de la vis & \\
+        \hline
+        nombre de dents & $Z_V$ \\
+        \hline
+        pas normal & $p_{n,V}$\\
+        \hline
+        angle d'hélice & $\beta_V$\\
+        \hline
+        pas apparent & $p_{t,V} = \frac{p_{n,V}}{\cos{\beta_V}}$\\
+        \hline
+        diamètre primitif & $d_V = \frac{p_{t,V}Z_V}{\pi \tan(\beta_V)} = \frac{m_{t,V}Z_V}{\tan(\beta_V)} $\\
+        \hline\hline
+    \end{tabular}
+    \caption{Paramètres géométriques}
+\end{table}
+
+\quad \underline{Conditions d'engrènement :}\\
+$\beta_V = -\beta_R$\\
+$p_{n,V} = p_{n,R} = p_n$\\
+$p_{t,V} = p_{t,R} = \frac{p_n}{\cos{\beta}}$\\
+
+\begin{equation}
+    i = \frac{\omega_E}{\omega_S} = \frac{\omega_V}{\omega_R} = \frac{Z_R}{Z_V} = \frac{d_R}{d_V \tan(\beta)}
+\end{equation}
+
+Soit l'entraxe : 
+\begin{equation}
+    a = \frac{m_n}{2}(\frac{Z_V}{\sin{\beta}} + \frac{Z_R}{\cos{\beta}})
+\end{equation}
+
+
+\subsubsection{Engrenages coniques}
+Engrenage à axes concourants. Cylindres primitifs remplacés par des cônes primitifs. La valeur du module dépend de la distance au point S.\\
+
+Il faut : $p_1=p_2=p_n$ pour engrener.\\
+Soit $\delta_1$ l'angle entre l'axe de l'engrenage et le point de contact entre les deux engrenages.\\
+$i = \frac{\sin{\delta_2}}{\sin{\delta_1}}$\\
+Si les axes sont perpendiculaire : $i = \frac{1}{\tan \delta_1}$ Car $\delta_1+\delta_2 = 90^\circ$\\
+
+Soit l'effort tangentiel : $F_t = \frac{C}{r_m}$. Avec $r_m = r-0.5b\sin{\delta}$\\
+\warning Si les engrenages sont perpendiculaires alors $F_{t1} = F_{t2}$!\\
+
+Ainsi : \begin{itemize}
+    \item Effort normal : $F_n = \frac{F_t}{\cos{\alpha}}$\\
+    \item Effort radial : $F_r = F_t \tan\alpha \cos{\delta}$\\
+    \item Effort axial : $F_a = F_t \tan\alpha \sin{\delta}$\\
+\end{itemize}
+
+\subsubsection{Réducteur à train d'engrenage}
+\quad \underline{Engrenage à réduction de vitesse :}\\
+On a $\lvert i \rvert >1$ $ \Rightarrow C_s = \eta \lvert i \rvert C_E$\\
+Pour des raisons d'encombrement, on a en général $\lvert i \rvert < 5$\\
+
+\quad \underline{Principe du réducteur à train ordinaire :}\\
+\begin{itemize}
+    \item axes de rotation fixes et arbres intermédiaires avec deux roues dentées\\
+    \item si $\omega_E$ grand, on utilise une denture hélicoïdale\\
+    \item si $C_s$ grand, on utilise alors une denture droite\\
+\end{itemize}
+
+\quad \underline{Rapport de transmission global :} \begin{equation}
+    i = \frac{\omega_E}{\omega_S} = \Pi_j i_j = (-1)^n \frac{\Pi z_{\text{menée}}}{\Pi z_{\text{menant}}}
+\end{equation}
+
+\quad \underline{Rendement global :} \begin{equation}
+    \eta = \frac{\dot{W}_S}{\dot{W}_E} = \Pi_j \eta_j
+\end{equation}
+
+\subsubsection{Réducteur à train épicycloïdal}
+\begin{itemize}
+    \item Deux roues à axe fixe, au moins une à une axe mobile\\
+    \item axes fixes sont coaxiaux\\
+    \item axes mobiles ont une trajectoire circulaire autour de l'axe fixe\\
+\end{itemize}
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Planétaire & Satellite \\
+        \hline
+        roue à axe fixe & roue à axe mobile\\
+        roue dentée à denture extérieure ou intérieure & pignon à denture extérieure\\
+    \end{tabular}
+    \caption{Description des éléments}
+\end{table}
+Les deux sont liés entre eux par un "porte-satellite" qui tourne autour de l'axe fixe.\\
+
+\quad \underline{Concept mathématique :}\\
+\begin{itemize}
+    \item cycloïde : trajectoire d'un point appartenant à un cercle qui roule sans glisser sur une droite\\
+    \item épicycloïde : trajectoire d'un point appartenant à un cercle qui roule sans glisser sur à l'extérieur d'un autre cercle. Ce mouvement décrit le satellite par rapport au pignon planétaire\\
+    \item hypocycloïde : trajectoire d'un point appartenant à un cercle qui roule sans glisser à l'intérieur d'un autre cercle. Ce mouvement décrit le satellite par rapport à la couronne\\
+\end{itemize}
+
+\warning Les satellites ne peuvent être ni des entrées ni des sorties\\
+
+\subsubsection{Calcul de raison}
+Il s'agit du rapport de transmission sous les conditions : on se place dans le référentiel du porte-satellite et on suppose que E et S sont les planétaires\\
+
+On a : $i_0 = \frac{w_{p1/ps}}{w_{p2/ps}} = -\frac{Z_{p2}}{Z_{p1}}$ avec p1 et p2 des entrées et sorties\\
+
+Pour changer de référentiel, on utilise la formule de Willis : $w_{p1/ps} = w_{p1}-w_{ps}$\\
+On obtient donc : $i_0 = \frac{w_{p1}-w_{ps}}{w_{p2}-w_{ps}}$\\
+
+Ainsi : $i = \frac{\omega_E}{\omega_S} = f(i_0)$\\
+
+\quad \underline{Condition de montage en type 1 :}\\
+\begin{equation}
+    \begin{gathered}
+        d_{p2} = d_{p1}+2 d_{sat}\\
+        Z_{p2} = Z_{p1} + 2 Z_{sat}
+    \end{gathered}
+\end{equation}
+
+Pour n satellites, on doit avoir $\frac{Z_{p1}+Z_{p2}}{n} \in \mathbb{N}$\\
+
+Pour ne pas avoir d'interférence entre les satellites adjacents, on doit avoir : \begin{itemize}
+    \item cercles de tête : $(d_a)_{sat} = d_{sat} + 2m_n$\\
+    \item cas limite si cercles de têtes tangents : $d_{p1} = m_z Z_{p1}$ et $d_{sat} = m_z Z_{sat}$\\
+    \item $\sin(\frac{\pi}{n}) > \frac{(d_a)_{sat}}{d_{p1}+d_{sat}}$\\
+\end{itemize}
+
+En cas de denture droite, on a également : $m_z = m_n$ $\Rightarrow \sin(\frac{\pi}{n})> \frac{Z_{sat}+2}{Z_{p1}+Z_{sat}}$\\
+
+
+\begin{itemize}
+    \item Avantages : \begin{itemize}
+        \item grand rapport de transmission possible\\
+        \item nombre réduit de roues, grand rendement et beaucoup de densité de puissance\\
+        \item colinéarité des axes d'entrées et de sorties\\
+    \end{itemize}
+    \item Inconvénients : \begin{itemize}
+        \item usinage précis, coûteux\\
+        \item efforts centripètes critiques si $\omega_{ps}$ est grand\\
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Différentiel}
+Il s'agit d'un train épicycloïdal "sphérique"\\
+On a ici : $Z_{p1} = Z_{p2} \Rightarrow i_0 = -1$\\
+Par la formule de Willis : $ \frac{w_{p1}-w_{ps}}{w_{p2}-w_{ps}} = -1 \Rightarrow w_{ps} = \frac{w_{p1}+w_{p2}}{2}$\\
+$\lvert C_{p1}\rvert = \lvert C_{p2} \rvert = \frac{\lvert C_{ps}\rvert}{2}$\\
+
+Si l'arbre d'entrée est l'arbre moteur, alors le coupe est réparti à part égal sur les deux arbres. Les vitesses de rotation des deux arbre est libre.\\
+On a par ailleurs $\omega_1 = \frac{1}{r} (R+a)\frac{V}{R}$ et $\omega_2 = \frac{1}{r}(R-a) \frac{V}{R}$\\
+
+
+\subsection{Transmission par courroie}
+Il existe deux types : \begin{itemize}
+    \item lisse (plate ou trapézoïdale), entraînement non-positif et asynchrone\\
+    \item cranté, entraînement positif et synchrone\\
+\end{itemize}
+La courroie doit être tendue en fonctionnement $\Rightarrow$ tension de précharge.\\
+
+\subsubsection{Longueur de la courroie}
+\begin{itemize}
+    \item diamètre d'enroulement $d_1$ et $d_2$\\
+    \item entraxe a\\
+    \item $L = L_1 + L_2 + 2 L_a$\\
+    \item $\alpha_1 = \pi - 2\theta$, $\alpha_2 = \pi + 2\theta$\\
+\end{itemize}
+On a par géométrie : $L_1 = (\pi-2\theta) \frac{d_1}{2}$, $L_2 = (\pi + 2\theta) \frac{d_2}{2}$. Ainsi : \\
+\begin{equation}
+    \begin{gathered}
+        \theta = \arcsin{(\frac{d_2-d_1}{2a})}\\
+        L = (\pi - 2\theta) \frac{d_1}{2} + (\pi + 2\theta) \frac{d_2}{2} + 2 \sqrt{a^2 - (\frac{d_2-d_1}{a})^2}\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Limite $\frac{d_2-d_1}{2}<<a$ :}\\
+On a maintenant : $L_1'= \pi \frac{d_1}{2}$, $L_2' = \pi \frac{d_2}{2}$, $L_a' \simeq a + \frac{(d_2-d_1)^2}{8a}$\\
+
+\begin{equation}
+    L' = \pi (\frac{d_1+d_2}{2})+ 2a + \frac{(d_2-d_1)^2}{4a}
+\end{equation}
+
+\subsubsection{Principe de fonctionnement}
+La tension est portée sur la fibre neutre : à mi épaisseur de la courroie $e$ tel que $d+e$ soit le diamètre d'enroulement de la fibre neutre. \\
+Par une somme des moments, on obtient pour une poulie : \begin{equation}
+    C_m + \frac{d+e}{2}T_2 = \frac{d+e}{2}T_1
+\end{equation}
+
+On a donc : \begin{itemize}
+    \item $T_1(>T_0)$ le brin menant\\
+    \item $T_2 (<T_0)$ le brin mené\\
+\end{itemize}
+
+La \textbf{force utile} est définie comme : \begin{equation}
+    F_u = T_1-T_2 = \frac{2C_m}{d+e} \simeq \frac{2C_m}{d}
+\end{equation}
+
+On définit également le débit massique : $\dot{m}_i = \rho_i A_i v_i$\\
+Avec la conservation de la masse, on doit avoir $\dot{m}_1 = \dot{m}_2$\\
+
+Les brins étant sollicités élastiquement, on a deux phénomènes qui apparaissent : \begin{itemize}
+    \item allongement longitudinal $\sigma_i = \frac{T_i}{A_i} = E \varepsilon_i$\\
+    \item contraction transverse $A_i = A_0(1-\nu \varepsilon_i)^2$\\
+\end{itemize}
+
+De plus, la masse volumique est donnée par : \\
+\begin{equation}
+    \rho_0 = \frac{dm}{A_0 dL_0} \Rightarrow \rho_i = \frac{\rho}{(1-\nu \varepsilon_i)^2(1+\varepsilon_i)}
+\end{equation}
+
+Dés lors, on a : \begin{equation}
+    \frac{V_2}{V_1} = \frac{1+\varepsilon_2}{1+\varepsilon_1}
+\end{equation}
+
+\subsubsection{Arc de fonctionnement}
+\quad \underline{Arc de repos $\alpha_{r,i}$ :}\\
+On a ici des frottements statiques, ainsi : $\frac{V_{courroie}}{\omega_{poulie}} = \frac{d_i + e}{2}$\\
+La vitesse de la courroie est donc constante, tout comme la tension dans le brin qui équivaut à la tension en amont.\\
+
+\quad \underline{Arc de glissement $\alpha_{g,i}$ :}\\
+On a maintenant des frottements dynamiques tel que $\frac{V_{courroie}}{\omega_{poulie}} \neq \frac{d_i + e}{2}$\\
+La vitesse de la courroie n'est donc pas constance et la tension du brin passe de $T_1$ à $T_2$.\\
+
+On a trois régimes possible : \begin{itemize}
+    \item à charge nulle ($C_m = C_r = 0)$ : $T_1 = T_2 = T_0 \Rightarrow F_u = 0$, $\alpha_{r,i} = \alpha_i$ et $\alpha_{g,i} = 0$\\
+    \item à charge partielle : $F_u = T_1-T_2>0$, $C_m>0$, $0 < \alpha_{g,i}<\alpha_i$\\
+    \item à charge maximale : $\min(\alpha_{r,i}) \rightarrow 0$, à la limite du patinage soit $(F_u)_{max}$\\
+\end{itemize}
+
+\subsubsection{Rapport de transmission}
+\quad \underline{Rapport de transmission $i$ :}\\
+Tout d'abord, définissons les vitesses de rotations comme : $\omega_i = \frac{2 V_i}{d_i+e}$\\
+Ce qui nous donne : \begin{equation}
+    i = \frac{1+ \varepsilon_1}{1+\varepsilon_2} \frac{d_2+e}{d_1+e} = \frac{v_1}{v_2} \frac{d_2 +e}{d_1 + e} = \frac{1}{1-g} \frac{d_2+e}{d_1+e}
+\end{equation}
+
+\quad \underline{Facteur de glissement :}\\
+\begin{equation}
+    g = \frac{v_1-v_2}{v_1} = \frac{\varepsilon_1 - \varepsilon_2}{1+\varepsilon_1}
+\end{equation}
+Si on suppose $\varepsilon_i<<1$ alors : \begin{equation}
+    g \simeq \varepsilon_1 - \varepsilon_2 = \frac{T_1-T_2}{A_0 E} = \frac{F_u}{A_0 E}
+\end{equation}
+
+\subsubsection{Tension de service}
+On considère ici une courroie de largeur b.\\
+\quad \underline{A l'arrêt ($C_m = C_r = 0, \omega_i =0$) :}\\
+La tension de pré-charge est donnée par : $T_0 = T_{10} = T_{20}$\\
+La pression de contact $p_0$ poulie/courroie : $p_0 = \frac{T_0}{br}$\\
+La force de réaction du palier sur la poulie : $F_A = 2 T_0 \sin{\frac{\alpha}{2}}$\\
+
+\quad \underline{Marche à vide ($C_m = C_r = 0, \omega_i \neq 0)$ :}\\
+La rotation entraîne une force centripète sur la courroie : $dF_c = dm \omega^2 r$. $dF_c$ génère un surcroît de tension $T_c$ appelée tension centrifuge.\\
+
+\begin{equation}
+    \begin{cases}
+        p_c = \frac{\rho A_0 r \omega^2}{b} & \text{pression centrifuge}\\
+        T_c = brp_c = \rho A_0 v^2 & \text{tension centrifuge}\\
+        p_f = p_0 - p_c & \text{pression de frottement}
+    \end{cases}
+\end{equation}
+La pression de frottement est la pression réelle ressentie lorsque la poulie tourne.\\
+
+De plus : $\begin{cases}
+    T_{10} = T_{f1} + T_c\\
+    T_{20} = T_{f2} + T_c\\
+\end{cases} \Rightarrow T_{f1} = T_{f2} = brp_f = br(p_0-p_c)$\\
+
+\quad \underline{Transmission d'une puissance ($C_i \neq 0, \omega_i \neq 0$) :}\\
+On a maintenant $p_f$ constant sur l'arc de repos. Cependant, il ne l'est pas sur l'arc de glissement. \\
+\begin{equation}
+    \mu_0 \alpha_g = -\ln{(\frac{T_{f2}}{T_{f1}})}
+\end{equation}
+Dès lors, $\alpha_g = \alpha_{g1} = \alpha_{g2}$\\
+De plus, $T_{10} \rightarrow T_1 = T_{f1} + T_c$ et $T_{20} = T_{f2} +T_c$\\
+
+\begin{equation}
+    T_{f1} = T_{f2} e^{mu_0 \alpha_g} \Rightarrow T_1-T_c = (T_2-T_c) e^{mu_0 \alpha_g}
+\end{equation}
+
+\color{gray}Note : à la limite du patinage, on a $\alpha_1<\alpha_2 \Rightarrow \frac{(T_{f1})_{max}}{(T_{f2})_{max}} = e^{\mu_0 \alpha_1}$ et $\alpha_g = \alpha_1$\color{black}\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c}
+        $\varepsilon_1 = \varepsilon_0 + \Delta \varepsilon_1$ & dans le brin menant & $\Delta \varepsilon_1 = - \Delta \varepsilon_2$ \\
+        $\varepsilon_2 = \varepsilon_0 + \Delta \varepsilon_2$ & dans le brin mené\\
+        \hline
+        $v_1 = v_0 + \Delta v_1$ & $\Delta v_1 = -\Delta v_2$& $v_{moy} = v_0$\\
+        $v_2 = v_0 + \Delta v_2$ & & \\
+        \hline
+        $T_1 = T_0 + \Delta T$ & $\Delta T = \frac{F_u}{2}$ & \\
+        $T_2 = T_0 - \Delta T$ & & \\
+    \end{tabular}
+    \caption{Paramètres}
+\end{table}
+
+On a maintenant les \textbf{équations de Poncelet} \begin{equation}
+    \begin{gathered}
+        T_1 = T_0 + \frac{F_u}{2} \Rightarrow T_{f1} = T_0 - T_c + \frac{F_u}{2}\\
+        T_2 = T_0 - \frac{F_u}{2} \Rightarrow T_{f2} = T_0 - T_c - \frac{F_u}{2}\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Tension à la limite du patinage :}\\
+\begin{itemize}
+    \item $(F_u)_{max} = (T_{f1})_{max} - (T_{f2})_{min} = (T_{f2})_{min} (e^{\mu_0\alpha_1}-1)$\\
+    \item $(T_1)_{max} = T_C + \frac{e^{\mu_0\alpha_1}}{e^{\mu_0\alpha_1}-1} (F_u)_{max}$\\
+    \item $(T_2)_{min} = T_c + \frac{1}{e^{\mu_0\alpha_1}-1} (F_u)_{max}$
+\end{itemize}
+
+\underline{Force utile :} $F_U = 2(T_0-T_c) \frac{e^{\mu_0 \alpha_g}-1}{e^{\mu_0 \alpha_g}+1}$\\
+\underline{angle de glissement :} $\alpha_g = \frac{1}{\mu_0} \ln(\frac{2(T_0-T_c)+F_U}{2(T_0-T_c)-F_U})$\\
+
+\subsubsection{Contraintes dans la courroie}
+\underline{Brin menant 1 :} $\sigma_1 = \frac{T_c+T_{f1}}{A_0} = \frac{1}{A_0}(T_c + \frac{e^{\mu_0 \alpha_g}}{e^{\mu_0 \alpha_g}-1}F_U)$\\
+
+\underline{Brin mené 2 :} $\sigma_2 = \frac{T_c+T_{f2}}{A_0} = \frac{1}{A_0}(T_c + \frac{1}{e^{\mu_0 \alpha_g}-1}F_U)$\\
+
+Courbure sur la poulie : $\gamma = \frac{2}{d}$\\
+Moment de flexion : $M_f = \gamma EI$\\
+Contrainte : \begin{equation}
+    \sigma_{in} = \frac{M_f}{I} \frac{e}{2} = \frac{\gamma E e}{2} = E \frac{e}{d}
+\end{equation}
+\color{gray}$\sigma_{in}$ maximale sur poulie de plus petit diamètre.\color{black}\\
+
+\underline{Contrainte totale :} $\sigma_{tot} = \sigma + \sigma_{in}$\\
+\begin{equation}
+    (\sigma_{tot})_{max} = \frac{T_c}{A_0} + \frac{e^{\mu_0 \alpha_g}}{e^{\mu_0 \alpha_g}-1} \frac{F_U}{A_0} + E \frac{e}{d_1}
+\end{equation}
+Elle est maximale lorsque le rayon d'enroulement est minimum; sur l'arc de repos $\alpha_{r1}$\\
+
+\quad \underline{Force utile aux limites d'utilisation :}\\
+On a dans ce cas $(\sigma_{tot})_{max} = \frac{T_1}{A_0} + \sigma_{in} = \sigma_{adm}$\\
+$F_U = 2[(\sigma_{adm}-\sigma_{in})A_0-T_0]$\\
+$\alpha_g = \min(\alpha_1, \alpha_2)$\\
+De plus : $T_c = \rho A_0 V^2$\\
+
+\begin{equation}
+    (F_U)_{max} = (\sigma_{adm}-\sigma_{in} - \rho V^2) A_0 \frac{e^{\mu_0 \alpha_1}-1}{e^{\mu_0 \alpha_1}}
+\end{equation}
+
+\subsubsection{Tension optimale et vitesse maximale}
+On veut $(T_0)_{opt}$ tel que $F_U = (F_U)_{max}$\\
+
+\begin{equation}
+    (T_0)_{opt} = \frac{e^{\mu_0 \alpha_1}+1}{2e^{\mu_0 \alpha_1}}[(\sigma_{adm}-\sigma_{in})A_0 + T_c \frac{e^{\mu_0 \alpha_1}-1}{e^{\mu_0 \alpha_1}+1}]
+\end{equation}
+
+\begin{equation}
+    V_{max} = \sqrt{\frac{\sigma_{adm}-\sigma_{in}}{\rho}}
+\end{equation}
+
+\subsubsection{Puissance transmissible maximale}
+$\dot{W}$ est maximale pour $F_U = (F_U)_{max}$. Ainsi il existe une vitesse optimale $V_{opt}$ pour laquelle $\dot{W} = \dot{W}_{max}$\\
+
+\begin{equation}
+    \dot{W} = V(\sigma_{max}-\sigma_{in} - \rho V^2) A_0 \frac{e^{\mu_0 \alpha_1}-1}{e^{\mu_0 \alpha_1}} = \dot{W}_{max}
+\end{equation}
+
+\begin{equation}
+    V_{opt} = \sqrt{\frac{\sigma_{adm}-\sigma_{in}}{3\rho}} = \frac{V_{max}}{\sqrt{3}}
+\end{equation}
+
+\begin{equation}
+    \dot{W}_{max} = \frac{2}{3} \sqrt{\frac{1}{3\rho}}(\sigma_{adm}-\sigma_{in})^{\frac{3}{2}} A_0 \frac{e^{\mu_0 \alpha_1}-1}{e^{\mu_0 \alpha_1}}
+\end{equation}
+Avec $\sigma_{in} = E \frac{e}{d_1}$\\
+
+\begin{equation}
+    \begin{gathered}
+        (T_0)_{opt} = A_0 (\sigma_{adm}-\sigma_{in}) \frac{2e^{\mu_0 \alpha_1}+1}{3e^{\mu_0 \alpha_1}}\\
+        (F_U)_{max} = \frac{2}{3} (\sigma_{adm}-\sigma_{in}) A_0 \frac{e^{\mu_0 \alpha_1}-1}{e^{\mu_0 \alpha_1}}\\
+    \end{gathered}
+\end{equation}
+
+Comment maximiser $\dot{W}_{max}$ : \begin{itemize}
+    \item utilisation de poulies intermédiaires / croisement de la courroie pour maximiser $\alpha_1$\\
+    \item diamètre de poulie agrandis pour maximiser $\sigma_{in}$\\
+    \item épaisseur $e$ la plus faible possible\\
+    \item largeur $b$ la plus grande possible\\
+    \item masse volumique $\rho$ la plus faible possible pour minimiser les effets centrifuges\\
+    \item contrainte admissible $\sigma_{adm}$ la plus élevée possible pour maximiser la tension de pré-charge\\
+    \item module de Young E le plus faible possible pour minimiser $\sigma_{in}$\\
+    \item coefficient de frottement $\mu_0$ le plus grand possible\\
+\end{itemize}
+
+\subsubsection{Transmission par courroie trapézoïdale}
+Transmission non-positive et asynchrone. Contact flancs sur flancs : flancs de courroie inclinés d'un angle $\frac{\beta}{2} \rightarrow N = \frac{F_N}{2 \sin(\beta/2)}$. Le flanc de poulie est une surface conique de conicité $(\pi-\beta)/2$. \\
+
+\begin{equation}
+\begin{gathered}
+    F_T = \frac{\mu_0}{\sin(\beta/2)}F_N\\
+    \mu_0' = \frac{\mu_0}{\sin(\beta/2)}\\
+\end{gathered}
+\end{equation}
+La même théorie est applicable avec $\mu_0'$ au lieu de $\mu_0$.\\
+
+L'angle $\beta$ n'est pas normalisé, cependant la section l'est. Les inconvénients de la forme en trapèze sont : \begin{itemize}
+    \item induction d'un ration de hauteur h / largeur b important : $\sigma_{in} \nearrow$ : utilisation de poulies de grand diamètre, effet limitant sur $(F_U)_{max}$\\
+    \item si nécessité de petits $\emptyset$ de poulies : crantages dans la courroie pour minimiser sa rigidité en flexion, utilisation de courroies de type "poly-V"\\
+\end{itemize}
+
+La courroie neuve doit affleurer le bord de la gorge de la poulie.\\
+
+\quad \underline{Effets de l'usure :}\\
+\begin{itemize}
+    \item Réduit le diamètre moyen d'enroulement : effet sur le rapport de transmission $i$\\
+    \item Réduit la tension de précontrainte : réduit $(F_U)_{max}$\\
+    \item Si contact sur fond de poulie : $\mu_0'$ remplacé par $\mu_0$\\
+\end{itemize}
+
+\subsubsection{Variateurs de vitesse}
+Flasque mobile dans la direction axiale de la poulie. Variation de l'écartement, et donc du diamètre d'enroulement. \\
+Principal avantage : variation continue du rapport de transmission sans interruption de la puissance transmise.\\
+
+La géométrie de la poulie impose les relations suivantes : \begin{itemize}
+    \item $r_{max} = r_{min} + e - h$\\
+    \item $\frac{b}{2} = e \tan( \beta/2)$\\
+\end{itemize}
+Soit R la plage de réglage telle que : \begin{equation}
+    R = \frac{r_{max}}{r_{min}} \Rightarrow R = 1+ \frac{1}{r_{min}} (\frac{b}{2\tan(\beta/2)}-h)
+\end{equation}
+
+
+\end{document}

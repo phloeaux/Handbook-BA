@@ -1,0 +1,402 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\etocsettocdepth{subsubsection}
+
+
+\begin{document}
+%\etocsetlevel{subsection}{6}
+\localtableofcontents
+\subsection{Fondations}\quad \underline{Surjective :} Une fonction $f:A\rightarrow B$ est dite surjective si chaque éléments de l'ensemble d'arrivée possède au moins une pré-image.\\
+
+\quad \underline{Injective :} une fonction est injective si $x\neq x' \Rightarrow f(x) \neq f(x')$\\
+
+\quad \underline{Bijective :} Si une fonction est à la fois injective et surjective.\\
+
+\quad \underline{Somme Géométrique :} $\sum_{k=0}^n r^k = \frac{1-r^{n+1}}{1-r}$\\
+
+\quad \underline{Binôme de Newton :} $(x+y)^n = \sum_{k=0}^n \begin{pmatrix}
+    n\\
+    k\\
+\end{pmatrix} x^{n-k} y^k$\\
+
+\quad \underline{Log :} $log_a(b) = \frac{log_d(b)}{log_d(a)}$\\
+
+\subsection{Les réels}
+Un ensemble de $\mathbb{R}$ est un corps totalement ordonné qui satisfait à la propriété de la borne supérieur : $\mathbb{R}$ est muni des opérations usuelles; on peut toujours comparer deux nombres (x<y); dans $\mathbb{R}$ tout ensemble majoré possède un \textbf{supremum} et tout ensemble minoré possède un \textbf{infimum}. On dit que A est borné s'il est à la fois minoré et majoré. On s'appelle S le supremum de A s'il majore A et qu'il est le plus petit majorant de A. Idem pour l'infimum.\\
+
+\quad \underline{Valeur absolue :}\\
+$|x| = x$ si $x>0$, $=0$ si $x=0$ et $=-x$ si $x<0$.\\
+
+\quad \underline{Distance :} $d(x,y) = |x-y|$\\
+Inégalité triangulaire : $d(x,z) \leq d(x,y) + d(y,z)$\\
+On a aussi : $|x+y| \leq |x| + |y|$\\
+
+\quad \underline{Densité :}\\
+Un sous ensemble $E\subset \mathbb{R}$ est dense si $\forall x,y \in$ $\mathbb{R}$, $x<y \rightarrow \exists z\in E$ tel que $x<z<y$.\\
+
+\quad \underline{Topologie de $\mathbb{R}$ :}\\
+Un sous ensemble $G \subset$ $\mathbb{R}$ est ouvert si $\forall x \in G$, $\exists \varepsilon>0$ tel que $]x-\varepsilon; x+\varepsilon[ \subset G$. Il est fermé si son complémentaire est ouvert.\\
+
+\subsection{Suites}
+($a_n$) est majoré si $\exists M\in $ $\mathbb{R}$ tel que $a_n \leq M \forall n$. Minoré : $\exists m\in $ $\mathbb{R}$ tel que $a_n \geq m \forall n$.\\
+Borné si les deux.\\
+$(a_n)$ est croissante/décroissante si $a_n \leq a_{n+1}$/$a_n \geq a_{n+1}$. Strictement croissante/décroissante avec inférieur/supérieur stricte.\\
+
+
+\underline{Def :} Une suite tend vers 0 (lorsque n tend vers $\infty$) si $\forall \varepsilon>0$ $\exists N\in \mathbb{N}$ (qui dépend de $\varepsilon$) tel que $a_n \in [-\varepsilon; \varepsilon] \forall n \geq N$.\\
+
+\underline{Def :} $(a_n) \rightarrow L \in$ $\mathbb{R}$ (lorsque n tend vers $\infty$) si $\forall \varepsilon > 0$, $\exists N \in \mathbb{N}$ tel que $a_n \in [L-\varepsilon; L+\varepsilon] \forall n \geq N$.\\
+
+\underline{Propriétés :} Soit $a_n \rightarrow L_1$ et $b_n \rightarrow L_2$. Alors on a :\\
+$a_n + b_n \rightarrow L_1 + L_2$, $a_n b_n \rightarrow L_1 L_2$ et $\frac{a_n}{b_n} \rightarrow \frac{L_1}{L_2}$. De plus, si $a_n \leq b_n$ pour tout n suffisamment grand, alors on a : $L_1 \leq L_2$.\\
+
+\begin{theorem}Théorème des gendarmes : \\
+Soit $(x_n), (a_n), (b_n)$ trois suites telles que $a_n \leq x_n \leq b_n \forall n$ suffisamment grand. De plus $lim a_n = lim b_n = L$. Alors $x_n \rightarrow L$.
+\end{theorem}
+
+\quad \underline{Suites monotones et bornées :} Soit $(a_n)$ une suite réelle. Si elle est croissante et majorée elle est convergente. Si elle est décroissante et minorée elle est aussi convergente.\\
+
+\quad \underline{Comportement à l'infini : polynomial, log, exp :} Les suites définies par des fonctions élémentaires tendent en général à l'infini : $a_n = n^p \rightarrow \infty$ ; $a_n = r^n \rightarrow \infty$ et $a_n = log_r(n) \rightarrow \infty$.\\
+
+\underline{Def :} Soit $(a_n)\rightarrow \infty$ et $(b_n)\rightarrow \infty$. On dit que $b_n$ tend plus vite vers l'infini si $\frac{a_n}{b_n} \rightarrow 0$.\\
+On a donc : log $\ll$ puissance $\ll$ exp.\\
+
+\quad \underline{Les indéterminations :}\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        $a_n$ & $b_n$ & la relation & est indéterminé \\
+        \hline
+        $\infty$ & $-\infty$ & $a_n + b_n$ & "$\infty-\infty$"\\
+        \hline
+        0 & $\infty$ & $a_nb_n$ & "$0\times \infty$"\\
+        \hline
+        0 & 0 & $\frac{a_n}{b_n}$ & "$\frac{0}{0}$"\\
+        \hline
+        $\infty$ & $\infty$ & $\frac{a_n}{b_n}$ & "$\frac{\infty}{\infty}$"\\
+        \hline
+        1 & $\infty$ & $a_n^{b_n}$ & "$1^{\infty}$"\\
+        \hline
+        $\infty$ & 0 & $a_n ^{b_n}$ & "$\infty^0$"\\
+        \hline
+        0 & 0 & $a_n^{b_n}$ & "$0^0$"\\
+    \end{tabular}
+    \caption{Différents types d'indéterminations}
+    
+\end{table}
+De plus, on peut prouver que : $\frac{sin(x_n)}{x_n} \rightarrow 1$ lorsque $x_n \rightarrow 0$.\\
+
+\quad \underline{Suite géométrique :} $S_n = \sum_{k=0}^n r^k$. On a que :\\
+$\lim_{n\rightarrow \infty} S_n = \frac{1}{1-r}$ si $|r|<1$, $=\infty$ si $r \geq 1$ et n'existe pas si $r \leq -1$.\\
+
+\quad \underline{Exponentiel :} On définit :\\
+\begin{equation}
+    e = \lim_{n\rightarrow \infty} (1+\frac{1}{n})^n = 1 + \sum_{k=1}^n \frac{1}{k!}(1-\frac{1}{n})\dots (1-\frac{k-1}{n})
+\end{equation}
+On a aussi la relation : $e^x = \lim (1+\frac{x}{n})^n$.\\
+
+
+\quad \underline{Critère d'Alembert :} Supposons $(a_n)$ telle que $\rho = lim_{n\rightarrow \infty} |\frac{a_{n+1}}{a_n}|$ existe. Alors si $0\leq \rho \leq 1 \Rightarrow a_n \rightarrow 0$. Sinon $a_n$ diverge. Si $\rho = 1$ on ne sait rien.\\
+
+\quad \underline{Limite supérieure/inférieure :}\\
+\underline{Def :} soit $(a_n)$ bornée. On a $M_n = \sup \{a_n, a_{n+1}, \dots\}$ et $m_n = \inf \{a_n, a_{n+1}, \dots\}$.\\
+
+\underline{Def :} Soit $(a_n)$ bornée. On appelle : $\limsup{a_n} = \lim M_n$ la limité supérieure de $(a_n)$ et $\liminf{a_n} = \lim m_n$ la limité inférieure de $a_n$.\\
+
+\begin{theorem}Théorème de Bolzano-Weierstrass :\\Soit $(a_n)$ bornée, alors on peut trouver une sous suite convergente.
+\end{theorem}
+
+\underline{Def :} Soit $(a_n)$ une suite de réels et $(n_k)$ une suite strictement croissante d'entiers : $0 \leq n_1 < n_2 < \dots, n_k \in \mathbb{N}$. Alors $a_{n_1}, a_{n_2}, \dots $ est une sous-suite de $(a_n)_k$.\\
+
+\underline{Théorème :} Soit $(a_n)$ bornée. Alors : $\exists c > 0 tel que -c \leq a_n \leq c$. Donc, $\exists L \in \mathbb{R}$ tel que $-c \leq L \leq c$ est une sous-suite $(a_n)_k$ telle que $\lim a_{n_k} = L$.\\
+
+\quad \underline{Suite de Cauchy :}\\
+\underline{Def :} $(a_n)$ est une suite de cauchy si $\forall \varepsilon>0$ $ \exists N$ tel que $|a_n - a_m| \leq \varepsilon$  $\forall n,m \geq N$. Si $(a_n)$ est convergente, c'est une suite de cauchy. De plus, toute suite de cauchy est convergente.\\
+
+\subsubsection{Suites définies par récurrence}
+\underline{Def :} Soit g: $\mathbb{R} \rightarrow \mathbb{R}$ et $x_0 \in \mathbb{R}$. On définit, $\forall n \geq 0$ : $x_{n+1} = g(x_n)$. $(x_0)_{n\geq 0}$ est une suite définie pas récurrence.\\
+
+3 méthodes pour résoudre : 1)Exprimer $x_n$ en fonction de n (et des autres $x_i$).\\
+2)Trouver sa convergence \\
+3) Utiliser les suites de cauchy.\\
+
+\underline{Def :} $x_*$ est un point fixe de g si $x_* = g(x_*)$.\\
+De plus, si $x_{n+1} = g(x_n)$ converge et si g est continue, alors $\lim x_n$ est un point fixe de g.\\
+
+
+\subsection{Nombre complexe}
+\underline{Def :} $\mathbb{C} = \{$ensemble des paires (x,y) x,y$\in \mathbb{R}$ muni de deux opérations : $\oplus$ : $(x, y)+(w,z) = (x+w, y+z)$ et $\otimes$ : $(x,y)\cdot (w,z) = (xw-yz, xz+yw)\}$\\
+
+\textbf{i = (0,1)}.\\
+On a donc $\forall z \in \mathbb{C}$, $z=x+iy$. Avec $x = Re(z)$ et $y=Im(z)$.\\
+
+\quad \underline{Conjugués et modules :}
+\underline{Def :} soit $z = x+iy$, alors son conjugué : $\overline{x-iy}$ et son module : $|z| = \sqrt{x^2 + y^2}$.\\
+
+\quad \underline{Plan compexe :} Dans le plan complexe, \textbf{l'argument de z correspond à l'angle orienté entre les réels et z}. On peut représenter $z=x+iy = r(\cos{\theta} + i\sin{\theta})$ Avec r le module de z et $\theta = \arctan(\frac{y}{x}) + 2k\pi$.\\
+
+\underline{Propriétés :} $arg \overline{z} = -arg z$; $arg(z z') = argz + arg z'$; $arg z^n = n arg z$; $arg \frac{z}{z'} = arg z - \arg z'$\\
+
+\quad \underline{Formule de Moivre :} $z^n = r^n(\cos(n\theta) + i \sin(n\theta))$.\\
+
+\quad \underline{Exponentiel complexe :} On a $|e^z| = e^{Re(z)}$; $e^{z+2k\pi} = e^z$.\\
+De plus :\\
+\begin{equation}
+    e^{i\varphi} = \cos(\varphi) + i \sin(\varphi)
+\end{equation}
+Soit $\sin{\varphi} = \frac{e^{i\varphi}-e^{-i\varphi}}{2i}$ et $\cos(\varphi) = \frac{e^{i\varphi}+e^{-i\varphi}}{2i}$.\\
+On a donc la représentation : $z = re^{i\theta}$.\\
+
+\subsubsection{Racines}
+\underline{Def :} Soit w$\in \mathbb{C}$. Tout complexe z est racine n-ième de w si $z^n = w$.\\
+
+\begin{theorem}
+    Soit $w = S e^{i\varphi}$. Alors les racines n-ième de w sont données par : \\
+\begin{equation}
+    z_k = \sqrt[n]{S} e^{i \frac{\varphi + 2k\pi}{n}}, k=0,1,\dots, n-1
+\end{equation}
+\end{theorem}
+
+
+\quad \underline{Polynômes complexes et factorisation :}\\
+Un polynôme en z est $P(z) = a_0 + a_1z + \dots + a_n z^n$, $a_k\in \mathbb{C}$. Une racine de P(z) est un nombre complexe $z_* \in \mathbb{C}$ tel que $p(z_*) = 0$\\
+
+\begin{theorem}
+    Tout polynôme complexe P(z) de degré n possède n racines complexes $z_1, \dots, z_n \in \mathbb{C}$. P(z) peut se factoriser : $P(z) = a_n(z-z_1)(z-z_2)\dots(z-z_n)$.
+\end{theorem}
+
+\underline{Proposition :} Si $z_*$ est une racine alors son conjugué l'est aussi. \\
+Si P a tous ses coefficients réels et P est de degré impaire, alors P possède au moins une racine réelle.\\
+Si P est un  polynôme à coefficients réels et de degré quelconque, alors P se factorise en produit de polynômes irréductibles de degré 1 ou 2 à coefficients réels.\\
+
+\subsection{Suites numériques}
+\underline{Def :} Soit $(a_n)$. On définit $(S_n) = a_0 + a_1 + \dots + a_n$. $(S_n)$ est la suite des sommes partielles associées à $(a_n)_{n\geq 0}$.\\
+Si la limite de $S_n$ existe et est finie alors la série $\sum a_n = s$ converge. Si $(S_n)_{n\geq 0}$ diverge alors s diverge. Si $S_n \rightarrow \pm \infty$ alors $s = \pm \infty$.\\
+
+\quad \underline{Divergence de la série harmonique :} La série harmonique : $\sum \frac{1}{n}$ est divergente.\\
+
+\underline{Propriété des séries convergentes :} Si $\sum a_n$ converge alors $a_n \rightarrow 0$. L'inverse n'est pas forcément vrai.
+
+\quad \underline{Critère de comparaison :} Soient $(a_n)$ et $(b_n)$ telles que $0 \leq a_n \leq b_n$ $\forall n$ suffisamment grand. Si $\sum b_n$ converge alors $\sum a_n$ converge. Si $\sum a_n$ diverge alors $\sum b_n$ diverge.\\
+
+On a aussi $\sum \frac{1}{n^p}$ \textbf{Converge si $p\geq 2$ et diverge si $p \leq 1$}.\\
+
+\quad \underline{Série alternée :} Soit $a_n = (-1)^nx_n$ où $\forall n$ suffisamment grand : $x_n \geq 0$; $(x_n)_n$ est décroissante; $x_n \rightarrow 0$\\
+
+\quad \underline{Série télescopique :} Exemple : $\sum \frac{1}{n(n+1)}$ Avec $a_k = \frac{1}{k} - \frac{1}{k+1} = y_k - y_{k+1}$.\\
+
+\quad \underline{Critère de la limite du quotient :} Soient $(a_n)$, $(b_n)$ si $a_n > 0$ et $b_n>0$ $\forall n$ suffisamment grand et si $\alpha = \lim \frac{a_n}{b_n}$ existe.\\
+Si $\alpha > 0$
+ alors soit $\sum a_n$ et $\sum b_n$ convergent ensemble soit elles divergent ensemble.\\
+
+ \quad \underline{Convergence absolue :} soit $(a_n)$. Si $\sum |a_n|$ converge on dit que $\sum a_n$ converge absolument. Si une série converge absolument alors elle converge.\\
+
+ \quad \underline{Critère d'Alembert :} Si $(a_n)$ est telle que : $\rho = \lim |\frac{a_{n+1}}{a_n}$ existe. Si $0 \leq \rho < 1$ alors $\sum a_n$ converge absolument et converge.\\
+ Si $\rho > 1$ $\sum a_n$ diverge. Sinon on ne sais rien.\\
+
+ \quad \underline{Critère de Cauchy :} Soit $(a_n)$ telle que : $\sigma = \lim \sqrt[n]{|a_n|}$ existe. Si $0 \leq \sigma < 1$ : $\sum a_n$ converge absolument et converge.\\
+ Si $\sigma>1$ $\sum a_n$ diverge. Sinon on ne sait rien.\\
+
+ \subsection{Fonctions réelles et limites}
+Soit $f:I\rightarrow \mathbb{R}$ avec I un intervalle. \\
+\underline{Def :} $f$ est paire si $f(-x) = f(x)$. Impaire si $f(-x) = -f(x)$.\\
+
+\underline{Propriétés :} si $f: D\rightarrow \mathbb{R}$. Si $A\subset D$, on peut restreindre $f$ à A en posant $f:A\rightarrow \mathbb{R}$. Si $A\subset B \subset D$ alors $\sup _A f \leq \sup_B f$, $\inf_A f \geq \inf_B f$;\\
+$\sup_D(-f) = -\inf_Df$; $\sup_D (f+g) \leq \sup_D f+\sup_D g$;\\
+si $\alpha > 0, \beta \in \mathbb{R}$ : $\sup_D(\alpha f+\beta) = \alpha\sup_D f + \beta$.\\
+
+
+\subsubsection{Limite}
+\underline{Def :} soit $x_0\in\mathbb{R}$. Si $\delta > 0$, $V = ]x_0 - \delta; x_0[U]x_0; x_0+\delta[$ est un voisinage épointé. Une fonction $f$ est défini au voisinage de $x_0$ si $\exists$ un voisinage épointé de $x_0$, V, tel que $f(x)$ est défini $\forall x\in V$.\\
+
+\underline{Def :} Soit $x_0 \in \mathbb{R}$, et $f$ défini au voisinage de $x_0$. On dit que $f(x)$ tend vers L lorsque $x$ tend vers $x_0$ si $\forall \varepsilon > 0$, $\exists \delta > 0$ tel que $|f(x)-L| \leq \varepsilon$ dès que $0<|x-x_0| \leq \delta$\\
+
+La limite de $f$ est unique. \\
+
+\quad \underline{Le théorème des gendarmes :} Soient $f,g,h$ définies dans un voisinage de $x_0$ telles que $g(x) \leq f(x) \leq h(x)$ $\forall x$ dans ce voisinage. Si $\lim_{x\rightarrow x_0} g(x) = \lim_{x\rightarrow x_0} h(x) = L$ Alors : $\lim_{x\rightarrow x_0} f(x) = L$.\\
+
+\quad \underline{Limite latérales $x \rightarrow x_0$ :} soit $x_0 \in \mathbb{R}$. Soit $f$ définie dans un intervalle $]x_0; x_0+\alpha[$ On dit que $f(x)$ tend vers L$\in \mathbb{R}$ lorsque x tend vers $x_0$ par la droite si $\forall \varepsilon>0 \exists \delta>0$ tel que $|f(x) - L| \leq \varepsilon$ dès que $x_0-\delta \leq x \leq x_0$. On note : $\lim_{x\rightarrow x_0^+} f(x) = L$.\\
+
+\underline{Théorème :} Si $f$ est définie dans un voisinage épointé de $x_0$, alors $\lim_{x\rightarrow x_0} f(x) = L \Leftrightarrow \lim_{x\rightarrow x_0^+} f(x) =\lim_{x\rightarrow x_0^-} f(x) = L$.\\
+
+$\lim (f+g) = \lim f +\lim g$; $\lim (fg) = \lim f \lim g$; $f(x) \leq g(x) \Rightarrow \lim f \leq \lim g$\\
+
+\subsection{Fonctions continues}
+Soit $f$ définie en $x_0$ et dans son voisinage. On dit que $f$ est continue en $x_0$ si $\lim_{x\rightarrow x_0} f(x) = f(x_0)$. Si $f$: $D\rightarrow \mathbb{R}$, $D\subset \mathbb{R}$ ouvert, on dit que $f$ est continue si elle est continue en chaque $x_0 \in D$.\\
+
+Les sommes de fonctions continues, produits, quotients et composés de fonctions continues sont continues. \\
+
+\quad \underline{Continuité latérale :} soit $f$ définie sur un intervalle de la forme : $[x_0; x_0+\alpha[$. Si $\lim_{x\rightarrow x_0^+} f(x) = f(x_0)$ alors $f$ est continue à droite en $x_0$.\\
+
+$f$ continue à droite et à gauche en $x_0$ $\Leftrightarrow$ $f$ est continue en $x_0$.\\
+
+\quad \underline{Prolongement par continuité :} Soit I$\subset \mathbb{R}$, I un intervalle $x_0 \in I$ et $f : I\setminus \{x_0\} \rightarrow \mathbb{R}$ continue en tout point de I sans $x_0$. \\
+Si $L = \lim_{x\rightarrow x_0} f(x)$. On peut prolonger par continuité la fonction en ce point.\\
+
+\quad \underline{Continuité sur un intervalle compact :} $f:[a,b]\rightarrow \mathbb{R}$ est continue si $f$ est continue en tout point sur l'intervalle $]a,b[$ et si elle est continue à droite en a et à gauche en b.\\
+
+\begin{theorem}
+    Toute fonction continue sur un intervalle fermée est bornée. Elle atteint son min et son max dans l'intervalle. 
+\end{theorem}
+
+\begin{theorem}
+    Théorème des valeurs intermédiaires :\\
+    Si $f$ est continue $f:[a,b] \rightarrow \mathbb{R}$ et si $f(a) < f(b)$ alors $\forall h \in ]f(a), f(b)[$, $\exists$ c $\in ]a,b[$ tel que $f(c) = h$. (Sur un intervalle fermé, une fonction continue va prendre toutes les valeurs comprises entre $f(a)$ et $f(b)$).
+\end{theorem}
+
+\subsection{Calcul différentiel}
+\underline{Def :} soit $f$ définie en $x_0$ et dans son voisinage. On dit que $f$ est dérivable en $x_0$ si la limite : $f'(x_0) = \lim_{x\rightarrow x_0} \frac{f(x) - f(x_0)}{x-x_0}$ existe. \\
+
+Si $f$ est dérivable en $x_0$ alors $f$ est continue en $x_0$.\\
+
+\underline{Quelques règles :} $(f+g)' = f'+g'$;
+$(f\cdot g)' = f'g + fg'$ ; $(\frac{f}{g})' = \frac{f'g - fg'}{g^2}$; $(f\circ g)' ) f'(g)\cdot g'$; $(f^g)' = (e^{gln(f)})(g ln(f))'$\\
+$(f^{-1})'(y_0) = \frac{1}{f'(x_0)} = \frac{1}{f'(f^{-1}(y_0))}$\\
+
+$(\arcsin(y))' = \frac{1}{\sqrt{1-y^2}}$; $(\arccos(y))' = -\frac{1}{\sqrt{1-y^2}}$; $(\arctan(y))' = \frac{1}{1+y^2}$\\
+
+
+\quad \underline{Dérivées latérales :}
+$f$ est dérivable à droite en $x_0$ si $f_+'(x_0) = \lim_{x\rightarrow x_0^+} \frac{f(x) - f(x_0)}{x-x_0}$ existe et est finie. \\
+
+Soit $f$ définie en un point $x_0$ et dans son voisinage. Alors $f$ est dérivable en $x_0 \Leftrightarrow f_+'(x_0)$ et $f_-'(x_0)$ existent et sont égales.\\
+
+\quad \underline{Fonction continûment dérivable :} Soit $I \subset \mathbb{R}$ un intervalle de $\mathbb{R}$, $f:I\rightarrow \mathbb{R}$ dérivable.\\
+Si $f' : I\rightarrow \mathbb{R}$ est continue, alors $f$ est dire continûment dérivable. \\
+
+\underline{Def :} Si $f: I\rightarrow \mathbb{R}$ est k-fois dérivable et si toutes ses dérivées sont continues sur I, on dir que $f$ est k-fois continûment dérivable: \\
+$C^k(I) = \{f:I\rightarrow \mathbb{R}$, k-fois continûment dérivable$\}$\\
+
+\quad \underline{Théorème de Rolle :}
+
+Soit $f$ définit en $x_0$ et dans son voisinage. $f$ possède un maximum local en $x_0$ si $\exists \delta > 0$ tel que $f(x) \leq f(x_0) \forall x \in ]x_o-\delta; x_0+\delta[$. Valable pour minimum local.\\
+
+\begin{theorem}
+    si $f$ possède un min/max local en $x_0$ alors $f'(x_0) = 0$.
+\end{theorem}
+
+\begin{theorem}Théorème de Rolle :\\soit $f:[a,b] \rightarrow \mathbb{R}$ continue et dérivable sur $]a,b[$ si $f(a) = f(b)$ alors : $\exists c \in ]a,b[$ tel que $f'(c)  = 0$
+\end{theorem}
+
+\begin{theorem}Théorème accroissements finis :\\ Soit $f:[a,b] \rightarrow \mathbb{R}$ continue, dérivable sur $]a,b[$ alors, $\exists c \in ]a,b[$ tel que $f'(c) = \frac{f(b)-f(a)}{b-a}$.
+\end{theorem}
+
+\underline{Généralisation du TAF :} Soient $f,g:[a,b] \rightarrow \mathbb{R}$ continues, dérivables sur $]a,b[$. Si $g(a) \neq g(b)$ alors $\exists c \in ]a,b[$ tel que $f'(c) = \frac{f(b)-f(a)}{b-a} g'(c)$\\
+
+\quad \underline{Règle de Bernoulli l'Hôpital :} Soient $f,g:[a,b] \rightarrow \mathbb{R}$ dérivables sur $]a,b[$ tel que $g(x) \neq 0, g'(x) \neq 0, \forall x$. De plus, la limite $\lim_{x\rightarrow a^+} \frac{f(x)}{g(x)}$ est une indétermination du type : $"\frac{0}{0}"$. Alors, on a :\\
+\begin{equation}
+    \lim_{x\rightarrow a^+} \frac{f(x)}{g(x)} = \lim_{x\rightarrow a^+} \frac{f'(x)}{g'(x)} = L
+\end{equation}
+
+\quad \underline{Recherche des extremas :} On regarde les points où la dérivée s'annule. On regarde aussi le bord!\\
+
+\subsubsection{Concavité/convexité}
+$f$ est convexe si : $f^{(2)} \geq 0$ Sinon elle est concave. \\
+
+\subsection{Développements limités}
+Approximation des fonctions par des polynômes.\\
+Si un développement existe, il est unique.\\
+
+\quad  \underline{Formule de Taylor/Mac Lauren :}\\
+\begin{equation}
+    f(x) = f(x_0) + f'(x_0) (x-x_0) + \dots + \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + \varepsilon(x-x_0)^k
+\end{equation}
+Où $\varepsilon(x) = (x-x_0) \frac{f^{(k+1)}(u)}{(k+1)!} \rightarrow 0$ est le reste.\\
+
+\subsubsection{Séries extrêmes}
+\quad \underline{Série entière :}
+Soit$(a_k)_{k\geq 0}$ une suite réelle. Alors $\sum_{k=0}^{\infty} a_k (x-x_0)^k$ est une série entière.\\
+
+On a R : le rayon de convergence de la série entière. On définit : $\sigma = \lim \sqrt[n]{|a_n|}$. Si la limite existe alors $R= \infty$ si $\sigma = 0$. Sinon $R = \frac{1}{\sigma}$.\\
+
+Ainsi, pour représenter $f$, on peut : \\
+\begin{equation}
+    f(x) = \sum_{k=0}^n \frac{1}{k!} f^{(k)} (x-x_0)^k
+\end{equation}
+
+
+\subsection{Intégrales}
+Somme de Darboux: On estime l'intégrale par des rectangles.\\
+
+\underline{Propriétés :} \\$|\int f(x)dx| \leq \int |f(x)|dx$\\
+$\int_b^a (\lambda_1 f(x) + \lambda_2 g(x))dx = \lambda_1 \int^a_b f(x)dx + \lambda_2  \int^a_b g(x)dx$\\
+$\int_b^a f(x)dx = \int_b^c f(x)dx + \int^a_c f(x)dx$\\
+
+\quad \underline{Théorème de la moyenne :}\\
+\begin{equation}
+    \overline{f} = \frac{1}{b-a} \int_a^b f(x)dx
+\end{equation}
+
+\quad \underline{Théorème fondamental de l'analyse :}
+Si $f:[a,b] \rightarrow \mathbb{R}$ est intégrable, on définit $A(x) = \int_a^x f(t)dt$.\\
+Si $f$ est continue alors $A(x)$ est dérivable sur $]a,b[$, continue sur $[a,b]$ et $A'(x) = f(x) \forall x \in ]a,b[$. De plus, si F est primitive de $f$ sur $]a,b[$ alors $A(x) = F(b)-F(a)$.\\
+
+\quad \underline{Primitives élémentaires :}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+        f(x) & k & $x^{\alpha}$ & $\frac{1}{\sqrt{x}}$ & $\frac{1}{x}$ &$e^x$ & $\frac{1}{\sqrt{x^2-1}}$ & $a^x$ & $\sin x$& $\cos x$\\
+        F(x) & $kx$ & $\frac{1}{\alpha + 1}x^{\alpha +1}$ & $2\sqrt{x}$ & $\ln{x}$ & $e^x$ & $argch(x)$ (x>1), $-argch(x)$ (x<-1) & $\frac{a^x}{ln(a)}$ & $-\cos x$ &$\sin x$\\
+    \end{tabular}
+    
+\end{table}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c}
+        f(x) & $\tan x$ & $\frac{1}{\sqrt{1-x^2}}$ & $\frac{1}{1+x^2}$ & $\sinh x$ & $\cosh x$ & $\tanh x$ & $\frac{1}{\sqrt{1+x^2}}$\\
+        F(x) & $-ln(\cos x)$ & $\arcsin x$ & $\arctan x$ & $\cosh x$ & $\sinh x$ & $ln(\cosh x)$ & $argsinh(x)$\\
+    \end{tabular}
+    
+\end{table}
+
+
+\quad \underline{Intégration par parties :}\\
+\begin{equation}
+    \int f'(x)g(x)dx = f(x)g(x) - \int f(x)g'(x)dx
+\end{equation}
+
+\subsection{Trigonométrie}
+\begin{minipage}{.5\textwidth}
+    $\sin^2x+\cos^2x = 1$\\
+    $\sin(-x) = -\sin{x}$\\
+    $\cos{(-x)} = \cos{x}$\\
+    $\sin{(\pi-x)} = \sin{x}$\\
+    $\cos{(\pi-x)} = -\cos{x}$\\
+        $\sin(\pi+x) = -\sin{x}$\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    $\cos(\pi+x) = -\cos{x}$\\
+    $\sin(\frac{\pi}{2}-x) = \cos{x}$\\
+    $\cos(\frac{\pi}{2}-x) = \sin{x}$\\
+    $\sin(\frac{\pi}{2}+x) = \cos{x}$\\
+    $\cos(\frac{\pi}{2}+x) = -\sin{x}$\\
+\end{minipage}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \diagbox[width=15mm,height=5mm,dir=SW]{}{} & 0&$\frac{\pi}{6}$ &$\frac{\pi}{4}$ & $\frac{\pi}{3}$ &$\frac{\pi}{2}$ &$\pi$\\
+        \hline
+        $\sin{x}$ & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0\\
+        $\cos{x}$ & 1 &$\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1\\
+    \end{tabular}
+    \caption{Angles remarquables}
+    
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+    $\sin(a+b) = \sin(a)\cos(b) + \sin(b)\cos(a)$\\
+    $\cos(a+b) = \cos(a)\cos(b) - \sin(a)\sin(b)$\\
+    $\sin(a) + \sin(b) = 2\sin(\frac{a+b}{2})\cos(\frac{a-b}{2})$\\
+    $\cos(a) + \cos(b) = 2\cos(\frac{a-b}{2})\cos(\frac{a+b}{2})$\\
+    $\cos(a) - \cos(b) = -2\sin(\frac{a-b}{2})\sin(\frac{a+b}{2})$
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    $\sin(a)\sin(b) = \frac{1}{2}(\cos(a-b)-\cos(a+b))$\\
+    $\cos(a)\cos(b) = \frac{1}{2}(\cos(a+b) + \cos(a-b))$\\
+    $\sin(a)\cos(b) = \frac{1}{2} (\sin(a+b) + \sin(a-b))$\\
+    
+\end{minipage}
+\end{document}

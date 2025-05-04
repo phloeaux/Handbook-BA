@@ -1,0 +1,413 @@
+\documentclass[a4paper]{article}
+\usepackage{hyperref}
+
+\title{HANDBOOK : \\ \textbf{Everything you need to know} \\ Bachelor level}
+\author{Florentin Julien}
+\date{}
+
+
+
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{diagbox}
+\usepackage{multirow}
+\usepackage{cancel}
+\usepackage{slashbox}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc}
+\usepackage{amssymb}
+\usepackage{fourier}
+\usepackage{subfiles}
+\usepackage{tocloft}
+\usepackage{etoc}
+\usepackage{draftwatermark}
+
+\newcounter{bachelorsem}
+\setcounter{bachelorsem}{0}
+
+\newcounter{numdisplay}
+\setcounter{numdisplay}{0}
+
+\SetWatermarkText{}
+\SetWatermarkScale{0.5}  % Adjust the scale as needed
+\SetWatermarkColor[gray]{0.3}  % Adjust the color as needed
+
+%%%%%%%%%%%%%%%%%%%%%%%% VALUES TO CHANGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{isFree} %admin power variable
+\setcounter{isFree}{1} %if isFree = 0 then add watermark and remove courses, else remove it
+
+\newcounter{BA1}
+\setcounter{BA1}{0}
+\newcounter{BA2}
+\setcounter{BA2}{0}
+\newcounter{BA3}
+\setcounter{BA3}{0}
+\newcounter{BA4}
+\setcounter{BA4}{0}
+\newcounter{BA5}
+\setcounter{BA5}{0}
+\newcounter{BA6}
+\setcounter{BA6}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%% END OF VALUES TO CHANGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{bought1}
+\setcounter{bought1}{0} %if bought1 > 0, remove watermarks on ToC
+
+\addtocounter{bought1}{\value{BA1}}
+\addtocounter{bought1}{\value{BA2}}
+\addtocounter{bought1}{\value{BA3}}
+\addtocounter{bought1}{\value{BA4}}
+\addtocounter{bought1}{\value{BA5}}
+\addtocounter{bought1}{\value{BA6}}
+
+\newcounter{numBA1}
+\setcounter{numBA1}{3}
+\newcounter{numBA2}
+\setcounter{numBA2}{2}
+\newcounter{numBA3}
+\setcounter{numBA3}{3}
+\newcounter{numBA4}
+\setcounter{numBA4}{4}
+\newcounter{numBA5}
+\setcounter{numBA5}{4}
+\newcounter{numBA6}
+\setcounter{numBA6}{4}
+
+\addtolength{\cftsubsecnumwidth}{10pt}
+\addtolength{\cftsubsubsecnumwidth}{10pt}
+
+
+\newtheorem{theorem}{Théorème}
+\newtheorem{theoremen}{Theorem}
+\usepackage{amsmath}
+
+\newcommand{\textMark}[1]{
+\ifnum\value{isFree}<1
+    \ifnum#1=0
+        \ifnum\value{bachelorsem}=1
+            \waterTest{BA1}
+        \else
+            \ifnum\value{bachelorsem}=2
+                \waterTest{BA2}
+            \else
+                \ifnum\value{bachelorsem}=3
+                    \waterTest{BA3}
+                \else
+                    \ifnum\value{bachelorsem}=4
+                        \waterTest{BA4}
+                    \else
+                        \ifnum\value{bachelorsem}=5
+                            \waterTest{BA5}
+                        \else
+                            \ifnum\value{bachelorsem}>5
+                                \waterTest{BA6}
+                            \fi
+                        \fi
+                    \fi
+                \fi
+            \fi
+        \fi
+
+    \else
+    \ifnum#1>1 \SetWatermarkText{}
+    \else
+    \ifnum\value{bought1}<1
+        \SetWatermarkText{For Full Version\\[.7em]CHF 8.- per semester\\[.7em]Contact\\[.7em] (+41)783274121} % First pages test
+    \else \SetWatermarkText{}
+    \fi
+    \fi
+    \fi
+\fi
+}
+
+\newcommand{\waterTest}[1]{
+\ifnum\value{#1}<1
+    \SetWatermarkText{FREE VERSION\\[1em]DO NOT COPY}
+\else \SetWatermarkText{}
+\fi
+}
+
+% Define a new command for including subfiles with the necessary setup
+
+\newcommand{\includesection}[3]{
+  \setcounter{equation}{0}
+  \setcounter{theorem}{0}
+  \setcounter{theoremen}{0}
+  \section{#2}
+  \fancyhead[C,C]{\color{black} #2}
+  \ifnum#3>0
+  \etocsettocstyle{\section*{Contents}}{}
+  \else
+  \etocsettocstyle{\section*{Table des matières}}{}
+  \fi
+  \ifnum\value{isFree}>0
+    \subfile{sections/#1}  
+  \else
+    \doDisplayBA{#1}
+    \fi
+    \stepcounter{numdisplay}
+  \newpage
+}
+
+\newcommand{\doDisplayBA}[1]{
+    \ifnum\value{bachelorsem}=1
+            \semTest{BA1}{numBA1}{#1}
+        \else
+            \ifnum\value{bachelorsem}=2
+                \semTest{BA2}{numBA2}{#1}
+            \else
+                \ifnum\value{bachelorsem}=3
+                    \semTest{BA3}{numBA3}{#1}
+                \else
+                    \ifnum\value{bachelorsem}=4
+                        \semTest{BA4}{numBA4}{#1}
+                    \else
+                        \ifnum\value{bachelorsem}=5
+                            \semTest{BA5}{numBA5}{#1}
+                        \else
+                            \ifnum\value{bachelorsem}>5
+                                \semTest{BA6}{numBA6}{#1}
+                        \fi
+                    \fi
+                \fi
+            \fi
+        \fi
+    \fi
+}
+\newcommand{\semTest}[3]{
+\ifnum\value{#1}>0
+    \subfile{sections/#3}
+\else
+    \ifnum\value{numdisplay}<\value{#2}
+        \subfile{sections/#3}
+    \else
+        \subfile{sections/no_section.tex}
+    \fi
+\fi
+}
+
+
+
+
+\newcommand{\tocmychapter}[1]{
+  \addtocontents{toc}{\cftpagenumbersoff{sec}\vspace{10pt}}% Add vertical space before entry
+
+  %\addtocontents{toc}{\noindent\makebox[\linewidth]{\dotfill}\par}% Add dashed line
+  %\addcontentsline{toc}{section}{\protect\color{black}\protect\LARGE\protect\textbf{#1} \protect\dotfill}% Larger, bold entry format without page number  
+  \addcontentsline{toc}{section}{\texorpdfstring{\color{black}\LARGE\textbf{#1}\dotfill}{#1}} % Properly handle PDF string
+    \addtocontents{toc}{\cftpagenumberson{sec}}
+    \addtocontents{toc}{\protect\renewcommand{\protect\cftdot}{}}% Remove dashed line\fi
+    
+
+}
+
+
+\usepackage{titlesec}
+\newcommand{\chapter}[1]{
+\setcounter{tocdepth}{1}
+
+\stepcounter{bachelorsem}
+\ifnum\value{bachelorsem}<7
+\setcounter{numdisplay}{0}
+\fi
+\textMark{0}
+  \clearpage
+  \vspace*{50pt}
+  \hbox{\hspace*{-\dimexpr \hoffset+\oddsidemargin\relax}
+  \begingroup
+    \color{red}\rule[-1cm]{5pt}{2cm}\hspace{10pt} % Bar in red
+    \parbox[b]{\dimexpr\textwidth-5pt-10pt}{\raggedright\huge\bfseries\color{black} #1} % Text in black
+  \endgroup}
+  \vspace{40pt}
+  \tocmychapter{#1}% Add to TOC with custom formatting
+  \setcounter{tocdepth}{5}
+
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={HANDBOOK},
+    %pdfpagemode=FullScreen,
+    }
+    
+\usepackage{caption}
+\captionsetup[table]{name=TABLEAU}
+\captionsetup[figure]{name=SCHEMA}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx} %package to manage images
+\graphicspath{ {./images/} }
+
+ %bordure magnifique
+\usepackage{calc}
+\usepackage{eso-pic}
+
+\newlength{\PageFrameTopMargin}
+\newlength{\PageFrameBottomMargin}
+\newlength{\PageFrameLeftMargin}
+\newlength{\PageFrameRightMargin}
+
+\setlength{\PageFrameTopMargin}{.5cm}
+\setlength{\PageFrameBottomMargin}{.5cm}
+\setlength{\PageFrameLeftMargin}{.5cm}
+\setlength{\PageFrameRightMargin}{.8cm}
+
+\makeatletter
+
+\newlength{\Page@FrameHeight}
+\newlength{\Page@FrameWidth}
+
+\AddToShipoutPicture{
+  \thinlines
+  \color{red}
+  \setlength{\Page@FrameHeight}{\paperheight-\PageFrameTopMargin-\PageFrameBottomMargin}
+  \setlength{\Page@FrameWidth}{\paperwidth-\PageFrameLeftMargin-\PageFrameRightMargin}
+  \put(\strip@pt\PageFrameLeftMargin,\strip@pt\PageFrameTopMargin){
+    \framebox(\strip@pt\Page@FrameWidth, \strip@pt\Page@FrameHeight){}}}
+
+\makeatother
+% et oui c'est long
+
+
+
+
+\begin{document}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\tcbset{
+  toplength/.store in={\tcbcornerruletoplength},
+  leftlength/.store in={\tcbcornerruleleftlength},
+  toplength=3cm,
+  leftlength=2cm,
+  bottomlength/.store in={\tcbcornerrulebottomlength},
+  rightlength/.store in={\tcbcornerrulerightlength},
+  bottomlength=3cm,
+  rightlength=2cm,
+  cornerruleshift/.store in={\tcbcornerruleshift},
+  cornerruleshift=1pt,
+  topcornercolor/.store in={\tcbtopcornercolor},
+  bottomcornercolor/.store in={\tcbbottomcornercolor},
+  topcornercolor=black!40!black,
+  bottomcornercolor=black!40!black,
+}
+\maketitle
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R,R]{\color{black} Génie mécanique}
+\fancyhead[L,L]{\color{black}\hyperlink{reviensSTP}{Table des matières}}
+\fancyhead[C,C]{\color{black} \leftmark}
+
+
+\fancyfoot[L,L]{\color{black} \href{https://people.epfl.ch/florentin.julien}{Florentin JULIEN}}
+\fancyfoot[C,C]{\includegraphics[scale=0.05]{IMAGES/LOGO_EPFL.png}}
+\fancyfoot[R,R]{\color{black} \thepage}
+
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\mbox{}
+
+
+\thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%fin présentation%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=\textwidth]{IMAGES/Pep.jpg}
+    \caption*{Soyez aussi heureux que lui en lisant cet ouvrage}
+\end{figure}
+
+\textit{%Livret réalisé par \href{https://people.epfl.ch/florentin.julien}{Florentin JULIEN}\\
+Il rassemble tous les enseignements nécessaires de l'EPFL pour un bon ingénieur mécanicien.}
+
+\newpage\phantom{blabla}
+\textMark{1}
+
+\thispagestyle{empty}
+\newpage
+
+\setcounter{tocdepth}{1}
+
+
+\textMark{2}
+\hypertarget{reviensSTP}{}
+
+\tableofcontents
+%\etocsetlevel{section}{6}
+
+\newpage
+
+\chapter{BA1}
+\includesection{analyse1.tex}{Analyse I}{0}
+\includesection{meca.tex}{Physique Générale I : Mécanique}{0}
+\includesection{algebre.tex}{Algèbre Linéaire}{0}
+\includesection{electricite.tex}{Électricité}{0}
+\includesection{mx1.tex}{Matériaux I}{0}
+\includesection{constru.tex}{Construction Mécanique I}{0}
+
+\chapter{BA2}
+\includesection{analyse2.tex}{Analyse II}{0}
+\includesection{thermo1.tex}{Physique Générale II : Thermodynamique}{0}
+\includesection{structure1.tex}{Structure I}{1}
+\includesection{icc.tex}{ICC}{0}
+
+\chapter{BA3}
+\includesection{analyse3.tex}{Analyse III}{0}
+\includesection{electromag.tex}{Physique Générale III : Électromagnétique}{0}
+\includesection{mx2.tex}{Matériaux II}{0}
+\includesection{structure2.tex}{Structure II}{0}
+\includesection{proba.tex}{Probabilités et Statistiques}{0}
+\includesection{thermo2.tex}{Thermodynamique II}{0}
+
+\chapter{BA4}
+\includesection{analyse4.tex}{Analyse IV}{0}
+\includesection{continuummech.tex}{Continuum Mechanics}{1}
+\includesection{dynamicalsys.tex}{Dynamical Systems}{1}
+\includesection{fluidmech.tex}{Fluid Mechanics}{1}
+\includesection{procedesprod.tex}{Procédés de Production}{0}
+\includesection{systemmech.tex}{Systèmes Mécaniques}{0}
+\includesection{analysenum.tex}{Analyse Numérique}{0}
+\includesection{progpring.tex}{Programmation pour Ingénieur}{0}
+
+\chapter{BA5}
+\includesection{controlsys.tex}{Control System}{1}
+\includesection{machineselec.tex}{Machines Électriques}{0}
+\includesection{electronique.tex}{Électronique}{0}
+\includesection{elementfinis.tex}{Éléments Finis}{0}
+\includesection{foundationIA.tex}{Foundations of Artificial Intelligence}{1}
+\includesection{Optimisation.tex}{Optimization and Operations Research}{1}
+\includesection{mecvibration.tex}{Mécanique Vibratoire}{0}
+\includesection{proddev.tex}{Product Development and Engineering Design}{1}
+
+\chapter{BA6}
+\includesection{dsm.tex}{Dynamique des Systèmes Mécaniques}{0}
+\includesection{heatandmass.tex}{Heat and Mass Transfer}{1}
+\includesection{measurements.tex}{Measurement Techniques}{1}
+\includesection{solidmech.tex}{Solid Mechanics}{1}
+
+\chapter{Options}
+\includesection{mfc.tex}{Mécanique des Fluides Compressibles}{0}
+\includesection{Microinfo.tex}{Micro-contrôleur}{0}
+\includesection{turbo.tex}{Turbo-machines}{1}
+
+
+
+\end{document}

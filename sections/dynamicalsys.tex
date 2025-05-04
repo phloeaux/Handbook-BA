@@ -1,0 +1,628 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+
+
+\begin{document}
+\localtableofcontents
+\subsection{Introduction}
+\underline{Dynamics :} the evolution of the system over time\\
+\underline{Block-diagram representation :} representation of a system in terms of discrete blocks that represent part of a system\\
+
+We can represent a dynamical system with \textbf{input u(t)}, \textbf{output y(t)}, \textbf{states of a system x(t)} (internal variables that change in time), \textbf{parameters $\theta$}.\\
+We can define \textbf{model of a system} : states x(t) and parameters($\theta$)\\
+A mono-variable system only has a single input and output. A multi-variable system might have multiple inputs and/or outputs.\\
+
+\warning The choice of states is not unique\\
+We can find analogous mathematical representation of different system :\\
+\begin{itemize}
+    \item Inertia $\leftrightarrow$ Inductance\\
+    \item Spring $\leftrightarrow$ Capacitance\\
+    \item Friction $\leftrightarrow$ Resistance\\
+\end{itemize}
+
+We can also have \textbf{perturbations}. They are undesirable, deterministic or stochastic and are often neglected.\\
+
+We can define different domains : \\
+\begin{itemize}
+    \item Simulation : output unknown\\
+    \item Construction : design system to get desired output\\
+    \item Identification : detect system knowing input and output\\
+    \item Control : input unknown\\
+\end{itemize}
+
+\underline{Static system :} all states and parameters are constant. Output only depends on input : y(t) = $f$(u(t))\\
+
+\underline{Dynamical system :} the state varies overtime and obey different equation that involve time derivatives\\
+
+\underline{Linear systems :} linear if it obeys superposition principle : \textbf{additivity} $f(x+y) = f(x)+f(y)$, \textbf{homogeneity} $f(\alpha x) = \alpha f(x)$\\
+
+\underline{Time invariance :} parameters do not change in time. Physical properties of system remain constant. Also, the system does not age and input does not change the foundation of the system.\\
+If u(t) generates y(t) then u(t-$t_0$) generates y(t-$t_0$).\\
+
+\underline{Causality :} output depends on past and present not future. An effect can not happen before its cause.\\
+A system is non causal if y(t) = u(t+1)\\
+
+\subsection{Elements of Mechanical System}
+Force and displacement as an input and motion as an output.\\
+Basic blocks : \\
+\begin{itemize}
+    \item Inertial elements : mass represent inertia and resistance to acceleration : \\
+    $\mathbf{F=ma = m\frac{d^2x}{dt^2}}$ and $\mathbf{M = J \frac{d^2 \theta}{dt^2}}$, with the moment of inertia of a rigid body around its axis of rotation $\mathbf{J = \int_M r^2dm}$\\
+    \item Stiffness elements : k does not change with extension or compression. It stores energy. $\mathbf{F=-kx}$, $\mathbf{M=-k\theta}$\\
+    \item Damping elements : energy dissipation : convert kinetic energy to thermal energy\\
+    dampers : viscous friction\\
+    $f$ does not change with the magnitude of velocity\\
+    $\mathbf{F = -fv}$, $\mathbf{M=-f\omega}$\\
+    Coulomb damping : (friction) $F_f = F_{push}$ until $F_f = \mu_s F_n$, afterwards $F_f = \mu_d F_n$\\
+\end{itemize}
+
+\quad \underline{Modeling steps :} \begin{itemize}
+    \item establish an inertial coordinate system\\
+    \item identify mechanical system elements and isolate them\\
+    \item determine minimum number of variables\\
+    \item draw Free Body Diagram\\
+    \item apply Newton's second law\\
+\end{itemize}
+
+\subsection{Second order linear ODE}
+\begin{equation}
+    P(x) \frac{d^2y}{dx^2} + Q(x) \frac{dy}{dx} + R(x) y = G(x)
+\end{equation}
+
+If $G(x) = 0$ we can set $y=e^{rx}$. Thus, we now have : $ar^2+br+c=0$\\
+\begin{minipage}{.5\textwidth}
+$r_1 = \frac{-b + \sqrt{b^2-4ac}}{2a}$\\
+$r_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}$\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+$\mathbf{b^2 - 4ac > 0}$\\
+$y = c_1 e^{r_1x} + c_2e^{r_2x}$\\
+
+$\mathbf{b^2-4ac = 0}$\\
+$y=c_1e^{rx}+c_2xe^{rx}$\\
+
+$\mathbf{b^2-4ac<0}$\\
+$y = e^{\alpha x}(c_1 \cos{(\beta x)} + c_2 \sin{(\beta x)})$ with $r_1 = \alpha + i\beta$\\
+\end{minipage}
+
+\subsection{Elements of electrical systems}
+\underline{Basic characteristics :} volt [v], charge q [coulomb], current i [A]\\
+
+\begin{itemize}
+    \item Resistor : $v_a-v_b = u_{ab} = Ri$ it stores energy\\
+    \item Capacitor : $q=C(v_a-v_b) = Cu_{ab}$ it stores energy\\
+    \item Inductor : $u_{ab} = L\frac{di}{dt}$ it dissipates energy\\
+\end{itemize}
+
+$i = \frac{dq}{dt} = C \frac{du_{ab}}{dt}$\\
+
+\quad \underline{Ohm's law :} series : $R = \sum R_i$, $u=\sum u_i$\\
+parallel : $\frac{1}{R} = \sum \frac{1}{R_i}$, $i = \sum i_i$\\
+
+\quad \underline{Kirchhoff's law :}\\
+Sum of all current entering a node is equal to the sum of all currents leaving the node. Sum of all the voltage drops is equal to the sum of all the voltage rises around a loop.\\
+
+i.e. two voltage sources in series combined with three resistance.\\
+$iR_1 + u_2 + iR_3 + iR_2 - u_1 = 0$\\
+
+\subsection{Analogous system}
+Physically different systems described by mathematical equation of identical form. The solution of one system can inform the other.\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Force F and torque M & voltage u \\
+        \hline
+        mass m and moment of inertia J & inductance L\\
+        \hline
+        viscous-friction $f$& resistance R\\
+        \hline
+        spring constant k & reciprocal of capacitance $\frac{1}{C}$\\
+        \hline
+        displacement $x$ or $\theta$ & charge q\\
+        \hline
+        velocity $v$ or $\omega$ & current i\\
+    \end{tabular}
+    \caption{F-V analogy}
+\end{table}
+
+
+\subsection{Electromechanical systems}
+\quad \underline{DC Servomotor :} a machine that converts electrical energy into rotation.\\
+Permanent magnets generates a magnetic field : magneto\\
+Electromagnetic coils generates a magnetic field : dynamo\\
+
+An electrical current passes through a coil in a magnetic field. This creates a magnetic force which in turn produces a torque : $IBA\sin{\theta}$\\
+
+\quad \underline{Faraday's law of induction :} the time derivative of magnetic flux through a closed circuit induces an electromotive force in the circuit that drives current.\\
+
+\quad \underline{Lenz's law :} induced current produces a magnetic field which tend to oppose the change in flux that induces such currents.\\
+
+The torque $M_m$ is proportional to the armature current : $\mathbf{M_m = K_m i_m}$\\
+The induced voltage $E_m$ is proportional to the angular velocity $\mathbf{E_m = K_m \dot{\theta}}$\\
+
+\subsection{Lagrangian mechanics}
+\begin{equation}
+    L = T-V
+\end{equation}
+With T the kinetic energy and V the potential one.\\
+\color{gray} Note: coordinates must locate the body with respect to an inertial reference frame\color{black}\\
+We write \textbf{non conservative/external force} : $Q_i$ along a generalised coordinate $q_i$\\
+If we have linear damping we use the Rayleigh's dissipation function : $D= \sum_{j=1}^m \frac{f_j}{n+1} \dot{u}^{n+1}$ for a damping being $F = -f \dot{u}^n$\\
+
+\begin{equation}
+    \frac{d}{dt}(\frac{\partial L}{\partial \dot{q_i}}) - \frac{\partial L}{\partial q_i} + \frac{\partial D}{\partial \dot{q_i}} = Q_i
+\end{equation}
+
+\subsection{Linearization and state models}
+We can write the following equation for a linear time invariant system :\\
+\begin{equation}
+    \begin{split}
+        \dot{x}(t) = Ax(t) + Bu(t)\\
+        y(t) = Cx(t) + Du(t)
+    \end{split}
+\end{equation}
+
+For $\dot{x} = Ax$, we have the following equation :\\
+$x(t) = e^{At}x(0) = (I+At+\frac{1}{2}A^2t^2+\dots + \frac{1}{k!}A^kt^k + \dots )x(0)$\\
+
+\color{gray}Notes : if BA=AB, then $\frac{d}{dt}e^{At} = Ae^{At}$, $e^{A(t+s)} = e^{At}e^{As}$\color{black}\\
+
+For $\dot{x} = Ax + Bu$, we have the following equation :\\
+$x(t) = e^{At}x(0)+\int_0^t e^{A(t-\tau)}Bu(\tau)d\tau = (I+At+\frac{1}{2}A^2t^2+\dots + \frac{1}{k!}A^kt^k + \dots )x(0)$\\
+
+We can write everything in one equation : $y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \dots + a_0y(t) = bu(t)$\\
+
+We need \textbf{n states variables} for an n-th order differential equation.\\
+
+\quad \underline{Utility of a state-space representation :}\\
+\begin{itemize}
+    \item stability : eigenvalues of matrix A\\
+    \item controllability : ability of an external input to move internal state of a system from any initial state to any other final state. We evaluate the rank of A and B matrices\\
+    \item observability : one can determine the behaviour of the entire system from system's output. We evaluate the rank of matrices A and C\\
+\end{itemize}
+
+\begin{itemize}
+    \item The state of a dynamical system is the smallest set of variables such that we can determine the behaviour for any time $t>t_0$\\
+    \item The state of an LTI at time t is independent of the state and input before $t_0$\\
+    \item Variables that do not represent physical quantities can be chosen as state variables\\
+\end{itemize}
+
+\subsubsection{Input derivatives}
+\begin{equation}
+    \Ddot{y}+a_1\dot{y}+a_2 y = b_0  \Ddot{u} + b_1 \dot{u} + b_2 u
+\end{equation}
+\quad \underline{Let :}\\
+\begin{minipage}{.5\textwidth}
+    $x_1 = y-\beta_0$\\
+    $x_2 = \dot{x_1} - \beta_1 u$\\
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+    $\beta_0 = b_0$\\
+    $\beta_1 = b_1-a_1\beta_0$\\
+\end{minipage}
+Therefore, we get :\\
+\begin{minipage}{.5\textwidth}
+    $\dot{x_2} = -a_2 x_1 + a_1 x_2 + \beta_2 u$\\
+    $\dot{x_1} = x_2 + \beta_1 u$\\
+    $y = x_1+\beta_0 u$\\
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+    $\beta_2 = b_2 - a_1\beta_1 - a_2 \beta_0$\\
+\end{minipage}
+
+\subsubsection{Linearization of non linear systems}
+\begin{itemize}
+    \item small angle approximation : \begin{minipage}{.5\textwidth}
+        $\cos{\theta} \simeq 1$\\
+        $\sin{\theta} \simeq \theta$\\
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        $\tan{\theta} \simeq \theta$\\
+        $\sin^2\theta \simeq 0$\\
+    \end{minipage}
+    \item equilibrium point : we have $\dot{x} = f(x,u)$ and $y=g(x,u)$\begin{itemize}
+        \item At this point, we have $(\overline{u}, \overline{x}, \overline{y})$ and the derivatives of $f$ will go to zero : $0 = f(\overline{x}, \overline{u})$ and $\overline{y} = g(\overline{x}, \overline{u})$\\
+        \item $\delta \dot{x} = A\delta x + B\delta u$ and $\delta y = C\delta x + D\delta u$\\
+        \item $A = \frac{\partial f}{\partial x}\Biggr\rvert_{\overline{u}, \overline{x}}$ If we have n functions $f$, this corresponds to a jacobian.\\
+        \item $B = \frac{\partial f}{\partial u} \biggr \rvert_{\overline{u}, \overline{x}}$\\
+        \item $C = \frac{\partial g}{\partial x} \biggr \rvert_{\overline{u}, \overline{x}}$\\
+        \item $D = \frac{\partial g}{\partial u} \biggr \rvert_{\overline{u}, \overline{x}}$
+    \end{itemize}
+\end{itemize}
+
+\subsection{Impulse response}
+\subsubsection{Unit step function}
+
+\begin{equation}
+    \varepsilon(t) = \begin{cases}1 & t\geq 0\\ 0& t<0\\ \end{cases}
+\end{equation}
+
+\subsubsection{Impulse signal}
+Let's define a first function : \\
+\begin{equation}
+    \rho(t) = \begin{cases}
+        0 & t<0\\
+        \frac{1}{\Delta t} & t\in [0, \Delta t[\\
+        0 & t\geq \Delta t\\
+    \end{cases}
+\end{equation}
+
+The impulse function is therefore defined as :\\
+\begin{equation}
+    \delta(t) = \lim_{\Delta t \rightarrow 0} \rho(t) \Leftarrow \int_{-\infty}^\infty \rho(t) dt = 1
+\end{equation}
+Used to model physical signals that act over short time intervals and whose effect depends on interval of signal.\\
+
+\warning $\delta$ function is not a function, $\delta(t) = 0$ for $t\neq 0$ and $\delta(t) = \infty$ for $t=0$\\
+
+We also have the relation : $\delta(t) = \frac{d\varepsilon(t)}{dt}$\\
+
+If $f$ is continuous at $t=\tau$ :\\
+\begin{equation}
+    f(t) \delta(t-a) = f(a) \delta(t-a) \Leftrightarrow \int_{-\infty}^\infty \delta(t-\tau) f(t) dt = f(\tau)
+\end{equation}
+Finally : $u(t) = \int_{-\infty}^\infty u(\tau) \delta(t-\tau)d\tau$\\
+
+
+\subsubsection{Impulse response}
+This corresponds to the output of the system at time t to an impulse at time $\tau$.\\
+\begin{equation}
+    g(t,\tau) = G(\delta(t,\tau))
+\end{equation}
+
+For a continuous-time LTI dynamical system : \\
+\begin{equation}
+    y(t) = \int_{-\infty}^\infty u(\tau) g(t-\tau)d\tau = u(t)*g(t)
+\end{equation}
+Most of the time this can be reduced to : $y(t) = \int_0^t u(\tau) g(t-\tau) d\tau$\\
+
+\color{gray}Notes : \begin{itemize}
+    \item input signals can be decomposed into a set of impulses\\
+    \item $g(t-\tau)$ is $g(\tau)$ delayed by t and reversed\\
+    \item the convolution product is associative, distributive and can be reversed\\
+    \item convolution systems are time-invariant\\
+\end{itemize}\color{black}
+
+Impulse response can be found from unit step response : $s(t) = \int_0^t g(\tau)d\tau$\\
+
+\begin{equation}
+    g(t) = \frac{d s(t)}{t}
+\end{equation}
+
+\subsection{Laplace Transform and Transfer function}
+For a function that satisfies $f(t)=0$ if $t<0$, its Laplace Transform is : $F(s) = \mathcal{L}(f(t)) = \int_0^\infty f(t) e^{-st} dt$, where $s = a +jb$ is a complex variable.\\
+
+\quad \underline{Final value theorem :}\\
+\begin{equation}
+    \lim_{t\rightarrow \infty} f(t) = \lim_{s\rightarrow 0} sF(s)
+\end{equation}
+
+\quad \underline{Initial value theorem :}\\
+\begin{equation}
+    \lim_{t\rightarrow 0} f(t) = \lim_{s\rightarrow \infty} sF(s)
+\end{equation}
+
+\subsubsection{Basic function and transformation's table}
+\quad \underline{Basic function}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        $x(t)$ & $X(s)$ \\
+        \hline
+        $\delta(t)$ & 1\\
+        $\varepsilon(t)$ & $\frac{1}{s}$\\
+        $\varepsilon(t)t^n$ & $\frac{n!}{s^{n+1}}$\\
+        $\varepsilon(t) e^{-\alpha t}$ & $\frac{1}{s+\alpha}$\\
+        $\varepsilon(t)t^n e^{-\alpha t}$ & $\frac{n!}{(s+\alpha)^{n+1}}$\\
+        $\varepsilon(t)\cos(\omega t)$ & $\frac{s}{s^2 + \omega^2}$\\
+        $\varepsilon(t)\sin(\omega t)$ & $\frac{\omega}{s^2+\omega^2}$\\
+        $\varepsilon(t) e^{-\alpha t} \cos(\omega t)$ & $\frac{s+\alpha}{(s+\alpha)^2+\omega^2}$\\
+        $\varepsilon(t) e^{-\alpha t} \sin(\omega t)$ & $\frac{w}{(s+\alpha)^2 + \omega^2}$\\
+    \end{tabular}
+\end{table}
+
+\quad \underline{Transformations}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        $x(t)$ & $X(s)$ \\
+         \hline
+        $e^{-\alpha t} f(t)$ & $F(s+\alpha)$\\
+        $\varepsilon(t-\tau) f(t-\tau)$ & $e^{-s\tau} F(s)$\\
+        $f(t)*g(t)$ & $F(s)G(s)$\\
+        $\frac{d^n}{dt^n}f(t)$ & $s^n F(s) - \sum_{k=1}^n s^{n-k} \frac{d^{k-1} f}{dt^{k-1}}\rvert_{t=0}$\\
+        $\int_0^t f(\tau)d\tau$ & $\frac{F(s)}{s}$\\
+        $t^nf(t)$ & $(-1)^n \frac{d^n}{ds^n}F(s)$\\
+    \end{tabular}
+\end{table}
+
+\subsubsection{Transfer function}
+\begin{equation}
+    Y(s) = G(s)U(s)
+\end{equation}
+The Laplace transform of the impulse response is the transfer function : $G(s) = \frac{Y(s)}{U(s)}$\\
+We have causality if the order of $Y$ is less than the order of $U$.\\
+
+\begin{itemize}
+    \item Poles : roots of the denominator polynomial\\
+    \item Zeros : roots of the numerator polynomial\\
+    \item Order of the system : degree of denominator polynomial (of U)\\
+\end{itemize}
+
+We therefore can rewrite the solutions : \\
+\begin{equation}
+    \begin{split}
+        X(s) = (sI-A)^{-1} BU(s) + (sI-A)^{-1}x_0\\
+        Y(s) = [C(sI-A)^{-1}B+D]U(s) + C(sI-A)^{-1}x_0
+    \end{split}
+\end{equation}
+
+The transfer matrix for a system initially at rest is : $G(s) = C(sI-A)^{-1}B + D$, with $G$ : qxp, $C$ : qxn, $A$ : nxn, $B$ : nxp, $D$ : qxp\\
+
+\subsubsection{Inverse Laplace Transform}
+$f(t) = \mathcal{L}^{-1}(F(s))$, $af_1(t)+bf_2(t) = a\mathcal{L}^{-1}(F_1(s))+b\mathcal{L}^{-1}(F_2(s))$\\
+
+\quad \underline{Partial fraction expansion :} $Y(s) = \frac{d_q s^q + \dots + d_0}{s^p+c_{p-1}s^{p-1}+\dots + c_0} = \frac{A_1}{s-s_1}+\dots + \frac{A_p}{s-s_p}$. Where $A_i$ are the residues.\\
+
+\begin{itemize}
+    \item \underline{Case 1 :} Distinct real roots : $Y(s) = \frac{N(s)}{(s+r_1)\dots (s+r_n)} = \frac{A_1}{s+r_1}+\dots+\frac{A_n}{s+r_n}$\begin{equation}
+        A_i = \lim_{s\rightarrow -r_i} (Y(s)(s+r_i))
+    \end{equation}
+    \item \underline{Case 2 :} Distinct complex roots : develop and find the brutal way\\
+    \item \underline{Case 3 :} Repeated real roots : $Y(s) = \frac{N(s)}{(s+r_1)^p(s+r_{p+1})\dots (s+r_n)} = \frac{A_1}{(s+r_1)^p}+\frac{A_2}{(s+r_1)^{p-1}}+\dots + \frac{A_p}{s+r_1}+\frac{A_{p+1}}{s+r_{p+1}}+\dots + \frac{A_n}{s+r_n}$\begin{equation}
+        A_i = \lim_{s\rightarrow -r_1} \{ \frac{1}{(i-1)!} \frac{d^{i-1}}{ds^{i-1}}[Y(s)(s+r_1)^p]\}, i=1,\dots,p
+    \end{equation}
+    and $A_i = \lim_{s\rightarrow -r_i} \{Y(s) (s+r_i)\}$, $i=p+1, \dots, n$\\
+\end{itemize}
+
+If the system is non-linear, the \textbf{transfer function only works for LTI systems !} We need to linearize around an equilibrium point or redefine variables.\\
+
+
+\subsection{System Analysis in the Time Domain}
+The order of the system is also the degree of the polynomial in the denominator of $G$. Also the number of poles of $G$, the minimum number of first order differential equations or even the number of state variables.\\
+
+\subsubsection{First order systems}
+We can rewrite $G(s) = \frac{K}{\tau s+1}$\\
+
+We can define the \textbf{steady state gain} : \begin{equation}
+    K = \lim_{s\rightarrow 0} G(s)
+\end{equation}
+
+With a unit step response : $y(t) = \varepsilon(t) KA [1-e^{-\frac{t}{\tau}}]$\\
+
+For $t=\tau$ we get : $0.63KA$\\
+For $3\tau$ we get : $0.95KA$\\
+
+With impulse response : $y(t) = \frac{KA}{\tau} e^{-\frac{t}{\tau}}$\\
+
+With ramp response : $u(t) = At$ : $y(t) = KA(t-\tau)+KA\tau e^{-\frac{t}{\tau}}$\\
+
+\quad \underline{A property of LTI systems :}\\
+Normalized ramp response : $c(t) = t-\tau + \tau e^{-\frac{t}{\tau}}$\\
+Normalized step response is the derivative of the normalized ramp : $c(t) = 1-e^{-\frac{t}{\tau}}$\\
+Normalized impulse response is the derivative of the normalized step response : $c(t) = \frac{1}{\tau} e^{-\frac{t}{\tau}}$\\
+
+\subsubsection{Second order systems}
+We can write $G(s) = K\frac{\omega_0^2}{s^2+2\xi \omega_0 s+\omega_0^2}$\\
+With : \begin{itemize}
+    \item K : steady state output (DC gain)\\
+    \item $\xi$ : damping ratio\\
+    \item $\omega_0$ (un-damped) natural frequency\\
+\end{itemize}
+
+If $\xi<0$ : the system is unstable\\
+Poles have to be negative for the system to be stable\\
+        
+Poles of the system are : $p_{1,2} = -\omega_0(\xi \pm \sqrt{\xi^2-1})$\\
+
+\begin{itemize}
+    \item Over-damped response (real and distinct poles)\\
+    \item Critically damped response (real and repeated poles)\\
+    \item Under-damped response (complex conjugate poles)\\
+    \item Un-damped response (complex conjugate poles without real parts)\\
+\end{itemize}
+
+\begin{itemize}
+    \item Over-damped case ($\xi>1$) :\begin{itemize}
+        \item $G(s) = K\frac{1}{(\tau_1 s+1)} \frac{1}{(\tau_2 s+1)}$ with $\tau_{1,2} = \frac{1}{\omega_0(\xi \pm \sqrt{\xi^2-1})}$\\
+        \item If step response $y(t) = \varepsilon(t)KA \{1-\frac{1}{\tau_1-\tau_2}[\tau_1 e^{-\frac{t}{\tau_1}}-\tau_2 e^{-\frac{t}{\tau_2}}]\}$\\
+    \end{itemize}
+    \item Dominant root approximation $\xi>>1$ : one of the two decaying exponential decreases much faster than the other. Faster decaying exponential term can be neglected.\\
+    \item Critically damped case ($\xi=1$) : \begin{itemize}
+        \item $G(s) = \frac{K}{(\tau s+1)^2}$ with $\tau = \frac{1}{\omega_0}$\\
+        \item If step response : $y(t) = \varepsilon(t) KA [1-e^{-\omega_0 t}(1+\omega_0t)]$
+    \end{itemize}
+    \item Under-damped case $0\leq \xi < 1$ : \begin{itemize}
+        \item $G(s) = K\frac{a^2+\overline{\omega}^2}{(s+a)^2+\overline{\omega}^2}$\\
+        \item Damped natural frequency : $\overline{\omega} = \omega_0 \sqrt{1-\xi^2}$\\
+        \item Attenuation : $a = \xi \omega_0$\\
+        \item If step response : $y(t) = \varepsilon(t) KA \{1-e^{at}(\cos{(\overline{\omega}t)}+\frac{\xi}{\sqrt{1-\xi^2}} \sin{(\overline{\omega}t)}\}$
+    \end{itemize}
+    \item un-damped response ($\xi = 0$) : the response becomes un-damped and oscillations continue indefinitely with natural frequency : $y(t) = \varepsilon(t) KA[2-\cos{(\omega_0 t)}]$\\
+\end{itemize}
+
+
+Transient response : under-damped \begin{itemize}
+    \item Delay time $t_d$ : time required for the response to reach half of the final value\\
+    \item Rise time $t_r$ : time required for the response to rise from 0\% to 100\% (under-damped) or from 10\% to 90\% (over-damped)\\
+    \item Peak time $t_p$ : time required for the response to reach the first peak of the overshoot\\
+    \item Maximum percent overshoot $M_p$\\
+    \item Settling time $t_s$ : time required for the response curve to reach and stay within a range about the final value of size specified by absolute percentage of the final value (2\% or 5\%)\\
+\end{itemize}
+
+When under-damped, we have the poles $p_1 = -a+j\overline{\omega}$, $p_2 = -a-j\overline{\omega}$ with \\
+$a = \xi \omega_0, \beta = \arctan(\frac{\overline{\omega}}{a}), \overline{\omega} = \omega_0 \sqrt{1-\xi^2}$\\
+
+We have the relation : \begin{itemize}
+    \item $t_r = \frac{\pi-\beta}{\overline{\omega}}$ : this was found using $c(t_r) = 1$\\
+    \item $t_p = \frac{\pi}{\overline{\omega}}$ : this was found using $\frac{dc}{dt}\rvert_{t=t_p} = 0$\\
+    \item $t_s = \frac{-\ln{\delta}}{a}$ : where $\delta$ is the precision percentage\\
+    \item $M_p = e^{-(\frac{a}{\overline{w}}) \pi}$ : this was found using $M_p = c(t_p)-1$\\
+\end{itemize}
+
+\color{gray} Note : \begin{itemize}
+    \item if $\xi < 0.4$ large overshoot\\
+    \item if $\xi>0.8$ sluggish response\\
+    \item rapid response need large $\omega_0$ and over-damped systems have large $t_s$\\
+    \item if poles have the same : \begin{itemize}
+        \item real part : then they have the same $\tau$ and $t_s$\\
+        \item imaginary part : same $t_p$ and same frequency oscillation\\
+    \end{itemize}
+\end{itemize}
+\color{black}
+
+\subsubsection{Poles, zeros and system properties}
+Homogeneous (free, natural) response can be written as : $y_h(t) = \sum_{i=1}^n C_i e^{p_it}$\\
+Transfer function poles are the roots of the characteristic equation and the eigenvalues of the A matrix : $\dot{x} = Ax$\\
+
+\quad \underline{Dominant pole approximation :} distance in between two poles has to be about $5-10 \tau_1$; they need to be far away\\
+
+If a real pole is in the right-half plane (Re>0) then $p_i = a$ and $y(t) = Ce^{at} \Rightarrow$ \textbf{unstable}\\
+
+\textbf{For a LTI system to be stable, all of its poles must have a negative real part.}\\
+
+Imaginary pole : $p_i = i \omega$ then $y(t) = A \sin(\omega t + \phi) \Rightarrow$ \textbf{unstable}\\
+
+Stability does not depend on input! Poles of input contributes only to steady state. The rate of decay is the real part of the pole $Re(p_i)$ and the frequency of oscillation is $Im(p_i)$\\
+If $p_i = -a \pm i \omega$ then $y(t) = A \sin(\omega t + \phi)$\\
+
+\quad \underline{Effects of zeros on time response :}\\
+Magnitude of residues depends on zeros and poles. \\
+For example : $G_1 = \frac{\omega_0^2}{s^2+2\xi\omega s+\omega^2}$ and $G_2 = \frac{(\frac{1}{z}s+1)\omega_0^2}{s^2+2\xi\omega s+\omega^2}$\\
+We get : $y_2(t) = y_1(t) + \frac{1}{z} \dot{y}_1(t)$ Therefore, the zeros changes the output\\
+
+As $z>0$ increases, $M_p$ decreases and $t_p$ increases, $t_s$ stays the same\\
+If $z<0$ we have no change in stability, the response is slower and we have an undershoot.\\
+
+\subsection{System analysis in the frequency domain}
+Steady state response of LTI to a sinusoidal input. A LTI system will vibrate at its own natural frequency and follow the frequency of input. At steady-state, LTI will be a sinusoidal at the same frequency of input (in case of damping). The output differs from input in the amplitude and phase angle only.\\
+
+\subsubsection{First order system}
+$u(t) = A\sin(\omega t)$ $\Rightarrow G = \frac{K}{\tau s +1} \Rightarrow Y(s) = \frac{\alpha_1}{\tau s+1} + \frac{\alpha_2 s+ \alpha_3}{s^2 + \omega^2}$\\
+$\Rightarrow y(t) = (\frac{kA \omega t}{1+\tau^2 \omega^2}) \exp(-\frac{t}{\tau}) + (\frac{kA}{\sqrt{1+\tau^2 \omega^2}}) \sin(\omega t+ \varphi)$\\
+$\varphi = -\arctan(\tau \omega)$\\
+
+The steady-state response is the one with the sinus as the exponential part goes rapidly to zero.\\
+
+\subsubsection{Second order system}
+Here again, $u(t) = A\sin(\omega t) \Rightarrow Y(s) = \frac{\alpha}{\tau_1 s +1} + \frac{\beta}{\tau_2 s+ 1}+  \frac{\alpha_2 s + \alpha_3}{\alpha s^2 + \omega^2}$\\
+
+Let's write : $I = A \frac{-k\omega (\tau_1+\tau_2)}{(1+\tau_1^2 \omega^2)(1+\tau_2^2 \omega^2)}$ and $R = \frac{k (1-\tau_1\tau_2 \omega^2)}{(1+\tau_1^2 \omega^2)(1+\tau_2^2 \omega^2)}$\\
+
+The steady-state response is therefore given by : $y_{ss}(t) = A \sqrt{I^2+R^2} \sin(\omega t +\varphi)$ and $\varphi = \arctan(\frac{I}{R})$\\
+
+\subsubsection{Sinusoidal transfer function}
+We can rewrite the transfer function : $G(j\omega) = \lvert G(j\omega) \rvert e^{j\theta}$\\
+The amplitude ratio of output/input is : \begin{equation}
+    \lvert G(j\omega)\rvert = \lvert \frac{Y(j\omega)}{U(j\omega)}\rvert
+\end{equation}
+The phase shift is also given by : \begin{equation}
+    \hat{G(j\omega)} = \hat{(\frac{Y(j\omega)}{U(j\omega)})}
+\end{equation}
+
+The steady state response is now given by : $y_{ss}(t) = u(t) \lvert G(j\omega)\rvert \sin(\omega t+\varphi)$\\
+
+\color{gray} Reminder : if $\lvert z \rvert = \frac{\lvert z_1\rvert \lvert z_2\rvert}{\lvert z_3 \rvert}$ Then $\arg z = \arg z_1 + \arg z_2 - \arg z_3$ \color{black}\\
+\quad \underline{Bode-plot :} \begin{itemize}
+    \item First plot : Bode magnitude plot $\lvert G(j\omega)\rvert$ vs $\omega$ (in log-log)\\
+    \item Second plot : Bode phase plot $\varphi$ vs $\omega$ (in semi-log)\\
+\end{itemize}
+
+\subsubsection{Resonant frequency}
+Frequency at which amplitude is maximum : $\frac{d}{d\omega} \lvert G(j\omega)\rvert = 0 \Rightarrow$ \begin{equation}
+    \omega_r = \omega_0 \sqrt{1-2\xi^2}
+\end{equation}
+\warning Only valid for :$0\leq \xi \leq \frac{1}{\sqrt{2}}$\\
+
+The magnitude of the peak and the phase shift are also : \begin{equation}
+    \begin{gathered}
+        M_r = \frac{k}{2\xi \sqrt{1-\xi^2}}\\
+        \varphi(\omega_r) = -\arctan(\frac{\sqrt{1-2\xi^2}}{\xi})
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Minimum phase system :} the transfer function has no poles or zeros in the right half plane\\
+
+\quad \underline{Non-minimum phase system :} the transfer function has poles or zeros in the right half plane. The system is stable when zeros have : $R_e z >0$\\
+
+\quad \underline{System with delay :} $y(t) = u(t-\theta) \Rightarrow \mathcal{L}$ with $e^{-\theta s}$\\
+
+\subsubsection{Decibel}
+Power gain in decibel dB\\
+\begin{equation}
+    \lvert G(j\omega) \rvert_{dB} = 20 \log_{10}\lvert G(j\omega)\rvert
+\end{equation}
+
+We define the \textbf{bandwidth} as the distance from the origin to corner frequency. As it increases, rise time decreases.\\
+
+\quad \underline{Filter design :} the goal is to modify characteristics of the system response :\begin{itemize}
+    \item magnitude and phase at certain frequency\\
+    \item low-pass filter : cut high frequency\\
+    \item high-pass filter : cut low frequency\\
+    \item band pass/notch filter : attenuate some particular frequency\\
+    \item all-pass filter : only change the phase\\
+\end{itemize}
+
+\subsubsection{Low-pass filter}
+Upper cut off frequency : $\omega_H$\\
+Amplifies signals below a certain frequency including DC gain\\
+\begin{equation}
+    \begin{gathered}
+        F(s) = K \frac{\omega_H}{s+\omega_H}\\
+        \varphi = -\arctan(\frac{\omega}{\omega_H})
+    \end{gathered}
+\end{equation}
+
+\subsubsection{High-pass filter}
+Lower cut off frequency : $\omega_L$\\
+\begin{equation}
+    \begin{gathered}
+        F(s) = K \frac{s}{s+\omega_L}\\
+        \varphi = \frac{\pi}{2} - \arctan(\frac{\omega}{\omega_L})
+    \end{gathered}
+\end{equation}
+
+\subsubsection{High-Q band pass amplifier and notch filter}
+\begin{equation}
+    F(s) = K \frac{s \omega_H}{(s+\omega_L)(s+\omega_H)}
+\end{equation}
+
+For small bandwidth and high quality factor Q we have complex poles : \\
+\begin{equation}
+    \begin{gathered}
+        F(s) = K \frac{s \frac{\omega_c}{Q}}{s^2 + s \frac{\omega_c}{Q} + \omega_c^2}\\
+        \varphi = \frac{\pi}{2}-\arctan(\frac{1}{Q} \frac{\omega \omega_C}{\omega_c^2-\omega^2})
+    \end{gathered}
+\end{equation}
+
+By using the band rejection (notch) we have : \\
+\begin{equation}
+    F(s) = K \frac{s^2 + \omega_c^2}{s^2+s \frac{\omega_c}{Q} + \omega_c^2}
+\end{equation}
+
+\subsubsection{All pass factor}
+Used to tailor phase characteristic of the system.\\
+\begin{equation}
+    \begin{gathered}
+        F(s) = K \frac{s-\omega_c}{s+\omega_c}\\
+        \varphi = -2 \arctan(\frac{\omega}{\omega_c})
+    \end{gathered}
+\end{equation}
+
+\subsubsection{Quality factor}
+The highest Q is, the sharper the resonance is. It is a dimensionless parameter that describes how under damped a resonator is. The Q-factor is the relation between the center frequency and the 3dB bandwidth.\\
+
+\subsubsection{System design and polar diagram}
+\quad \underline{Nyquist plot :}\\
+Plot with a real and imaginary axis, based on frequency. An arrow is going from low to high frequency. The magnitude of $G(j\omega)$ is given by the distance from the origin to the point on the graph. The phase on the other hand is given by the angle with respect to the origin. \\
+Plot intersect the unit circle when $\lvert G(j\omega)\rvert = 1$\\
+Plot crosses the real axis when $\arg(G(j\omega)) = n 180^\circ$\\
+
+As the phase increases, the plot moves counterclockwise. As the phase decreases, the plot moves clockwise. As the magnitude increases, the plot moves away from the origin. Finally as the magnitude decreases, the plot moves toward the origin.\\
+With time delay, the nyquist diagram shows rounds around the origin.\\
+
+
+\end{document}

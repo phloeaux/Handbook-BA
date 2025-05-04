@@ -1,0 +1,420 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+
+\localtableofcontents
+\subsection{Fonctions holomorphes et équations de Cauchy-Riemann}
+\subsubsection{Introduction}
+\quad \underline{Fonction complexe :}\\
+Définition : une fonction d'une variable complexe à valeurs dans $\mathbb{C}$ s'écrit :\\
+\begin{equation}
+    \begin{split}
+        f: \mathbb{C} \rightarrow \mathbb{C}\\
+        z = x+iy \mapsto f(z) = u(x,y) + i v(x,y)
+    \end{split}
+\end{equation}
+Où $u:\mathbb{R}^2 \rightarrow \mathbb{R}$ et $v:\mathbb{R}^2\rightarrow \mathbb{R}$ sont deux fonctions à valeurs dans $\mathbb{R}$ qui s'appellent respectivement la partie réelle de $f$ (on écrit Re($f$) = $u$) et la partie imaginaire de $f$ (Im($f$) = $v$)\\
+
+\color{gray} Remarque : x et y des fonctions u et v sont les parties réelles et imaginaires de la variable $z\in \mathbb{C}$ de la fonction $f$\color{black}\\
+
+On définit les fonctions suivantes :\\
+\begin{itemize}
+    \item $e^z = e^x(\cos{y}+i\sin{y})$, cette fonction est bijective uniquement sur le domaine $-\pi<y<\pi$;\\
+    \item $\log(z)=\ln{\lvert z \rvert} + i \arg(z)$, on parle de détermination principal si on a $\arg(z) \in ]-\pi;\pi[$. \warning $\log(z)$ n'est pas continu en $z\in ]-\infty; 0]$. Cette fonction est donc continue uniquement dans l'ensemble $V=\mathbb{C}\backslash \{z\in \mathbb{C} : Im(z)=0 \text{ et } Re(z) \leq 0\}$\\
+    \item $\cos(z) = \frac{e^{iz}+e^{-iz}}{2}$, $\sin(z) = \frac{e^{iz}-e^{-iz}}{2i}$\\
+    \item $\cosh(z) = \frac{e^{z}+e^{-z}}{2}$, $\sinh(z) = \frac{e^{z}-e^{-z}}{2}$\\
+\end{itemize}
+
+\color{gray} Remarque : les formules valables en analyse réelles ne sont pas forcément valable en complexe. Par exemple, en général $\log(z_1z_2) \neq \log(z_1)+\log(z_2)$\color{black}\\
+
+\quad \underline{Limite, continuité et dérivabilité :}\\
+Définition : Les notions de limite, continuité et dérivabilité sont analogues à celles de l'analyse réelle. Soit $f:\mathbb{C}\rightarrow \mathbb{C}$, une fonction d'une variable complexe z à valeurs dans $\mathbb{C}$.\\
+\begin{enumerate}
+    \item $f$ possède une limite $l\in \mathbb{C}$ en un point $z_0 \in \mathbb{C}$ : si $\forall \varepsilon>0$, $\exists$ $\delta>0$ tel que si et seulement $\lvert z-z_0\rvert < \delta_0$ alors $\lvert f(z)-l\rvert < \varepsilon$\\
+    \item $f$ est continue en $z_0\in \mathbb{C}$ si $\lim_{z\rightarrow z_0}f(t) = f(z_0)$\\
+    \item $f$ est dérivable en $z_0 \in \mathbb{C}$ si $\lim_{z\rightarrow z_0} \frac{f(z)-f(z_0)}{z-z_0}$ existe et est finie. La limite est appelée la dérivée de $f$ en $z_0$ est notée $f'(z_0)$\\
+    \item Étant donné un ouvert $V\subset \mathbb{C}$, on dit que $f:V\rightarrow \mathbb{C}$ est \textbf{holomorphe} dans V si $f$ est définie et dérivable $\forall z \in V$\\
+    \item Soient U et V deux ouverts tels que $U \subset V \subset \mathbb{C}$ si $f:V\rightarrow \mathbb{C}$ et $g:V\rightarrow U$ sont deux fonctions holomorphes dans V et si $g(z) \neq 0, \forall z\in V$ alors : $f+g$, $fg$, $\frac{f}{g}$, $f\circ g$ sont aussi des fonctions holomorphes dans V.\\
+\end{enumerate}
+
+\color{gray} Les règles de dérivation établies dans $\mathbb{R}$ sont valables dans $\mathbb{C}$\color{black}\\
+
+\quad \underline{Équation de Cauchy-Riemann :}\\
+Théorème : Soit $V\subset \mathbb{C}$ un ouvert et soit une fonction $f:V\rightarrow \mathbb{C}$\\
+Alors les deux affirmations suivantes sont équivalents : \\
+\begin{enumerate}
+    \item $f$ est holomorphe sur V;\\
+    \item les fonctions $u\in C^1(V)$, $v\in C^1(V)$ et satisfont les équations de Cauchy-Riemann : 
+    \begin{equation}
+        \frac{\partial u}{\partial x} (x,y) = \frac{\partial v}{\partial y}(x,y); \frac{\partial u}{\partial y} (x,y) = -\frac{\partial v}{\partial x}(x,y)
+    \end{equation}
+\end{enumerate}
+De plus, si $f$ est holomorphe dans V, alors on a :\\
+\begin{equation}
+    f'(z) = \frac{\partial u}{\partial x} (x,y) + i \frac{\partial v}{\partial x}(x,y) = \frac{\partial v}{\partial y} (x,y) - i \frac{\partial u}{\partial y}(x,y)
+\end{equation}
+\color{gray}
+\underline{Remarques :} \begin{enumerate}
+    \item Les équations de Cauchy-Riemann sont une condition nécessaires pour que $f$ soit holomorphes mais elles ne sont pas suffisantes! Si u et v sont continûment dérivables ($u \in C^1$, $v\in C^1$) alors elles deviennent une condition suffisante\\
+    \item Utilité : pour qu'une fonction soit holomorphe dans un ouvert V : il suffit de vérifier que les équations de Cauchy-Riemann pour $u=Re(f) \in C^1(V)$ et $v=Im(f) \in C^1(V)$ sont satisfaites\\
+    \item On peut réécrire suivant la notation : $u_x=v_y$ et $u_y=-v_x$\\
+\end{enumerate}
+\color{black}
+
+\subsection{Théorème et formule intégrale de Cauchy}
+\subsubsection{Intégration complexe}
+Plusieurs définitions :\\
+\begin{enumerate}
+    \item $\Gamma \in \mathbb{C}$ est une courbe simple régulière dans $\mathbb{C}$ s'il existe un interval $[a;b] \in \mathbb{R}$ et une fonction $\begin{matrix}\gamma:[a;b]\rightarrow \mathbb{C}\\ t\mapsto \gamma(t) = \gamma_1(t)+i \gamma_2(t) \end{matrix}$ qui est une paramétrisation de $\Gamma$ décrite par $t\in [a;b]$ avec $\gamma_1:[a;b]\rightarrow \mathbb{R}$ et $\gamma_2:[a;b] \rightarrow \mathbb{R}$ définie par $t\mapsto \gamma_1$ et $t\mapsto \gamma_2$\\
+    \item $\Gamma \in \mathbb{C}$ est une courbe simple régulière fermée si $\gamma(a)=\gamma(b)$\\
+    \item $\Gamma \in \mathbb{C}$ est une courbe simple régulière par morceaux s'il existe $\Gamma_1, \dots, \Gamma_k$ des courbes simples régulières telles que $\Gamma = \cup_{j=1}^k\Gamma_j$\\
+    \item $\Gamma \in \mathbb{C}$ est une courbe simple fermée régulière (par morceaux) de paramétrisation $\gamma$, on note $\mathbb{int\Gamma}$ l'ensemble ouvert et borné $V\in \mathbb{C}$ dont le bord est $\Gamma$ : \begin{enumerate}
+        \item Pour le bord de V, on écrit $\partial V = \gamma$\\
+        \item Pour l'adhérence de V, on écrit $\overline{int \gamma} = int\gamma \cup \gamma$\\
+        \item $\gamma$ est dite orientée positivement si le sens de parcours laisse int$\gamma$ à gauche\\
+    \end{enumerate}
+    \item soit $\Gamma \in \mathbb{C}$ est une courbe simple régulière de paramétrisation $\begin{matrix}\gamma:[a;b]\rightarrow \mathbb{C}\\ t\mapsto \gamma(t)\end{matrix}$. Soit $\begin{matrix}f:\Gamma \rightarrow \mathbb{C}\\ z\mapsto f(z)\end{matrix}$ une fonction continue. \textbf{L'intégrale de f le long de $\Gamma$} est définie par :\\
+    \begin{equation}
+        \int_{\Gamma}f(z)dz = \int_{\gamma}f(z)dz = \int_a^bf(\gamma(t))\gamma'(t)dt
+    \end{equation}
+    \item Si la courbe $\Gamma = \cup_{j=1}^k\Gamma_j$ est simple régulière par morceaux, alors : $\int_{\Gamma}f(z)dz = \sum_{j=1}^k \int_{\Gamma_j}f(z)dz$\\
+\end{enumerate}
+
+\subsubsection{Théorème de Cauchy}
+\color{gray} \underline{Rappel :} on appelle simplement connexe un ensemble ouvert $D\in \mathbb{C}$ qui "n'a pas de trou"\color{black}\\
+
+\quad \underline{Théorème :}\\
+Soit $D\in \mathbb{C}$ simplement connexe, $\begin{matrix} f:D\rightarrow \mathbb{C}\\ z\mapsto f(z)\end{matrix}$ une fonction holomorphe dans D et $\gamma$ une courbe simple fermée régulière contenue dans D. Alors :\\
+\begin{equation}
+    \int_\gamma f(z)dz = 0
+\end{equation}
+
+\quad \underline{Généralisation :}\\
+Soient $D_0, D_1, \dots, D_m \subset \mathbb{C}$ où $m \in \mathbb{N}^*$ domaine simplement connexe tel que :\\
+\begin{enumerate}
+    \item $\partial D_j = \gamma_j$, $\forall j=0,\dots, m$ sont des courbes simples fermées régulières\\
+    \item $\overline{D_j} \subset D_0$, $\forall j=1,\dots, m$\\
+    \item $\overline{D_j} \cap \overline{D_k} = \phi$, $\forall j\neq k =1,\dots, m$\\
+\end{enumerate}
+Soit $f:D = \overline{D_0}\backslash \cup_{j=1}^m D_j \rightarrow \mathbb{C}$ une fonction holomorphe dans D.\\
+Alors : \\
+\begin{equation}
+    \int_{\gamma_0}f(z)dz = \sum_{j=1}^m \int_{\gamma_i}f(z)dz
+\end{equation}
+Où toutes les courbes $\gamma_i$ sont orientées positivement.\\
+
+
+\subsubsection{Formule intégrale de Cauchy}
+Soient $D\in \mathbb{C}$ un domaine simplement connexe, $f:D\rightarrow \mathbb{C}$ une fonction holomorphe dans D et $\gamma$ une courbe simple fermée régulière (par morceaux) orientée positivement contenue dans D. Alors :\\
+\begin{equation}
+    f(z) = \frac{1}{2\pi i}\int_\gamma \frac{f(\xi)}{\xi -z}d\xi, \forall z\in \text{int}\gamma
+\end{equation}
+\color{gray} Remarque : la valeur de l'intégrale est la même pour n'importe quelle courbe $\gamma$ simple fermée régulière\color{black}\\
+
+\subsubsection{Corollaire de la formule intégrale de Cauchy}
+Avec les mêmes hypothèses qu'auparavant ($D\subset \mathbb{C}$ simplement connexe, $f:D\rightarrow \mathbb{C}$ holomorphe dans D, $\gamma \in D$ courbe simple régulière orientée positivement). Alors, on a :\\
+\begin{itemize}
+    \item $f$ est infiniment dérivable dans D\\
+    \item $f^{(n)}(z) = \frac{n!}{2\pi i} \int_\gamma \frac{f(\xi)}{(\xi-z)^{n+1}}d\xi$ pour $n\in \mathbb{N}$ et tout $z \in int \gamma$\\
+\end{itemize}
+
+\color{gray} Commentaire : un résultat remarquable, le corollaire affirme qu'une fonction holomorphe dans D est en fait infiniment dérivable et il donne une formule exprimant la n-ème dérivée de $f \forall n\in \mathbb{N}$\color{black}\\
+
+\subsubsection{Formule de la moyenne}
+La formule de la moyenne est donnée par :\\
+\begin{equation}
+    f(z_0) = \frac{1}{2\pi} \int_0^{2\pi} f(z_0+r e^{it}) dt
+\end{equation}
+
+\subsection{Séries de Laurent, pôles et résidus}
+\subsubsection{Polynôme et série de Taylor d'une fonction holomorphe}
+\quad \underline{hypothèses :} soit un ouvert $D\subset \mathbb{C}$, $f:D\rightarrow \mathbb{C}$ une fonction holomorphe dans $D$ et $z_0 \in D$.\\
+
+Pour $N \in \mathbb{N}$, le polynôme de Taylor de $f$ de degré N en $z_0$ est : \\
+\begin{equation}
+    T_N f(z) = \sum_{n=0}^N \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n
+\end{equation}
+
+Soit $R>0$ et $D_R(z_0) = \{z\in \mathbb{C} : \lvert z-z_0\rvert <R \}$ le plus grand disque de rayon R centré en $z_0$ contenu dans D. \color{gray} Convention : Si $D=\mathbb{C} \Rightarrow R=+\infty$ et $D_R(z_0)=\mathbb{C}$\color{black}\\
+
+On a alors plusieurs conséquences :\\
+\begin{itemize}
+    \item $Tf(z) = \lim_{N\rightarrow \infty} T_N f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n$ existe et est finie pour tout $z\in D_R(z_0)$. L'expression $Tf(z)$ s'appelle \textbf{la série de Taylor de $f$ en $z_0$}.\\
+    \item on a $f(z) = Tf(z)$, $\forall z\in D_R(z_0)$ et R s'appelle le rayon de convergence de $Tf(z)$\\
+    \item les coefficients de la série de Taylor sont reliés à la formule de Cauchy par le corollaire :  $\frac{f^{(n)}(z_0)}{n!} = \frac{1}{2\pi i} \int_\gamma \frac{f(\xi)}{(\xi-z_0)^{n+1}}d\xi$ où $\gamma \subset D_R(z)$ est une courbe simple fermée régulière par morceaux orientée positivement tel que $z_0 \in int \gamma$\\
+\end{itemize}
+
+\quad \underline{Théorème de Liouville :} soit $f:\mathbb{C} \rightarrow \mathbb{C}$ une fonction bornée holomorphe dans $\mathbb{C}$. Alors $f$ est constante.\\
+
+\subsubsection{Série de Laurent}
+\quad \underline{Hypothèses :} soit $D\subset \mathbb{C}$ un domaine simplement connexe, $z_0 \in D$ et $f: D\backslash \{z_0\} \rightarrow \mathbb{C}$ une fonction holomorphe dans $D\backslash \{z_0\}$\\
+
+Pour $N \in \mathbb{N}$, le développement de Laurent de $f$ de degré N au voisinage de $z_0$ est :\\
+\begin{equation}
+    L_N f(z) = \sum_{n=-N}^N C_n(z-z_0)^n
+\end{equation}
+Avec les coefficients :\\
+\begin{equation}
+    C_n = \frac{1}{2\pi i }\int_\gamma \frac{f(\xi)}{(\xi-z_0)^{n+1}}d\xi
+\end{equation}
+Où $\gamma \subset D$ est une courbe simple fermée régulière orientée positive telle que $z_0 \in \overline{int \gamma}$\\
+
+\quad \underline{Résultat :} soit R>0 et $D_R(z_0) = \{z\in \mathbb{C} : \lvert z-z_0\rvert < R \}$ le plus grand disque ouvert de rayon R centré en $z_0$ et contenu dans D\\
+
+$Lf(z) = \lim_{N\leftarrow \infty} L_Nf(z) = \sum_{-\infty}^\infty C_n (z-z_0)^n$ existe et est finie pour tout $z \in D_R(z_0) \backslash \{z_0\}$. On l'appelle la série de Laurent de $f$ au voisinage de $z_0$.\\
+De plus, $f(z) = Lf(z)$, pour tout $z\in D_R(z_0) \backslash \{z_0\}$, R s'appelle le rayon de convergence de la série de Laurent et $D_R(z_0) \backslash \{z_0\}$ est le domaine de convergence de la série de Laurent.\\
+
+\color{gray} Remarque : \begin{itemize}
+    \item La série de Laurent de $f$ peut s'écrire $Lf(z) = \sum_{n=-\infty}^{-1} C_n (z-z_0)^n + \sum_{n=0}^\infty C_n (z-z_0)^n$ : \begin{itemize}
+        \item la première série $\sum_{n=-\infty}^{-1} C_n(z-z_0)^n = \sum_{n=1}^\infty C_{-n} (z-z_0)^{-n}$ s'appelle la \textbf{partie singulière} de la série de Laurent\\
+        \item la seconde série $\sum_{n=0}^\infty C_n(z-z_0)^n$ s'appelle la \textbf{partie régulière} de la série de Laurent\\
+    \end{itemize}
+    \item si $f:D\rightarrow \mathbb{C}$ est holomorphe en $z_0$ alors la série de Laurent coïncide avec la série de Taylor. En effet, la partie singulière de la série de Laurent est nulle puisque pour $n=1,2,\dots$ on a $C_{-n} = \frac{1}{2\pi i}\int_\gamma \frac{f(\xi)}{(\xi-z_0)^{1-n}}d\xi = \frac{1}{2\pi i} \int_\gamma f(\xi) (\xi-z_0)^{n-1}d\xi = 0$. Les coefficients de la partie régulière donnent la série de Taylor puisque par définition pour $n=0,1,\dots$ on a $C_n = \frac{1}{2\pi i} \int_\gamma \frac{f(\xi)}{(\xi - z_0)^{n+1}}d\xi = \frac{f^{(n)}(z_0)}{n!}$ \\
+\end{itemize}
+\color{black}
+
+\quad \underline{Définitions :}\\
+\begin{enumerate}
+    \item $z_0 \in \mathbb{C}$ est un \textbf{point régulier} de $f$ $\Leftrightarrow$ partie singulière de la série de Laurent de $f$ au voisinage de $z_0$ est nulle : $C_{-k} = 0 \forall k \in \mathbb{C}^*$ et $Lf(z) = Tf(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n$\\
+    \item Soit $m \in \mathbb{N}^*$, $z_0 \in \mathbb{C}$ est un \textbf{pôle d'ordre m} de $f$ $\Leftrightarrow$ $C_{-m} \neq 0$ et $C_{-k} = 0 \forall k>m$ : $Lf(z) = \sum_{n=-m}^\infty C_n (z-z_0)^n$\\
+    \item $z_0 \in \mathbb{C}$ est \textbf{une singularité essentielle} de $f$ $\Leftrightarrow$ $C_{-m} \neq 0$ pour une infinité d'indices $C_{-1}$ de la série de Laurent de $f$ au voisinage de $z_0$ \begin{equation}
+        \text{Rés}_{z_0}(f) = C_{-1} = \frac{1}{2\pi i} \int_\gamma f(\xi) d\xi
+    \end{equation}
+    Où $\gamma \subset D$ avec $z_0 \in \text{int}\gamma$\\
+\end{enumerate}
+
+\subsubsection{Étude des pôles d'une fonction et calcul des résidus}
+\quad \underline{Méthode de détection des pôles :}\\
+\underline{Définition :} Soit $n \in \mathbb{N}^*$, $z_0 \in \mathbb{C}$ est un \textbf{zéro d'ordre $n$} d'une fonction $f$ lorsque $f(z_0) = f^{(1)}(z_0) = \dots = f^{(n-1)}(z_0) = 0$ mais $f^{(n)}(z_0)\neq 0$\\
+\color{gray}\underline{Convention :} si $z_0$ n'est pas un zéro de $f$ alors $f(z_0) \neq 0$ et puisque $f^{(0)}(z_0) = f(z_0)$ en posant $n=0$ on dit que $z_0$ est un zéro d'ordre zéro.\color{black}\\
+
+\quad \underline{Méthode :} \begin{itemize}
+    \item soit $f$ donnée par $f(z) = \frac{p(z)}{q(z)}$ où p et q sont des fonctions holomorphes au voisinage de $z_0 \in \mathbb{C}$ qui est un zéro d'ordre k de p et un zéro d'ordre l de q. On a alors deux cas possibles :\begin{itemize}
+        \item $l>k$ alors $z_0$ est un pôle d'ordre $l-k$ de $f$\\
+        \item $l<k$ alors $z_0$ est un point régulier de $f$ et on dit que $z_0$ est une singularité éliminable de $f$ en posant $f(z_0) = \lim_{z\rightarrow z_0} \frac{p(z)}{q(z)}$\\
+    \end{itemize}
+    \item soient $f$ une fonction holomorphe dans $D\backslash \{z_0\}$, $m\in \mathbb{N}^*$ et \begin{equation}
+        L = \lim_{z\rightarrow z_0} [(z-z_0)^m f(z)]
+    \end{equation}
+    si L est finie et $L\neq 0$ alors $z_0$ est un pôle d'ordre $m$ de $f$\\
+\end{itemize}
+
+\subsubsection{Formule de calcul des résidus d'une fonction}
+\begin{itemize}
+    \item soit $f$ une fonction holomorphe dans $D\backslash \{z_0\}$ et soit $m \in \mathbb{N}^*$. Si $z_0$ est un pôle d'ordre $m$ de $f$ alors : \begin{equation}
+        \text{Rés}_{z_0}(f) = \frac{1}{(m-1)!} \lim_{z\rightarrow z_0} \frac{d^{m-1}}{dz^{m-1}} [(z-z_0)^m f(z)]
+    \end{equation}\\
+    \item soit $f$ défini par $f(z) = \frac{p(z)}{q(z)}$ où $p$ et $q$ sont des fonctions holomorphes au voisinage de $z_0 \in \mathbb{C}$ telles que $z_0$ est un zéro d'ordre un de $q$ et $p(z_0)\neq 0$. Alors : \begin{equation}
+        \text{Rés}_{z_0}(f) = \frac{p(z_0)}{q'(z_0)}
+    \end{equation}
+\end{itemize}
+
+\subsection{Théorème des résidus et application au calcul intégrale}
+\subsubsection{Théorème des résidus}
+\quad \underline{Théorème :} soient $D\subset \mathbb{C}$ un domaine simplement connexe, $\gamma$ une courbe simple fermée régulière contenue dans D orientée positivement et $z_1, \dots, z_m$ $\in \text{int} \gamma$ tel que $z_i \neq z_j$ $\forall i=1,\dots, m$ et $\forall j=1,\dots, m$, $i\neq j$ avec $m\in \mathbb{N}^*$. Si une fonction $f : D \backslash \{ z_1 ,\dots, z_m\} \rightarrow \mathbb{C}$ est holomorphe alors : \\
+
+\begin{equation}
+    \int_\gamma f(z) dz = 2\pi i \sum_{k=1}^m \text{Rés}_{z_k}(f)
+\end{equation}
+\color{gray}Remarque : si $f$ est holomorphe sauf en un nombre fini de points $z_1,\dots, z_n$ alors l'intégrale de $f$ le long de n'importe qu'elle courbe simple fermée régulière $\gamma$ contenue dans D orientée positivement est donnée par la somme des résidus de $f$ en ce point.\color{black}\\
+
+\subsubsection{Application du théorème des résidus au calcul d'intégral réel}
+\quad \underline{Calcul d'intégrale de fonction périodique}\\
+\underline{But :} calculer des intégrales de la forme $\int_0^{2\pi} f(\cos{\theta}, \sin{\theta})d\theta$ avec $f:\mathbb{R}^2 \rightarrow \mathbb{R}$ définie par $(x,y) \mapsto f(x,y) = \frac{p(x,y)}{q(x,y)}$, où p et q sont des fonctions polynomiales avec $q(\cos{\theta}, \sin{\theta}) \neq 0 \forall \theta \in [0,2\pi]$\\
+
+On constate avec la formule d'Euler que si $z= x+iy = e^{i\theta}$ alors on peut écrire $\cos{\theta} = \frac{e^{i\theta} + e^{-i\theta}}{2} = \frac{1}{2}(z+\frac{1}{z})$ et $\sin{\theta} = \frac{e^{i\theta} - e^{-i\theta}}{2i} = \frac{1}{2i}(z-\frac{1}{z})$\\
+On définit $\Tilde{f}(z) : \mathbb{C} \rightarrow \mathbb{C}$ par $z\mapsto \Tilde{f}(z) = \frac{1}{iz} f(\frac{1}{2}(z+\frac{1}{z}), \frac{1}{2i}(z-\frac{1}{z}))$\\
+On considère $\gamma$ le cercle unité centré en $z=0$, orienté positivement et $z_k$, pour $k=1,\dots, m$ les singularités de $\Tilde{f}$ à l'intérieur de $\gamma$. Par définition, il n'y a pas de singularité de $\Tilde{f}$ sur $\gamma$.\\
+
+On a $\int_\gamma \Tilde{f}(z)dz = \int_\gamma \frac{1}{iz} f(\frac{1}{2}(z+\frac{1}{z}), \frac{1}{2i}(z-\frac{1}{z}))dz = \int_0^{2\pi} \frac{1}{ie^{i\theta}} f(\cos{\theta}, \sin{\theta}) i e^{i\theta}d\theta = \int_0^{2\pi}f(\cos{\theta}, \sin{\theta})d\theta$. Or, $\int_\gamma \Tilde{f}(z)dz = 2\pi i \sum_{k=1}^m Res_{z_k}(\Tilde{f})$\\
+
+Ainsi,on a :\\
+\begin{equation}
+    \int_0^{2\pi} f(\cos{\theta}, \sin{\theta}) d\theta = 2\pi i \sum_{k=1}^m Res_{z_k} (\Tilde{f})
+\end{equation}
+Où $z_k$ pour $k=1,\dots, m$ sont les singularités de $\Tilde{f}$ qui sont à l'intérieur du cercle unité $\gamma$ centré en $z=0$.\\
+
+\quad \underline{Calcul d'intégrales généralisées} \\
+\underline{But :} calculer des intégrales de la forme $\int_{-\infty}^\infty f(x) e^{i\alpha x}dx$ avec $\alpha \in \mathbb{R}_+$ et $f: \mathbb{R} \rightarrow \mathbb{R}_+$ définit par $f(x) = \frac{p(x)}{q(x)}$ où p et q sont des fonctions polynomiales telles que $q(x) \neq 0$ $\forall x \in \mathbb{R}$ et degré$(q)-$degré(p)$\geq 2$\\
+
+\color{gray} Remarque : les conditions sur p et q garantissent la convergence de l'intégrale \color{black}\\
+
+On choisit un nombre réel $r>0$ et on considère la courbe $\gamma_r = L_r \cup C_r$ orientée positivement où : $L_r$ est le segment de droite définit par l'intervalle $[-r, r]$ situé sur l'axe de réel. $C_r$ est le demi-cercle de rayon $r$ centré en $z=0$ situé dans le demi-plan supérieur. $\gamma_r$ est une courbe simple fermée régulière par morceaux orientée positivement.\\
+On définit la fonction $g:\mathbb{C}\rightarrow \mathbb{C}$
+ par $z\mapsto g(z) = f(z) e^{i\alpha z} = \frac{p(z)}{q(z)} e^{i\alpha z}$\\
+ Les seuls singularités de $g$ sont des zéros complexes de q. Comme q est une fonction polynomiale et que $q(x)\neq 0 \forall x \in \mathbb{R}$ alors q possède un nombre fini de zéros et aucun n'est situé sur l'axe réel.\\
+
+ D'une part, en appliquant le théorème des résidus à la fonction g définie par $g(z) = f(z)=e^{i\alpha z}$ intégrée le long de $\gamma_r$, on a : $\int_{\gamma_r} f(z)e^{i\alpha z}dz = 2\pi i \sum_{k=1}^m Res_{z_k}(g)$, où $z_k$, $k=1,2,\dots,m$ sont les singularités de g dans le demi-plan supérieur.\\
+ D'autre part, puisque $\gamma_r = L_r \cup C_r$, on a $\int_{\gamma_r} f(z)e^{i\alpha z}dz = \int_{L_r} f(z)e^{i\alpha z}dz + \int_{C_r} f(z)e^{i\alpha z}dz$.\\
+On écrit alors : $\lim_{r\rightarrow \infty}\int_{\gamma_r} f(z)e^{i\alpha z}dz =\lim_{r\rightarrow \infty} \int_{L_r} f(z)e^{i\alpha z}dz + \lim_{r\rightarrow \infty} \int_{C_r} f(z)e^{i\alpha z}dz$.\\
+Étude de chaque limite :
+\begin{itemize}
+    \item $\lim_{r\rightarrow \infty}\int_{\gamma_r} f(z)e^{i\alpha z}dz = 2\pi i \sum_{k=1}^m Res_{z_k}(g)$\\
+    \item $\lim_{r\rightarrow \infty} \int_{L_r} f(z)e^{i\alpha z}dz = \int_{-\infty}^\infty f(x)e^{i\alpha x}dx$\\
+    \item $\lim_{r\rightarrow \infty} \int_{C_r} f(z)e^{i\alpha z}dz = 0$\\
+\end{itemize}
+
+ On a donc : \\
+ \begin{equation}
+     \int_{-\infty}^\infty f(x)e^{i\alpha x}dx = 2\pi i \sum_{k=1}^m Res_{z_k}(g)
+ \end{equation}
+ Où $g(z) = f(z) e^{i\alpha z}$, $\alpha \geq 0$ et $z_k$, $k=1,2,\dots,m$ sont les singularités de $g$ situées dans le demi-plan supérieur (telles que $Im(z_k) >0$)\\
+
+ \color{gray} \underline{Remarque :} pour $z\in C_r$ on a $z=re^{i\theta} = r(\cos{\theta} + i\sin{\theta})$ et $\lvert e^{i\alpha z}\rvert = e^{-\alpha r \sin{\theta}}$, lorsque $\alpha < 0$, il faut choisir le demi-cercle $C_r$ situé dans le demi-plan inférieur pour avoir $\lim_{r\rightarrow \infty} \int_{C_r} f(z)e^{i\alpha z} dz = 0$\\
+
+ Pour calculer les intégrales généralisées du type $\int_{-\infty}^\infty f(x) e^{i\alpha x}dx$ avec $\alpha < 0$ on applique la même méthode en considérant les singularités $z_k$ de $f$ situées dans le demi-plan inférieur (telles que $Im(z_k)<0$)\\
+ \warning orientation positive de $L_r$ :\begin{equation}
+     \int_{-\infty}^\infty f(x) e^{i\alpha x}dx = -2\pi i \sum_{k=1}^m Res_{z_k}(g)
+ \end{equation}
+\color{black}\\
+
+\subsubsection{Application du théorème des résidus aux transformations de Fourier}
+Soit $f:\mathbb{R}\rightarrow \mathbb{R}$ une fonction définie par $f(x) = \frac{p(x)}{q(x)}$ tel que $q(x) \neq 0$ $\forall x \in \mathbb{R}$ et $deg(q)-deg(p)\geq 2$\\
+
+\begin{enumerate}
+    \item si $\alpha\leq 0$ : $\mathcal{F}(f)(\alpha) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{-i\alpha x}dx = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) e^{i\beta x}dx = \sqrt{2\pi} i \sum_{k=1}^m Res_{z_k} (g)$, $g(z) = f(z) e^{-i\alpha z}$ et $z_k$ les pôles de $f(z)$ où $Im(z_k)>0$\\
+    \item si $\alpha>0$ : $\mathcal{F}(f)(\alpha) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{-i\alpha x}dx = -\sqrt{2\pi} i \sum_{k=1}^m Res_{z_k}(g)$, $g(z) = f(z)e^{-i\alpha z}$, et $z_k$ les pôles de $f(z)$ tels que $Im(z_k)<0$\\ 
+\end{enumerate}
+\color{gray}Remarque : la méthode et la formule s'appliquent aussi pour des fonctions rationnelles $f:\mathbb{R} \rightarrow\mathbb{C}$ avec des polynômes $p$ et $q$  ayant des coefficients complexes.\color{black}\\
+
+\subsubsection{Application du théorème des résidus aux transformations de Laplace}
+Soit $f:\mathbb{R}_+ \rightarrow \mathbb{R}$ continue définie par : $t\mapsto f(t)$ étendue à $\mathbb{R}$ en posant $f(t) = 0$, $t<0$. Soit $\gamma_0 \in \mathbb{R}$ l'abscisse de convergence de $f$. Si la transformation de Laplace $F= \mathcal{L}(f)$ est telle que $\int_{-\infty}^\infty F(\gamma+is)ds<\infty$ pour un certain $\gamma > \gamma_0$.\\
+Alors on a $\mathcal{L}^{-1}(F)(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\gamma+is)e^{(\gamma+is)t}ds = f(t)$ $\forall t\geq 0$. Cette intégrale est indépendante de $\gamma$.\\
+
+\quad \underline{Méthode pour calculer $\mathcal{L}^{-1}(F)$ :}\\
+\begin{itemize}
+    \item Première solution : trouver $\mathcal{L}^{-1}(F)$ en décomposant l'expression de $f(z)$ en élément simples et en utilisant les formulaires\\
+    \item Seconde solution : calculer $\mathcal{L}^{-1}(F)$ en utilisant le théorème des résidus et en appliquant l'analyse complexe à la définition donnée par la formule d'inversion\\
+\end{itemize}
+
+La méthode des résidus pour calculer $\mathcal{L}^{-1}(F)(t)$ peut s'appliquer à des fonctions $F : \mathbb{C} \rightarrow\mathbb{C}$ telles que $\lvert F(z) \rvert \leq \frac{M}{\lvert z \rvert^k}$ pour $\lvert z \rvert$ assez grand où $M>0 \in \mathbb{R}$ et $k>0$\\
+
+Pour $t\geq 0$, on a \begin{equation}
+    \mathcal{L}^{-1} (F)(t) = \sum_{j=1}^m Res_{z_j}(h)
+\end{equation}
+Où $h(z) = F(z) e^{zt}$ et $z_j$ pour $j=1,\dots,m$ sont les singularités de h, où $h(z) = F(z) e^{zt}$.\\
+
+\color{gray}Note : on peut aussi centrer le cercle $C_r$ en $\gamma$ avec $k>1$ dans la condition pour $\lvert F(z) \rvert \leq \frac{M}{\lvert z \rvert^k}$\color{black}\\
+
+
+\subsection{Applications conformes}
+\subsubsection{Introduction}
+Soit $\Omega \subset \mathbb{C}$ un ensemble ouvert. Soit $f: \mathbb{C} \rightarrow \mathbb{C}$ et $f(\Omega) = \{w \in \mathbb{C} : w=f(z)$ pour $z\in w \}$\\
+
+On dit que $f$ est une application conforme de $\Omega$ sur $f(\Omega)$ si : \begin{itemize}
+    \item $f$ est holomorphe dans $\Omega$\\
+    \item $f$ est bijective dans $\Omega$ sur $f(\Omega)$\\
+    \item $f'(z)\neq 0$ $\forall z \in \Omega$\\
+\end{itemize}
+
+\subsubsection{Transformation de Moebius}
+Une transformation de Moebius est une fonction $f:\mathbb{C} \rightarrow \mathbb{C}$ définie par \begin{equation}
+    z\rightarrow w = f(z) = \frac{az+b}{cz+d}
+\end{equation}
+Avec $a,b,c,d \in \mathbb{C}$ tel que $c \in \mathbb{C}^*$ si $d=0$ et $d \in \mathbb{C}^*$ si $c=0$\\
+
+\quad \underline{Résultats :}\\
+\begin{itemize}
+    \item si $c\neq 0$ et $ad-bc \neq 0$ alors la transformation de Moebius est une application conforme de $\Omega = \mathbb{C} \backslash \{\frac{-d}{c}\}$ sur $f(\Omega) = \mathbb{C} \backslash \{\frac{a}{c}\}$\\
+    \item Une transformation de Moebius donnée par $f(z) = \frac{az+b}{cz+d}$ avec $ad-bc \neq 0$ s'écrit toujours comme une composition d'homothéties, de rotations de translations et d'inversions. En effet, si $c\neq 0$ on définit $f_1(z) = \frac{bc-ad}{c}z+ \frac{a}{c}$ (homothétie, rotation, translation), $f_2(z) = \frac{1}{z}$(inversion) et $f_3(z) = cz+d$ (homothétie, rotation et translation) on a alors : $(f_1 \circ f_2 \circ f_3)(z) = \frac{az+b}{cz+d}$. Si $c=0$ alors $f(z) = \frac{a}{d}z+ \frac{b}{d}$ (homothétie, translation, rotation)\\
+    \item Toute transformation de Moebius $f$ définie par $z \mapsto w = f(z) = \frac{az+b}{cz+d}$ avec $ad-bc \neq 0$ transforme des cercles et des droites du plan de la variable $z$ en des cercles et des droites du plan de la variable $w$\\
+    \item Si $f$ est une transformation de Moebius définie par $z\mapsto w = f(z) = \frac{az+b}{cz+d}$ avec $ad-bc \neq 0$ et si $W_j = f(z_j)$ pour $z=1,2,3$ avec $z_j \neq z_k$ lorsque $j\neq k$ alors $\forall z \neq z_3$ on a : \begin{equation}
+        \frac{z-z_1}{z-z_3} \frac{z_2-z_3}{z_2-z_1} = \frac{f(z)-w_1}{f(z)-w_3} \frac{w_2-w_3}{w_2-w_1}
+    \end{equation}
+\end{itemize}
+
+\color{gray}Remarque : \begin{itemize}
+    \item si $c=0$ et $ad-bc\neq 0$ alors $f(z) = \frac{a}{d}z+\frac{b}{d}$ $f$ est conforme de $\mathbb{C}$ sur $\mathbb{C}$\\
+    \item si $ad-bc\neq 0 \Rightarrow f'(z) = 0 \forall \in \Omega$ donc $f$ est constante dans $\Omega$ et donc $f$ n'est pas conforme\\
+    \item on a aussi que $f^{-1}$ est aussi une transformation de Moebius conforme de $f(\Omega) = \mathbb{C}\backslash \{\frac{a}{c}\}$ sur $\Omega = \mathbb{C} \backslash \{-\frac{d}{c}\}$ définie par $w\mapsto z= f^{-1}(w) = \frac{-dw+b}{cw-a}$\\
+\end{itemize}
+\color{black}
+
+
+\subsubsection{Caractérisation et détermination d'une transformation de Moebius}
+\quad \underline{Théorème de Caractérisation :} Étant donné trois points distinct $z_1$, $z_2$, $z_3$ du plan de la variable $z$ et trois points distincts $w_1$, $w_2$, $w_3$ du plan de la variable $w$, alors \textbf{$\exists$ une unique transformation de Moebius} $f$ définie par $z \mapsto w = f(z) = \frac{az+b}{cz+d}$ avec $ad-bc \neq 0$ tel que $w_1=f(z_1)$, $w_2 = f(z_2)$, $w_3 = f(z_3)$.\\
+
+\subsection{Équation de Laplace}
+\subsubsection{Équation dans un disque}
+\quad \underline{Problème à résoudre :}\\
+On considère $\Omega = \{(x,y) \in \mathbb{R}^2 : x^2+y^2<R^2\}$ un disque de rayon $R>0$ centré à l'origine. \\
+On veut trouver une solution $u(x,y)$ de l'équation de Laplace $(\nabla^2 u)(x,y) =0$ pour $(x,y)\in \Omega$ avec la condition aux bords : $u(x,y) = \varphi(x,y)$ pour $(x,y) \in \partial \Omega$ donnée par une fonction $\varphi : \partial \Omega \rightarrow \mathbb{R}$ définie par $\varphi(x,y)$. On suppose $\varphi \in C^1(\partial\Omega)$\\
+
+\quad \underline{Méthode de résolution :}\\
+\begin{itemize}
+    \item \underline{1ère étape :} on utilise les coordonnées polaires $x=r\cos\theta$, $y=r\sin{\theta}$ avec $r\in ]0;R]$ et $\theta \in [0;2\pi]$. On écrit donc $u(r\cos{\theta}, r\sin{\theta}) = v(r,\theta)$ et $\varphi(R\cos{\theta}, R\sin{\theta}) = \psi(\theta)$. On veut donc trouver une solution $v(r,\theta)$ de l'équation : \begin{equation}
+    \begin{cases}
+        \frac{\partial^2 v}{\partial r^2}(r,\theta) + \frac{1}{r} \frac{\partial v}{\partial r}(r,\theta) + \frac{1}{r^2} \frac{\partial^2 v}{\partial \theta^2}(r,\theta) = 0 & r\in ]0;R[, \theta \in ]0;2\pi[\\
+        v(R,\theta) = \psi(\theta) & \theta \in ]0;2\pi[\\
+        v(r,0) = v(r,2\pi), \frac{\partial v}{\partial \theta} (r,0) = \frac{\partial v}{\partial \theta}(r,2\pi) & r \in ]0;R[\\
+        \end{cases}
+    \end{equation}
+    \item \underline{2ème étape :} On ignore la condition au bord et on procède par séparation de variables : $v(r,\theta) = f(r) g(\theta)$. L'équation est donc maintenant : \begin{equation}\begin{gathered}
+        f"(r)g(\theta) + \frac{1}{r}f'(r) g(\theta) + \frac{1}{r^2}f(r) g"(\theta) = 0\\
+        \Leftrightarrow \frac{r^2 f"(r) + r f'(r)}{f(r)} = -\frac{g"(\theta)}{g(\theta)} = \lambda
+        \end{gathered}
+    \end{equation}
+    On a donc deux équations à résoudre : \\
+    \begin{minipage}{.5\textwidth}
+        \begin{equation}
+            \begin{cases}
+                g"(\theta) + \lambda g(\theta) = 0 & \theta \in ]0;2\pi[\\
+                g(0) = g(2\pi)\\
+                g'(0) = g'(2\pi)\\
+            \end{cases}
+        \end{equation}
+        Les seules solutions non triviales sont données par $\lambda = n^2$\\
+        \begin{equation}
+            g_n(\theta) = \alpha_n \cos(n\theta) + \beta_n \sin(n\theta)
+        \end{equation}
+        $\alpha_n$ et $\beta_n$ sont des constantes arbitraires\\
+    \end{minipage}
+    \vline
+    \begin{minipage}{.5\textwidth}
+        \begin{equation}
+            r^2 f"(r) + rf'(r) -\lambda f(r) = 0
+        \end{equation}
+        Avec $\lambda = n^2$. La solution est donc donnée par : \begin{equation}
+            f_n(r) = \begin{cases}
+                \gamma_n r^n & n\neq 0\\
+                \gamma_0 & n=0\\
+            \end{cases}
+        \end{equation}
+        On a ici enlevé les parties divergentes en $r=0$.\\
+    \end{minipage}
+    Ainsi, pour chaque $n \in \mathbb{N}$, on a la solution générale : \begin{equation}
+        v(r,\theta) = \frac{A_0}{2} + \sum_{n=1}^\infty [A_n \cos{(n\theta)} + B_n \sin{(n\theta)}]r^n
+    \end{equation}
+    Où $A_0 = 2C_0 \alpha_0 \gamma_0$, $A_n = \gamma_n \alpha_n C_n$ et $B_n = \gamma_n \beta_n C_n$ sont des constantes arbitraires\\
+    \item \underline{3ème étape :} on applique la condition au bord du disque. \\
+    On a $v(R,\theta) = \psi(\theta) \Rightarrow \frac{A_0}{2} + \sum_{n=1}^\infty [A_n \cos{(n\theta)} + B_n \sin{(n\theta)}]R^n$\\
+    On a donc \begin{equation}
+        \begin{gathered}
+            A_n = \frac{1}{\pi R^n} \int_0^{2\pi} \psi(\theta) \cos{(n\theta)}d\theta\\
+            B_n = \frac{1}{\pi R^n} \int_0^{2\pi} \psi(\theta) \sin{(n\theta)}d\theta\\
+        \end{gathered}
+    \end{equation}
+    Où $\psi(\theta) = \varphi(R\cos{\theta}, R\sin{\theta})$ est déterminée par la condition aux bords $\varphi(x,y)$\\
+    \item \underline{4ème étape :} on trouve la solution $u(x,y)$ cherchée exprimée en coordonnées cartésiennes\\
+\end{itemize}
+
+\subsubsection{Équation dans un rectangle}
+Trouver une solution $u(x,y)$ de l'équation de Laplace $\frac{\partial^2 u}{\partial x^2}(x,y) + \frac{\partial^2 u}{\partial y^2} = 0$ pour $(x,y) \in \Omega = ]0;L[x]0;M[$ où $L \in \mathbb{R}_+$ et $M \in \mathbb{R}_+$ avec les conditions de bords : \begin{itemize}
+    \item vertical : $u(0,y) = u(L,y) = 0$ $\forall y \in ]0;M[$\\
+    \item horizontal : $u(x,0) = f(x)$ et $u(x,M) = g(x)$ $\forall x \in ]0;L[$ données par $f$ et $g$ des fonctions : $]0;L[ \rightarrow \mathbb{R}$ définie par $f(x)$ et $g(x)$. On suppose $f$ et $g$ $\in C^1(]0;L[)$\\
+\end{itemize}
+On utilise la méthode de séparation de variables : $u(x,y) = v(x) w(y)$\\
+\begin{equation}
+    v(x,y) = \sum_{n=1}^\infty [A_n \cosh{(\frac{n\pi}{L}y)} + B_n \sinh{(\frac{n\pi}{L}y)}] \sin{(\frac{n\pi}{L}x)}
+\end{equation}
+
+Où : \begin{equation}
+    \begin{gathered}
+        A_n = \frac{2}{L} \int_0^L f(x) \sin{(\frac{n\pi}{L}x)}dx\\
+        B_n = \frac{2}{L\sinh{(\frac{n\pi}{L}M)}} \int_0^L [g(x) - \cosh{(\frac{n\pi}{L}M)}f(x)]\sin{(\frac{n\pi}{L}x)}dx
+    \end{gathered}
+\end{equation}
+
+
+\end{document}

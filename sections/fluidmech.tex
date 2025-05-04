@@ -1,0 +1,774 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+
+\begin{document}
+\localtableofcontents
+\subsection{Introduction}
+\quad What is a fluid? (liquid/gaz)\\
+
+Definition : a fluid is a substance that deforms continuously under any shear stress. Or a fluid is a material that can't statically resist a shear stress.\\
+
+Shear stress : $\tau = \frac{F}{A}$\\
+Resistance of a fluid to a shear stress : \textbf{viscosity}\\
+
+\begin{minipage}{.5\textwidth}
+\quad \underline{Basic laws a fluid dynamics :}\\
+\begin{enumerate}
+    \item conservation of mass\\
+    \item newton's second law\\
+    \item conservation of energy\\
+    \item (second law of thermodynamics)\\
+\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \quad \underline{Properties of a fluid :}\\
+\begin{enumerate}
+    \item density $\rho = \frac{m}{V}$ $[\rho] = \frac{kg}{m^3}$\\
+    \item specific volume $v = \frac{V}{m} = \frac{1}{\rho}$\\
+    \item specific weight $\gamma = \rho g$ $[\gamma] = \frac{kg}{m^2s^2} = \frac{N}{m^3}$\\
+    \item specific gravity $SG = \frac{\rho}{\rho_{H_2O}}$\\
+\end{enumerate}
+\end{minipage}
+
+We have at normal condition (1atm, 300K) : $\rho_{H_2O} = 1000\frac{kg}{m^3}$, $\rho_{air} = 1.22 \frac{kg}{m^3}$\\
+
+\quad \underline{Viscosity :}\\
+No-slip condition states that at a solid boundary a viscous fluid will have zero velocity relative to the solid boundary.\\
+
+\begin{equation}
+    \dot{\gamma} = \frac{d\beta}{dt} = \frac{u}{h} = \frac{du}{dy}
+\end{equation}
+u being the speed of the upper plate and h the distance in between the two plates.
+
+For a newtonian fluid, we have $\tau = \mu \dot{\gamma}$, with $\mu$ the (thermodynamic) viscosity $[\mu] = Pa.s = \frac{Ns}{m^2} = \frac{kg}{ms}$.\\
+The kinematic viscosity $\nu = \frac{\mu}{\rho}$, $[\nu] = \frac{m^2}{s}$\\
+
+\color{gray} stress-strain rate relation in general is more complex in other geometries but it remains linear (for newtonian fluid at least)\color{black}\\
+
+Typical values for the viscosity :\\
+\begin{itemize}
+    \item air : $\mu = 1.8 \cdot 10^{-5}$\\
+    \item water : $\mu = 1.1 \cdot 10^{-3}$\\
+    \item units : (cgs)= (cm, gr, sec) : $\frac{g}{cm \cdot s} =:$ poise = p\\
+\end{itemize}
+
+\underline{measure of compressibility :} Bulk modulus : $E_v = -V \frac{\partial P}{\partial V}$\\
+
+\subsection{Hydro-statics}
+The fluid is at rest, so there is no shear force applied to it!\\
+Pressure is a scalar.\\
+
+From equilibrium, we get that (in the assumption of no shearing forces)\\
+\begin{equation}
+    -\nabla P-\rho g \hat{k} = \rho \vec{a}
+\end{equation}
+In order to get there, we take a finite box with forces acting on it on each sides and apply newton's second law.\\
+
+If the fluid is at rest, then we get that $P=P(z)$\\
+\begin{itemize}
+    \item Incompressible : $\rho$ is constant, thus $P-P_0 = \rho g h$ ($h_0 = 0$)\\
+    \item $\rho \neq$constant : i.e. ideal gaz, $\frac{dP}{dz} = -\frac{P}{RT}g \Rightarrow P = Ce^{-\frac{g}{RT}z}$ assuming T is constant. If T is not constant and $T = T_0 - \beta z$ then : $P=P_0(1-\frac{\beta z}{T_0})^{\frac{g}{R\beta}}$\\
+\end{itemize}
+
+\color{gray}Note: \begin{itemize}
+    \item Pressure units : \begin{itemize}
+        \item SI = $\frac{N}{m^2}=Pa$\\
+        \item 1 atm = $1.01\cdot 10^5Pa = 760mmHg$\\
+    \end{itemize}
+    \item Manometry\\
+\end{itemize}
+\color{black}
+
+\subsubsection{Forces on submerged bodies}
+\quad \underline{Flat surfaces :}\\
+Assume $\rho$ constant.\\
+We get $h=y\sin{\theta}$\\
+$F = \int_A \rho g h dA = \int_A \rho g y \sin{\theta}dA = \rho g \sin{\theta} \int_A ydA = \rho g h_c A = P_cA$\\
+The resultant force is independent of $\theta$ and is applied below centroid.\\
+
+To find where the force is applied, we need :\\
+$M = \int dM = \rho g \sin{\theta} I_x$ with $I_x = I_{xc}+Ay_c^2$ the moment of inertia around the x-axis.\\
+Thus, we have $M = \rho g \sin{\theta} (I_{xc}+Ay_c^2) = \rho g y_c \sin{\theta}Ay_r$\\
+\begin{equation}
+    y_R = y_c+\frac{I_{xc}}{Ay_c}
+\end{equation}
+
+\quad \underline{Curved surfaces :}\\
+$\vec{F}_r = F_H \vec{i} + F_V \Vec{j}$\\
+$dF = PdA$, $dF_H = PdA \cos{\theta} = PdA_V$\\
+\begin{equation}
+    F_H = \int PdA_V
+\end{equation}
+Force acting on the vertical projection of the surface.\\
+
+\begin{equation}
+    F_V = \int dF_V = \int dW = W
+\end{equation}
+Force on the projected vertical area.\\
+
+\subsubsection{Archimede's principle}
+Vertical forces on a submerged objects -'buoyancy'\\
+The net force of acting on an submerged objects is the weight of the displaced volume.\\
+
+\subsection{Fluid dynamics : Bernoulli equation}
+Basic assumptions : \\
+\begin{itemize}
+    \item streamline (SL) : lines tangent to the velocity vector at every point\\
+    \item steady flow : velocity field $\vec{v}(\vec{r}, t) = \vec{v}(\vec{r})$ (does not depend on time)\\
+\end{itemize}
+
+Considering one streamline, and assuming no viscous force. By taking a small fluid element and applying newton's second law in the s-direction (along the SL) :\\
+$a_s = \frac{\partial v}{\partial s} \frac{\partial s}{\partial t}= \frac{\partial v}{\partial s} v$\\
+\begin{equation}
+    \frac{1}{2}\rho \frac{\partial v^2}{\partial s} + \frac{\partial P}{\partial s} + \rho g \frac{\partial z}{\partial s} =0
+\end{equation}
+By integrating along SL with ds we get :\\
+If $\rho$ is constant :\\
+\begin{equation}
+    \frac{1}{2} \rho v^2 + P + \rho g z=C
+\end{equation}
+The famous \textbf{Bernoulli's equation}.\\
+Assumptions needed :\\
+\begin{itemize}
+    \item $\rho$ is constant\\
+    \item true along one SL\\
+    \item steady flow\\
+    \item neglect viscosity\\
+\end{itemize}
+
+\quad \underline{Notes :}\\
+All terms have unit of kinetic energy per volume or pressure.\\
+\begin{itemize}
+    \item $\frac{1}{2}\rho v^2$ : dynamic pressure\\
+    \item P : static pressure\\
+    \item $\rho g z$ : head pressure, elevation pressure\\
+    \item $P + \frac{1}{2} \rho v^2$ : stagnation pressure\\
+\end{itemize}
+
+Applying newton's second law across SL (along n).\\
+$-\frac{\partial P}{\partial n} - \rho g \cos{\theta} = \rho \frac{v^2}{R}$, with R the radius of curvature.\\
+$-dP - \rho g dz = \rho \frac{v^2}{R}dn$\\
+\begin{equation}
+    P+\rho g z + \rho \int \frac{v^2}{R}dn = C
+\end{equation}
+
+Mass conservation states that between two points : \\
+\begin{equation}
+    v_1 A_1 = cste
+\end{equation}
+
+\quad \underline{Contraction coefficient :}\\
+Let D be the diameter of the hole and d the diameter of the fluid. \\
+In a free jet, we have $d<D$ and we can define the contraction coefficient : \\
+\begin{equation}
+    C_c = \frac{A_{jet}}{A_h} = \frac{d^2}{D^2}
+\end{equation}
+
+\subsection{Diffusion}
+\quad \underline{Diffusion :}\\
+transport of material (small particles, molecules, $\dots$) in a fluid without flow.\\
+\color{gray}diffusion and convective transport often happens simultaneously. \\
+chemical diffusion(mass transport) mathematically similar to heat conduction (thermal energy)\color{black}\\
+
+In 1D, a particle has to move from its initial position and go into one of the nearest neighbor. Thus, we define the number of particles at a position x and time t : \textbf{n($x$,t)}.\\
+By doing a Taylor expansion we find the \textbf{convection/diffusion equation :}\\
+\begin{equation}
+    \frac{\partial n}{\partial t} + v \frac{\partial n}{\partial x} = D \frac{\partial^2 n}{\partial t^2}
+\end{equation}
+With \textbf{the diffusion coefficient} $D = \frac{(\Delta x)^2}{2 \Delta t}$ and \textbf{the drift velocity} $v = (1-2p) \frac{\Delta x}{\Delta t}$\\
+
+For an unbiased random walk ($p=0.5$) we get (in 1D):\\
+\begin{equation}
+    \frac{\partial n}{\partial t} = D \frac{\partial^2 n}{\partial^2 t}
+\end{equation}
+
+\color{gray}The net flux $x+\Delta x \rightarrow x$ for $p=0.5$ is $n(x+\Delta x,t)p-n(x,t)(1-p) = \frac{1}{2} \Delta x \frac{\partial n}{\partial x}+ \dots \propto \frac{\partial n}{\partial x}$\\
+The same goes for the net flux $x-\Delta x \rightarrow x$.\color{black}\\
+
+The flux is proportional to gradients : $\frac{\partial n}{\partial x}$\\
+
+In 3D we get for unbiased random walk (p=$\frac{1}{6}$) :\\
+\begin{equation}
+    \frac{\partial n}{\partial t} = \frac{\delta^2}{6 \Delta t}(\frac{\partial^2 n}{\partial^2 x} + \frac{\partial^2 n}{\partial^2 y} + \frac{\partial^2 n}{\partial^2 z}) = D \nabla^2 n
+\end{equation}
+With $D = \frac{\delta^2}{6 \Delta t}$\\
+
+We can estimate the diffusion coefficients :\\
+\begin{itemize}
+    \item Self diffusion : (molecule in an ocean of the same type) $v_m = \frac{\delta}{\Delta t}$ ($\delta$ is the size of the molecule) $\frac{1}{2}v_m^2 = \frac{3}{2} \frac{k_b T}{m}$. Therefore, $D\simeq \frac{1}{6} \delta \sqrt{3\frac{k_b T}{m}}$\\
+    \item Suspended particles : sphere of radius a in a liquid with viscosity $\mu$ : $\mathbf{D = \frac{k_B T}{6\pi \mu a}}$ the stokes Einstein's equation\\
+\end{itemize}
+
+\subsubsection{Continuum description}
+Define $c(\Vec{x}, t)$ concentration; $[c] = \frac{1}{m^3}$\\
+Molecules diffuse from high to low concentration.\\
+
+\quad \underline{Fick's law :} \\
+\begin{equation}
+    \Vec{j} = -D \nabla c
+\end{equation}
+Where $\Vec{j}$ is the number flux defined by $\frac{\text{number}}{\text{time}\cdot \text{Area}}$\\
+
+The flux is always along a negative concentration gradients.\\
+
+\quad \underline{Mass conservation in a control volume :}\\
+\begin{equation}
+    "\{\text{rate of change of mass inside}\} = \{\text{rate in}\} - \{\text{rate out}\}"
+\end{equation}
+Which corresponds to : $\frac{\partial }{\partial t}[\int_V cdV] = -\oint_S \Vec{j}\cdot d\Vec{S} = -\int_V \Vec{\nabla} \cdot \Vec{j} dV$\\
+The global form is :\\
+\begin{equation}
+    \int_V \frac{\partial c}{\partial t} dV + \Vec{\nabla} \cdot \Vec{j}dV = 0
+\end{equation}
+And the local form : \\
+\begin{equation}
+    \frac{\partial c}{\partial t} = -\Vec{\nabla} \cdot \Vec{j}
+\end{equation}
+
+Combined with Fick's law : $\frac{\partial c}{\partial t} = \Vec{\nabla} \cdot (D \nabla c)$\\
+If D is constant we get the \textbf{diffusion equation}: \\
+\begin{equation}
+    \frac{\partial c}{\partial t} = D \nabla^2 c
+\end{equation}
+
+\color{gray}Notes : heat conduction : with conservation of energy and Fourier's law (for thermal energy flux), we get : $\frac{\partial T}{\partial t} = \kappa \nabla^2 T$, with $\kappa = \frac{k}{\rho c_p}$ the thermal diffusivity and $\Vec{q} = -k \nabla T$\color{black}\\
+
+If we have sources and sinks, the diffusion equation changes to :\\
+\begin{equation}
+    \frac{\partial c}{\partial t} = D \nabla^2 c + f
+\end{equation}
+Where $f$ are some chemical reactions.\\
+
+
+\subsubsection{Solving the diffusion equation for steady-state}
+If we assume steady state in 1D with the following boundary conditions : $c(0,t) = \alpha$, $c(L,t) = \beta$ we get the equation : \\
+$\frac{\partial^2 c}{\partial x^2} = 0$ A solution to this equation is $c(x) = A_1 x + A_2$\\
+Finally, we get $c(x) = \frac{\beta-\alpha}{L}x+\alpha$\\
+
+\subsubsection{Time dependant diffusion}
+\quad \underline{Finite domain (1D) and fixed concentration :}\\
+The problem is as following : $\frac{\partial c}{\partial t} = D \frac{\partial^2 c}{\partial x^2}$\\
+Boundary conditions : $c(0,t) = c(L,t) = 0$ and initial conditions $c(x,t=0) = c_0(x)$\\
+
+\color{gray}Notes : This PDE is linear and homogeneous with homogeneous BC, therefore if $c_1$ and $c_2$ are solutions then $(c_1+c_2)$ is also a solution, same goes for $(\beta c_1)$\color{black}\\
+
+\underline{Solution approach based on linearity :}\\
+\begin{itemize}
+    \item step 1 : write general solution of PDE + BC as a linear combination of base solution\\
+    \begin{equation}
+        c(x,t) = \sum_{n=1}^\infty A_n \varphi_n(x,t)
+    \end{equation}
+    \item step 2 : determine $\{A_n\}$ so that $c(x,t)$ satisfies initial condition $c(x,t=0)=c_0$\\
+\end{itemize}
+
+\underline{step 1:}\\
+Method : separation of variables : assume $\varphi(x,t) = X(x)T(t)$\\
+We get : $\frac{1}{D} \frac{T'(t)}{T(t)} = \frac{X"(x)}{X(x)} = -\lambda$ where $\lambda$ is a real number.\\
+Rewriting the BC we get : $X(0) = X(L)= 0$\\
+
+First, we solve $\frac{X"(x)}{X(x)} = -\lambda$, we have 3 cases : \\
+\begin{itemize}
+    \item \underline{case I :} $\lambda<0$ $X(x) = \alpha_1 e^{\sqrt{-\lambda}x}+\alpha_2 e^{-\sqrt{-\lambda}x}$ this only gives us (after applying BC) the trivial solution $\varphi=0$\\
+    \item \underline{case II :} $\lambda=0$ $X(x) = \alpha_1 x + \alpha_2$ this only gives us (after applying BC) the trivial solution $\varphi=0$\\
+    \item \underline{case III :} $\lambda > 0$ $X(x) = \alpha_1 \cos(\sqrt{\lambda} x) + \alpha_2 \sin(\sqrt{\lambda} x)$, after applying the BC we get the \textbf{eigenvalues} : $\mathbf{\lambda_n = (\frac{n \pi}{L})^2}$, $n=1,2,\dots$. Therefore, we finally get $X_n(x) = \alpha_n \sin(\frac{n \pi}{L} x)$\\ 
+
+The temporal problem for a fixed $\lambda = (\frac{n\pi}{L})^2$ is : $T_n(t) = \beta_n e^{-D(\frac{n\pi}{L})^2t}$, a decaying exponential.\\
+We therefore get : \\
+\begin{equation}
+    c(x,t) = \sum_{n=1}^\infty A_n e^{-D(\frac{n\pi}{L})^2t} \sin(\frac{n\pi}{L}x)
+\end{equation}
+\end{itemize}
+
+\quad \underline{Step 2 : determine $\{A_n\}$ from IC}\\
+$c_0(x) = c(x,0) = \sum_{n=1}^\infty A_n \sin(\frac{n\pi}{L}x)$\\
+
+With the Fourier's trick, we get : $A_n = \frac{2}{L} \int_0^L c(x,0) \sin(\frac{\pi n}{L}x)dx$\\
+
+Therefore, the solution is :\\
+\begin{equation}
+    c(x,t) = \sum_{n=1}^\infty [\frac{2}{L} \int_0^L c_0(\Tilde{x}) \sin(\frac{n \pi}{L} \Tilde{x})d\Tilde{x} ] e^{-D(\frac{n\pi}{L})^2t} \sin(\frac{n\pi}{L}x)
+\end{equation}
+
+\subsubsection{Time dependant diffusion (universal)}
+Solve $\frac{\partial c}{\partial t} = \frac{\partial^2 c}{\partial x^2}$ for $0\leq x \leq L$ with homogeneous BC and given IC $c_0(x)$.\\
+
+\quad \underline{Step 1:}\begin{itemize}
+    \item separation of variables : $\varphi_n(x,t) = X_n(x) T_n(t)$ : this transforms the PDE into two ODE linked by eigenvalues $\lambda_n$\\
+    \item solve spatial problem : $X"(x) + \lambda X(x) = 0$ from BC : $\lambda_n$ (non trivial solution) and $X_n(x)$ (eigen modes)\\
+    \item solve temporal problem : $T'(t) + \lambda T(t) = 0 \Rightarrow T_n(t) = e^{-D\lambda_n t}$\\
+    \item construct $\varphi_n(x,t) = X_n(t)T_n(t)$ and $c(x,t) = \sum_{n=1}^\infty A_n \varphi_n(x,t)$
+\end{itemize}
+\quad \underline{Step 2 : determine $\{A_n\}$}\\
+\begin{equation}
+    A_m = \frac{\int_0^L c_0(x) X_m(x)dx}{\int_0^L X_m^2(x)dx}
+\end{equation}
+
+\warning Do not forget to verify for all possible $\lambda$!\\
+
+\subsubsection{Non-homogeneous BC}
+$\frac{\partial c}{\partial t} = D\frac{\partial^2 c}{\partial^2 x}$ with BC : $c(0,t) = c_1$ and $c(L,t) = c_2$ and IC : $c(x,0) = c_0(x)$\\
+
+\quad \underline{Step A : solve for steady state} $c_f(x) = \lim_{t\rightarrow 0}c(x,t) \Rightarrow c_f(x) = c_1 + \frac{c_2 - c_1}{2}x$\\
+
+\quad \underline{Step B :} $\Tilde{c}(x,t) = c(x,t)-c_f(x)$ Solve $\frac{\partial \Tilde{c}}{\partial t} = D\frac{\partial^2 \Tilde{c}}{\partial x^2}$ with homogeneous BC $\Tilde{c}(0,t) = \Tilde{c}(L,t)=0$ \\
+
+\quad \underline{Step C :} combine $c(x,t) = c_f(x) + \Tilde{c}(x,t)$\\
+
+\subsubsection{Diffusion on infinite domain}
+$\frac{\partial c}{\partial t} = \frac{\partial^2 c}{\partial x^2}$, $-\infty \leq x \leq \infty$ with BC : $c\rightarrow 0$ for $x\rightarrow \pm \infty$ and IC : $c(x,0) = c_0(x)$\\
+
+We here have the mass conservation as : $B:= \int_{-\infty}^\infty c(x,t)dx = $constant\\
+Let's define $\eta = \frac{x}{\sqrt{Dt}}$\\
+
+One solution for the PDE : $c(x,t) = \frac{B}{\sqrt{4\pi Dt}} e^{-\frac{x^2}{4Dt}}$ (we next set B to 1)\\
+
+It's IC is : $c(x,0) = \lim_{t\rightarrow 0} \frac{1}{\sqrt{4\pi Dt}} e^{-\frac{x^2}{4Dt}} = \delta(x)$, with $\int_{-\infty}^\infty \delta(x)dx = 1$ and $\int_{-\infty}^\infty \delta(x) g(x)dx = g(0)$.\\
+
+Define the Green's function : $G(x,t,\Tilde{x} ) = \frac{1}{\sqrt{4\pi Dt}} e^{-\frac{(x-\Tilde{x})^2}{4Dt}}$\\
+
+By linearity : $c(x,t) = \int_{-\infty}^\infty A(\Tilde{x}) G(x,t,\Tilde{x})d\Tilde{x}$\\
+
+\quad \underline{Determine A :}\\
+\begin{equation}
+    A(x) = c_0(x)
+\end{equation}
+
+Finally, the solution is : \\
+\begin{equation}
+    c(x,t) = \int_{-\infty}^\infty \frac{c_0(\Tilde{x})}{\sqrt{4\pi Dt}} e^{-\frac{(x-\Tilde{x})^2}{4Dt}}d\Tilde{x}
+\end{equation}
+
+\subsection{Kinematics}
+\subsubsection{Velocity field}
+\begin{itemize}
+    \item Eularian approach : field description $\Vec{v}(\Vec{r},t) = u \hat{i} + v \hat{j} + w\hat{k}$\\
+    \item Lagrangian approach : following particles $\Vec{v}(\Vec{r_0},t)$\\
+\end{itemize}
+
+\begin{itemize}
+    \item \underline{Streamline :} line tangent to the velocity vector at any point\begin{itemize}
+        \item $\Vec{r}_{SL}(s)$ the parameterized curve, we have $\frac{d\Vec{r}_{SL}(s)}{ds}\times \Vec{v}(\Vec{r}_{SL}) = 0$\\
+        \begin{equation}
+            \frac{dy}{dx} = \frac{v}{u}, \frac{dz}{dx} = \frac{w}{u}, \frac{dz}{dy} = \frac{w}{v}
+        \end{equation}
+    \end{itemize}
+    \item \underline{Path-line :} line describing the actual path of a fluid element \begin{itemize}
+        \item velocity at instantaneous particle location $\frac{d\Vec{r}_p}{dt} = \Vec{v}(\Vec{r}_p(t))$, here p is a point. \\
+        \item In components, we have $\frac{dx}{dt} = u$, $\frac{dy}{dt} = v$, $\frac{dz}{dt} = w$ in a Lagrangian sense\\
+        \item We generally have $\frac{d\Vec{r}_{PL}}{dt} = \Vec{v}(\Vec{r}_{PL},t) \Rightarrow \Vec{v}_{PL}(t=t_0) = \Vec{r}_0$\\
+        \item \warning Path-lines can cross\\
+    \end{itemize}
+    \item \underline{Streak-line :} line made up of particles that have previously passed through a common point. They can be computed from path-lines \begin{itemize}
+        \item $\frac{d\Vec{r}_p}{dt} = \Vec{v}(\Vec{r}_p,t)$ with $\Vec{r}_p(t=\tau_p)= \Vec{r}_0$\\
+        \item the parametrization of a streak-line is given by $\Vec{r}_p(t,\tau_p)$\\ 
+    \end{itemize}
+\end{itemize}
+
+\color{gray}Notes : if a flow is steady, then streamline, path-line and streak-line are all identical.\color{black}\\
+
+
+\subsubsection{Acceleration field}
+Lagrangian : $\Vec{a} = \frac{d\Vec{v}}{dt} = \lim_{\Delta t \rightarrow 0} \frac{\Vec{v}(t+\Delta t) - \Vec{v}(t)}{\Delta t}$\\
+
+Eularian : \begin{equation}
+    \Vec{a} = \frac{d\Vec{v}(\Vec{r}(t), t)}{dt} = \frac{\partial \Vec{v}}{\partial t} + (\Vec{v}\cdot \Vec{\nabla}) \Vec{v}
+\end{equation}
+
+
+\subsubsection{Control volume and system}
+\begin{itemize}
+    \item \underline{System :}\begin{itemize}
+        \item collection of matter of fixed identity\\
+        \item controlled mass\\
+        \item Lagrangian : moving with the flow\\
+    \end{itemize}
+    \item \underline{Controlled volume :}\begin{itemize}
+        \item volume fixed in space (Eularian)\\
+        \item boundary : controlled surface\\
+    \end{itemize}
+\end{itemize}
+
+
+\subsubsection{Reynolds Transport Theorem}
+This is to make a link between control volume and system.\\
+
+Assume B an extensive quantity and $b= \frac{B}{M}$ an intensive quantity.\\
+We have $B_{sys} = \int_{sys} \rho b dV$ and $B_{cv} = \int_{cv} \rho b dV$\\
+Also $\dot{B}_{in} = b_{in} \dot{M}_{in} = b_{in}\rho_{in}v_{in}A_{in}$, same goes for $\dot{B}_{out}$\\
+
+For a simple RTT, we therefore have : \\
+\begin{equation}
+    (\frac{DB}{Dt})_{sys} = (\frac{\partial B}{\partial t})_{cv} + (b\rho v A)_{out} - (b\rho v A)_{in}
+\end{equation}
+
+\quad \underline{General RTT :}\\
+Mass flux : $\dot{M} = \int_A \rho v \cos{\theta} dA = \int_A \rho \Vec{v}\cdot \hat{n}dA$\\
+$\dot{B} = \int_A b \rho v_ndA = \dot{B}_{out}-\dot{B}_{in}$\\
+
+General form of the RTT :\\
+\begin{equation}
+    (\frac{DB}{Dt})_{sys} = \frac{\partial}{\partial t} \int_{CV} \rho b dV + \int_{CS} \rho b \Vec{v}\cdot \hat{n}dA
+\end{equation}
+
+\color{gray}\underline{Note :}\begin{itemize}
+    \item steady-flow : $\frac{\partial}{\partial t}\int_{CV} \rho b dV = 0$\\
+    \item moving, non deforming CV : use relative velocity $\Vec{w} = \Vec{v}-\Vec{v}_{CV}$\\
+\end{itemize}
+\color{black}
+
+\subsection{Control volume approach using RTT}
+3 physical laws : mass conservation, Newton's second law, energy conservation : all Lagrangian\\
+We want to convert them into Eularian laws\\
+
+\subsubsection{Eularian Mass conservation}
+$B = M$, $b=1$\\
+We have : $(\frac{DM}{Dt})_{sys} = \frac{\partial}{\partial t} \int_{CV} \rho dV + \int_{CS} \rho \Vec{v}\cdot \hat{n}dA$.\\
+Although, from mass conservation : $\frac{DM}{Dt} = 0$\\
+
+\begin{equation}
+    \frac{\partial}{\partial t} \int_{CV} \rho dV + \int_{CS} \rho \Vec{v} \cdot \hat{n}dA=0
+\end{equation}
+
+\subsubsection{Newton's second law}
+$\Vec{B} = M\Vec{v}$ (linear momentum), $\Vec{b} = \vec{v}$\\
+
+\begin{equation}
+    \begin{gathered}
+        \frac{D}{Dt}(M\Vec{v})_{sys} = \sum \Vec{F}_{sys}\\
+       \Leftrightarrow \frac{\partial}{\partial t} \int_{CV} \rho \Vec{v}dV + \int_{CS} \rho \Vec{v} (\Vec{v}\cdot \hat{n})dA = \sum \Vec{F}_{\text{constant of coincident CV}}
+    \end{gathered}
+\end{equation}
+
+\color{gray} Note : CV fixed, non-deforming and inertial frame of reference\\
+In case of deforming CV : even if steady state, $\frac{\partial}{\partial t} \int_{CV} \rho b dV$ does not necessarily go to zero.\color{black}\\
+
+\subsubsection{RTT for first law of thermodynamics (energy conservation)}
+\quad \underline{General situation :}\\
+$B = E$(total energy), $b = e = \Tilde{u}+\frac{1}{2}v^2 + gz$ (total specific energy)\\
+
+Therefore, \\
+\begin{equation}
+    \frac{D}{Dt}\int_{sys} e\rho dV = \dot{Q}_{net,in}+\dot{W}_{net,int} = \frac{\partial}{\partial t}\int_{CV}e\rho dV + \int_{CS}\rho e \Vec{v}\cdot \hat{n}dA = (\dot{Q}_{net,in}+\dot{W}_{net,in})_{CV}
+\end{equation}
+
+We can divide the power into a $\dot{W}_{shaft}$ and $\dot{W}_{normal stress} = \int_{CS}-p\Vec{v}\cdot \hat{n}dA$\\
+
+\begin{equation}
+    \frac{\partial }{\partial t} \int_{CV} e\rho dV + \int_{CS} (\Tilde{u}+\frac{1}{2}v^2+gz+\frac{P}{\rho}) \rho \Vec{v}\cdot \hat{n}dA = \dot{Q}_{net,in}+\dot{W}_{shaft,net,in}
+\end{equation}
+
+If we assume steady flow, one inlet, one outlet and a uniform flow through the inlet/outlet then : $(\Tilde{u}+\frac{1}{2}v^2+gz+\frac{P}{\rho})_{out} \dot{M} - (\Tilde{u}+\frac{1}{2}v^2+gz+\frac{P}{\rho})_{in} \dot{M} = \dot{Q}_{in,net}+\dot{W}_{shaft,net,in}$\\
+
+\underline{Back to Bernoulli :}\\
+$(\frac{1}{2}v^2+gz+\frac{P}{\rho})_{out} - (\frac{1}{2}v^2+gz+\frac{P}{\rho})_{in} = q_{in,net}+w_{shaft,net,in}-(\Tilde{u}_{out}-\Tilde{u}_{in})$\\
+Where $q_{net,in} = \frac{\dot{Q}_{net,in}}{\dot{M}}$\\
+
+We also have : $\Tilde{u}_{out}-\Tilde{u}_{in} - q_{net,in} = \text{loss}$(due to friction)\\
+
+Therefore, we can make an extension to Bernoulli :\\
+\begin{equation}
+    (\frac{1}{2}v^2+gz+\frac{P}{\rho})_{out} - (\frac{1}{2}v^2+gz+\frac{P}{\rho})_{in} = w_{shaft,in,net}-\text{loss}
+\end{equation}
+
+\subsection{Differential analysis}
+\subsubsection{Conservation of mass}
+\begin{equation}
+    \begin{gathered}
+        \frac{DM_{sys}}{Dt} = 0 \Rightarrow \frac{\partial}{\partial t} \int_{CV} \rho dV + \int_{CS} \rho \Vec{v}\cdot \hat{n}dA = 0\\
+        \Rightarrow_{\text{Assume CV is stationary}} \int_{CV} \frac{\partial \rho}{\partial t} + \nabla\cdot (\rho \vec{v})dV = 0\\
+        \Leftrightarrow \frac{\partial \rho}{\partial t} + \nabla \cdot(\rho \Vec{v})=0
+    \end{gathered}
+\end{equation}
+
+This is a Eularian concept. We can also rewrite it in a Lagrangian way : $\frac{D\rho}{Dt} + \rho \nabla \cdot \Vec{v} = 0$\\
+
+Therefore, if the flow is incompressible ($\rho=$constant), then $\nabla \cdot \Vec{v}=0$\\
+
+\subsubsection{Newton's second law}
+\begin{equation}
+    \begin{gathered}
+        \frac{D}{Dt}(M\Vec{v})_{sys} = \sum \Vec{F}_{ext}\\
+        \Rightarrow \frac{\partial}{\partial t}\int_{CV}\rho \Vec{v}dV + \int_{CS} \rho \Vec{v}(\Vec{v}\cdot \hat{n})dA = \sum \Vec{F}_{ext}
+    \end{gathered}
+\end{equation}
+
+What are the external forces ?\\
+\begin{itemize}
+    \item body forces : $\int_{CV} \rho \Vec{g}dV$\\
+    \item surface forces : all forces ($p+\tau$) where $\tau$ is a second order tensor with $\tau_{ij}$, i being the face of the element, j the direction of the stress \begin{itemize}
+        \item $\overline{\overline{\tau}} = \begin{pmatrix}
+        \tau_{xx} & \tau_{xy} & \tau_{xz}\\
+        \tau_{yx} & \tau_{yy} & \tau_{yz}\\
+        \tau_{zx} & \tau_{zy} & \tau_{zz}\\
+        \end{pmatrix}$
+        \item properties : $\hat{n}\cdot \overline{\overline{\tau}} = \overline{\overline{\tau}}\cdot \hat{n} = (\hat{n}\cdot \overline{\overline{\tau}})_j = n_i \tau_{ij}$ stress surface with normal $\hat{n}$\\
+        \item $\tau_{ij} = \tau_{ji}$, the tensor is symmetric\\
+        \item combining both p and $\overline{\overline{\tau}}$ we get $\overline{\overline{\sigma}} = -P \overline{\overline{I}}+\overline{\overline{\tau}}$\\
+        \item $\Rightarrow \int_{CS} \overline{\overline{\sigma}}\cdot \hat{n}dA$
+    \end{itemize}
+\end{itemize}
+
+Therefore, we first have : $\int_{CS} \rho \Vec{v}(\Vec{v}\cdot \hat{n})dA = \int_{CV} \nabla\cdot (\Vec{v}\rho \Vec{v})dV$ (only for incompressible flow!)\\
+$\Rightarrow \nabla \cdot(\Vec{v}\rho \Vec{v}) = \rho \Vec{v}\cdot \nabla \Vec{v}$\\
+$\Rightarrow \int_{CS} \rho \Vec{v} (\Vec{v}\cdot \hat{n})dA = \int_{CV} \rho \Vec{v}\cdot \nabla \Vec{v}dV$\\
+With $\rho$ constant, we get : $\int_{CV} [\rho \frac{\partial \Vec{v}}{\partial t} + \rho \Vec{v}\cdot \nabla \Vec{v} - \rho \Vec{g} - \nabla \cdot \overline{\overline{\sigma}}]dV = 0$ Valid for all CV :\\
+\begin{equation}
+    \rho (\frac{\partial \Vec{v}}{\partial t} + \Vec{v} \cdot \nabla \Vec{v}) = -\nabla P + \rho \Vec{g} + \nabla \cdot \overline{\overline{\tau}} = \rho \Vec{a}
+\end{equation}
+Incompressible case\\
+
+
+For a Newtonian fluid, we have in general : \begin{equation}
+    \tau_{ij} = \mu (\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i})
+\end{equation}
+
+Therefore : $\nabla \cdot \overline{\overline{\tau}} = \mu \nabla^2 \Vec{v}$\\
+
+The Navier-Stokes equation for incompressible Newtonian fluid is given by :\\
+\begin{equation}
+    \rho (\frac{\partial \Vec{v}}{\partial t} + \Vec{v} \cdot \nabla \Vec{v}) = -\nabla P + \rho \Vec{g} + \mu \nabla^2 \Vec{v}
+\end{equation}
+
+\quad \underline{Equations of motion in cylindrical coordinates :}\\
+
+\underline{Continuity :} \begin{equation}
+    \frac{1}{r} \frac{\partial}{\partial r}(rv_r) + \frac{1}{r} \frac{\partial}{\partial \theta} (v_\theta) + \frac{\partial}{\partial z}(v_z)=0
+\end{equation}
+
+\underline{r-momentum equation :} \begin{equation}
+    \begin{gathered}
+        \frac{\partial v_r}{\partial t} + v_r \frac{\partial v_r}{\partial r} + \frac{1}{r} v_\theta \frac{\partial v_r}{\partial \theta} + v_z \frac{\partial v_r}{\partial z} - \frac{1}{r}v_\theta^2 = \\
+        -\frac{1}{\rho} \frac{\partial p}{\partial r} + g_r + \nu(\frac{1}{r} \frac{\partial}{\partial r}(r \frac{\partial v_r}{\partial r}) + \frac{1}{r^2} \frac{\partial^2 v_r}{\partial \theta^2} + \frac{\partial^2 v_r}{\partial z^2} - \frac{v_r}{r^2} - \frac{2}{r^2}\frac{\partial v_\theta}{\partial \theta})
+    \end{gathered}
+\end{equation}
+
+\underline{$\theta$-momentum equation :} \begin{equation}
+    \begin{gathered}
+        \frac{\partial v_\theta}{\partial t} + v_r \frac{\partial v_\theta}{\partial r} + \frac{1}{r} v_\theta \frac{\partial v_\theta}{\partial \theta} + v_z \frac{\partial v_\theta}{\partial z} + \frac{1}{r}v_\theta v_r = \\
+        -\frac{1}{\rho r} \frac{\partial p}{\partial \theta} + g_\theta + \nu(\frac{1}{r} \frac{\partial}{\partial r}(r \frac{\partial v_\theta}{\partial r}) + \frac{1}{r^2} \frac{\partial^2 v_\theta}{\partial \theta^2} + \frac{\partial^2 v_\theta}{\partial z^2} - \frac{v_\theta}{r^2} + \frac{2}{r^2}\frac{\partial v_r}{\partial \theta})
+    \end{gathered}
+\end{equation}
+
+\underline{z-momentum equation :} \begin{equation}
+    \begin{gathered}
+        \frac{\partial v_z}{\partial t} + v_r \frac{\partial v_z}{\partial r} + \frac{1}{r} v_\theta \frac{\partial v_z}{\partial \theta} + v_z \frac{\partial v_z}{\partial z} = \\
+        -\frac{1}{\rho } \frac{\partial p}{\partial z} + g_z + \nu(\frac{1}{r} \frac{\partial}{\partial r}(r \frac{\partial v_z}{\partial r}) + \frac{1}{r^2} \frac{\partial^2 v_z}{\partial \theta^2} + \frac{\partial^2 v_z}{\partial z^2})
+    \end{gathered}
+\end{equation}
+
+\subsubsection{In-viscid flows}
+The viscous term is : $\mu \nabla^2 \Vec{v}$. We can scale it $\lvert \mu \nabla^2 \Vec{v}\rvert \simeq \mu \frac{V}{L^2}$\\
+The inertial term $\rho \Vec{v}\cdot \nabla \Vec{v}$. We can also scale it $\lvert \rho \Vec{v}\cdot \nabla \Vec{v}\rvert \simeq \rho \frac{V^2}{L}$\\
+
+\textbf{Reynolds number :} \begin{equation}
+    R_e = \frac{VL}{\nu} = \frac{VL}{\frac{\mu}{\rho}}
+\end{equation}
+
+\underline{$R_e>>1$ ignore viscosity :}\\
+$\rho( \frac{\partial \Vec{v}}{\partial t} + \Vec{v} \cdot \nabla \Vec{v}) = -\nabla P + \rho \Vec{g}$ This is the Euler equation for in-viscid flow\\
+
+\underline{$R_e<<1$ ignore inertia :}\\
+This is the stokes equation for creeping flow\\
+
+\subsubsection{Vorticity and circulation}
+The deformation of a fluid element is linked to the velocity gradient\\
+
+\quad \underline{Linear deformation :}\\
+We have with Taylor's expansion that the deformation in x is : $\frac{\partial u}{\partial x}$. Same goes for other directions.\\
+Therefore, the volume change is given by $\frac{1}{\delta V} \frac{d}{dt} (\delta V) = \nabla \cdot \Vec{v} = 0$ if $\rho$ is constant.\\
+
+\quad \underline{Angular deformation :}\\
+The average rotation of bisecting line of fluid element (diagonal) is given by :\begin{equation}
+    \Vec{\omega} = \frac{1}{2} \nabla \times \Vec{v}
+\end{equation}
+
+Therefore, we can define the \textbf{vorticity} : $\Vec{\zeta} = \nabla \times \Vec{v}$\\
+
+\quad \underline{Circulation :}\\
+
+Consider a closed surface C such that :$\Gamma = \oint \Vec{v}\cdot d\Vec{s} = \int_A (\nabla \times \Vec{v})\cdot d\Vec{A}$\\
+
+If the fluid is in-viscid then we have no change in rotation. \\
+As the curve C is arbitrary, we have for an arbitrary flow $\nabla \times \Vec{v} = \Vec{0}$. The vorticity remains 0\\
+
+\subsubsection{Irrotational/Potential flow}
+Assume here incompressible, inviscid and irrotational\\
+We have that $\nabla \times \Vec{v} = \Vec{0}$ therefore, it exists a scalar field $\phi$ such that :\begin{equation}
+    \nabla \phi = \Vec{v}
+\end{equation}
+$\phi$ is the velocity potential\\
+
+The \textbf{Laplace equation} is : $\nabla^2 \phi = 0$\\
+
+By rewriting momentum balance, we get : \begin{equation}
+    \rho \frac{\partial \phi}{\partial t} + \frac{\rho}{2} v^2 + P + \rho g z = C
+\end{equation}
+This equation is true everywhere. It is a form of the Bernoulli's equation but is not restricted to stream line.\\
+
+\subsubsection{2D flows/stream function}
+\begin{equation}
+    \nabla \times \psi = \Vec{v}
+\end{equation}
+We here use conservation of mass $\nabla \cdot \Vec{v} = 0$ with $\Vec{v} = u \hat{i}+ v\hat{j}$\\
+$\Rightarrow \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0$. \\
+
+If $\psi(x,y)$ exists with $\frac{\partial \psi}{\partial y} = u$ and $-\frac{\partial \psi}{\partial x} = v$\\
+Then $\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = \frac{\partial^2 \psi}{\partial x \partial y} - \frac{\partial^2 \psi}{\partial x \partial y}= 0$\\
+
+2D velocity field derived from stream function $\psi(x,y)$ satisfies continuity.\\
+
+Also, the total differential of $\psi$ is : \\
+$d \psi = \frac{\partial \psi}{\partial x}dx+ \frac{\partial \psi}{\partial y}dy = -vdx + udy$\\
+Therefore, $\psi$ is constant along a stream line as : $d\psi = 0 \Leftrightarrow vdx = udy \Rightarrow \frac{dy}{dx} = \frac{v}{u}$\\
+
+In polar coordinates : $\Vec{v} = v_r \hat{e}_r + v_\theta \hat{e}_\theta$\\
+$\nabla \cdot \Vec{v} = \frac{1}{r} \frac{\partial}{\partial r}(rv_r) + \frac{1}{r}\frac{\partial}{\partial \theta} v_\theta$\\
+$\Rightarrow \psi(r,\theta) \Rightarrow v_r= \frac{1}{r} \frac{\partial \psi}{\partial \theta}$, $v_\theta = -\frac{\partial \psi}{\partial r}$\\
+$\Rightarrow \phi(r,\theta) \Rightarrow v_r = \frac{\partial \phi}{\partial r}, v_\theta = \frac{1}{r} \frac{\partial \phi}{\partial \theta}$
+
+\subsubsection{2D potential flows}
+Assume : incompressible, in-viscid, irrotational and 2D\\
+
+Both $\phi$ and $\psi$ satisfy 2D Laplace equation : $\nabla^2 \psi = \nabla^2 \phi = 0$\\
+
+Although, for the potential velocity, we get that it is constant on equipotential lines that are perpendicular to stream lines : $d\phi = udx+vdy \Rightarrow \frac{dy}{dx} = -\frac{u}{v}$\\
+
+\subsection{Basic potential flows}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|}
+    \hline
+        Type & Velocity potential $\phi$ & Stream function $\psi$\\
+        \hline
+        Uniform flow & (angle $\alpha$) $U(x \cos{\alpha} + y \sin{\alpha})$ & $U(y \cos{\alpha} - x \sin{\alpha})$\\
+        Sources(m>0) and sinks(m<0) & $\frac{m}{2\pi} \ln{r}$ & $\frac{m \theta}{2\pi}$\\
+        Line vortex & $\frac{\Gamma}{2\pi} \theta$ & $-\frac{\Gamma}{2\pi} \ln{r}$\\
+        Doublet (source and sink)& $\frac{K \cos{\theta}}{r}$ & $-\frac{K \sin{\theta}}{r}$\\
+        \hline
+    \end{tabular}
+    \caption{Basic potential flows}
+\end{table}
+\footnote{$K = \frac{ma}{\pi}$ the strength of the doublet, a the semi-distance between the source and the sink} 
+\subsubsection{Superposition of basic solutions}
+\quad \underline{source plus uniform flow - the half body :}\\
+$\psi = \psi_{uf} + \psi_s = Ur\sin{\theta} + \frac{m}{2\pi}\theta$\\
+$\phi = U r\cos{\theta} + \frac{m}{2\pi}\ln{r}$\\
+$V_r = U \cos{\theta} + \frac{m}{2\pi r}$, $V_\theta = -U \sin{\theta}$\\
+
+The stagnation on the x-axis is located where : $V_r = 0$ for $\theta=\pi \Rightarrow r_{sp} = \frac{m}{2\pi U}$\\
+
+To calculate a stream line, we use : $\psi_{sl} = \psi(r_{sp},\pi) = \frac{m}{2} \Rightarrow r = \frac{m}{2\pi U} \frac{\pi - \theta}{\sin{\theta}}, \quad \theta \in [0;2\pi]$\\
+
+On y-axis, we have : $\theta = \frac{\pi}{2} \Rightarrow r = \frac{m}{4 U}$\\
+
+Height maximum is given by : $\theta \to 0, \quad y=r\sin{\theta} = \frac{m}{2\pi U}(\pi-\theta) = \frac{m}{2U}$.\\
+The stagnation streamline is the surface of a half-body.\\
+
+$V^2 = V_r^2 + V_\theta^2 = U^2 (1+2\frac{b}{r}\cos{\theta} + \frac{b^2}{r^2}), \quad b= \frac{m}{2\pi U}$\\
+
+\quad \underline{Rankine oval :} uniform flow + source and sink\\
+
+\quad \underline{flow around a circular cylinder :} uniform flow + doublet\\
+
+$\psi = (U_0 - \frac{K}{r^2})r\sin{\theta}$\\
+$\phi = (U_0+\frac{K}{r^2})r\cos{\theta}$\\
+
+We can find two stagnation points on the x-axis $\Rightarrow \theta = 0,\pi$ $\Rightarrow \psi = 0$ for a stagnation streamline. $\psi = 0$ is a streamline through $a=r$, if $K = U_0 a^2$\\
+
+\begin{equation}
+    \begin{gathered}
+        \psi = U_0(1-\frac{a^2}{r^2})r\sin{\theta}\\
+        \phi = U_0(1+\frac{a^2}{r^2})r\cos{\theta}\\
+    \end{gathered}
+\end{equation}
+
+$v_r = U_0(1-\frac{a^2}{r^2})\cos{\theta}$\\
+$v_\theta = -U_0(1+\frac{a^2}{r^2})\sin{\theta}$\\
+
+On the cylinder surface(r=a) : $v_r = 0, v_\theta = -2U_0 \sin{\theta}$(slip velocity)\\
+
+Pressure $p_s$ on the surface : $p_s = p_0 + \frac{1}{2}\rho U_0^2(1-4\sin^2\theta)$ (ignore hydro-static contribution)\\
+
+\underline{Drag and lift :} $F_l = -\int_0^{2\pi} p_s \sin{\theta} a d\theta = 0$ no lift!\\
+$F_d = -\int_0^{2\pi} p_s \cos{\theta} a d\theta=0$ no drag! \\
+This is known as the D'Alembert's paradox.\\
+
+\quad \underline{Flow around a rotating cylinder :} add a free vortex to previous solution\\
+
+\begin{equation}
+    \begin{gathered}
+        \psi = U_0(1-\frac{a^2}{r^2})r\sin{\theta} - \frac{\Gamma}{2\pi} \ln{r}\\
+        \varphi = U_0(1+\frac{a^2}{r^2})r\cos{\theta} + \frac{\Gamma}{2\pi}\theta\\
+    \end{gathered}
+\end{equation}
+
+Velocity at surface $r=a$ : $v_r = 0$, $v_\theta = -2U_0 \sin{\theta} + \frac{\Gamma}{2\pi a}$\\
+
+Stagnation points on the surface : $\sin{\theta_{SP}} = \frac{\Gamma}{4\pi U_0 a}$ $ \begin{cases}
+    =1 & \theta = \frac{\pi}{2}\\
+    <1 & 2 SP\\
+    >1 & \text{no solution on the surface}\\
+\end{cases}$
+
+\begin{equation}
+    p_s = p_0 + \frac{1}{2}\rho U_0^2 (1-4\sin^2\theta + \frac{2\Gamma \sin{\theta}}{\pi a U_0} - \frac{\Gamma^2}{4\pi^2 a^2 U_0^2})
+\end{equation}
+Still no drag but : \\
+\begin{equation}
+    F_L = -\rho U_0 \Gamma
+\end{equation}
+The \textbf{Magnus effect}. \color{gray}Note : applies for many objects!\color{black}\\
+The lift force is perpendicular to the flow direction.\\
+
+\subsubsection{Viscous flows}
+\quad \underline{Laminar shear flow between two parallel plates :}\\
+Assumptions : \begin{itemize}
+    \item $\Vec{v}(\Vec{r},t) = u(y,t) \hat{i}$ only a downstream component\\
+    \item only depends on the wall normal coordinate\\
+\end{itemize}
+The non-linear term vanishes : $\Vec{v}\cdot \nabla \Vec{v} = \Vec{0}$\\
+
+Constant prescribed pressure gradient : $\frac{\partial p}{\partial x}$ fixed, $\frac{\partial p}{\partial z} = 0$\\
+
+\begin{itemize}
+    \item $\hat{j}$ : $\frac{\partial p}{\partial y} = -\rho g$\\
+    \item $\hat{i} : \rho \frac{\partial u}{\partial t} = -\frac{\partial p}{\partial x}+\mu \frac{\partial^2 u}{\partial y^2}$\\
+    \item $\hat{k}$ : $0=0$\\
+\end{itemize}
+$\Rightarrow  p = -\rho g y + \frac{\partial p}{\partial x} x+c$\\
+$\Rightarrow \rho \frac{\partial u}{\partial t} = -\frac{\partial p}{\partial x} + \mu \frac{\partial^2 u}{\partial y^2}$ the diffusion equation for linear momentum density.\\
+
+\underline{Steady-state solution :} \begin{itemize}
+    \item if $U_0 = 0$, $\frac{\partial p}{\partial x} \neq 0$ : plane Poiseuil Flow\\
+    \item if $U_0 \neq 0$, $\frac{\partial p}{\partial x}= 0$ : plane Couette Flow\\
+    \item if $U_0 \neq 0$, $\frac{\partial p}{\partial x} \neq 0$ : mixed Couette Flow\\
+\end{itemize}
+Solve : $\mu \frac{\partial^2 u}{\partial y^2} = \frac{\partial p}{\partial x}$ with BC : $u(h) = U_0$, $u(-h) = 0$\\
+
+$\Rightarrow u = \frac{U_0}{2}(\frac{y}{h}+1) + \frac{1}{2\mu}(\frac{\partial p}{\partial x})(y^2-h^2)$\\
+
+Volume flow rate (per unit depth) : \\
+$Q = \int_{-h}^h udy = u_0h-\frac{2}{\mu}(\frac{\partial p}{\partial x}) \frac{h^3}{3}$\\
+
+\quad \underline{Pipe flow (through a circular pipe) :}\\
+Assume : \begin{itemize}
+    \item incompressible, Newtonian\\
+    \item laminar flow\\
+    \item steady-state : $\Vec{v} = v(r) \hat{z}$\\
+    \item $\frac{\partial p}{\partial x}$ is a constant and imposed\\
+\end{itemize}
+
+BC : $v_z(R) = 0$, $\lvert v_z \rvert < \infty$ as $r\to 0$\\
+
+We have : $0 = -(\frac{\partial p}{\partial x}) + \mu[\frac{1}{r}\frac{\partial}{\partial r}(r\frac{\partial v_z}{\partial r})]$\\
+$v_z(r) = \frac{1}{4\mu} (\frac{\partial p}{\partial x})(r^2-R^2)$\\
+
+
+
+
+
+
+
+\end{document}

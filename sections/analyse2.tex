@@ -1,0 +1,520 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+
+\localtableofcontents
+\subsection{Topologie d'un espace}
+$\mathbb{R}^n$ est un espace vectoriel de dimension n. Ainsi il existe une base pour $\mathbb{R}^n$n de taille n.\\
+
+\quad \underline{Produit scalaire :}($\mathbb{R}^n$ comme un espace vectoriel)\\
+\begin{equation}
+    <\vec{x}; \vec{y}> = \sum_{i=1}^n x_iy_i
+\end{equation}
+
+\quad \underline{La norme :}($\mathbb{R}^n$ comme un espace normé)\\
+ \begin{equation}
+     \parallel \vec{x}\parallel_2 = \sqrt{<\vec{x}; \vec{x}>} \forall \vec{x} \in \mathbb{R}^n
+\end{equation}
+
+\quad \underline{Inégalité de Chauchy-Schwarz :}\\
+\begin{equation}
+    \forall \vec{x}, \vec{y} \Rightarrow |<\vec{x}; \vec{y}>| \leq \parallel \vec{x}\parallel_2 \parallel \vec{y}\parallel_2
+\end{equation}
+
+\quad \underline{Distance euclidienne $d_2$ :}\\
+\begin{equation}
+    d_2(\vec{x}; \vec{y}) = \parallel \vec{x}-\vec{y}\parallel_2
+\end{equation}
+
+\quad \underline{$\mathbb{R}^n$ un espace métrique :}\\
+C'est une paire (M,d) M est un ensemble non vide et d est une fonction sur MxM satisfaisant la distance euclidienne.\\
+
+\quad \underline{Topologie de $\mathbb{R}^n$, $d_2$ :}\\
+Pour $\vec{x} \in \mathbb{R}^n$, $r>0$. \\
+$\mathcal{B}(\vec{x}; r) = \{\vec{y} \in \mathbb{R}^n : d_2(\vec{x}; \vec{y}) < r\}$. Ainsi que : $\overline{\mathcal{B}(\vec{x}; r)} = \{\vec{y} \in \mathbb{R}^n : d_2(\vec{x}; \vec{y}) \leq r\}$\\
+
+Un ensemble V$\subseteq \mathbb{R}^n$ est un voisinage de $\vec{x} \in \mathbb{R}^n$ si $\exists r>0$ tel que $\mathcal{B}(\vec{x}, r) \subseteq V$.\\
+
+$O \subseteq \mathbb{R}^n$ est ouvert si $\forall \vec{x} \in O$, $\exists r_x>0$ tel que $\mathcal{B}(\vec{x}, r_x) \subseteq O$\\
+
+\quad \underline{Propriétés des ouverts :}\\
+Soient $O_i$, i$\in$I des ouverts, alors $\cup_{i\in I} O_i$ est ouvert.\\
+Si $O_1, \dots, O_m$, $m<\infty$ sont ouverts alors $\cap_{i=1}^m O_i$ est ouvert.\\
+
+\warning $\cap_{i\in I} O_i$ n'est pas toujours ouvert!\\
+
+On peut définir l'angle entre $\vec{x}$ et $\vec{y}$ : $\theta$ tel que :\\
+\begin{equation}
+    \cos{\theta} = \frac{<\vec{x}; \vec{y}>}{\parallel \vec{x}\parallel_2 \parallel \vec{y}\parallel_2}
+\end{equation}
+
+On a aussi, $F\subseteq \mathbb{R}^n$ est fermé si $F^c$ est ouvert.\\
+
+Soient $F_i$, $i \in I$ sont des fermés, alors $\cap F_i$ est fermée.\\
+Soient $F_1, \dots, F_m$ sont des fermés alors $\cup_1^m F_i$ est fermée.\\
+
+Pour $S\subseteq \mathbb{R}^n$, $S^{\circ}$ est l'ensemble ouvert le plus grand de S : $= \{\vec{x} \in S :$tel que $\exists r$ avec $\mathcal{B}(\vec{x}, r)\subseteq S\}$\\
+
+Pour $S\subseteq \mathbb{R}^n$, on définit $\partial S$ : le bord de S (la frontière) : $=\{\vec{x}$: tel que $\forall r>0 \mathcal{B}(\vec{x}; r) \cap S\neq \varnothing$ et $\mathcal{B}(\vec{x}; r) \cap S^c \neq \varnothing\}$\\
+
+Pour $S\subseteq \mathbb{R}^n$, $\overline{S}$ l'adhérence de S(la fermeture) : $\overline{S} = S\cup \partial S = S^{\circ} \cup \partial S$\\
+
+
+\subsection{Les suites}
+On est dans $\mathbb{R}^n$\\
+C'est une fonction $f:\mathbb{N} = \{1,2,\dots\} \rightarrow \mathbb{R}^n$\\
+
+On a $\vec{x_1} = f(1), \dots, \vec{x_n} = f(n)$\\
+On conçoit la suite comme une liste $\vec{x_1}, \dots, \vec{x_k}$. Une suite dite dans $A \subseteq \mathbb{R}^n$ si $\vec{x_k} \in A$\\
+$\{\vec{x_k}\}$ est dite convergente si $\exists \vec{y} \in \mathbb{R}^n$ tel que $\parallel \vec{x_k}-\vec{y}\parallel_2 \rightarrow 0$.\\
+On dit alors que $\vec{y}$ est la limite de la suite et on a : $\vec{x_k} \rightarrow \vec{y}$. Si $\vec{y}$ n'existe pas alors $\{\vec{x_k}\}$ ne converge pas.\\
+
+Un ensemble A est fermé si et seulement si $\forall \{\vec{x_k}\}$ dans A convergente, la limite et dans A.\\
+
+$\{\vec{x_k}\}$ est convergente si et seulement si $\forall 1\leq j \leq n$, la suite $\{\vec{x_{kj}}\}$ est convergente.\\
+
+\subsubsection{Suites de Cauchy}
+Une suite est de Cauchy si, $\forall \varepsilon > 0$, $\exists k_0$ tel que $l,m \geq k_0 \Rightarrow \parallel \vec{x_l}-\vec{x_m} \parallel_2 \leq \varepsilon$.\\
+\color{gray}Remarque : Si $\{\vec{x_k}\}$ est convergente alors c'est une suite de cauchy.\color{black}\\
+
+\quad \underline{Corollaire :} Si $\{\vec{x_k}\}$ est une suite de cauchy dans $\mathbb{R}^n \Rightarrow \{\vec{x_k}\}$ est convergente.\\
+
+\subsubsection{Sous-suites}
+Étant donné une suite $\{\vec{x_k}\}$, $\{\vec{y_k}\}$ est une sous-suite si $\exists$ $1\leq n_1\leq \dots \leq n_n \in \mathbb{N}$ tel que $\forall k$ : $\vec{y_k} = \vec{x_{n_k}}$.\\
+Où $(\vec{x_k})$ est une fonction $f:\mathbb{N} \rightarrow \mathbb{R}^n$. \\
+Une sous-suite de $\{\vec{x_k}\}$ est une fonction $h:\mathbb{N} \rightarrow \mathbb{R}^n \Rightarrow h=f\circ g$, $g$ une fonction strictement croissante.\\
+
+\subsubsection{Théorème de Bolzano-Weierstrass}
+\begin{theorem}
+Pour $A\subseteq \mathbb{R}^n$ borné et $\{\vec{x_k}\}$ dans A, il existe une sous-suite convergente.\end{theorem}
+
+\quad \underline{Corollaire :} Si $A\subseteq \mathbb{R}^n$ est borné et fermé. Alors pour chaque suite $\{\vec{x_k}\}$ dans A, il existe une sous-suite convergente dont sa limite est dans A.\\
+
+
+\subsection{Les fonctions continues :}
+Pour $f:A\rightarrow \mathbb{R}^n$ et $A\subseteq \mathbb{R}^n$. On a $f$ continue en $\vec{a} \in A$.\\
+Si $\forall \{\vec{x_k}\}$ dans A est convergente en $\vec{a}$ alors $f(\vec{x_k}) \rightarrow f(\vec{a})$ \\
+
+$f:A\rightarrow \mathbb{R}^n$ est dite continue si $f$ est continue en $\vec{a}\forall \vec{a} \in A$.\\
+
+$f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ est continue $\Leftrightarrow f^{-1}(O)$ est ouvert $\forall O\subseteq \mathbb{R}^m$ ouvert $\Leftrightarrow f^{-1}(F)$ est fermé $\forall F$ fermé.\\
+
+$f:A\rightarrow \mathbb{R}^n$ est continu si $\forall \vec{a} \in A$, $\forall \{\vec{x_k}\}$ dans A avec $\vec{a}$ pour limite.\\
+Alors on a $f(\vec{x_k}) \rightarrow f(\vec{a}) \forall \vec{x}$, $f(\vec{x}) = \begin{pmatrix}
+    f_1(\vec{x}) \\
+    \dots\\
+    f_n(\vec{x})\\
+\end{pmatrix}$. Si $f$ est continue alors les $f_i$ sont continues $\forall 1\leq i \leq n$\\
+
+\begin{theorem}Théorème pour A borné et fermé et fonction continue sur A :\\
+$\exists \vec{x_0} \in A$ tel que $f(\vec{x_0}) \geq f(\vec{x}) \forall \vec{x} \in A$ en particulier $\sup_{\vec{x}\in A} f(\vec{x}) < \infty$\end{theorem}
+
+\begin{theorem}
+$\exists \vec{x_1} \in A$ tel que $f(\vec{x_1}) \leq f(\vec{x}) \forall \vec{x} \in A$ A borné et fermé. \end{theorem}
+
+\subsubsection{Continuité uniforme}
+$f:A\rightarrow \mathbb{R}^n$ est dite uniformément continue si $\forall \varepsilon > 0$, $\exists \delta >0$ tel que $\vec{x}, \vec{y} \in A$\\
+$\parallel \vec{x}-\vec{y}\parallel_2< \delta \Rightarrow \parallel f(\vec{x})-f(\vec{y})\parallel_2 < \varepsilon$\\
+
+\begin{theorem}Si A est borné et fermé\textbf{(ensemble compacte)}, et $f:A\rightarrow \mathbb{R}$ est continue alors $f$ est uniformément continue.\end{theorem}
+
+\begin{theorem}Si A est borné et fermé $\Rightarrow f$ est bornée sur A et $f$ prend un maximum et un minimum sur A.\end{theorem}
+
+\subsubsection{Les normes}
+Sur un espace vectorielle deux normes $\parallel \dots \parallel_q$ et $\parallel\dots\parallel_f$ sont équivalentes si $\exists 0<c<d<\infty$ tel que $\forall \vec{x}$ $c\parallel \vec{x}\parallel_q \leq \parallel \vec{x}\parallel_f \leq d \parallel\vec{x}\parallel_q$.\\
+
+\subsection{Les courbes}
+Une courbe $\gamma$ est une fonction continue $f:I\rightarrow \mathbb{R}^n$ où I est un intervalle dans $\mathbb{R}$. $f(t) = \begin{pmatrix}
+    f_1(t)\\
+    \dots\\
+    f_n(t)\\
+\end{pmatrix}$\\
+
+$f$ est dérivable en $t_0 \in I \Rightarrow \lim_{h\rightarrow0} \frac{f(t_0+h)-f(t_0)}{h}$ existe $\Leftrightarrow \forall t_k \rightarrow t_0$ dans I/$\{t_0\}$ : $\frac{f(t_k) - f(t_0)}{t_k-t_0} \rightarrow f'(t_0)$\\
+
+$f$ est dérivable $\Leftrightarrow f'(t)$ est définie $\forall t \in I$.\\
+
+$f$ est dérivable en $t_0 \subseteq I \Leftrightarrow f_i$ est dérivable en $t_0 \subseteq I \forall 1 \leq i \leq n$\\
+$\Rightarrow$ si $f$ est dérivable $\forall t_k$ alors $\frac{f(t_k)-f(t_0)}{t_k-t_0}$ est convergente $\Leftrightarrow 1\leq i \leq n $ $f_i$ est dérivable $\forall 1\leq i \leq n$ et on a $\frac{f_i(t_k)-f_i(t_0)}{t_k-t_0}$\\
+
+$f \in C^k(I), k\geq 1 \Leftrightarrow$ $f$ est k-fois dérivable et la k-ème dérivée est continue sur I.\\
+
+Une courbe $f:I\rightarrow \mathbb{R}^n$ est dite \textbf{Régulière} si $f'(t)$ existe $\forall t\in I$ et $f'(t) \neq \vec{0} \forall t$\\
+
+Pour une courbe, si $f(t) = \vec{0}$, $t$ est un \textbf{point stationnaire} ou singulier.\\
+
+Si deux courbes $f:I\rightarrow \mathbb{R}^n$ et $q: J\rightarrow \mathbb{R}^n$ se croisent en $\vec{x} = f(t_0) = q(S_0)$ alors l'angle d'intersection $\theta$ entre les deux vaut :\\
+\begin{equation}
+    \cos{\theta} = \pm \frac{<f'(t_0), q'(S_0)>}{\parallel f'(t_0)\parallel_2 \parallel q'(S_0)\parallel_2}
+\end{equation}
+
+ Pour une courbe $f:I\rightarrow \mathbb{R}^n$, le graphe $G_f$ est la courbe $G_f:I\rightarrow \mathbb{R}^{n+1}$ tel que :\\
+ \begin{equation}
+     G_f(t) = \begin{pmatrix}
+         t\\
+         f(t)\\
+     \end{pmatrix} \Rightarrow G'_f(t) = \begin{pmatrix}
+         1\\
+         f'(t)\\
+     \end{pmatrix}
+ \end{equation}
+
+On définit aussi \textbf{la courbure} $\kappa = \frac{\parallel r'(t) \wedge r''(t)\parallel_2}{\parallel r'(t)\parallel^3_2}$.\\
+
+\subsubsection{Longueur d'une courbe/graphe}
+\quad \underline{Longueur d'une courbe :}\\
+Soit $f:I\rightarrow \mathbb{R}^n$. Supposons $I=[a,b]$. On a la longueur d'une courbe :\\
+\begin{equation}
+    l = \int_a^b \parallel f'(t)\parallel_2dt
+\end{equation}
+
+\quad \underline{Longueur d'un graphe :}\\
+Pour $f\in C^1(I)$, $I=[a,b]$. On a la longueur d'un graphe :\\
+\begin{equation}
+    l = \int_a^b \parallel G'_f(t)\parallel_2dt = \int^b_a \sqrt{1+|f'(t)|^2}dt
+\end{equation}
+
+\subsubsection{Les fonctions qui renvoient dans les réels}
+Pour une fonction, les ensembles de niveaux/lignes de niveaux sont les ensembles de la forme $\{\vec{x} \in \mathbb{R}^n : f(\vec{x}) = c\}$\\
+
+Pour $f:D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ et $\vec{a} \in D$, la limite de $f$ en $\vec{a}$ (si elle existe) vaut la valeur L tel que $\forall \varepsilon>0 \exists \delta >0$ tel que $0< \parallel \vec{x}-\vec{a}\parallel_2 < \delta \Rightarrow \parallel f(\vec{x}) - L\parallel_2 < \varepsilon$\\
+
+La limite de $f$ en $\vec{a}$ existe et est égale à L $\Leftrightarrow \forall \{\vec{x_k}\}$ dans D/$\{\vec{a}\}$ qui converge en $\vec{a}$, on a $\lim_{k\rightarrow \infty} f(\vec{x_k}) = L$\\
+
+\subsubsection{Dérivées partielles}
+Étant donné $f:\mathbb{R}^n \rightarrow \mathbb{R}$ et $\vec{a} \in D$. La dérivée partielle de $f$ par rapport à $\vec{x_k}$ $1\leq k  \leq n$ en $\vec{a}$ est : $\frac{\partial f(\vec{a})}{\partial x_k} = \lim_{h\rightarrow 0} \frac{f(\vec{a} + h\vec{e_k})-f(\vec{a})}{h}$\\
+
+On note : $D_{x_k} f(\vec{a}) = \frac{\partial f(\vec{a})}{\partial x_k}$\\
+On note aussi : $D_{x_l,x_l} f(\vec{x}) = \frac{\partial^2 f(\vec{x})}{\partial x_l \partial x_k}$\\
+
+$f$ est partiellement différentiable en $\vec{a} \in \mathbb{R}^n$ si $\forall 1\leq k\leq n$ $D_{x_k} f(\vec{a})$ existe.\\
+
+Si $f$ est partiellement différentiable en $\vec{a}$ alors le gradient :\\
+\begin{equation}
+    \nabla f(\vec{a}) = (\frac{\partial f(\vec{a})}{\partial x_1}, \dots, \frac{\partial f(\vec{a})}{\partial x_n})^T
+\end{equation}
+existe et est défini.\\
+
+Si toutes les dérivées partielles existent et sont continues en $\vec{a}$ alors $f$ est continue en $\vec{a}$\\
+
+Pour $f:D\rightarrow \mathbb{R}$ défini sur un voisinage de $\vec{a}$ $f$ est différentiable en $\vec{a}$ si \\
+$\lim_{h\rightarrow 0} \frac{f(\vec{a}+\vec{h})-f(\vec{a})-<\nabla f(\vec{a}); \vec{h}>}{\parallel \vec{h}\parallel_2} = 0$\\
+
+Si $\frac{\partial f(\vec{a})}{\partial x_k}$ sont continues en $\vec{a}, \forall 1\leq k \leq n \Rightarrow f$ est différentiable en $\vec{a}$.\\
+
+Si $f: U\rightarrow \mathbb{R}^n$, U ouvert et $\forall 1\leq k \leq n$, $\frac{\partial f}{\partial x}$ est continue sur U $\Rightarrow f$ est différentiable en $\vec{x}$, $\forall \vec{x} \in U$. On dit $f \in C^1(U) \Leftrightarrow \frac{\partial f}{\partial x_k}$ est continue sur U $\forall k$\\
+Si $f \in C^1(U) \Rightarrow f$ est différentiable sur U $\Rightarrow f$ est partiellement différentiable\\
+\warning Pas dans l'autre sens.\\
+
+\quad \underline{Développement limité du premier ordre :}\\
+\begin{equation}
+    f(\vec{a}+\vec{h})-f(\vec{a}) \simeq <\nabla f(\vec{a}); \vec{h}> = \frac{\partial f(\vec{a}) \vec{h_1}}{\partial x_1} + \dots + \frac{\partial f(\vec{a}) \vec{h_n}}{\partial x_n}
+\end{equation}
+
+\quad \underline{Dérivées directionnelles :}\\
+Pour $\vec{a} \in \mathbb{R}^2, f:U\rightarrow \mathbb{R}$ ouvert, $\vec{a} \in U$, $\vec{v} \in \mathbb{R}^2\backslash \{\vec{0}\}$. \\
+La dérivée directionnelle en $\vec{a}$ à la direction :$\vec{v}$ : \\
+\begin{equation}
+    D_{\vec{v}} f(\vec{a}) = \lim_{t\rightarrow 0} \frac{f(\vec{a}+t\vec{v}) - f(\vec{a})}{t} = g'(0)
+\end{equation}
+Où $g(t) = f(\vec{a}+t\vec{v})$. Si elle existe : $D_{\vec{e_1}} f(\vec{a}) = \frac{\partial f(\vec{a})}{\partial x_1}$\\
+
+Si $f$ est différentiable en $\vec{a}$ alors $D_{\vec{v}} f(\vec{a})$ existe $\forall \vec{v} \in \mathbb{R}^n\backslash \{\vec{0}\}$ et $D_{\vec{v}} f(\vec{a}) = <\nabla f(\vec{a}); \vec{v}>$\\
+La direction de croissance maximale de $f$ est celle du gradient.\\
+
+\quad \underline{Tangente :}\\
+Dans $\mathbb{R}^2$ : $y-y_0 = f'(x_0)(x-x_0)$\\
+$\begin{pmatrix}
+    x\\
+    y\\
+\end{pmatrix} = \begin{pmatrix}
+    x_0\\
+    y_0\\
+\end{pmatrix} + t\begin{pmatrix}
+    1\\
+    f'(x_0)\\
+\end{pmatrix}$
+Soit le vecteur $\vec{n} = \begin{pmatrix}
+    f'(x_0)\\
+    -1\\
+\end{pmatrix}$
+On a donc : $<\vec{n}; \begin{pmatrix}
+    1\\
+    f'(x_0)\\
+\end{pmatrix}> = 0$\\
+
+Généralement, un hyperplan sur $\mathbb{R}^m$ est caractérisé par un point dans l'hyperplan, une direction normale.\\
+
+Ainsi pour un hyperplan, la normale est :\\
+\begin{equation}
+    \vec{n} = \begin{pmatrix}
+        \nabla f(\vec{a})\\
+        -1\\
+    \end{pmatrix}
+\end{equation}
+L'équation du plan est donc donné par : $x_{n+1} - f(\vec{a}) = \sum_i^n \frac{\partial f(\vec{a})}{\partial x_i}(x_i-a_i)$\\
+
+\quad \underline{Composition de f :}\\
+Pour $k: I\rightarrow \mathbb{R}^n$ une courbe différentiable en $t_0 \in I$ telle que $k(I) \subseteq V$ ouvert $\subseteq \mathbb{R}^n$\\
+$f: V\rightarrow \mathbb{R}$, $f$ est dérivable en $k(t_0)$ : $t\rightarrow (f\circ k)(t) = f(k(t))$ est différentiable en $t_0$ et :\\
+\begin{equation}
+    \frac{df(k(t_0))}{dt}\rvert_{t=0} = <\nabla f(k(t_0)); k'(t_0)> \Rightarrow \nabla (f\circ k)(\vec{x_0}) = f'(k(\vec{x_0})) \nabla k(\vec{x_0})
+\end{equation}
+
+\subsubsection{Dérivée d'ordre supérieur à 1}
+\quad \underline{Laplacien :}\\
+\begin{equation}
+    \Delta f(\vec{x}) = \sum_i^n \frac{\partial^2 f(\vec{x})}{\partial x_i^2} = \sum_i^n D_{ii} f(\vec{x})
+\end{equation}
+
+\quad \underline{Hessien :}\\
+Pour $f\in C^2(U)$, U ouvert $\subseteq \mathbb{R}^n$\\
+La Hessienne pour $f$ en $\vec{a} \in U$ est donnée par \\
+\begin{equation}
+    Hess f(\vec{a})_{ij} = \frac{\partial^2 f(\vec{a})}{\partial x_i \partial x_j}
+\end{equation}
+
+\quad \underline{Développement limité :}\\
+\begin{equation}
+    f(\vec{a}+\vec{h}) = f(\vec{a}) + <\nabla f(\vec{a}); \vec{h}> + \frac{1}{2} \vec{h}^T Hess f(\vec{a}) \vec{h} + o(\parallel \vec{h}\parallel^2)
+\end{equation}
+
+\subsection{Dérivées de fonctions}
+\subsubsection{Jacobienne}
+\begin{equation}
+    J_v (\vec{a}) = \begin{pmatrix}
+        \frac{\partial v_1(\vec{a})}{\partial x_1} & \dots & \frac{\partial v_1(\vec{a})}{\partial x_n}\\
+        . & &.\\
+        .& &.\\
+        \frac{\partial v_n(\vec{a})}{\partial x_1} & \dots & \frac{\partial v_m(\vec{a})}{\partial x_n}\\
+    \end{pmatrix}
+\end{equation}
+
+$\vec{v} : D\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$ est différentiable en $\vec{a}\in D \Leftrightarrow \vec{v}(\vec{a}+\vec{h}) = \vec{v}(\vec{a}) + J_{\vec{v}}(\vec{a}) \vec{h} + o(\parallel \vec{h}\parallel)$\\
+
+
+On dit $\vec{v}$ est partiellement dérivable en $\vec{a}$ si $\frac{\partial v_i (\vec{a]})}{\partial x_j}$ existe $\forall 1\leq i\leq m$, $\forall 1\leq j\leq n$\\
+
+\subsubsection{Règle de chaîne}
+$\vec{w} \circ \vec{v} : \mathbb{R}^n\rightarrow \mathbb{R}^k$, si $\vec{v} : U_1\rightarrow U_2 \subseteq\mathbb{R}^n$ est différentiable sur $U_1$ et $\vec{w} : U_2 \rightarrow \mathbb{R}^k$ est différentiable sur $U_2$. Alors \\
+\begin{equation}
+    J_{\vec{w}\circ \vec{v}} (\vec{a})) = J_{\vec{w}} (\vec{v}(\vec{a}) J_{\vec{v}}(\vec{a})
+\end{equation}
+
+\subsubsection{Champs vectoriel}
+Si $\vec{v} : U\rightarrow V$ est une bijection alors $\vec{w} : V\rightarrow U$ définit par $\vec{w} (\vec{y}) = \vec{x} \Leftrightarrow \vec{v}(\vec{x}) = \vec{y}$ et $\vec{w}$ est l'inverse de $\vec{v}$.\\
+Si $\vec{v} :U \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^n$ est injective alors $\vec{v} :U\rightarrow V$ est une bijection. On peut donc définir $\vec{y} \in V$ tel que : $\vec{w}(\vec{y}) = \vec{x}\Leftrightarrow \vec{v}(\vec{x}) = \vec{y}$\\
+\textbf{$\vec{v}$ est inversible}\\
+
+On a $\vec{w} = \vec{v}^{-1}$ et : $J_{\vec{w}}(\vec{v}(\vec{a})) = J_{\vec{v}}(\vec{a})^{-1}$\\
+Si $\vec{v} \in C^1$ est inversible et son inverse est $C^1$ alors $J_{\vec{v}}$ est inversible. De plus, si $J_{\vec{v}}(\vec{a})$ est inversible $\forall \vec{a} \Rightarrow \det J_{\vec{v}}(\vec{a}) \neq 0$\\
+
+Si $\det J_{\vec{v}}(\vec{a}) = 0$ on ne sais pas si $\vec{v}$ est inversible ou pas.\\
+
+\subsubsection{Changement de coordonnées}
+soit $(u,v) = \vec{v}(x,y)$\\
+soit $h(x,y) = g(u,v) = g\circ \vec{v} (x,y)$\\
+\begin{equation}
+    J_h(x,y) = J_{g\circ \vec{v}} (x,y) = J_g(\vec{v}(x,y)) J_{\vec{v}}(x,y)
+\end{equation}
+
+\subsubsection{Différentiation implicite}
+Si il existe une fonction $g$ et que localement L est le graphe de $g$, on peut trouver $g'(x)$.\\
+Soit $f\in C^1$, $L=\{(x,y) : f(x,y)=c\}$ On sait que localement il existe $g$ tel que : $L=\{(x,g(x))\}$ or, $f(x,g(x)) = c$\\
+On a donc :\\
+\begin{equation}
+    g'(x) = \frac{-\frac{\partial f(x,g(x))}{\partial x}}{\frac{\partial f(x,g(x))}{\partial y}}
+\end{equation}
+
+\begin{theorem}Théorème généralisée :\\
+Soit $f\in C^1(U)$, U ouvert $\subseteq \mathbb{R}^n$\\
+Soit $L= \{\vec{x} : f(\vec{x}) = c\}$ et $\vec{a} \in L$ avec $D_{x_n} f(\vec{a}) = \frac{\partial f(\vec{a})}{\partial x_n} \neq 0$.\\
+
+On a les relations :$g\in C^1$; $g(\vec{a}') = a_n$; $f(\vec{x}'; g(\vec{x})) = c \forall \vec{x} \in \mathbb{N}$\\
+$\frac{\partial g(\vec{a}')}{\partial x_i} = \frac{-D_{x_i} f(\vec{a})}{D_{x_n} f(\vec{a})}$\\
+
+$x_n = g(\vec{x}')$ et $f\in C^k(U) \Rightarrow g\in C^k (U)$\\
+
+Si $g'(x) = 0\Rightarrow g''(x) = \frac{-\frac{\partial^2 f(x, g(x))}{\partial x^2}}{\frac{\partial f(x, g(x))}{\partial y}}$ \\
+Si $g''(x) < 0$ : max local\\
+Plus généralement : $g''(x) = -\frac{D_{11}f + g' D_{12}f+ g'^2D_{22}f}{D_2}$
+\end{theorem}
+
+\quad \underline{Hyperplan tangent :}\\
+\begin{equation}
+    x_n - a_n = \sum_{i=1}^{n-1} \frac{\partial g(\vec{a})}{\partial x_i}(x_i - a_i) \Rightarrow \frac{\partial f(\vec{a})}{\partial x_1}(x_n-a_n) = -\sum_1^{n-1} \frac{\partial f(\vec{a})}{\partial x_i} (x_i-a_i)
+\end{equation}
+
+\subsection{Extremas de fonction}
+Pour $\vec{a}\in U$ ouvert, $f:U\rightarrow \mathbb{R}$, $\vec{a}$ est un maximum/minimum local si $\exists \varepsilon > 0$ tel que $\forall \vec{x} \in \mathcal{B}(\vec{a}; \varepsilon) \subseteq U$ : $f(\vec{x}) \leq f(\vec{a})$\\
+
+$\vec{a}$ est un point stationnaire pour $f$ si $\nabla f(\vec{a}) = 0$\\
+
+Pour $f$ définit dans U, ouvert, $\vec{a}$ est un point selle pour $f (\vec{a} \in U)$, si $\exists \vec{v_1}, \vec{v_2} \neq \delta$ tel que :\\
+soit $t\rightarrow f(\vec{a} +t\vec{v_1})$ a un max local stricte en t=0\\
+soit $t\rightarrow f(\vec{a} + t\vec{v_2})$ a un min local stricte en t=0.\\
+$\vec{a}$ est à la fois un  min et max local.\\
+$Hess f(\vec{a})$ est une matrice symétrique donc il existe n valeurs propres $\lambda_i$ avec des vecteurs propres orthonormaux $\vec{f_i}$.\\
+On dit : \\
+\begin{enumerate}
+    \item A$> 0$ si $\lambda_i > 0 \forall i$ : $\vec{a}$ est un minimum local (supérieur ou égal : pas un maximum local)\\
+    \item A<0 si $\lambda_i < 0 \forall i$ : $\vec{a}$ est un maximum local (inférieur ou égal : pas un minimum local)\\
+    \item A est indéfini si $\lambda_1 < 0 < \lambda_n$ : $\vec{a}$ est un point selle.\\
+\end{enumerate}
+
+\subsubsection{Trouver les extremas}
+\quad \underline{D borné :}\\
+On a une fonction $C^1$ définie sur D, D est borné et fermé. Soit $\vec{x_0} \in D$ un maximum/minimum local. Alors on a $\vec{x_0} \in D^{\circ}$ ou $\vec{x_0}\in \partial D$.\\
+
+\quad \underline{D non borné :}\\
+Les minimums et maximums n'existent pas forcément.\\
+Pour $f$ sur D est $C^1(D)$ et $\vec{x_0}\in D$, $f(\vec{x_0})$ est tel que pour une suite $\{\vec{x_k}\}$ dans D qui converge à une limite dans $\partial D$ avec $\lim f(\vec{x_k}) < f(\vec{x_0})$ alors il existe un maximum pour $f$ sur D.\\
+
+\subsubsection{Multiplicateurs de Lagrange}
+On veut minimiser/maximiser une fonction $h$ sur un intervalle sous contrainte.\\
+
+$\vec{x} \in M$ est un maximum local pour $h$ sur M si $\exists \delta>0$ tel que $\forall y \in M\cap \mathcal{B}(\vec{x}, \delta)$ : $h(\vec{y}) < h(\vec{x})$\\
+
+\begin{theorem}
+Soit $U \subseteq \mathbb{R}^n$ ouvert, et $h, f\in C^1(U)$. Soit $M=\{\vec{x}\in U : f(\vec{x})=0\}$.\\
+Si $\vec{a} \in M\cap U$ satisfait : $\nabla f(\vec{a}) \neq \vec{0}$\\
+$\vec{a}$ est un extremas local pour $h$ sur M $\Rightarrow$ Il existe $\lambda \in \mathbb{R}$ tel que :\\
+\begin{equation}
+    \nabla h(\vec{a}) = \lambda \nabla f(\vec{a})
+\end{equation}
+\end{theorem}
+
+\quad \underline{Plusieurs contraintes :}\\
+On veut maintenant résoudre :\\
+\begin{equation}
+    \nabla h(\vec{a}) = \sum_i^p \lambda_i \nabla f_i(\vec{a})
+\end{equation}
+
+\quad \underline{Plusieurs relations :}\\
+$\parallel \nabla g\parallel_2^2 = \nabla g^T \nabla g = \nabla g^T J_w J_w^T \nabla g$\\
+$\nabla g_{x,y,z} = J_w^T \nabla g(r,\theta, \phi)$\\
+$J_{\vec{v}} J_{\vec{v}}^T = \begin{pmatrix}
+    \det J_{\vec{v}} &0\\
+    0 & \det J_{\vec{v}}\\
+\end{pmatrix}$\\
+
+\subsection{Intégration}
+Soit $g(\vec{y}) = \int_{\alpha(\vec{y})}^{\beta(\vec{y})} f(x,\vec{y}) dx$. Si $g\in C^1$ alors on a la formule de dérivation :\\
+\begin{equation}
+    \frac{\partial g}{\partial y_i} = \int_{\alpha(\vec{y})}^{\beta(\vec{y})} \frac{\partial f}{\partial y_i}dx + \frac{\partial \beta(\vec{y})}{\partial y_i}f(\beta(\vec{y}), \vec{y}) - \frac{\partial \alpha(\vec{y})}{\partial y_i}f(\alpha(\vec{y}), \vec{y})
+\end{equation}
+
+\subsubsection{Théorème de Fubini}
+soit $f$ continue sur $[a,b]$x$[c,d]$ alors :\\
+\begin{equation}
+    \int_a^b \int^d_c fdxdy = \int^d_c \int_a^b fdydx
+\end{equation}
+Les intégrales sont inversibles mais il faut faire attention aux bornes lorsque celle-ci ne sont pas indépendantes.\\
+
+\quad \underline{Volumes :} Vol(D) $=\iint_D dxdydz$\\
+
+\begin{theorem}Théorème de la valeur moyenne :\\Soit D fermé, borné et connexe par chemin, $g>0$. Soit $f$ continue sur D$\Rightarrow \exists \vec{x_0} \in D$ tel que \\
+$f(\vec{x_0}) \int_D g dx_1 \dots dx_n = \int_D fg dx_1\dots dx_n$\\
+
+D est connexe par chemin si $\forall \vec{x}, \vec{y} \in D$, $\exists \gamma$ une courbe :$[0,1]\rightarrow D$ avec $\gamma(0) = \vec{x}$ et $\gamma(1) = \vec{y}$.
+\end{theorem}
+
+\subsubsection{Changement de variables}
+\begin{theorem}Théorème de changement de variables :\\Pour $\Omega \subseteq \mathbb{R}^n$, un domaine borné et fermé et $\vec{v} : \Omega \rightarrow \Omega' \subseteq \mathbb{R}^n$ une bijection $C^1$.\\
+Soit $f$ continue sur $\Omega'$ alors :\\
+\begin{equation}
+    \int_{\Omega}f(\vec{v}(\vec{x})) |\det J_{\vec{v}}(\vec{x})|dx_1 \dots dx_n = \int_{\Omega'} f(\vec{v}) dv_1\dots dv_n
+\end{equation}
+\end{theorem}
+
+
+\quad \underline{Changement de variables standards :}\\
+\begin{enumerate}
+    \item Coordonnées polaires(et cylindriques) : $x=r \cos{\theta}$, $y=r\sin{\theta} \Rightarrow |\det J(r, \theta)| = r$\\
+    \item Coordonnées sphériques : $x=r\sin{\theta} \cos{\phi}$; $y=r\sin{\theta} \sin{\phi}$; $z=r\cos{\theta}$ $\Rightarrow |\det J(r, \phi, \theta) | = r^2 \sin{\theta}$, $0\leq \theta \leq \pi$ et $0\leq \phi \leq 2\pi$\\
+\end{enumerate}
+
+En résumé, lors d'un changement de variable, on multiplie l'intégrale par la valeur absolue du déterminant de la matrice jacobienne associé aux nouvelles variables vis à vis des anciennes.\\
+
+\subsection{Équations différentielles}
+On cherche des solutions de l'équation : $y^{(n)}(t) = f(t, y, \dots, y^{(n-1)})$\\
+Les conditions initiales sont alors dénotées : $y_0 = y(t_0), y_1 = y'(t_0), \dots$\\
+
+\begin{theorem}Théorème de l'unicité :\\
+Une solution est unique et existe si $F(x,y)$ est continue $\forall x,y$ et $\frac{\partial F}{\partial y}(x,y)$ est continue $\forall x,y$\end{theorem}
+
+Pour $I\subseteq \mathbb{R}$, $t_0 \in I$ et $f:I$x$\mathbb{R}^n\rightarrow\mathbb{R}^n$ est continue.\\
+Alors $y:I\rightarrow \mathbb{R}^n$ est une solution $C^1$ de $\vec{y}'=f(t, \vec{y})$, $\vec{y}(t_0) = \vec{y_0}$ si et seulement si, y est solution de:\\
+\begin{equation}
+    \vec{y}(t) = \vec{y_0} + \int_{t_0}^t f(s, y(s)) ds
+\end{equation}
+
+\subsubsection{Les solutions}
+\quad \underline{Premier ordre :}\\
+Soit l'équation :\\
+\begin{equation}
+    y'(x) +a(x) y(x) = b(x), y(t_0) = y_0
+\end{equation}
+Soit $A'(x) = a(x)$.\\
+La solution de l'équation est alors :\\
+\begin{equation}
+    y(x) = e^{-A(x)} \int e^{A(x)} b(x) dx+ C^{-A(x)}
+\end{equation}
+\warning Si z et w sont solutions de l'équation, alors z+w est aussi solution.\\
+
+\quad \underline{Séparation de variables :}\\
+Soit l'équation : $y'(t) = f(y) g(t)$, $y(t_0) = y_0$\\
+Une solution est de décomposer les variables :\\
+\begin{equation}
+    \frac{dy(t)}{dt} = f(y) g(t) \Rightarrow \frac{dy(t)}{f(y)} = g(t) dt
+\end{equation}
+Ce qui est facilement intégrable la plupart du temps.\\
+
+\quad \underline{Deuxième ordre :}\\
+On considère :\\
+\begin{equation}
+    y''(t) +p(t) y'(t) +g(t)y=f(t)
+    \label{eqo2}
+\end{equation}
+Si p et g sont continues sur I, $t_0\in I$ alors il existe une solution unique sur I.\\
+
+Si $f(t) =0$ alors on a l'équation homogène et les solutions constituent un espace vectoriel.\\
+
+Étant donné deux solutions à l'équation \eqref{eqo2} homogène ($f(t) =0$) $y_1$ et $y_2$, on peut définir le \textbf{Wronstian w} qui est une fonction sur I telle que :\\
+\begin{equation}
+    w(t) = \begin{vmatrix}
+        y_1(t) & \dot{y_1}(t)\\
+        y_2(t) & \dot{y_2}(t)\\
+    \end{vmatrix}
+\end{equation}
+w(t) = 0 si les vecteurs colonnes sont linéairement dépendants et différents de 0 sinon.\\
+
+Ainsi, si on connaît une solution $y_1$ alors on peut connaître $y_2$ grâce à la relation :\\
+\begin{equation}
+    y_2(t) = y_1(t) \int_{t_0}^t \frac{e^{-\int_{t_0}^u p(s)ds}}{y_1^2(u)}du
+\end{equation}
+
+\warning Si $f(t) \neq 0$ alors les solutions ne forment pas un espace vectoriel.\\
+
+\underline{Solution équation homogène :}\\
+On pose d'abord la relation :$y(t) = e^{\lambda t}$ Donc on résout : $\lambda^2 e^{\lambda t} + p\lambda e^{\lambda t} + ge^{\lambda t} = 0$. Ainsi, on commence par trouver $\lambda_1$ et $\lambda_2$ tels que :\\
+$\lambda^2 +p\lambda + g =0$\\
+Ensuite, on a trois possibilités :
+\begin{enumerate}
+    \item $\lambda_1 \neq \lambda_2$ :\\ \begin{equation}
+        y(t) = \alpha e^{\lambda_1 t} + \beta e^{\lambda_2 t}
+    \end{equation}\\
+    \item $\lambda_1=\lambda_2 = \lambda_0$ : \\ \begin{equation}
+        y(t) = e^{\lambda_0 t} (A+Bt)
+    \end{equation}\\
+    \item $\lambda_1 = a+ib_1$ et $\lambda_2 = a+ib_2$ : \\ \begin{equation}
+        y(t) = e^{at} (A\cos(b_1t) + B\sin(b_2t))
+    \end{equation}\\
+\end{enumerate}
+\underline{Solution équation in-homogène :}\\
+Une solution est :$y(t) =$solution particulière + solution homogène\\
+Pour la solution particulière, on pose une solution qui fonctionne.\\
+Exemple, si $f(t) =\sin{t}$ ou $=\cos{t}$ alors on essaie avec $z(t) = a\cos{t}+b\sin{t}$\\
+Si $f(t) = e^t$ alors $z(t) = ce^t$, ou alors $cte^t$ ou encore $z(t) = ct^2 e^t$, $\dots$
+\end{document}

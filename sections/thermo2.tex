@@ -1,0 +1,328 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Principes fondamentaux}
+\begin{equation}
+    \frac{dU_{cz}}{dt} = \sum_k \dot{E^+} + \sum_{\alpha} \dot{Q^+} + \sum_j h_{czj}\dot{M_j^+}
+\end{equation}
+On définit les énergies totales comme : $U_{cz} = U + M \frac{C^2}{2} + Mgz$\\
+Pour un système fermé, on a \\
+\begin{equation}
+    dU_{cz} = \delta A^+ + \delta Q^+
+\end{equation}
+On définit aussi l'enthalpie : $H = U + PV$\\
+Pour un gaz parfait, on a les relations : \\
+\begin{equation}
+\begin{split}
+    dU = M c_v dT\\
+    dH = M c_p dT
+\end{split}
+\end{equation}
+Ces fonctions la sont \textbf{extensives}. \\
+
+On utilise les termes suivants : \\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+    \hline
+         & adiabate & Isénerge &Isentropique\\
+         \hline
+        =0 & $Q^+$ & U & S\\
+    \end{tabular}
+    \caption{Transformations}
+\end{table}
+
+On a aussi pour beaucoup de fonctions : \\
+\begin{equation}
+    \dot{H_{cz}} = h_{cz} \dot{M}
+\end{equation}
+
+On définit l'énergie de transformation : \\
+\begin{equation}
+        Y^+ = \sum \int (h_{czj}dM_j^+) - \Delta (U_{cz} + P_aV)\\
+\end{equation}
+\begin{equation}
+    \sum \dot{E_k^+} + \sum \dot{Q_i^+} + \dot{Q_a^+} + \sum \dot{Y_n^+} = 0
+\end{equation}
+
+\textbf{2ème principe :} L'entropie, pour décrire les évolutions naturelles des systèmes. L'entropie est proportionnel à la fraction d'énergie non convertible en travail. \\
+
+\begin{equation}
+    dS = \sum \frac{\partial Q_{\alpha}^+}{T_{\alpha}} + \sum s_j dM_j^+ + \sum \frac{\partial R_{\alpha}}{T_{\alpha}} + \sum (\frac{1}{T_{\beta}}-\frac{1}{T_{\alpha}}) \delta Q_{\alpha\beta} + \sum \partial S_{\alpha
+    }^x
+\end{equation}
+
+Pour un système ouvert, on a : \\
+\begin{equation}
+    Du_{cz} = \sum E_k^+ + E_a^+ + \sum Q^+_i + Q_a^+ + \sum h_{czj}dM_{czj}^+
+\end{equation}
+Où $Q_a$ et $E_a$ sont des échanges avec l'atmosphère.\\
+
+On considère aussi des fluides incompressibles : $\dot{M_j^+} = \frac{\dot{V_j^+}}{v_j} = \frac{C_j S_j}{v_j}$\\
+
+On peut aussi définir les différents coefficients :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|}
+        \hline
+        Compression isochore& Dilatation isobare & Compressibilité isotherme \\
+        \hline
+        $\alpha_v = \frac{T}{P} (\frac{\partial P}{\partial T})_v$& $\beta_p = \frac{T}{v} (\frac{\partial v}{\partial T})_P$ & $\gamma_t = -\frac{v}{P} (\frac{\partial P}{\partial v})_T$\\
+        \hline
+    \end{tabular}
+    \caption{Facteurs}
+\end{table}
+
+Selon l'équation de Gibbs, on a $dU = -PdV + TdS$\\
+
+\subsubsection{Fermé homogène}
+\begin{equation}
+    \partial a^- + d\frac{C^2}{2} + gdZ + \partial r = Pdv = -du + \partial q^+ + \partial r = -du + Tds
+\end{equation}
+Pour un gaz parfait, on a selon Mayer : $c_p-c_v = r$\\
+On peut donc définir les valeurs entières : \\
+$v_c = v(1+\frac{C^2}{2c_p T})^{\frac{1}{1-\gamma}}$, $P_c = P(1+\frac{C^2}{2c_p T})^{\frac{\gamma}{1-\gamma}}$\\
+$T_c = T+\frac{C^2}{2c_p}$, $h_c = h+\frac{C^2}{2}$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Fluides réels & GP-SP \\
+          \hline
+        $\frac{dT}{T} = \frac{1}{\beta_p} \frac{dv}{v} + \frac{1}{\alpha_v}\frac{dP}{P}$ & $\frac{dT}{T} = \frac{dv}{v} + \frac{dP}{P}$\\
+        $du = (\alpha_v - 1) Pdv + c_v dT$ & $du = c_v dT$\\
+        $dh = (1-\beta_p)vdP + c_p dT$ & $dh = c_pdT$\\
+        $ds = \frac{c_p}{\beta_p} \frac{dv}{v} + \frac{c_v}{\alpha_v}\frac{dP}{P}$ & $ds = c_p \frac{dv}{v} + c_v \frac{dP}{P}$\\
+        $ds = \frac{\alpha_v P}{T} dv + c_v \frac{dT}{T}$ & $ds = r \frac{dv}{v}+ c_v \frac{dT}{T}$\\
+        $ds = -\frac{\beta_p v}{T}dP + c_p \frac{dT}{T}$ & $ds = -r \frac{dP}{P} + c_p \frac{dT}{T}$\\
+        $c_p - c_v = \alpha_v P \frac{dv}{dT} + \beta_p v \frac{dP}{dT}$ & $c_p - c_v = P\frac{dv}{dT}+v\frac{dP}{dT}$\\
+        $c_p-c_v = \alpha_v \beta_p \frac{vP}{T}$ & $c_p-c_v = r$\\
+    \end{tabular}
+    \caption{Formules importantes}
+\end{table}
+
+Lors d'une transformation polytrope, on définit le coefficient polytropique : $\sigma = \frac{Tds}{vdP}$\\
+
+Le facteur calorifique : $\Gamma = \frac{\gamma-1}{\gamma} = \frac{r}{c_p}$, avec le rapport calorifique $\gamma = \frac{c_p}{c_v}$\\
+
+\subsubsection{Ouvert homogène}
+\begin{equation}
+    \partial e^- + d\frac{C^2}{2} + gdZ + \partial r = -vdP = -dh + \partial q^+\partial r = -dh + Tds
+\end{equation}
+On prend aussi $\dot{M} = \rho \dot{V}$\\
+On définit le débit de masse surfacique $\dot{\mu} = \frac{\dot{M}}{S} = \frac{C}{v}$\\
+
+
+\subsection{Tuyère}
+Vitesse du son dans un milieu (vitesse de laval) : \\
+\begin{equation}
+    C_L = \sqrt{\gamma rT} = Al_l
+\end{equation}
+On définit donc le nombre de laval : $L_a = \frac{C_1}{A_L}$\\
+
+Dans une tuyère simple on a plusieurs cas :\\
+Sonique adapté si : $P_4 = P_L = P_2$. Sinon $P_4 < P_L = P_2$\\
+
+On a les relations suivantes si la tuyère est isentrope :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        C(vitesse) & $\sqrt{2c_p T_0(1-(\frac{P}{P_0})^{\Gamma})} = \sqrt{2c_p (T_0-T)}$ \\
+        $M_a$ & $\sqrt{\frac{2}{\gamma -1} ((\frac{P}{P_0})^{\frac{1-\gamma}{\gamma}}-1)}$\\
+        $\dot{M} = SP_0 \sqrt{\frac{2\gamma}{(\gamma-1)rT_0}((\frac{P}{P_0})^{\frac{2}{\gamma}}(1-\frac{P}{P_0})^{\frac{\gamma-1}{\gamma}})}$& $\dot{M} = \frac{SC}{v} = \frac{S}{v}\sqrt{2c_p T_0 (1-(\frac{P}{P_0})^{\frac{\gamma-1}{\gamma}})}$\\
+        \hline
+    \end{tabular}
+    \caption{Valeurs}
+\end{table}
+\subsubsection{Tuyère de Laval}
+Au col, on vérifie d'abord que $\frac{P_L}{P_0} > \frac{P_4}{P_0}$. Si c'est vrai, on est sonique au col et $P_2 = P_L$\\
+
+On a plusieurs possibilités : adapté $P_4 = P_3^*$\\
+non adapté : $P_3^* > P_4$\\
+supersonique adapté : $P_4 = P_3^{**}$\\
+supersonique non adapté : $P_4 > P_3^{**}$\\
+
+\subsection{Turbine/compresseur/canal}
+\subsubsection{Canal chauffé/refroidi}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Canal chauffé H & Canal refroidi R  \\
+        \hline
+        $\eta_{H\sigma} = \frac{q^+}{q^+ + r} = \frac{\ln{\tau}}{\ln{\tau} - \Gamma \ln{\pi}}$ & $\eta_{R\sigma} = \frac{q^- r}{q^-} = \frac{\ln{\tau} - \Gamma \ln{\pi}}{\ln{\tau}}$ \\
+        $\eta_{H\sigma} = \frac{h_{cz2} - h_{cz1}}{h_{cz2} - h_{cz1} + r}$ & $\eta_{R\sigma} = \frac{h_{cz1} - h_{cz2} - r}{h_{cz1} - h_{cz2}}$\\
+        \hline
+        $\eta_{HP} = \frac{h_{cz2} - h_{cz1}}{h_{2P-h_1}} = \frac{\tau -1}{\pi -1}$ & $\eta_{RP} = \frac{h_1-h_{2P}}{h_{cz1} - h_{cz2}} = \frac{\frac{\tau}{\pi^{\Gamma}}-1}{\tau-1}$\\
+        \hline
+        $\eta_{HT} = \frac{h_{cz2} - h_{cz1}}{T_1(s_2-s_1)} = \frac{\tau-1}{\ln{\tau}-\Gamma \ln{\pi}}$ & $\eta_{RT} = \frac{T_1(s_1-s_2)}{h_{cz1} - h_{cz2}} = \frac{\ln{\tau}-\Gamma \ln{\pi}}{\tau -1}$
+    \end{tabular}
+    \caption{Rendements}
+\end{table}
+
+Avec $\tau = \frac{T_2}{T_1}$, $\pi = \frac{P_2}{P_1}$\\
+
+\subsubsection{Turbine/compresseur}
+On a en général : $\dot{E^-} = \dot{M}e^- = \dot{M}(h_1-h_4 + q^+)$\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Turbine & Compresseur \\
+        \hline
+        $\eta_{T\sigma} = \frac{e^-}{-\int_1^4 vdP - \frac{\Delta C^2}{2}}$ & $\eta_{C\sigma} = \frac{\int_1^4 vdP + \frac{\Delta C^2}{2}}{e^+}$\\
+        $\eta_{Ts} = \frac{e^-}{-\int_1^{4s} vdP - \frac{\Delta C^2}{2}}$ & $\eta_{Cs} = \frac{\int_1^{4s} vdP + \frac{\Delta C^2}{2}}{e^+}$\\
+        $\eta_{TT} = \frac{e^-}{-\int_1^{4T} vdP - \frac{\Delta C^2}{2}}$ & $\eta_{CT} = \frac{\int_1^{4T} vdP + \frac{\Delta C^2}{2}}{e^+}$\\
+    \end{tabular}
+    \caption{Rendements réels}
+\end{table}
+Pour des gaz parfaits :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Turbine & Compresseur \\
+        \hline
+        $\eta_{T\sigma} = \frac{-\ln{\tau}}{-\Gamma \ln{\pi}}$& $\eta_{C\sigma} = \frac{\Gamma \ln{\pi}}{\ln{\tau}}$\\
+        \hline
+        $\eta_{Ts} = \frac{1-\tau}{1-\pi^{\Gamma}}$ & $\eta_{Cs} = \frac{1-\pi^{\Gamma}}{1-\tau}$\\
+        \hline
+        $\eta_{TT} = \frac{1-\tau}{-\Gamma \ln{\pi}}$ & $\eta_{CT} = \frac{\Gamma \ln{\pi}}{\tau-1}$\\
+    \end{tabular}
+    \caption{Rendement Gaz parfait}
+\end{table}
+En gaz parfait, on a les relations : \\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \hline
+         & Monoatomique & Biatomique & Triatomique et plus \\
+        $c_v$ & $3\frac{r}{2}$ & $5\frac{r}{2}$ & $3r$\\ 
+        $c_p$ & $5\frac{r}{2}$ & $7\frac{r}{2}$ & $4r$\\
+    \end{tabular}
+    \caption{Valeurs pour $c_p$ et $c_v$}
+\end{table}
+
+\subsection{Gaz parfait/réels}
+De manière générale : \\
+\begin{equation}
+    Pv = rT
+\end{equation}
+Une constante : $\Tilde{r} = r\Tilde{m} [\frac{J}{K kmol}] = 8314$\\
+Pour des gaz semi-parfait, les coefficients calorifiques dépendent de la température.\\
+Volume molaire : $\Tilde{v} = \frac{V}{N_x}$\\
+
+L'état normal est définit pour $P= 1atm = 1bar = 10^5Pa$ et $T_0 = 0^{\circ}C$\\
+Le volume normal est donc de $\Tilde{v_n} = \frac{\Tilde{r} T_n}{P_n} = 22.4 [\frac{m^3}{kmol}]$ et un mètre cube normal $1Nm^3 = \frac{1}{22.4}[kmol]$\\
+
+\quad \underline{Vander-Walls :}\\
+\begin{equation}
+    (v-b)(P+\frac{a}{v^2})=rT
+\end{equation}
+
+Pour les solides et liquides, on q $c_p \simeq c_v \simeq c$\\
+$du = cdT$, $dh=cdT+vdP$, $ds = \frac{c}{T}dT$\\
+
+\subsubsection{Changement de phase}
+\warning Ici les pressions sont en bar et les températures en degré celcius\\
+Par clapeyron :\\
+\begin{equation}
+    \frac{dP_s}{dT} = \frac{s"-s'}{v"-v'} = \frac{q_{vap}}{(v"-v')T} > 0
+\end{equation}
+Pour trouver le point de saturation :\\
+\begin{equation}
+    \ln{(\frac{P_v"}{140974})} = \frac{-392805}{231.667+\hat{T}}
+\end{equation}
+
+On a le titre de mélange : $x = \frac{M"}{M}$\\
+Pour toute fonction lors d'un changement de phase, on a \\
+\begin{equation}
+    \overline{v} = v' + x(v"-v')
+\end{equation}
+
+\subsubsection{Mélange de gaz parfait}
+Concentration massique : $c_i = \frac{M_i}{M}$ et molaire $\Tilde{c_i} = \frac{N_i}{N}$\\
+Avec les relations : $M = \sum M_i$ et $\sum c_i = \sum \Tilde{c_i} = 1$, $N = \sum N_i$\\
+\begin{equation}
+    \Tilde{m_i} \Tilde{c_i} = \Tilde{m} c_i
+\end{equation}
+De plus, $\Tilde{m_i} = \frac{M_i}{N_i}$ et $\frac{P_i}{P} = \Tilde{c_i}$\\
+
+Ainsi que $r= \sum c_ir_i$, $c_v = \sum c_i c_{vi}$, $c_p = \sum c_i c_{pi}$\\
+
+Selon Dalton, on a le volume constant et $P= \sum P_i$\\
+Selon Amagat, on a la pression constante et $V = \sum V_i$\\
+Entropie de diffusion : $S^d = -N \Tilde{r} \sum \Tilde{c_i} \ln{\Tilde{c_i}}$\\
+Température finale :\\
+
+$T = \frac{\sum \Tilde{c_i} \Tilde{c_{vi}} T_{i1}}{\sum \Tilde{c_i} \Tilde{c_{pi}}}$ De même avec $c_p$. \\
+La pression finale : $P = \frac{N\Tilde{r}T}{V} = \frac{T}{V} \sum \frac{V_{1i} P_{1i}}{T_{i1}}$\\
+
+\subsection{Saturation}
+On définit le degré de saturation : $\psi = \frac{w^*}{w^{*"}} = \frac{M_e}{M_v"}$\\
+Taux d'humidité : $w^* = \frac{\Tilde{m_v}}{\Tilde{m_a}} \frac{P_v}{P_m-P_v}$\\
+Ainsi que l'humidité relative : $\varphi = \frac{P_v}{P_v"}$\\
+
+On a $P_m = P_a+P_v$ ainsi que $M = M_e+M_a$\\
+
+Pour un mélange saturé, on a $\hat{h^*"} = c_{pa} \hat{T} + w^*"(q_{vap} + c_{pv} \hat{T})$\\
+Pour un mélange vapeur, liquide : $\hat{h^*} = \hat{h^*"} + (w^*-w^*")c_l \hat{T}$\\
+Pour un mélange sec : $\hat{h^*} = c_{pa}\hat{T} + w^*(q_{vap} + c_{pv}\hat{T})$\\
+
+On a aussi $r = \frac{r_a + w^*r_v}{1+w^*}$\\
+
+\begin{equation}
+\begin{split}
+        w^* = \frac{\Tilde{m_v}}{\Tilde{m_a}} \frac{\varphi P_v"}{P_m - \varphi P_v"}\\
+        \Rightarrow w^* = \frac{\dot{M_e}}{\dot{M_a}} = \frac{\dot{M_{a1}} w_1^* + \dot{M_{a2}} w_2^*}{\dot{M_{a1}} + \dot{M_{a2}}}
+\end{split}
+\end{equation}
+
+De même pour $\hat{h^*}$ : \\
+$\hat{h^*} = \frac{\dot{H}}{\dot{M_a}} = \frac{\dot{M_{a1}} \hat{h_1^*} + \dot{M_{a2}} \hat{h_2^*}}{\dot{M_{a1} + \dot{M_{a2}}}}$\\
+
+Si on a mélange avec une substance pure E :\\
+$w_2^* = \infty$, $\dot{M_{a2}} = 0 \Rightarrow w^* = w_1^* + \frac{\dot{M_{e2}}}{\dot{M_{a1}}}$\\
+
+\subsection{Exergie}
+
+On définit ici la partie de l'énergie qui peut réellement être utilisée.\\
+On a donc le facteur de carnot $\theta = 1-\frac{T_a}{T}$\\
+Exergie chaleur : $E_q^+ = \int \theta \partial Q^+$\\
+On a donc la coénergie totale : $J_{cz} = U_{cz} + P_aV - T_aS$\\
+Ainsi que la coenthalpie totale : $K_{cz} = H_{cz} - T_aS$\\
+
+L'exergie transformation reçu est donc $\dot{E_y} = \sum (h_{czj} \dot{M_j^+}) - \frac{dJ_{czj}}{dt}$\\
+
+On définit les pertes comme : \\
+\begin{equation}
+    \sum \dot{E^+_k} + \sum \dot{E^+_{qi}} + \sum \dot{E^+_{yn}} = \dot{L} \geq 0
+\end{equation}
+Et donc le rendement exergétique : \warning Faire attention aux bordures!\\
+
+\begin{equation}
+    \eta = \frac{\sum \dot{E^-_k} + \sum \dot{E^-_{qi}} + \sum \dot{E^-_{yn}}}{\sum \dot{E^+_k} + \sum \dot{E^+_{qi}} + \sum \dot{E^+_{yn}}}
+\end{equation}
+
+\subsubsection{Turbine}
+$\eta = \frac{\sum h_{cj} \dot{M_j^+} - \dot{Q_a}^-}{\sum k_{cj} \dot{M_j^-}} = 1-\frac{T_a (s_2-s_1)}{k_{1c}-k_{2c}}$\\
+$\dot{L} = \dot{Q_a^-} - T_a \sum \dot{M^+_j}s_j$\\
+
+
+\subsubsection{Compresseur}
+$\eta = \frac{\sum k_{cj} \dot{M_j^-}}{\sum h_{cj} \dot{M_j^+}} = 1-\frac{T_a (s_2-s_1)}{h_{1c}-h_{2c}}$\\
+$\dot{L} =  - T_a \sum \dot{M^+_j}s_j$\\
+
+\subsection{Combustion}
+On définit le pouvoir énergétique isobare :\\
+massique : $\underline{\Delta}h^{\circ} = \frac{H_M^{\circ}-H_{Gc}^{\circ}}{M_f}[\frac{J}{kmol_{fuel}}]$\\
+molaire : $\underline{\Delta}\Tilde{h^{\circ}} = \frac{H_M^{\circ}-H_{Gc}^{\circ}}{N_f}[\frac{J}{kmol_{fuel}}]$\\
+
+On a maintenant $M_{Gc} = M_M = M_F+M_A$\\
+On prend le pouvoir exergétique supérieur si on trouve de l'eau sous forme liquide dans les produit de combustion. Sinon on prend le pouvoir exergétique inférieur.\\
+
+L'énergie de combustion est donnée par $\dot{Y}_{comb}^+ = \dot{M_f} \underline{\Delta}h_s^{\circ}$\\
+
+Soit $\underline{\Delta}h_i^{\circ} = \underline{\Delta}h_s^{\circ} - \dot{M_{h_2O}} q_{vap}$\\
+L'exergie de combustion est donc : $\dot{E}_{ycomb}^+ = \dot{M}_f \underline{\Delta}k^{\circ}$\\
+\end{document}

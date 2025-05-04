@@ -1,0 +1,705 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+
+\localtableofcontents
+\subsection{Interpolation}
+Soit n entiers positif, n+1 valeurs $t_0, \dots, t_n$ distinctes, n+1 valeurs $p_0, \dots, p_n$.\\
+On cherche donc $p\in \mathbb{P}_n$ tel que $p(t_j) = p_j, j=0,1,\dots, n$\\
+
+On veut approcher une fonction par un polynôme.\\
+On rappelle que $\mathbb{P}_n$ a pour dimension n+1\\
+Une mauvaise méthode est de faire n+1 équations et de les résoudre (très long)\\
+
+\quad \underline{Interpolation de Lagrange :}\\
+Valide pour n quelconque : \\
+Soit $\varphi_0, \dots, \varphi_n$, une base de Lagrange de $\mathbb{P}_n$ associé aux points $t_0, \dots, t_n$.\\
+Pour $0\leq k \leq n$ fixé et $\varphi_k \in \mathbb{P}_n$. On a les caractéristiques : $\varphi_k(t_k) = 1$, $\varphi_k(t_j) = 0, \forall j\neq k$\\
+\begin{equation}
+    \varphi_k(t) = \Pi_{j=0, j\neq k}^n \frac{t-t_j}{t_k-t_j}
+\end{equation}
+Cette base satisfait aussi :\\
+\begin{equation}
+    p(t) = p_0 \varphi_0(t) + \dots + p_n \varphi_n(t)
+\end{equation}
+
+\quad \underline{Interpolation de fonction continue :}\\
+$f:[a;b] \rightarrow \mathbb{R}$ continue\\
+$t_j = a +\frac{b-a}{n} j $, $j=0,1,\dots, n$\\
+$p_n \in \mathbb{P}_n$ tel que $p_n(t_j) = f(t_j)$\\
+Est-ce que $p_n \rightarrow f$? Cela dépend des fonctions\\
+
+\begin{theorem}
+On suppose $f\in C^{n+1}([a;b])$ alors :\\
+\begin{equation}
+    \max_{a\leq x\leq b} \lvert f(t) - p_n(t)\rvert \leq \frac{1}{2(n+1)} (\frac{b-a}{n})^{n+1} \max_{a\leq t\leq b} \lvert f^{(n+1)}(t)\rvert
+\end{equation}
+On peut donc conclure que cette solution n'est pas souhaitable et que l'on préfère prendre des points distribués de manière adéquate.
+\end{theorem}
+
+\quad \underline{Interpolation de degré 1 par intervalle :}\\
+$f:[a;b] \rightarrow \mathbb{R}$ continue\\
+$x_i = a +\frac{b-a}{N} i $, $i=0,1,\dots, N$, N intervalles\\
+$f_h\in C^{\circ}([a;b])$\\
+$f_h(x_i)=f(x_i)$, $i=0,1, \dots, N$\\
+$f_h([x_i; x_{i+1}])\in \mathbb{P}_1$\\
+
+\begin{theorem}
+$\exists C>0$, $\forall f \in C^2([a;b]) \forall h>0$\\
+\begin{equation}
+    \max_{a\leq x \leq b} \lvert f_h(x) - f(x) \rvert \leq ch^2 \max_{a\leq x\leq b} \lvert f"(x)\rvert
+\end{equation}
+\end{theorem}
+
+\quad \underline{Interpolation de degré deux par intervalles :}\\
+Soit $h= \frac{b-a}{N}$, $x_i = a+hi$, $i=0,1,\dots, N$\\
+$f_h\in C^{\circ}([a;b])$, $f_h(x_i) = f(x_i)$ $i=0,1,\dots, N$\\
+$f_h(x_{i+\frac{1}{2}}) = f(x_{i+\frac{1}{2}})$ $i=0,1,\dots, N-1$\\
+$f_h([x_i;x_{i+1}]) \in \mathbb{P}_2$ $i=0,1,\dots, N-1$\\
+\begin{theorem}
+$\exists c>0 \forall f\in C^3([a;b])$\\
+\begin{equation}
+    \max_{a\leq x\leq b} \lvert f_h(x) - f(x)\rvert \leq ch^3 \max \lvert f^{(3)}(x)\rvert
+\end{equation}
+\end{theorem}
+
+\subsection{Dérivation numérique}
+\subsubsection{Ordre 1}
+$f:\mathbb{R}\rightarrow \mathbb{R}$, $f\in C^1$\\
+Soit $f'(x_0) = \lim_{h\rightarrow 0} \frac{f(x_0+h)-f(x_0)}{h} = \lim_{h\rightarrow 0} \frac{f(x_0)-f(x_0+h)}{h} = \lim_{h\rightarrow 0} \frac{f(x_0+\frac{h}{2})-f(x_0-\frac{h}{2})}{h}$\\
+Pour un h>0 fixé, on a la relation : $\lvert f'(x_0)-\frac{f(x_0+h)-f(x_0)}{h}\rvert = o(h)$ : Formule de différence finies \textbf{progressive} d'ordre 1 en h\\
+$\lvert f'(x_0)-\frac{f(x_0)-f(x_0-h)}{h}\rvert = o(h)$ : FDF \textbf{rétrograde}\\
+$\lvert f'(x_0)-\frac{f(x_0+\frac{h}{2})-f(x_0-\frac{h}{2})}{h}\rvert = o(h^2)$ : FDF \textbf{centrée} d'ordre 2 en h\\
+
+\quad \underline{Formule différence finie progressive :}\\
+$\forall f\in C^2$, $\forall x_0\in \mathbb{R}$, $\exists c> 0$, $\forall 0 \leq h \leq 1$. Par Taylor, $f(x_0+h) = f(x_0)+hf'(x_0)+\frac{h^2}{2}f"(\xi)$, $x_0 \leq \xi \leq x_0+h$\\
+\begin{equation}
+    \lvert f'(x_0) - \frac{f(x_0+h)-f(x_0)}{h}\rvert \leq Ch
+\end{equation}
+\warning C dépend de f, $x_0$ mais pas de h
+
+\quad \underline{Formule différence finie rétrograde :}\\
+$\forall f\in C^2$, $\forall x_0\in \mathbb{R}$, $\exists c> 0$, $\forall 0 \leq h \leq 1$\\
+\begin{equation}
+    \lvert f'(x_0) - \frac{f(x_0)-f(x_0-h)}{h}\rvert \leq Ch
+\end{equation}
+
+\quad \underline{Formule différence finie centrée :}\\
+$\forall f\in C^2$, $\forall x_0\in \mathbb{R}$, $\exists c> 0$, $\forall 0 \leq h \leq 1$\\
+
+\begin{equation}
+    \lvert f'(x_0) - \frac{f(x_0+\frac{h}{2})-f(x_0-\frac{h}{2})}{h} \rvert \leq Ch^2 
+\end{equation}
+
+\subsubsection{Erreur d'arrondis}
+En intégrant une équation, on réduit son bruit, en dérivant le bruit augmente\\
+
+Soit $\overline{c}$ l'approximation de c. On a $\lvert c-\overline{c}\rvert = \lvert c \rvert 10^{-N}$\\
+Soit $f(x_0) \simeq \lvert f(x_0)\rvert 10^{-N} \simeq f(x_0+h)$\\
+$\frac{f(x_0+h)-f(x_0)}{h} \simeq \frac{2 \lvert f(x_0) \rvert 10^{-N}}{h}$\\
+Ainsi, si $h>>2\lvert f(x_0)\rvert 10^{-N}$ pas d'erreur d'arrondis. \\
+
+\subsubsection{Ordre 2}
+$\forall f\in C^4$, $\forall x_0 \in \mathbb{R}$, $\exists c>0$ tel que $\forall 0\leq h \leq 1$\\
+\begin{equation}
+    \lvert f"(x_0) - \frac{f(x_0+h) - 2f(x_0) + f(x_0-h)}{h^2} \rvert \leq ch^2
+\end{equation}
+Erreur d'arrondis en $o(\frac{1}{h^2})$\\
+
+\subsection{Intégration numérique}
+\subsubsection{Généralités}
+$f:[a;b] \rightarrow \mathbb{R}$ continue. On veut approcher numériquement $\int_a^bf(x)dx$ :\\
+\begin{equation}
+    \int_a^bf(x)dx = \sum_{i=0}^{N-1} \int_{x_i}^{x_{i+1}}f(x)dx = \frac{h}{2} \sum_{i=0}^{N-1} \int_{-1}^1 f(x_i + h\frac{t+1}{2})dt
+\end{equation}
+Avec $h = \frac{b-a}{N}$\\
+
+
+\subsubsection{Formule de quadrature}
+M entier positifs, $-1\leq t_1 < \dots < t_M \leq 1$ points d'intégrations et $\omega_1, \dots, \omega_M$ poids d'intégrations\\
+
+\begin{equation}
+    J(g) = \omega_1 g(t_1) + \omega_2 g(t_2) + \dots + \omega_M g(t_M)
+\end{equation}
+Avec $g(t_i) = f(x_i + h\frac{t+1}{2})$\\
+Dès lors, on a : $\int_a^b f(x)dx = \frac{h}{2} \sum_{i=0}^{N-1} \int_{-1}^1 f(x_i + h\frac{t+1}{2}) dt \simeq \frac{h}{2} \sum_{i=0}^{N-1} \sum_{j=1}^M \omega_j f(x_i + h\frac{t_j+1}{2}) = L_h(f)$\\
+
+\begin{theorem}
+Données : $M, t_1, \dots, t_M$ points d'intégrations, $\omega_1, \omega_2, \dots, \omega_M$ poids d'intégrations\\
+Hypothèses : \begin{itemize}
+    \item la formule de quadrature J(g) est exact pour les polynômes de degré $r>0$ $\forall p\in \mathbb{P}_r$ : $\int_{-1}^1p(t)dt = J(p) = \sum_{j=1}^{r+1}\omega_j g(t_j)$\\
+    \item $f\in C^{r+1} [a;b]$\\
+\end{itemize}
+
+Ainsi, $\forall f \in C^{r+1}[a;b] \exists c>0$, $\forall 0 <h<b-a$\\
+\begin{equation}
+    \lvert \int_a^b f(x)dx-L_h(f)\rvert \leq ch^{r+1}
+\end{equation}
+On prend donc $t_j$ et $\omega_j$ de sorte que r soit le plus grand possible.\\
+\end{theorem}
+
+\quad \underline{Formule du rectangle/trapèze :}\\
+
+Rectangle : $J(g) = 2g(0)$,\quad $L_h(f) = h\sum_{i=0}^{N-1} f(x_i+\frac{h}{2})$, en $o(h^2)$\\
+
+Trapèze : $J(g) = g(-1)+g(1)$,\quad $L_h(f) = \frac{h}{2} \sum_{i=0}^{N-1}f(x_i)+f(x_i+1)$, en $o(h^2)$\\
+
+\color{gray} Note : pour un rectangle, M=1 et $\omega_1 = 2$. Pour un trapèze : M=2 et $\omega_1=\omega_2 = 1$\color{black}\\
+
+\subsubsection{Poids d'une formule}
+Soit $\varphi_1, \dots, \varphi_M$ la base de Lagrange de $\mathbb{P}_{M-1}$ associée aux points $t_1, \dots, t_M$\\
+
+\quad \underline{Théorème 3.2 :}\\
+\begin{equation}
+    \int_{-1}^1p(t)dt = J(p) \forall p\in \mathbf{M-1} \Leftrightarrow \omega_j = \int_{-1}^1 \varphi_j(t)dt, j=1,\dots, M
+\end{equation}
+On définit ainsi l'erreur : $\lvert \int_a^b f(x)dx -L_h(f)\rvert = o(h^M)$ si $f\in C^M[a;b]$\\
+Enfin, $\sum \omega_i = 2$\\
+
+\subsubsection{Formule de Simpson}
+$J(g) = \omega_1 g(-1) + \omega_2g(0) + \omega_3g(1)$\\
+$\omega_1 = \omega_3 = \frac{1}{3}$ et $\omega_2 = \frac{4}{3}$\\
+Ainsi $L_h(f) = \frac{h}{6} \sum_{i=0}^{N-1}(f(x_i)+4f(x_i+\frac{h}{2})+f(x_i+1))$\\
+Pour des raison de symétrie, la formule est exact $\forall p \in \mathbb{P}_3$\\
+On a donc $\lvert \int_a^b f(x)dx - L_h(f)\rvert = o(h^4)$\\
+
+\subsubsection{Points d'intégration-Formule de Gauss}
+Comment choisir $t_1, \dots, t_M$?\\
+\begin{itemize}
+    \item M=2 : \begin{itemize}
+        \item $t_1 = -\frac{1}{\sqrt{3}}$\\
+        \item $t_2 = \frac{1}{\sqrt{3}}$, $\omega_1 = \omega_2 = 1$\\
+        \item Pour des raisons de symétrie, la formule est vraie $\forall p \in \mathbb{P}_3$\\
+        \item $\lvert \int_a^b f(x)dx -L_h(f)\rvert = o(h^4)$ $f\in C^4[a;b]$\\
+    \end{itemize}
+    \item M quelconque : \begin{itemize}
+        \item $t_1, \dots, t_M$ sont les zéros du polynôme Gauss-Legendre $L_M$\\
+        \item Formule vraie $\forall p \in \mathbb{P}_{2M-1}$\\
+        \item $\lvert \int_a^b f(x)dx - L_h(f)\rvert = o(h^{2M})$, $f\in C^{2M}[a;b]$\\
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Résolution systèmes linéraires}
+N entier positifs $10 \rightarrow 10^9$\\
+Soit une matrice A, NxN régulière(inversible, detA$\neq$0, $\dots$)\\
+Soit $\Vec{b}$ un vecteur à N coefficients. On veut trouver $\Vec{x}$ un vecteur à N coefficients tel que $A\Vec{x} = \vec{b}$\\
+
+\subsubsection{Élimination de Gauss}
+On échelonne la matrice A en effectuant les mêmes opérations sur $\Vec{b}$\\
+Ainsi, on passe de $A\Vec{x} = \Vec{b}$ à $U\Vec{x} = \Vec{d}$. Avec U une matrice triangulaire supérieure avec ses coefficients diagonaux égaux à 1.\\
+
+\subsubsection{Décomposition LU}
+On écrit A comme A=LU, avec L une matrice triangulaire inférieure et U une matrice triangulaire supérieure avec ses coefficients diagonaux égaux à 1.\\
+
+Grâce à cela, on doit trouver les solutions : $L\Vec{y} = \Vec{b}$ puis de $U\Vec{x} = \Vec{y}$\\
+
+Pour obtenir les coefficients de L et U, on identifie les coefficients de A et LU dans l'ordre suivant :\\
+\begin{enumerate}
+    \item coefficient de la première colonne de A et LU : on obtient que la première colonne de A est égale à la première ligne de L\\
+    \item on trouve que la première ligne de A est égale à la première ligne de $\frac{U}{A_{11}}$\\
+\end{enumerate}
+
+
+\subsubsection{Autre décomposition}
+On parle ici de la décomposition $LL^T$.\\
+A est une matrice symétrique définie positive si :\\
+\begin{itemize}
+    \item $A=A^T$\\
+    \item $\forall \Vec{x} \in \mathbb{R}^n$, $\Vec{x}^TA\Vec{x} = \langle \Vec{x}; A\Vec{x}\rangle \geq 0$\\
+    \item $\Vec{x}^T A \Vec{x} = 0 \Leftrightarrow \Vec{x} = \Vec{0}$\\
+\end{itemize}
+Si A est symétrique définie positive, alors il existe L ($l_{ii} > 0$) tel que $A=LL^T$ avec L : triangulaire inférieure\\
+De plus, la première colonne de A est égale à la première colonne de L.\\
+
+\subsection{Équations et systèmes d'équations non linéaires}
+\quad \underline{Données :} $f:\mathbb{R} \rightarrow \mathbb{R}$ continue, on cherche ($\overline{x}$ tel que $f(\overline{x})=0$)$\Leftrightarrow$($\overline{x}$ tel que $\overline{x}=g(\overline{x})$), $\overline{x}$ est un point fixe de g.\\
+
+\subsubsection{Méthode des points fixes}
+Soit $x_0$ donné, $g:\mathbb{R}\rightarrow\mathbb{R}$ continue et $x_{n+1} = g(x_n)$\\
+
+\quad \underline{Théorème :}\\
+Soit $g:\mathbb{R}\rightarrow\mathbb{R}$, $C^1$ : soit $\overline{x}$ tel que $g(\overline{x})=\overline{x}$, supposons $\lvert g'(x)\rvert < 1$\\
+Alors, $\exists \varepsilon>0$, $\forall \overline{x}-\varepsilon \leq x_0 \leq \overline{x}+\varepsilon$, la suite définie par $x_{n+1} = g(x_n)$ converge vers $\overline{x}$. De plus, la convergence est linéaire :\\
+\begin{equation}
+    \exists 0 < c < 1, \forall n : \lvert \overline{x}-x_{n+1}\rvert \leq c \lvert \overline{x}-x_n\rvert 
+\end{equation}
+
+\subsubsection{Méthode de Newton}
+On cherche ici $\overline{x}$ tel que $f(\overline{x})= 0$\\
+\begin{equation}
+    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+\end{equation}
+La méthode de Newton est une méthode de points fixes : \\
+$x_{n+1} = g(x_n)$ où $g(x) = x-\frac{f(x)}{f'(x)} \Rightarrow g'(x) = 1- \frac{(f'(x))^2-f(x)f"(x)}{(f'(x))^2} = 0<1$ ainsi par le théorème, la suite $(x_n)_n$ converge vers $\overline{x}$\\
+
+\quad \underline{Théorème :} soit $f:\mathbb{R}\rightarrow \mathbb{R}$, $C^2$, soit $\overline{x}$ tel que $f(\overline{x})=0$. On suppose $f'(\overline{x})=0$.\\
+Alors, $\exists \varepsilon>0$ $\forall \overline{x}-\varepsilon \leq x_0 \leq \overline{x}+\varepsilon$ la suite définie par $x_{n+1} = x_n + \frac{f(x_n)}{f'(x_n)}$ converge vers $\overline{x}$. De plus, la convergence est quadratique :\\
+\begin{equation}
+    \lvert \overline{x}-x_{n+1}\rvert < C \lvert \overline{x}-x_n\rvert ^2
+\end{equation}
+
+
+\quad \underline{Généralisation à $\mathbb{R}^n$ :}\\
+Soit $\Vec{x}\in \mathbb{R}^N$ tel que $\Vec{f}(\Vec{x}) = \Vec{0}$. \\
+Avec $\Vec{x} = \begin{pmatrix} x_1\\ \dots \\ x_n \\\end{pmatrix}$ et $\Vec{f}:\mathbb{R}^N \rightarrow \mathbb{R}^N$ $\Vec{f}(\Vec{x}) = \begin{pmatrix}
+    f_1(x_1, \dots, x_n)\\ \dots \\ f_n(x_1, \dots, x_n)\\
+\end{pmatrix}$
+On définit $Df(\Vec{x}) = \begin{pmatrix}
+    \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n}\\
+    \dots & \dots & \dots\\
+    \frac{\partial f_n}{\partial x_1} & \dots & \frac{\partial f_n}{\partial x_n}
+\end{pmatrix}$
+
+$Df(\Vec{x}^n) (\Vec{x}^n-\Vec{x}^{n+1}) = \Vec{f}(\Vec{x}^n)$\\
+
+\subsection{Équations différentielles}
+\quad \underline{Données :} $u_0 \in \mathbb{R}$, $f(x,t)$\\
+
+\quad \underline{Problème :} trouver $u : \begin{matrix}
+    \mathbb{R} \rightarrow \mathbb{R}\\
+    t \rightarrow u(t)\\
+\end{matrix} $ tel que $ \begin{cases} \dot{u(t)} = f(u(t),t) & t>0\\ u(0) = u_0 & \\ \end{cases}$\\
+
+\subsubsection{Existence}
+\begin{theorem}
+
+On suppose que $f$ est continue et que $\exists l : \begin{matrix} \mathbb{R}_+ \rightarrow \mathbb{R}\\ t\rightarrow l(t)\end{matrix}$ tel que $\forall x,y \in \mathbb{R}$, $\forall t\geq 0$ on a :\\
+\begin{equation}
+    (f(x,t)-f(y,t))(x-y) \leq l(t)(x-y)
+\end{equation}
+Alors le problème admet une solution globale unique.
+\end{theorem}
+
+\quad \underline{Corollaire :}\\
+Soit $f(x,t) \in C^1$, $\exists k \in \mathbb{R}$ $\forall x \in \mathbb{R}$, $\forall t \geq 0$ : \\
+\begin{equation}
+    \frac{\partial f}{\partial x}(x,t) \leq k
+\end{equation}
+Alors le problème admet une solution unique.\\
+
+\subsubsection{Schéma d'Euler}
+\quad \underline{Progressif :}\\
+Soit $g_n = nh$, $n=0,1,\dots$\\
+
+On approxime $u(t_n)$ par $u^n$.\\
+
+Le schéma d'Euler progressif est défini comme : \\
+\begin{equation}
+    \frac{u^{n+1}-u^n}{h} = f(u^n, t_n)
+\end{equation}
+
+\underline{Avantages :} schéma explicite : $u^{n+1} = u^n + h f(u^n,t_n)$, facile à programmer\\
+
+\underline{Inconvénients :} non stable\\
+
+\quad \underline{Rétrograde :}\\
+\begin{equation}
+    \frac{u^{n+1}-u^n}{h} = f(u^{n+1},t_{n+1})
+\end{equation}
+
+Ce schéma est implicite : $u^{n+1} - u^n - hf(u^{n+1}, t_{n+1}) = g(u^{n+1}) = 0$, on la résout à l'aide de la méthode de Newton.\\
+
+\underline{Inconvénients :} implicite, plus difficile à programmer\\
+\underline{Avantages :} Stable\\
+
+\quad \underline{Stabilité des schémas d'Euler :}\\
+On réécrit d'abord la fonction comme : $\begin{cases}
+    \dot{u}(t) = -\beta u(t) & t>0\\
+    u(0) = u_0 & \\
+\end{cases}, \beta>0$\\
+
+\underline{Définition :} le schéma est \textbf{stable} si $\lim_{n\rightarrow \infty} u^n = 0$\\
+
+Schéma d'Euler progressif : il faut que $h < \frac{2}{\beta}$\\
+Schéma d'Euler rétrograde : il faut que $1> \frac{1}{1+\beta h}$, ce qui est toujours le cas.\\
+
+\quad \underline{Convergence des schémas d'Euler :} ils convergent à l'ordre 1 en h\\
+On a la relation : \\
+\begin{equation}
+    \lvert u(t_n) - u^n\rvert  = O(h)
+\end{equation}
+
+\quad \underline{Schémas d'ordre supérieur :}\\
+Schéma de Crank-Nicolson : $\frac{u^{n+1}-u^n}{h} = \frac{1}{2}(f(u^n, t_n)+f(u^{n+1},t_{n+1}))$\\
+Il s'agit ici d'un ordre 2 en h : $\lvert u(t_n) - u^n\rvert = O(h^2)$\\
+Ce schéma et inconditionnellement stable. \\
+
+\subsubsection{Systèmes d'équations différentielles du premier ordre}
+On cherche $\Vec{u}(t) = \begin{pmatrix}
+    u_1(t)\\ \dots \\ u_n(t)
+\end{pmatrix}$ tel que $\begin{cases}
+    \dot{\Vec{u}}(t) = \Vec{f}(\Vec{u}(t), t) & t>0\\
+    \Vec{u}(0) = \Vec{u}_0
+\end{cases}$ où $f : \mathbb{R}^M x \mathbb{R}_+ \rightarrow \mathbb{R}^M$, $\Vec{f}(\Vec{x},t) = \begin{pmatrix}
+    f_1(x_1, x_2, \dots, x_m, t)\\
+    \dots\\
+    f_m(x_1, x_2, \dots, x_m, t)\\
+\end{pmatrix}$
+
+Par le schéma d'Euler progressif, on a : $\Vec{u}^{n+1} = \Vec{u}^n + h\Vec{f}(\Vec{u}^n, t_n)$\\
+
+Par le schéma d'Euler rétrograde, on a : $\Vec{u}^{n+1} - \Vec{u}^n - h\Vec{f}(\Vec{u}^{n+1}, t_{n+1}) = \Vec{0}$, à chaque pas de temps, on a un système d'équations non linéaires à M équations et M inconnues.\\
+
+\subsection{Problèmes aux limites unidimensionnels}
+\quad \underline{Problème modèle :} donnée : $f:\begin{matrix}
+    [0,1] \rightarrow \mathbb{R}\\
+    x \mapsto f(x)\\
+\end{matrix}$ cherché : $ u : \begin{matrix}
+    [0,1] \rightarrow \mathbb{R}\\
+    x \mapsto u(x)\\
+\end{matrix}$ Il s'agit ici par exemple d'une corde élastique tendue, pincée aux extrémités.\\
+$\begin{cases}
+    -u"(x) = f(x)\\
+    u(0) = u(1)=0 \\
+\end{cases}$
+
+On utilise ici la méthode de différence finie.\\
+
+Soit N un entier positif (grand) et $h = \frac{1}{N+1}$ un pas d'espace (petit). On a aussi $x_i = ih$, $i=0,1,\dots, N+1$\\
+Le but est de calculer des valeurs $u_i$ approximations de $u(x_i)$, $i=1,\dots, N$\\
+On a ainsi : $-u"(x_i) = f(x_i)$, $i=1,\dots, N$\\
+Par la formule de différence finie centrée : $-\frac{u(x_{i-1})-2u(x_i)+u(x_{i+1})}{h^2} = f(x_i)+O(h^2)$\\
+
+\quad \underline{Schéma :}\\
+\begin{equation}
+    \frac{-u_{i-1}+2u_i-u_{i+1}}{h^2} = f(x_i)
+\end{equation}
+Avec $i=1,\dots, N$\\
+
+On peut réécrire le problème sous forme de système linéaire :\\
+\begin{equation}
+    \frac{1}{h^2} \begin{pmatrix}
+        2 & -1 & 0 & 0\\
+        -1 & 2 & -1& 0 \\
+        \dots & \dots & \dots & \dots\\
+        0 & 0 & -1 & 2\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        u_1\\
+        u_2\\
+        \dots \\
+        u_N\\
+    \end{pmatrix} = \begin{pmatrix}
+        f(x_1)\\
+        f(x_2)\\
+        \dots \\
+        f(x_N)\\
+    \end{pmatrix} \Leftrightarrow A \Vec{u} = \Vec{f}
+\end{equation}
+On a A symétrique définie positive. On peut donc appliquer la décomposition $A=LL^T$\\
+
+\begin{theorem}
+$u \in C^4[0,1]$, $\exists c>0$ $\forall 0<h<1$\\
+\begin{equation}
+    \max_{1\leq i \leq N} \lvert u_i-u(x_i)\rvert \leq ch^2
+\end{equation}
+\end{theorem}
+
+\subsubsection{Problèmes non linéaires :}
+Par exemple, on peut étudier : $\begin{cases}
+    -u"(x) + x (u(x))^3 = f(x) & 0<x<1\\
+    u(0)\\
+    u(1)\\
+\end{cases}$
+
+\quad \underline{Schéma :}\\
+$\frac{-u_{i-1}+2u_i - u_{i+1}}{h^2} + x_i(u_i)^3 = f(x_i)$. On peut réécrire le tout comme un système non linéaire : \\
+\begin{equation}
+    \Vec{F}(\Vec{u}) = \Vec{0} = \begin{pmatrix}
+        F_1 (u_1, u_2, \dots, u_N)\\
+        \dots\\
+        \dots \\
+        F_N(u_1, u_2, \dots, u_N)\\
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{2u_1-u_2}{h^2} + x_1 (u_1)^3 - f(x_1)\\
+        \frac{-u_1+2u_2-u_3}{h^2} + x_2 (u_2)^3 - f(x_2)\\
+        \dots\\
+        \frac{-u_{N-1}+2u_N}{h^2} + x_N (u_N)^3 - f(x_N)\\
+    \end{pmatrix}
+\end{equation}
+Comme $\Vec{u}^n = \begin{pmatrix}
+    u_1^n\\
+    \dots\\
+    u_N^n\\
+\end{pmatrix}$ est connu, on cherche $\Vec{u}^{n+1}$ tel que $DF(\Vec{u}^n)(\Vec{u}^n-\Vec{u}^{n+1}) = \Vec{F}(\Vec{u}^n)$. Avec DF une matrice symétrique définie positive, la jacobienne de $\Vec{u}$.\\
+
+\subsubsection{Formulation variationnelle (faible, principe des travaux virtuels)}
+Soit $v:[0,1] \rightarrow \mathbb{R}$, $C^1$ et on multiplie le problème de base par $v(x)$ et on intègre entre 0 et 1.\\
+$\Rightarrow \int_0^1 -u"(x)v(x)dx = \int_0^1f(x)f(x)dx \Rightarrow \int_0^1 u'(x)v'(x)dx - [u'(x)v(x)]_0^1 = \int_0^1 f(x)v(x)dx$, on prend $v$ tel que $v(0)=v(1)=0$\\
+Le problème se réduit donc en :\\
+\begin{equation}
+    \int_0^1 u'(x)v'(x)dx = \int_0^1 f(x)v(x)dx
+\end{equation}
+Ainsi, on veut trouver $u\in V$ tel qu'il soit solution du nouveau problème $\forall v \in V$\\
+On définit l'ensemble V comme l'ensemble des déplacements admissibles :\\
+\begin{equation}
+    V = \{v:[0,1] \rightarrow \mathbb{R} \text{ continue, v' continue par morceaux et } v(0)=v(1)=0\}
+\end{equation}
+
+\color{gray}Remarque : on vient de démontrer que si $u$ est solution du problème original, alors $u$ est solution du nouveau. Il existe cependant des solutions du nouveau problème qui ne sont pas solutions de l'original. \color{black}\\
+
+\subsubsection{Modèle de Ritz-Galerkin}
+Soit V un espace vectoriel avec $\dim V = \infty$ \\
+Soit $\varphi_1, \dots, \varphi_N$ N fonction linéairement indépendante de V et soit $\dim V_h = N$ $V_h = span(\varphi_1, \varphi_2, \dots, \varphi_N)$\\
+
+On cherche $u_h \in V_h$ tel que $\int_0^1 u'_h(x) v'_h(x)dx = \int_0^1 f(x)v_h(x)dx$ $\forall v_h \in V_h$\\
+
+On a $u_h \in V_h$ donc $u_h(x) = \sum_{j=1}^N u_j \varphi_j(x)$. On choisit ici $v_h(x) = \varphi_i(x)$, $i=1,\dots,N$\\
+$\Rightarrow \sum_{j=1}^N u_j \int_0^1 \varphi'_j(x)\varphi'_i(x)dx = \int_0^1 f(x) \varphi_i(x) dx= f_i$, $i=1,\dots, N$\\
+$A\Vec{u} = \Vec{f}$. Où A est symétrique définie positive donc $\ker(A) = 0$, $\forall \Vec{f} \in \mathbb{R}^N$, $\exists! \Vec{u} \in \mathbb{R}^N$ tel que $A\Vec{u} = \Vec{f}$\\
+
+\subsubsection{Méthode des éléments finis}
+On choisis $\varphi_1, \varphi_2, \dots, \varphi_N$ : \begin{itemize}
+    \item $\varphi_i(x) = \sin{(i\pi x)}$ série de Fourier\\
+    \item $\varphi_i(x) = x(1-x)$\\
+    \item $\varphi_i(x)$ éléments finis
+\end{itemize}
+
+Soit $v_h \in V_h$, $v_h = \sum_{j=1}^N v_j \varphi_j(x)$, $\rightarrow v_h(x_i) = \sum_{j=1}^N v_j \varphi_j(x_i) = v_i$ (la base utilisée est définie comme $\varphi_i(x_j) = \begin{cases}
+    1 & \text{si i=j}\\
+    0 & \text{sinon}\\
+\end{cases}$
+La matrice A est creuse (tri-diagonal). De plus, comme A est symétrique, on a $A_{i,i-1}=A_{i+1,i}$\\
+
+\begin{equation}
+    \begin{gathered}
+    A_{ii} = \int_0^1 (\varphi'_i(x_i))^2dx = \int_{x_{i-1}}^{x_i} (\frac{1}{h})^2dx + \int_{x_i}^{x_{i+1}} (\frac{1}{h})^2dx = \frac{2}{h}\\
+    A_{i,i-1} = -\frac{1}{h} \\
+    f_i= \int_0^1 f(x) \varphi_i(x)dx = \int_{x_{i-1}}^{x_i} f(x)\varphi_i(x)dx + \int_{x_i}^{x_{i+1}} f(x)\varphi_i(x)dx\\
+    = \frac{h}{2}(f(x_{i-1})\varphi_i(x_{x-1})+f(x_i) \varphi_i(x_i) + f(x_{i+1})\varphi_i(x_{i+1})+f(x_i)\varphi_i(x_i)) = hf(x_i) \Rightarrow f_i \simeq hf(x_i)
+    \end{gathered}
+\end{equation}
+
+On a donc :\\
+\begin{equation}
+    \frac{1}{h} \begin{pmatrix}
+        2 & -1 & 0 & \dots & & & 0\\
+        -1 & 2 &-1 & 0 & \dots & & 0\\
+        0 & -1 & 2 & -1 & 0& \dots & 0\\
+    \end{pmatrix} \begin{pmatrix}
+        u_1\\
+        \dots \\
+        u_N
+    \end{pmatrix} = h \begin{pmatrix}
+        f(x_1)\\
+        \dots \\
+        f(x_N)\\
+    \end{pmatrix}
+\end{equation} 
+
+\subsection{Équation de la chaleur en 1D}
+On a comme données : $\rho C_p$, $k >0$. On cherche la température du système $u(x,t)$ qui satisfait : $\begin{cases}
+    \rho C_p \frac{\partial u}{\partial t}(x,t) - k \frac{\partial^2u}{\partial x^2}(x,t) = f(x,t) & 0<x<1, t>0\\
+    u(0,t)=u(1,y)=0\\
+    u(x,0)=w(x)\\
+\end{cases}$\\
+
+On intègre l'équation de la chaleur entre deux points compris entre 0 et 1, a et b. : $\int_a^b \rho C_p \frac{\partial u}{\partial t}(x,t)dx-\int_a^b k\frac{\partial^2u}{\partial x^2}(x,t)dx=\int_a^b f(x,t)dx \Rightarrow \frac{d}{dt}(\int_a^b \rho C_p u(x,t)dx)-[k\frac{\partial u}{\partial x}]_a^b$\\
+
+Si $f(x,t)=0$, on a les deux propriétés suivantes : \begin{itemize}
+    \item $(w(x)\geq 0) \Leftrightarrow (u(x,t) \geq 0)$, $0<x<1$\\
+    \item $\max_{0<x<1} \lvert u(x,t)\rvert \leq \max_{0<x<1} \lvert w(x,t)\rvert$\\
+\end{itemize}
+
+\underline{Méthode :} grille différence finies espace temps et marche en temps\\
+
+Soit $\tau$ le pas de temps tel que $t_n = n \tau$, n=0,1,$\dots$, N+1\\
+Et $h$ le pas d'espace tel que $h = \frac{1}{N+1}$ et $x_i = ih$, i=0,1,$\dots$, N+1\\
+
+\quad \underline{Schéma d'Euler progressif :}\\
+On écrit l'équation au point $x_i$ au temps $t_n$ (n fixé)\\
+\begin{equation}
+    \frac{\partial u}{\partial t}(x_i,t_n)-k \frac{\partial^2 u}{\partial x^2}(x_i,t_n) = f(x_i,t_n), i=1,\dots,N
+\end{equation}
+On utilise une formule de différence finie centrée pour $\frac{\partial^2 u}{\partial x^2}$ et une formule de différence finie progressive pour $\frac{\partial u}{\partial t}$\\
+
+$\frac{u(x_i,t_{n+1})-u(x_i,t_n)}{\tau} - k\frac{u(x_{i-1},t_n)-2u(x_i,t_n)+u(x_{i+1},t_n)}{h^2} = f(x_i,t_n)+O(\tau)+O(h^2)$\\
+
+\begin{equation}
+    \begin{cases}
+        \frac{u_i^{n+1}-u_i^n}{\tau}-k \frac{u_{i-1}^n-2u_i^n+u_i^n+u_{i+1}^n}{h^2} = f(x_i,t_n)\\
+        u_0^n = u_{N+1}^n = 0\\
+    \end{cases}
+\end{equation}
+
+$\Rightarrow \frac{\Vec{u}^{n+1}-\Vec{u}^n}{\tau}+A \Vec{u}^n = \Vec{f}(t_n)$ où $\Vec{u}^n = \begin{pmatrix}
+    u_1^n\\
+    \dots\\
+    u_N^n\\
+\end{pmatrix}$, $A = \frac{k}{h^2} \begin{pmatrix}
+    2 & -1 &\\
+    -1 & 2 & -1\\
+    0 & -1 &2 -1 & 0\\
+    \dots\\
+\end{pmatrix}$, $\Vec{f}(t_n) = \begin{pmatrix}
+    f(x_1,t_n)\\
+    \dots \\
+    f(x_N,t_n)\\
+\end{pmatrix}$\\
+
+On a donc : \begin{equation}
+\begin{gathered}
+    \Vec{u}^{n+1} = (I-\tau A) \Vec{u}^n + \tau \Vec{f}(t_n)\\
+    \Rightarrow \begin{cases}
+        u_i^{n+1} = (1-\frac{2\tau k}{h^2})u_i^n + \frac{\tau k}{h^2} (u_{i-1}^n+u_{i+1}^n)+\tau f(x_i,t_n) & 1=1,\dots, N\\
+        u_0^n = u_{N+1}^n = 0\\
+    \end{cases}
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Schéma d'Euler rétrograde :}\\
+On écrit ici l'équation en $x_i$ et $t_{n+1}$ : $\frac{\partial u}{\partial t}(x_i,t_{n+1})-k\frac{\partial^2 u}{\partial x^2}(x_i,t_{n+1}) = f(x_i,t_{n+1})$\\
+
+On a donc :\\
+$\frac{u(x_i,t_{n+1})-u(x_i,t_n)}{\tau} - k\frac{u(x_{i-1},t_{n+1})-2u(x_i,t_{n+1}n)+u(x_{i+1},t_{n+1})}{h^2} = f(x_i,t_{n+1})+O(\tau)+O(h^2)$\\
+
+\begin{equation}
+    \begin{cases}
+        \frac{u_i^{n+1}-u_i^n}{\tau}-k \frac{u_{i-1}^{n+1}-2u_i^{n+1}+u_i^{n+1}+u_{i+1}^{n+1}}{h^2} = f(x_i,t_{n+1})\\ 
+        u_0^{n+1} = u_{N+1}^{n+1} = 0\\
+    \end{cases}
+\end{equation}
+$(I+\tau A) \Vec{u}^{n+1} = \Vec{u}^n + \tau \Vec{f}(t_{n+1})$\\
+
+\quad \underline{Stabilité des schémas d'Euler :}\\
+\underline{Définition :}\\
+On dit que le schéma est stable si les propriétés suivantes sont satisfaites (cas où $f(x,t)=0$): \begin{itemize}
+    \item ($u_i^n\geq 0) \Leftrightarrow(u_i^{n+1}\geq 0)$), i=1,$\dots$,N\\
+    \item $\max_{1\leq i \leq N} \lvert u_i^{n+1}\rvert \leq \max_{1\leq i \leq N}\lvert u_i^n\rvert$\\
+\end{itemize}
+
+
+\quad \underline{Lemme :} le schéma d'Euler progressif est stable si $\tau \leq  \frac{h^2}{2k}$. Le schéma d'Euler rétrograde est toujours stable $\forall \tau >0$, $\forall h>0$\\
+
+
+\subsection{Équation de transport}
+On veut ici résoudre l'équation : \begin{equation}
+    \begin{cases}
+        \frac{\partial u}{\partial t}(x,t) + c(x,t) \frac{\partial u}{\partial x}(x,t) = f(x,t) & x\in \mathbb{R}, t>0\\
+        u(x,0) = w(x) & x \in \mathbb{R}\\
+    \end{cases}
+\end{equation}
+
+\quad \underline{Grille espace-temps :}$x_j = jh$, $j\in \mathbb{Z}$, $t_n = n\tau$ $n=0,1, \dots$\\
+Il existe deux schéma, un avec une formule de différence finie centrée pour $ \frac{\partial u}{\partial x}$ et une autre décentrée pour ce même terme. Le premier schéma est toujours instable.\\
+
+
+\subsubsection{Schéma explicite décentrée}
+On utilise ici : \begin{equation}
+    \frac{u_j^{n+1}-u_j^n}{\tau}+ c(x_j,t_n) \frac{u_j^n-u_{j-1}^n}{h} = f(x_j,t_n)
+\end{equation}
+Il s'agit ici d'un schéma explicite avec $O(\tau) + O(h)$.\\
+
+\quad \underline{Stabilité du schéma explicite décentré}
+On dira que le schéma est stable si les deux propriétés suivantes sont satisfaites (lorsque $(fx,t)=0$ et $c(x,t)=c_0$) : \begin{itemize}
+    \item si $( u_j^n \geq 0, j\in \mathbb{Z})$ alors $(u_j^{n+1} \geq 0, j \in \mathbb{Z})$\\
+    \item $\sup_{j \in \mathbb{Z}} \lvert u_j^{n+1} \rvert \leq \sup_{j \in \mathbb{Z}} \lvert u_j^n\rvert$\\
+\end{itemize}
+
+Le schéma est stable si $\tau \leq \frac{h}{\lvert c_0 \rvert}$\\
+
+Si $x\in [0;1]$ alors on a besoin des conditions aux bords.\\
+
+\subsection{Ondes}
+La situation est ici une onde vibrante avec : \begin{itemize}
+    \item w(x) : la déformation initiale\\
+    \item v(x) : la vitesse de déformation initiale\\
+    \item c>0 : la vitesse de propagation\\
+    \item u(x,t) : la déformation au temps t\\
+\end{itemize}
+Données : w(x), v(x), $f$(x,t)\\
+Inconnues : u(x,t)\\
+
+\begin{equation}
+    \begin{cases}
+        \frac{\partial^2 u}{\partial t^2}(x,t) - c^2 \frac{\partial^2 u}{\partial x^2}(x,t) = f(x,t) & 0<x<1, t<0\\
+        u(x,0) = w(x), \frac{\partial u}{\partial t}(x,0) = v(x) & 0<x<1\\
+        u(0,t) = u(1,t) = 0 & t>0\\
+    \end{cases}
+\end{equation}
+
+\color{gray}Remarque : \begin{itemize}
+    \item la solution du cas particulier $f(x,t)=v(x) = 0$ est donnée par : $u(x,t) = \frac{1}{2}[w(x-ct) + w(x+ct)]$ où $w$ est prolongé par imparité sur $[-1,0]$ puis par 2-périodicité sur $\mathbb{R}$\\
+    \item L'équation des ondes traduit un principe de conservation de la variation d'énergie\\
+\end{itemize} \color{black}
+
+\quad \underline{Schéma numérique de Newmark:}\\
+Soit $h = \frac{1}{N+1}$, $x_i = ih$ avec $i=0,1,\dots,N+1$\\
+$t_n = n\tau$, $n=0,1,\dots$\\
+
+Au point $x_i$ et temps $t_n$, l'équation des ondes devient : \\
+$\frac{\partial^2 u}{\partial t^2}(x_i,t_n) - c^2 \frac{\partial^2 u}{\partial x^2}(x_i,t_n) = f(x_i,t_n)$\\
+
+On utilise ici une formule de différence finie centrée en temps et espace : \\
+\begin{equation}
+    \frac{u(x_i, t_{n+1})-2u(x_i,t_n)+u(x_i, t_{n-1})}{\tau^2} - c^2 \frac{u(x_{i+1},t_n) - 2u(x_i,t_n) + u(x_{i-1},t_n)}{h^2} = f(x_i,t_n)+O(\tau^2)+O(h^2)
+\end{equation}
+Qui peut donc être approximée par : \\
+\begin{equation}
+    \begin{cases}
+        \frac{u_i^{n+1} - 2u_i^n + u_i^{n-1}}{\tau^2} - c^2 \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{h^2} = f(x_i,t_n)& i=1,\dots, N\\
+        u_0^n = 0 & u_{N+1}^0 = 0\\
+    \end{cases}
+\end{equation}
+
+Le schéma est explicite, ainsi : \\
+$u_i^{n+1} = u_i^n (2-2 \frac{\tau^2 c^2}{h^2}) + (u_{i+1}^n+u_{i-1}^n) \frac{\tau^2 c^2}{h^2} - u_i^{n-1} + \tau^2 f(x_i,t_n)$\\
+De plus : $u_i^0 = w(x_i)$, $i=1,\dots, N$\\
+
+On a cependant besoin de $u_i^n$ et $u_i^{n-1}$ pour trouver $u_i^{n+1}$. On veut donc trouver $u_i^{-1}$.\\
+Or : $\frac{\partial u}{\partial t}(x_i,0) = v(x_i) \Rightarrow u_i^{-1} = u_i^1 - 2\tau v(x_i)$\\
+
+\quad \underline{Stabilité :}\\
+Le schéma est stable si $\tau \leq \frac{h}{c}$. Il converge à l'ordre $O(\tau^2)+O(h^2)$\\
+
+\subsection{Diffusion-convection}
+\quad \underline{Problème :} \begin{itemize}
+    \item données : $\varepsilon, C_0>0$ et $w(x)$ la condition initiale\\
+    \item inconnues : $u(x,t)$, vitesse, temp, concentration\\
+\end{itemize}
+
+\begin{equation}
+    \begin{cases}
+        \frac{\partial u}{\partial t}(x,t)-\varepsilon \frac{\partial^2 u}{\partial x^2}(x,t) + c_0 \frac{\partial u}{\partial x}(x,t) = 0 & 0<x<1, t>0\\
+        u(0,t) = 0\\
+        u(x,0) w(x)\\
+    \end{cases}
+\end{equation}
+
+La solution $u(x,t)$ satisfait les deux propriétés suivantes : \begin{itemize}
+    \item $(w(x) \geq 0$, $0\leq x \leq 1) \Rightarrow (u(x,t)\geq 0$, $0\leq x \leq 1$)\\
+    \item $\max_{0\leq x \leq 1} \lvert u(x,t) \rvert \leq \max_{0\leq x \leq 1} \lvert w(x) \rvert$\\
+\end{itemize}
+
+\subsubsection{Schéma explicite centré}
+On se place au point $x_i$ et temps $t_n$.\\
+On utilise une formule de différentiation finie progressive pour $\frac{\partial u}{\partial t}$, une centrée pour $\frac{\partial^2 u}{\partial x^2}$ et une centrée pour $\frac{\partial u}{\partial x}$\\
+
+\begin{equation}
+    \frac{u_i^{n+1}-u_i^n}{\tau} - \varepsilon \frac{u_{i-1}^n - 2u_i^n + u_{i+1}^n}{h^2} + c_0 \frac{u_{i+1}^n - u_i^n}{h} = 0
+\end{equation}
+Ce schéma est stable si \begin{itemize}
+    \item $\tau \leq \frac{h^2}{2\varepsilon}$\\
+    \item $h \leq \frac{2\varepsilon}{c_0}$\\
+\end{itemize}
+Ce schéma converge sous les conditions de stabilités à l'ordre : $O(h^2)+ O(\tau)$\\
+
+\subsubsection{Schéma implicite décentré}
+On se place ici au point $x_i$ et au temps $t_{n+1}$\\
+On utilise une formule de différentiation rétrograde pour $ \frac{\partial u}{\partial t}$, centrée pour $\frac{\partial^2 u}{\partial x^2}$ et décentrée pour $\frac{\partial u}{\partial x}$\\
+
+\begin{equation}
+    \begin{cases}
+        \frac{u_i^{n+1} - u_i^n}{\tau} - \varepsilon \frac{u_{i-1}^{n+1} - 2u_i^{n+1} + u_{i+1}^{n+1}}{h^2} + c_0 \frac{u_i^{n+1} - u_{i-1}^{n+1}}{h} = 0\\
+        u_0^{n+1} = 0\\
+        u_{N+1}^{n+1} = 0\\
+    \end{cases}
+\end{equation}
+
+Ce schéma n'a pas de conditions de stabilité; il est stable $\forall h\geq 0$, $\forall \tau \geq 0$\\
+Il converge à l'ordre : $O(h)+O(\tau)$\\
+
+
+\end{document}

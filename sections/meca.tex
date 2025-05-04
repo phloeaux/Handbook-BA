@@ -1,0 +1,363 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Newton et Balistique}
+$\vec{F} = \frac{d}{dt} \vec{P}$, avec : $\vec{P} = m\vec{v}$ la quantité de mouvement. Ainsi pour un point matériel, on a : $\vec{F} = m \frac{d \vec{v}}{dt}$.\\
+$\vec{F_{1\rightarrow 2}} = -\vec{F_{2\rightarrow 1}}$\\
+
+\quad \underline{Moments de force :}\\
+\begin{equation}
+    \vec{M_0} = \sum \vec{OP_{\alpha}} \wedge \vec{F_{\alpha}}
+\end{equation}
+
+\quad \underline{Moment cinétique :} \\
+\begin{equation}
+    \vec{L_0} = \sum \vec{OP_{\alpha}} \wedge (m_{\alpha} \vec{v_{\alpha}})
+\end{equation}
+On a enfin : $\vec{M_0} = \frac{d \vec{L_0}}{dt}$\\
+
+\quad \underline{BABAR :}\\
+$\vec{M_B} = \vec{M_A} + \vec{BA} \wedge \vec{R}$\\
+Avec $\vec{R} = \sum \vec{F_A}$\\
+$\vec{V_A} = \vec{V_G} + \vec{\omega} \wedge \vec{GA}$\\
+Où $\vec{V_A}$ est nulle si roulement sans glissement.\\
+
+\quad \underline{Centre de masse :}\\
+\begin{equation}
+    \vec{OG} = \frac{1}{\sum m_{\alpha}} \sum (m_{\alpha} \vec{OP})
+\end{equation}
+
+\underline{Équations du mouvement :} (en général) $x(t) = \dot{x}(0)t + x(0) $. De même pour les autres coordonnées.\\
+
+\quad \underline{On a de base :}\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|c|c|}
+        \hline
+        & $x$ & $v_0$ & $v$ & $t$ & $a$ \\
+        \hline
+        $v = v_0 + at$ & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+        \hline
+        $\Delta x = \frac{1}{2}(v_0 + v_f)t$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & \\
+        \hline
+        $\Delta x = v_0t + \frac{1}{2} at^2$ & $\checkmark$ & $\checkmark$ & &$\checkmark$ & $\checkmark$\\
+        \hline
+        $v^2 = v_0^2 + 2a\Delta x$ & $\checkmark$&$\checkmark$&$\checkmark$& &$\checkmark$\\
+        \hline
+    \end{tabular}
+    \caption{Récapitulatif des formules}
+    
+\end{table}
+
+\subsubsection{Balistique avec frottement}
+En général :(avec b le coefficient de frottement de l'air)\\
+$\Ddot{x} = -\frac{b}{m} \dot{x}$ ; $\Ddot{y} = -\frac{b}{m} \dot{y}$; $\Ddot{z} = -\frac{b}{m} \dot{z} -g$\\
+$\Rightarrow x(t) = C_1 e^{-\frac{b}{m} t} + C_2$ (idem pour $y(t)$)\\
+$\Rightarrow z(t) = C_3 e^{-\frac{b}{m} t} + C_4 - \frac{mg}{b} t$\\
+
+
+
+\subsection{Oscillateurs harmoniques I}
+\begin{equation}
+    \vec{F} = -k(x-l_0) \hat{x} \Rightarrow m \Ddot{x} = -k(x-l_0)
+\end{equation}
+En posant $e = x-l_0$ on a : $\Ddot{e} = -\frac{k}{m} e$.\\
+Une solution de l'équation :\\
+\begin{equation}
+    e(t) = C_1 \cos(\omega t) + C_2 \sin(\omega t) \Rightarrow \Ddot{e}(t) = -\omega^2 e(t) \Rightarrow \omega = \sqrt{\frac{k}{m}} \Rightarrow e(t) = e(0) \cos(\omega t) + \frac{\dot{e}(0)}{\omega} \sin(\omega t)
+\end{equation}
+
+\quad \underline{Pendule simple :}\\
+$\vec{g} = g\cos(\theta) \vec{e_r} - g\sin(\theta) \vec{e_{\theta}}$\\
+On a donc l'équation : $\Ddot{\theta} = -\frac{g}{r} \theta \Rightarrow \omega^2 = \frac{g}{r}$\\
+Or : $\frac{\vec{T}}{m} + \vec{g} = \Ddot{\vec{OP}}$.\\
+Ainsi la tension dans le câble équivaut : $T = -mr\Dot{\theta}^2 - mg\cos(\theta)$.\\
+
+\quad \underline{Ressort avec masse :}\\
+Une solution est : $x(t) = C e^{st}$, $s\in \mathbb{C}$. Avec : $s = \pm i\sqrt{\frac{k}{m}}$\\
+
+\subsection{Oscillateurs harmoniques II}
+On suppose que le système est amorti et/ou forcé. \\
+On dit que le terme amortissant satisfait : $b \dot{x}$, où b est une constante. Et le terme forçant est tel qu'il ne dépend pas de $x$ (exemple $B \sin(\omega t)$)\\
+Pour trouver la solution, on a $x(t) = x_p(t) + x_h(t)$ Où $x_p$ est une solution particulière et $x_h$ la solution du problème homogène. Celle ci n'est pas souvent prise en compte car ses effets diminuent très vite dans le temps.\\
+
+\quad \underline{Solution homogène :}\\
+$\Ddot{x} = -\frac{b}{m}\dot{x} - \frac{k}{m}x$. Pour résoudre, on pose : $\lambda = \frac{d}{dt}$\\
+$(\lambda^2 + \frac{b}{m}\lambda + \frac{k}{m})x = 0$. Trois solutions sont possibles :\\
+\begin{enumerate}
+    \item Si $\frac{b^2}{m^2} < \frac{4k}{m}$ : $x(t) = e^{-\frac{b}{2m}t} (C_1 e^{i\sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}t} + C_2 e^{-i\sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}t}) $\\
+    \item Si $\frac{b^2}{m^2} = \frac{4k}{m}$ : $x(t) = C_1 e^{-\frac{b}{2m} t} + C_2 t e^{\frac{b}{2m}t}$\\
+    \item $\frac{b^2}{m^2} > \frac{4k}{m}$ : $x(t) = e^{-\frac{b}{2m}t} (C_1 e^{\sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}t} + C_2 e^{-\sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}t}) $\\
+\end{enumerate}
+
+
+\quad \underline{Solution particulière :}\\
+Si le système est forcé et amorti on a alors : $m \Ddot{x} = -b \dot{x} -k(x-l_0-s(t))$. Où $s(t)$ est le terme forçant : $s(t) = B \sin(\omega t)$ Avec $B$ l'amplitude du forçage.\\
+
+On pose $x_p(t) = \alpha_0 \sin(\omega t) + \alpha_1 \cos(\omega t)$. \\
+
+Si $s(t)$ est en sinus : $\alpha_0 = \frac{(\frac{k}{m}-\omega^2)A}{(\frac{k}{m}-\omega^2)^2 + \frac{b^2}{m^2} \omega^2}$. $\alpha_1 = \frac{-\frac{b}{m}A \omega}{(\frac{k}{m}-\omega^2)^2 + \frac{b^2}{m^2} \omega^2}$\\
+
+Si $s(t)$ est en cosinus : $\alpha_0 = \frac{\frac{b}{m}A \omega}{(\frac{k}{m}-\omega^2)^2 + \frac{b^2}{m^2} \omega^2}$. $\alpha_1 = \frac{(\frac{k}{m}-\omega^2)A}{(\frac{k}{m}-\omega^2)^2 + \frac{b^2}{m^2} \omega^2}$
+
+\underline{Petites règles bien à savoir :} délais entre maxima lors de résonance : $\simeq \frac{1}{4}T$\\
+De plus, si $A \Ddot{x} + Bx = C \sin{(\omega t)}$ alors la solution particulière est : $x(t) = x_0 \sin(\omega t)$. Avec $x_0$ l'amplitude maximale. (en cosinus si l'équation est en cosinus)\\
+Enfin si $\Ddot{x} = \lambda^2 x$. Alors la solution particulière est : $x(t) = A e^{\lambda t} + B e^{\lambda t}$
+
+\quad \underline{Battements :}\\
+Lorsque $\omega$ est proche de $\omega_0 = \frac{k}{m}$ et $b\simeq0$. L'amplitude change constamment et varie énormément.\\
+
+\quad \underline{Résonances :}\\
+Une solution particulière : $x_p(t) = A_m \sin(\omega t+\phi)$ (ou en cosinus si $s(t)$ est en cosinus). Avec $A_m = \sqrt{\alpha_0^2 + \alpha_1^2}$\\
+$A_m = \frac{A}{\sqrt{\omega^4 + (\frac{b^2}{m^2} - 2\frac{k}{m})\omega^2 + \frac{k^2}{\omega^2}}}$\\
+Soit la fréquence de résonance : $\omega_r = \sqrt{\frac{k}{m} - \frac{b^2}{2m^2}}$ (maximiser $A_m$).
+
+
+\subsection{Énergie et stabilité}
+$\vec{F} = -\frac{dE}{dt}$ Énergie dissipée : travail (W) des forces non conservatives.\\
+$W = \sum \vec{F} \cdot \vec{AB} [J]$ Avec : \\
+\begin{equation}
+    W_{AB} = \int_a^b \vec{F} \cdot d\vec{r} = \int_a^b \vec{F} \cdot \vec{v} dt
+\end{equation}
+La puissance instantanée est décrite comme : $P_{inst} = \frac{dW}{dt} = \vec{F} \cdot \vec{v}[W]$. \\
+L'énergie potentiel est donc définie comme : \\
+\begin{equation}
+    V = -\int \vec{F}\cdot d\vec{r}
+\end{equation}
+Avec pour la gravité : $V = mgh$. Pour un ressort :$V = \frac{1}{2} k(l-l_0)^2$.\\
+L'énergie cinétique est quant à elle définit comme :\\
+(point matériel) : $W_c = \frac{1}{2} m \vec{V_A} \cdot \vec{V_A}$. \\
+(solide) : $W_c = \frac{1}{2} m \vec{V_A} \cdot \vec{V_A} + m \vec{V_A} \cdot (\vec{\omega} \wedge \vec{AG}) + \frac{1}{2} \vec{\omega} \cdot I_A \vec{\omega}$\\
+
+
+\subsubsection{Stabilité}
+On veut l'énergie potentiel minimum $\Rightarrow \frac{d V}{d \theta} = 0$.\\
+Ainsi si :$\frac{d^2V}{d \theta^2} < 0$ le système est \textbf{instable}. Sinon il est stable.
+
+\subsection{Rotation}
+On a des matrices de rotation pour modéliser une rotation :\\
+Point qui tourne, avec un repère fixe : $R = \begin{pmatrix}
+    \cos{\theta} & \sin{\theta}\\
+    -\sin{\theta} & \cos{\theta}\\
+\end{pmatrix}$\\
+Repère tourne : 
+$\begin{pmatrix}
+    x'\\
+    y'\\
+\end{pmatrix} = \begin{pmatrix}
+    \cos{\theta} & \sin{\theta}\\
+    -\sin{\theta} & \cos{\theta}\\
+\end{pmatrix} \begin{pmatrix}
+    x\\
+    y\\
+\end{pmatrix}$\\
+On a la matrice de rotation : $R = \hat{n} \hat{n}^T + (I-\hat{n} \hat{n}^T)\cos{\theta} + \begin{pmatrix}
+    0 & n_3 & n_2\\
+    n_3 & 0 & -n_1\\
+    -n_2 & n_1 & 0\\
+\end{pmatrix} \sin{\theta}$ Où $\hat{n}$ est le vecteur générateur de l'axe de norme 1.\\
+
+\subsubsection{Types de coordonnées et leur dérivée}
+\textbf{Formule de Poisson :}\\
+\begin{equation}
+    \dot{\vec{OP}} = \vec{\omega} \wedge \vec{OP}
+\end{equation}
+
+\quad \underline{Coordonnées cylindriques :}\\
+\begin{minipage}{.5\textwidth}
+    $x = r \cos{\theta}$\\
+    $y = r \sin{\theta}$\\
+    $z = z$\\
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+    $\vec{\omega} = \omega \vec{e_z}$ (dépend de la situation)\\
+    $\vec{OP} = r \vec{e_r} + z \vec{e_z}$\\
+    $\Ddot{\vec{OP}} = (\Ddot{r} - \dot{\phi}^2 r)\vec{e_r} + (r \Ddot{\phi} + 2 \dot{r} \dot{\phi})\vec{e_{\phi}} + \Ddot{z} \vec{e_z}$\\
+\end{minipage}
+
+\quad \underline{Coordonnées sphériques :}\\
+\begin{minipage}{.15\textwidth}
+    $x = r \sin{\theta} \cos{\phi}$\\
+    $y = r \sin{\theta} \sin{\phi}$\\
+    $z = r \cos{\theta}$\\
+\end{minipage}
+\vline
+\begin{minipage}{.85\textwidth}
+    $\vec{\omega} = \omega \vec{e_z}$ (dépend de la situation)\\
+    $\vec{OP} = r \vec{e_r}$\\
+    $\Ddot{\vec{OP}} = (\Ddot{r} - r \dot{\theta}^2 - r \dot{\phi}^2 \sin^2 \theta) \vec{e_r} + (r \Ddot{\theta} + 2 \dot{r} \dot{\theta} - r \dot{\phi}^2 \cos{\theta} \sin{\theta}) \vec{e_{\theta}} +(r \Ddot{\phi} \sin{\theta} + 2r\dot{\phi} \dot{\theta} \cos{\theta} + 2 \dot{r} \dot{\phi} \sin{\theta})\vec{e_{\phi}}$
+\end{minipage}
+
+
+\subsection{Corps solide}
+On a : $\vec{L_0} = I_0 \vec{\omega} = \vec{L_G} + \vec{OG} \wedge m \vec{v_G}$.\\
+I : le moment d'inertie du solide.(résistance à la mise en rotation)\\
+
+$I_0 = \begin{pmatrix}
+    \iiint y^2 + z^2dm & -\iiint xydm & \iiint xzdm\\
+    -\iiint xydm & \iiint x^2 + z^2 dm & -\iiint yzdm\\
+    -\iiint xzdm & -\iiint yzdm & \iiint x^2 + y^2 dm\\
+\end{pmatrix}$\\
+ et $I_g = \begin{pmatrix}
+     \iiint y^2+z^2dm & 0&0\\
+     0 & \iiint x^2+z^2dm & 0\\
+     0 &0 &\iiint x^2+y^2dm\\
+ \end{pmatrix} = \begin{pmatrix}
+     I_x &0&0\\
+     0&I_y&0\\
+     0&0&I_z
+ \end{pmatrix} \Rightarrow I_z = I_x + I_y - 2 \int z^2dw$ \\
+ Avec $dw = (\iint dxdy)dz$\\
+On a aussi $dm = \mu dV$ : en cartésien $dV = dxdydz$; cylindrique $dV = r d\phi dr dz$; sphérique $dV = r^2 \sin{\phi} d\phi d\theta dr$\\
+$\mu$ : la densité volumique
+
+\quad \underline{Steiner :} $I_A = I_g+md^2$\\
+
+\subsubsection{Accélérations dans repère}
+Accélération absolue : \\
+\begin{equation}
+    \vec{a_{abs}} = \vec{a_r} + \dot{\vec{\omega}} \wedge \vec{OP} + \vec{\omega} \wedge (\vec{\omega}\wedge \vec{OP}) + 2\vec{\omega} \wedge \vec{v_r} + \Ddot{\vec{OO'}}
+\end{equation}
+
+Ainsi, cette accélération engendre deux forces, une force de coriolis ainsi qu'une force d'entraînement.\\
+$\vec{F_c} = -(2\vec{\omega} \wedge \vec{v_r})m$ et $\vec{F_e} = (\dot{\vec{\omega}} \wedge \vec{OP} + \vec{\omega} \wedge (\vec{\omega}\wedge \vec{OP}))m$\\
+
+\quad \underline{Angles d'Euler :}\\
+On peut aussi définir des angles d'euler (trois rotations selon $x_1$, $x_2$ et $x_3$) :\\
+\begin{minipage}{.5\textwidth}
+    Selon $x_1$ : \\
+$\begin{pmatrix}
+    x_1'\\
+    x_2'\\
+    x_3'\\
+\end{pmatrix} = \begin{pmatrix}
+    1&0&0\\
+    0&\cos{\theta} & \sin{\theta}\\
+    0&-\sin{\theta} & \cos{\theta}\\
+\end{pmatrix} \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+\end{pmatrix}$\\
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+    Selon $x_2$ :\\
+$\begin{pmatrix}
+    x_1'\\
+    x_2'\\
+    x_3'\\
+\end{pmatrix} = \begin{pmatrix}
+    \cos{\theta}&0&\sin{\theta}\\
+    0&1 & 0\\
+    -\sin{\theta} &0& \cos{\theta}\\
+\end{pmatrix} \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+\end{pmatrix}$\\
+\end{minipage}
+Selon $x_3$ :\\
+$\begin{pmatrix}
+    x_1'\\
+    x_2'\\
+    x_3'\\
+\end{pmatrix} = \begin{pmatrix}
+    \cos{\theta} & \sin{\theta} &0\\
+    -\sin{\theta} & \cos{\theta}&0\\
+    0&0&1\\
+\end{pmatrix} \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+\end{pmatrix}$\\
+
+
+\subsection{Choc et collision}
+On a conservation de la quantité de mouvement : $m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'$.\\
+Si l'angle d'entrée est nul $\theta =0$ et le deuxième objet et initialement immobile :$v_2 = 0$. Alors on a :\\
+$v_1' = \frac{v_1 (m_1-m_2)}{m_1+m_2}$ et $v_2' = \frac{2v_1 m_1}{m_1+m_2}$\\
+De plus, lors de choc élastique, on a conservation du moment cinétique :$\vec{L_0^+} = \vec{L_0^-}$ (Non valable pour les percussions)\\
+
+\quad \underline{Percussion :}\\
+On a la relation :\\
+\begin{equation}
+    \lim_{t\rightarrow 0} \int_0^t \vec{F}^{ext} dt \neq 0 = \vec{\pi} \Rightarrow \lim_{t\rightarrow0} \int_0^t \vec{OP} \wedge \vec{F}^{ext} dt = \vec{OP} \wedge \vec{\pi} = \vec{L_0^+}-\vec{L_0^-} = \lim_{t\rightarrow0} \int_0^t \vec{M_0}dt
+\end{equation}
+
+
+Si on a un choc élastique : $w_{cin}^- = w_{cin}^+$. Si inélastique : $w_{cin}^- > w_{cin}^+$. \\
+Pendant les rebonds, on a un coefficient de restitution $e$ tel que : $0<e<1$ : $v_r^+ = ev_r^-$\\
+
+\subsection{Lagrange}
+Selon la physique de Lagrange, on a $T$ l'énergie cinétique et $V$ l'énergie potentielle.\\
+\begin{equation}
+    L = T-V \Rightarrow \frac{d}{dt}(\frac{\partial L}{\partial \dot{q_i}}) - \frac{\partial L}{\partial q_i} = F_{q_i}
+\end{equation}
+Avec les $F_{q_i}$ les forces généralisées provenant des forces extérieures et $q_i$ les coordonnées généralisées.\\
+
+\subsection{Mouvement dans le vide}
+
+Loi des aires : $r^2 \dot{\theta} = $cste $\Rightarrow \vec{OP} \wedge \vec{v_p} = \dot{\theta} r^2 \vec{e_z}$.\\
+L'accélération radiale est donc donnée par :$a_r = -\frac{c^2}{r^2} [\frac{d^2}{d \theta^2} (\frac{1}{r}) + \frac{1}{r}]$. \\
+Soit l'accélération totale : $\vec{a} = -\chi \frac{\vec{r}}{\parallel \vec{r}\parallel^3}$\\
+La loi de Kepler nous donne donc : $\frac{T^2}{(2R)^3} =$cste\\
+
+\subsection{Frottements}
+Dans un fluide à basse vitesse, on a que :\\
+\begin{equation}
+    \vec{F}^{fr} = -k \eta \vec{v}
+\end{equation}
+Avec $k$ un coefficient de forme $[m]$ et $\eta$ le coefficient de viscosité $[N.m^{-2}.s]$\\
+Ainsi qu'à haute vitesse :\\
+\begin{equation}
+    \vec{F}^{fr} = -\frac{1}{2}C_x \rho \parallel\vec{v}\parallel^2 S \vec{v}
+\end{equation}
+Avec $C_x$ le coefficient de traînée, $\rho$ la masse volumique et $S$ l'air de la surface perpendiculaire à la vitesse.\\
+
+Entre deux surfaces en contact on a :$\parallel \vec{F}^{fr} \parallel \leq \parallel \vec{F}^{fr}_{max} \parallel = \mu_s \parallel \vec{N} \parallel$ (statique)\\
+En statique, on a : $\vec{F}^{fr} = -\sum \vec{F}$.\\
+\warning $\mu_s$ ne dépend pas de l'aire de la surface.\\
+En cinétique : $\vec{F}^{fr} = - \mu_c \parallel \vec{N} \parallel \hat{v}$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c}
+        Matériaux & $\mu_c$ & $\mu_s$\\
+        \hline
+        Acier/Acier(dur, sec) & .42 & .78\\
+        Acier/Acier(gras) & .05 & .1\\
+        Bois/Bois & .3 & .5\\
+        Métal/Glace & .01 & .03\\
+        Pneu/Route mouillée & .1 & .15\\
+        Pneu/Route sèche & .6 & .8\\
+        Acier/Acier(poli) & $10^{-2}$ & $10^{-2}$\\
+    \end{tabular}
+    \caption{Valeurs de $\mu$}
+    
+\end{table}
+
+
+\quad \underline{Roulement statique :}\\
+$\vec{M_A}^{fr} = -\vec{M_A}^{ext} \Rightarrow \parallel \vec{M_A}^{ext} \parallel R = \delta \parallel \vec{N} \parallel$\\
+
+En cinétique, on a : $\vec{\omega} = \vec{\omega}^t + \vec{\omega}^n$ et :$\vec{M_a} = \vec{M_a}^t + \vec{M_a}^n$\\
+Si $\vec{\omega}^t = 0 \Rightarrow \parallel \vec{M_A}^t\parallel \leq \delta_s \parallel \vec{N} \parallel$. Sinon si :$\vec{\omega}^t \neq 0 \Rightarrow \vec{M_A}^t = -\delta_s \parallel \vec{N} \parallel \hat{\omega}^t$\\
+Si $\vec{\omega}^n = 0 \Rightarrow \parallel \vec{M_A}^n\parallel \leq \gamma_s \parallel \vec{N} \parallel$. Sinon si :$\vec{\omega}^n \neq 0 \Rightarrow \vec{M_A}^n = -\gamma_s \parallel \vec{N} \parallel \hat{\omega}^n$\\
+
+
+\subsection{Valeurs usuelles}
+$I_g :$ 
+\begin{enumerate}
+    \item Cylindre : $I_1 = \frac{1}{2} m R^2$; $I_2 = \frac{1}{4}mR^2 + \frac{1}{12}ml^2$\\
+    \item Tige mince : $I = \frac{1}{12}mL^2$\\
+    \item Parallélépipède : $I=\frac{1}{12} (a^2+b^2)$\\
+    \item Sphère (creuse) : $I = \frac{2}{3}mR^2$\\
+    \item Cône : $I_1 = I_2 = \frac{3}{80} m (4R^2+h^2)$; $I_3 = \frac{3}{10} mR^2$\\
+    \item Anneau : $I_1 = I_2 = \frac{1}{2}mR^2$; $I_3 = mR^2$\\
+    \item Boule (pleine) : $I = \frac{2}{5}mR^2$\\
+\end{enumerate}
+\end{document}

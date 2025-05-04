@@ -1,0 +1,900 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Les essais mécaniques}
+\subsubsection{Essai de traction}
+On utilise typiquement un barreau cylindrique ou plat.\\
+La contrainte est uniforme dans toute la section réduite : $\overline{\sigma} = \begin{pmatrix}
+    \sigma_{xx} & 0 & 0\\
+    0 & 0 & 0\\
+    0 & 0 & 0\\
+\end{pmatrix}$ et l'élongation est uniforme : $\begin{pmatrix}
+    \frac{\sigma_{xx}}{E} & 0 & 0\\
+    0 & -\frac{\nu \sigma_{xx}}{E} & 0\\
+    0 & 0 & -\frac{\nu \sigma_{xx}}{E}\\
+\end{pmatrix}$
+
+Il existe deux types de machines à test : \\
+\begin{itemize}
+    \item Servohydraulique : la traverse est fixe\\
+    \item Traction à vis : la traverse est mobile\\
+\end{itemize}
+
+La force est mesurée par la cellule de charge, et l'allongement peut être déterminé par la position de la traverse (moins précis) ou par un extensomètre, une jauge résistive, etc.\\
+
+
+On définit plusieurs valeurs : \\
+\begin{itemize}
+    \item l'allongement relatif (engineering strain) : \begin{equation}
+        e= \frac{L-L_0}{L}
+    \end{equation}\\
+    \item la déformation vraie : \begin{equation}
+        d\varepsilon = \frac{dL}{L} \Rightarrow \varepsilon = \ln{1+e}
+    \end{equation}\\
+    \item la charge unitaire (engineering stress) : \begin{equation}
+        R = \frac{P}{S_0}
+    \end{equation}\\
+    \item la contrainte vraie (true stress) : \begin{equation}
+        \sigma = \frac{P}{S}
+    \end{equation} Dans les grandes déformations plastiques, on a $\sigma = R(1+e)$\\
+    
+\end{itemize}
+\warning $S_0L_0 \neq SL$ lors des déformations plastiques si $\nu \neq 0.5$\\
+
+Il existe aussi d'autres grandeurs. Par exemple lorsque l'on sort du domaine élastique : \\
+Le taux d'écrouissage : $\theta(\varepsilon) = \frac{d\sigma}{d\varepsilon}$.\\
+On mesure la ductilité par l'allongement relatif à rupture $\frac{\Delta L}{L_0}$ : \\
+\begin{itemize}
+    \item $\leq 1\%$ : matériaux fragiles\\
+    \item $> 10 \%$ : matériaux ductiles\\
+\end{itemize}
+Fonctionne aussi avec le rapport de l'aire finale sur initiale.\\
+
+Lors de la rupture, on a une concentration de la déformation en une section limitée du barreau : \textbf{striction}. La striction est due à une instabilité mécanique.\\
+
+Nous avons dans le barreau deux cas qui peuvent se présenter : \\
+\begin{itemize}
+    \item Soit $ \theta(\varepsilon) > \sigma$ : La contrainte d'écoulement du matériau a été augmentée localement et la contrainte locale ne peut plus déformer le matériau la où à lieu la striction. Dès lors la déformation plastique s'y arrête pendant qu'elle continue ailleurs dans le matériau. La déformation est stable.\\
+    \item Soit $ \theta(\varepsilon) < \sigma$ : la déformation plastique s'arrête partout sauf dans le creux et la déformation est alors instable.\\
+\end{itemize}
+
+La striction apparaît donc lorsque : \begin{equation}
+    \sigma = \frac{d\sigma}{d\varepsilon} \Rightarrow 0 = \frac{dR}{de}
+\end{equation}
+
+
+\subsubsection{Surface de charge}
+Répond à la question : à partir de quelle contrainte en 3D le matériau se déforme plastiquement.\\
+Pour un matériau isotrope, ça ne dépend pas de l'orientation des contraintes. Si on connaît la forme de la surface de charge, mesurer la limite d'élasticité en traction uniaxiale donne le critère de plastification pour tous les états de contrainte 3D.\\
+
+Si le matériau est indépendant de la pression hydrostatique : $\sigma_1 = \sigma_2 = \sigma_3$, ce qui nous donne un cylindre circulaire. (vrai pour beaucoup de matériaux denses).\\
+Si le matériau est poreux alors sa surface aura l'aspect d'un cône centré sur $\sigma_1 = \sigma_2 = \sigma_3$. En général, il sera alors résistant en compression mais peu à la traction.\\
+
+\subsubsection{Essai de compression}
+Cet essai présente deux gros désavantages par rapport à l'essai de traction : \\
+\begin{itemize}
+    \item Le flambage : Le matériau peut flamber avant de se rompre\\
+    \item le frottement causant la mise en tonneau\\
+\end{itemize}
+Dès lors un bon rapport hauteur/diamètre $\simeq 3,4$
+
+\subsubsection{Essai de dureté}
+
+\quad \underline{Brinell :}\\
+On utilise une bille comme indentateur. \\
+\begin{equation}
+    HB = \frac{P}{\pi D t}
+\end{equation}
+Avec t : l'enfoncement dans la matière.\\
+
+\quad \underline{Vickers/Knoop :}\\
+Utilisation d'indentateur carré (vickers) losange (knoop).\\
+Le plus utilisé. En général la dureté vaut : $H = \frac{F}{A}$. De plus si le taux d'écrouissage est faible, on a $ H = 3 \sigma_y$
+
+
+\quad \underline{Rockwell :}\\
+On regarde le retour élastique entre deux masses différentes sur un même matériau.\\
+
+\quad \underline{Clivage :} Il s'agit de la rupture d'un cristal selon les parois où il est faible.\\
+
+\subsubsection{Essai de flexion :}
+On utilise la flexion trois points voire quatre points.\\
+Soit la théorie des poutres simplifiée (Euler-Bernoulli) : $\varepsilon_{xx} = \frac{y}{R}$ avec y la distance de l'axe neutre et R la courbure locale de la poutre.\\
+
+On perd ici le caractère uniforme de l'essai de traction car la déformation n'est pas uniaxiale. Mais il est très pratique pour les matériaux fragiles.
+
+\subsubsection{Déformation en fonction du temps}
+En général, plus on déforme vite un matériau, plus la contrainte nécessaire est grande.\\
+On a la relation :\\
+\begin{equation}
+    \sigma = K \dot{\varepsilon}^m
+\end{equation}
+Avec $m=\frac{\ln{\frac{\sigma_2}{\sigma_1}}}{\ln{\frac{\dot{\varepsilon_2}}{\dot{\varepsilon_1}}}}$
+
+\quad \underline{Le fluage :}\\
+C'est la déformation des métaux et céramiques à $T>\frac{1}{2} T_m(K)$ Avec $T_m$ la température de fusion en Kelvin.\\
+
+L'essai de fluage consiste à laisser une charge constante sur un matériau que l'on chauffe.\\
+Si la température est proche de $0.3, 0.4 T_m$ alors on observe un fluage logarithmique.\\
+Si $T> 0.5 T_m$ alors on observe un fluage secondaire. En régime stationnaire, on a la loi :\\
+\begin{equation}
+    \dot{\varepsilon} = A \sigma^N e^{-\frac{Q}{RT}}
+\end{equation}
+Avec N généralement entre 1 et 10, $N = \frac{1}{m}$. Q : l'énergie d'activation de l'auto-diffusion. \\
+C'est la loi d'Arrhenius : $\frac{d}{dt} \propto e^{-\frac{Q}{RT}}$\\
+
+\quad \underline{Fluide visqueux :} On a m=1 et par définition on a un fluide visqueux newtonien. Il n'y a donc pas de striction.\\
+
+\subsubsection{Essai de rupture}
+Deux approches possibles.\\
+\quad \underline{L'énergie de fissuration R ou G$_c$ :}\\
+Il s'agit de l'énergie qu'il faut fournir pour créer un mètre carré de fissure dans le matériau. Le solide se fissure si la contrainte appliquée fournit plus de travail qu'il n'en faut pour faire avancer la fissure : \\
+\begin{equation}
+    G = \frac{\pi F \sigma^2 a}{E} [J.m^{-2}]
+\end{equation}
+
+\quad \underline{Le facteur d'intensité de contrainte K :}\\
+On définit le facteur d'intensité de contraintes K : \\
+\begin{equation}
+    K= \sigma Y \sqrt{\pi a} [MPa.m^{\frac{1}{2}}]
+\end{equation}
+La fissure avance si K > K$_c$. Avec a la longueur de la fissure. \\
+Y est fonction de la géométrie. (En général proche de 1)\\
+
+On a donc $ G_c = A\frac{K_c^2}{E}$ Avec A un facteur dépendant de la géométrie.\\
+
+Plusieurs essai : \\
+\quad \underline{Charpy :}\\
+On regarde l'énergie de fissuration par rapport à la température du matériau.\\
+
+\subsubsection{Essai de fatigue}
+\warning Les résultats de ces essais sont statistiques.\\
+
+Il existe deux types :\\
+\quad \underline{Échantillon lisse :}\\
+On fait varier la contrainte entre un minimum et maximum avec $\Delta \sigma = \sigma_{max}-\sigma_{min}$ et $\sigma_a = \frac{\Delta \sigma}{2}$.\\
+On peut former des courbes de Wohler pour voir leur limite d'endurance.\\
+
+Ces résultats dépendent de facteurs comme la fréquence, l'environnement, etc...\\
+
+\quad \underline{Échantillon fissuré :}\\
+On rapporte la vitesse de croissance de la fissure $\frac{da}{dN}$\\
+Soit $K_{max} = Y\sigma_{max} \sqrt{\pi a}$ et $K_{min} = Y\sigma_{min} \sqrt{\pi a}$ si $\sigma_{min}>0$ et $K_{min} = 0$ sinon.\\
+En régime stationnaire, on a $\frac{da}{dN} = A(\Delta K)^m$.\\
+
+Pour les métaux, si la fatigue excède la limite d'élasticité alors le nombre de cycle total sera inférieur à $10^4$ : \textbf{fatigue oligocyclique}.\\
+Sinon on parle de fatigue vibratoire : $\sigma < \sigma_y$\\
+
+\subsection{Céramiques}
+Les éléments formant des céramiques sont très présents sur Terre.\\
+Ils ont un bon module de Young (10-10$^3$GPa) ainsi que de bonne résistance à la traction ($10^2 < \sigma_y < 10^5 [MPa]$). Cependant leur densité est plutôt élevée : $10^3 < \rho < 10^4 [kg.m^{-3}]$ et leur ténacité est faible (0.2-5Mpa.m$^{\frac{1}{2}}$).\\
+Leur résistance aux chocs thermiques se situe aux alentours de 3 à 500K. Et leur coefficient d'expansion thermique vaut en moyenne 10 MK$^{-1}$. En général, elles ont aussi un haut point de fusion.\\
+
+En traction ou flexion avec charge répartie, on veut minimiser le rapport $\frac{E}{\rho}$. En flexion avec charge ponctuelle, on veut minimiser le rapport $\frac{E}{\rho^2}$.
+
+\subsubsection{Structure}
+Les céramiques sont des solides faits d'atomes liés par des liaisons ionocovalents. \\
+Il existe deux classes :\\
+\begin{itemize}
+    \item \textbf{Métal - non métal} : ionique\\
+    \item \textbf{non métal - non métal} : covalente.\\
+\end{itemize}
+
+\quad \underline{Liaisons ioniques :}\\
+Anions sont plus gros que les cations et veulent être voisins proches. On veut aussi une charge total neutre.\\
+
+Les plus gros atomes(anions) sont souvent répartis selon CFC ou hexagonal compact ou CS. Les plus petits quant à eux se logent dans les sites interstitiels laissés entre ces atomes. \\
+\warning Le site doit être plus petit que la taille de l'atome!\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|}
+    \hline
+        Coordination & Nombre coordination & Ration rayon \\
+        \hline
+        NA & 2 & $<.155$\\
+        NA & 3 & .155-.255\\
+        Tétrahédrique & 4 & .255-.414\\
+        Octahédrique & 6 & .414-.732\\
+        Cubique & 8 & .732-1\\
+        \hline
+    \end{tabular}
+    \caption{Sites interstitiels}
+    
+\end{table}
+
+Dans CFC : 8 sites tétrahédrales et un octahédrale.\\
+
+\quad \underline{Liaisons covalentes :}\\
+Les structures sont moins denses et directionnelles.\\
+\textbf{Le tétrahèdre $S_iO_4$ représente l'unité de base de la silice} mais aussi de beaucoup de structures qui les combinent avec d'autres oxydes. Suivant les proportions d'oxydène et de silicium les tétrahèdres se répartissent suivant différents réseaux.\\
+
+La proportion des liaisons entre $S_iO_4$, via les atomes d'oxygènes partagés, et les autres oxydes croît avec la proportion des autres oxydes. Il se forme alors \textbf{des couches planes voire des chaînes atomiques.}\\
+Celles-ci sont hydratables entre les couches. Elles peuvent donc glisser l'une sur l'autre. \\
+
+Les structures des oxydes comportant deux cations sont décrits par des \textbf{diagramme de phase quasi-binaire}. \color{gray} Ce n'est pas un diagramme binaire mais une coupe à travers un diagramme d'ordre plus élevé. \color{black}\\
+
+Les angles entre monomères de $S_iO_4$ peuvent varier dans une gamme sans perdre de la stabilité.\\
+
+La stabilité d'une structure irrégulière est méta-stable et ne cristallise pas spontanément à température ambiante.\\
+
+\textbf{Un solide méta-stable est non-cristallin et amorphe/un verre}\\
+La densité des verres dépend donc de leur vitesse de refroidissement.\\
+
+\quad \underline{Les verres :}\\
+Pour un fluide newtonien : \\
+\begin{equation}
+    \tau = \eta \dot{\gamma} = \eta \frac{d \gamma}{dt}
+\end{equation}
+Avec $\eta[Pa.s]$ la viscosité dynamique : \\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        matériau & $\eta$ \\
+        \hline
+        Eau & $10^{-3}$\\
+        Huile & $5\cdot 10^{-2}$\\
+        Miel & 2 à 10\\
+        Verres (fusion) & 10\\
+        Verres (mise en forme) & $10^3$\\
+        Verres (ramolissement) & $4\cdot 10^6$\\
+        \hline
+    \end{tabular}
+    \caption{Valeurs typiques}
+     
+\end{table}
+
+La viscosité diminue avec la température. Elle obéit à la loi d'Arrhenius : $\eta \propto \exp{(\frac{Q}{RT})}$.\\
+\color{gray} 1poise = $10^{-1}Pa.s$\color{black}\\
+
+La silice amorphe pure a d'excellentes propriétés mais n'est formable qu'à haute température. On y rajoute donc quelques dizaines de pourcent de modifiants qui abaissent la viscosité.\\
+
+\subsubsection{Élaboration des céramiques}
+
+\quad \underline{Argiles :} mise en forme à l'aide de moule\\
+Puis coulée en barbotine : Pièce dans un moule en plâtre\\
+Lors du séchage, on a une perte de volume conséquente.\\
+
+\quad \underline{Pressage de poudres :} On applique une pression hydrostatique sur l'ensemble d'un moule.\\
+
+\quad \underline{La capillarité :}\\
+Les surfaces et interfaces sont des lieux d'énergie locale plus élevée. Leur création est donc accompagnée d'un excédent d'énergie : \textbf{énergie de surface ou interface $\gamma(J.m^{-2})$}.\\
+Or on a $1 J.m^{-2} = 1 N.m^{-1}$. Cette énergie de surface se traduit donc par une tension de surface.\\
+
+\quad \underline{Cuisson et frittage :} Les corps sont moins poreux donc plus denses et plus solides.\\
+
+\quad \underline{Contraintes thermiques :}\\
+Soit le refroidissement rapide d'une plaque solide à la température $T_1$ par immersion dans un fluide à température $T_2< T_1$. La distribution au sein de la plaque dépend du temps ainsi que de paramètres tels que la conductivité du solide, coefficient de transfert thermique à l'interface, épaisseur de la plaque, etc. \\
+
+Si on considère qu'une fine couche est ramené instantanément à $T_2$ (le reste est à $T_1$). Alors la contrainte dans le matériau sera : \\
+\begin{equation}
+    \sigma = \frac{E}{1-\nu} \alpha (T_1-T_2)
+\end{equation}
+Avec $\alpha$ le coefficient de dilatation thermique du solide. On a ici une contrainte de traction; l'extérieur veut se contracter alors que l'intérieur l'en empêche.\\
+
+On définit alors \textbf{la résistance au choc thermique} comme étant l'excursion maximale de température $\Delta T$ que peut subir la surface d'une pièce sans se rompre lors d'une trempe brutale.\\
+\warning Le verre doit être sous forme solide à $T_1$. \\
+
+Si le matériau n'est pas solide à $T_1$ alors lorsqu'on refroidit la surface, le coeur peut se déformer et se contracter puis lorsqu'il se refroidit il met la \textbf{surface en compression}. Le coeur est donc en tension. C'est la \textbf{trempe du verre}. La contrainte en compression empêche la rupture par fissuration à la surface du verre, cependant si une fissure arrive au coeur du verre, elle va s'y propager rapidement et mener à la rupture.\\
+
+Si la pièce est trop mince, on peut produire le \textbf{même résultat par échange d'ions}; on remplace un ion par un plus gros.\\
+
+\subsubsection{Comportement mécanique}
+Tous les matériaux contiennent des défauts : micro-fissures, pores, etc qui sont assimilables à des fissures. Cependant, ces défauts sont distribués selon une certaine statistique. Ainsi pour les matériaux fragiles, la contrainte à rupture est statistiquement distribuée. On ne peut pas parler de la résistance mécanique d'un matériau fragile comme le verre car c'est une grandeur statistique.\\
+
+\quad \underline{Statistique de Weibull :}\\
+On présuppose que chaque volume dans le corps contient la même distribution des défauts et que ces distributions sont indépendantes. De plus si un des volumes casse, toute la pièce casse.\\
+
+Ainsi, la probabilité de survie de la pièce est donnée par :\\
+\begin{equation}
+    S(V, \sigma) ) = 1- F(V,\sigma) = e^{-k_m V (\frac{\sigma_{max}}{S_0})^m}
+\end{equation}
+Où k est une constante adimensionnelle caractéristique de la géométrie de la pièce sollicitée et de m (coefficient de Weibull) et $S_0 = \sigma_0 V_0^{\frac{1}{m}}$ une constante [MPa.$m^{\frac{3}{m}}$]\\
+\begin{itemize}
+    \item Traction : k=1\\
+    \item Flexion pure : $k=\frac{1}{2(m+1)}$\\
+    \item Flexion trois points : $k = \frac{1}{2(m+1)^2}$\\
+    \item Flexion quatre points : $k = \frac{mL_i + L_0}{2L_0 (m+1)^2}$
+\end{itemize}
+
+En passant par $f(\sigma) = \frac{dF(\sigma)}{d\sigma}$, ainsi que N observations. Si on classe ces N observations par ordre de $\sigma$ croissant et qu'on divise leur ordre par N, alors on obtient la probabilité de rupture d'un matériau pour une contrainte donnée.\\
+
+En compression, les fissures transverses à la contrainte ne croissent pas. Par contre, la fissuration d'un matériau fragile a lieu parallèlement à l'axe de contrainte de compression maximale. Cette fissuration est stable. \\
+Comme la rupture est ici causée par la propagation d'une fissure stable, la résistance mécanique du matériau est déterminée par :\\
+\begin{equation}
+    \sigma = C \frac{K_c}{Y\sqrt{\pi \overline{a}}}
+\end{equation}
+Avec $C \simeq 15$ et $\overline{a}$ la longueur moyenne des fissures.\\
+
+\quad \underline{Fissuration lente (corrosion sous contrainte) :}\\
+Les oxydes peuvent voir leurs liaisons atomiques rompues par des molécules présentes dans leur environnement. Ex : l'eau pour la silice.\\
+Une fissure dans du verre en présence d'humidité croît dans le temps. \\
+La vitesse de croissance est donnée par :\\
+\begin{equation}
+    \frac{da}{dt} = (K)^n F(P_{H_2O}) e^{-\frac{Q}{RT}}
+\end{equation}
+F une fonction de la concentration en eau. Puis au delà d'une certaine valeur pour K, la vitesse devient constante. \\
+Ce phénomène existe aussi avec d'autres oxydes.\\
+De ce fait, la \textbf{résistance mécanique dépend du temps}. Et on a la relation : $(\frac{\sigma}{\sigma_{test}})^n = \frac{t(test)}{t}$
+Avec $10<n<20$ en général. 
+
+
+\subsection{Métaux et alliages}
+Récapitulatif : E : 10-$10^3$, $\rho$ : $10^3-10^4[kg.m^{-3}]$, $\sigma_y$ : 1-$10^3$, $K_{1c} : 5-200$\\
+Beaucoup de métaux ont la même valeur pour $\frac{E}{\rho}$\\
+\quad \underline{Ressources :} l'ensemble total de tout ce qu'on peut envisager l'existence (mesure l'abondance)\\
+\quad  \underline{Réserves :} l'ensemble des dépôts miniers connus.\\
+
+Métal les plus abondants : Aluminium(Guinée), Fer(Ukraine), Magnésium\\
+
+\subsubsection{Contenu énergétique}
+Il s'agit de l'énergie nécessaire pour créer 1kg de matériau. En général, il faut plus de 50$\%$ de l'énergie pour extraire le matériau et 33$\%$ à chaque fois pour le recycler.  \\
+En général, plus la concentration sur Terre est élevée, moins le contenu énergétique est élevé. L'empreinte carbone correspond au contenu énergétique.\\
+
+On recycle environ 30$\%$ de chaque métaux (Cuivre, Aluminium, Fer, etc)\\
+Le taux de recyclage est limité par la croissance globale de la demande : $F \leq (1+i)^{-n}$ où n est la durée de vie en années et i le taux de croissance annuelle de la croissance.
+
+\subsubsection{Production de l'aluminium et cuivre}
+\quad \underline{Diagramme d'Ellingham :}\\
+Plus $-\Delta G$ est grand, plus l'oxyde est stable. (Les oxydes en bas du diagramme sont les plus stables) Si $\Delta G < 0$ la réaction est spontanée. Dans le diagramme, celui au dessus oxyde celui en dessous.\\
+
+\quad \underline{Extraction du cuivre :} Il existe deux moyens, la pyrométallurgie et l'hydrométallurgie.\\ 
+L'énergie requise ici est faible car c'est un métal quasi noble.\\
+
+\quad \underline{Extraction aluminium :} La bauxite est très présente sur Terre, on lui extrait donc son aluminium.\\
+Le rapport est environ de 4; pour 4 tonnes de bauxite, on obtient 1 tonne d'aluminium.\\
+
+La production mondiale est environ de 100Mtonnes dont 30$\%$ provenant du recyclage.\\
+Il y a plusieurs possibilités pour la mise en forme de l'aluminium : \\
+La coulée continue; laminage; coulée en bande; extrusion; coulée en moule de sable; coulée à la cire perdue; forgeage; impression 3D \\
+
+\quad \underline{Attribut de l'aluminium :}\\
+Il est léger, abondant...\\
+L'oxyde d'aluminium est très stable : il protège le métal contre la corrosion. L'alumine forme une couche compatible avec l'aluminium. \textbf{Coefficient de Pilling-Bedworth} : si proche de 1, l'oxyde se forme sans fissure ni recouvrement et protège le métal. Si inférieur à 1, il est fissuré et s'il est supérieur à 1 alors il y se recouvre lui même et ne protège pas le métal.\\
+\begin{equation}
+    R_{PB} = \frac{V_{oxyde}}{n V_{metal}} = \frac{M_{oxyde} \rho_{metal}}{n M_{metal} \rho_{oxyde}}
+\end{equation}
+Avec M : la masse molaire, n le nombre d'atomes de métal par molécule d'oxyde.\\
+
+\subsubsection{Métallurgie de l'aluminium}
+\quad \underline{Système Al-Cu :}\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+    \hline
+    Nom du point triple & Réaction\\
+    \hline
+        Eutectique & $L \rightarrow \alpha + \beta$ \\
+        Eutectoïde & $\alpha \rightarrow \beta + \gamma$\\
+        Péritectique & $L+\alpha \rightarrow \beta$\\
+        Péritectoïde & $\alpha + \beta \rightarrow \gamma$\\
+    \end{tabular}
+    \caption{Points triples}
+     
+\end{table}
+
+Inter-métallique : composé entre deux métaux, assez fragile en général.\\
+
+\quad \underline{Loi du levier :} $f_{\alpha} = \frac{C_{\beta}-C}{C_{\beta}-C_{\alpha}}$\\
+\color{gray} Distance opposée sur longueur totale.\color{black}\\
+
+Alliage Al-4.5$\%$pds Cu, on a formation de dendrites. Pour l'alliage eutectique, les deux phases vont croître simultanément.\\
+
+La loi des leviers suppose qu'à chaque instant les phases peuvent adapter leur concentration. C'est vrai pour les liquides ou la diffusion est rapide. Cependant, cette \textbf{homogénéisation est impossible pour la solidification au sein de beaucoup de phases solides.} Ainsi, sauf si diffusion rapide, une fois formé le solide ne change plus sa composition : \textbf{micro-ségrégation} on observe une phase hors équilibre.\\
+
+\quad \underline{La capillarité :} Si on prend une sphère de matière entourée par une surface d'énergie $\gamma$, la matière est soumise à une surpression $\Delta P = \frac{2\gamma}{R} $. Donc on augmente G du solide de $\Delta P v$. Plus R est faible, moins la phase dans la sphère est stable.\\
+
+\quad \underline{La maturation :}\\
+Le solide veut réduire sa surface d'interface : la maturation\\
+La vitesse de la maturation est régie par la diffusion. La dimension moyenne $\lambda$ des éléments de micro-structures est donnée par : \\
+\begin{equation}
+    \lambda^3-\lambda_0^3 = kt
+\end{equation}
+Avec K une constante qui dépend de la température.\\
+Dès lors, la micro-structure sera d'autant plus fine que la vitesse de solidification est élevée.\\
+
+Cependant, aux grandes vitesses de refroidissement, on peut voir apparaître d'autres phases que celles prédites.\\
+
+Après une coulée, en général, on fait une \textbf{homogénéisation} : on donne le temps à la diffusion de ramener la structure à celle prévue.\\
+
+\quad \underline{Diagramme TTT :}\\
+Nous donne les transformations en fonction du temps passé ainsi que de la température.\\
+Il s'agit de transformation lors d'un maintient isotherme après une exposition prolongée à une température donnée. En général, on chauffe jusqu'à une température T donnée, puis on trempe et enfin on homogénéise. Pour éviter le nez du diagramme.\\
+
+En réalité on trouve plusieurs précipités de composition proche de $Al_2Cu$ car \textbf{certains précipités moins stables ont une cinétique de germination et de croissance plus rapide.}\\
+Une des raisons essentielle pour cela est l'interface : \\
+Interface cohérente si les positions des atomes coïncident entre les deux cristaux. Cependant, le long des interfaces, on trouve beaucoup de contraintes.\\
+Interface incohérente si les positions ne coïncident pas.\\
+Pour soulager ces contraintes, des dislocations apparaissent.\\
+
+\warning Dans le temps, la taille des précipités augmente.\\
+
+Les précipités sont des obstacles au déplacement des dislocations. Il y a deux moyens de les passer :\\
+\begin{itemize}
+    \item Cisailler les précipités (petites tailles). La contrainte requise pour cisailler les précipités augmente avec leur nombre et leur taille.\\
+    \item Se plier sous l'action de la contrainte et passer les précipités en les contournant. On a une contrainte supplémentaire de $\sigma \simeq 2 G\frac{b}{d}$ Avec d la distance inter-précipités et b la distance inter-atomique.\\
+\end{itemize}
+De ce fait, le durcissement créé par les précipités croît d'abord puis décroît quand la distance inter-précipité croît : il y a un \textbf{temps de durcissement optimal}.\\
+Le niveau de durcissement dépend de la température.\\
+
+\quad \underline{Durcissement structural :}\\
+Mise en solution, trempe, revenu\\
+C'est un des mécanismes de durcissement les plus efficaces.\\
+Caractéristiques nécessaires : temps de trempe possible, solubilité qui décroît avec la température.\\
+Limite utilisation : \\
+On ne peut utiliser l'alliage à des température où la maturation a lieu.\\
+Il requiert aussi des précipités qui durcissent l'alliage.\\
+
+
+\quad \underline{Dislocations :}\\
+Les dislocations sont entourées d'un champ de contraintes élevées : elles se repoussent ou s'attirent. Dans tous les cas, cela interfère avec leur mouvement et augmente la contrainte requise à les faire avancer. De même pour les solutés.\\
+
+Les dislocations s'accumulent au sein du métal et celui ci se durcit au fur et à mesure qu'on le déforme : \textbf{écrouissage}.\\
+Les dislocations représentent un surcroît d'énergie interne; elles sont thermodynamiquement instable. Environ $90-95\%$ de l'énergie dépensée à déformer un métal par déformation plastique est relâchée sous forme de chaleur.\\
+Ainsi le matériau à tendance à évoluer pour diminuer la densité de dislocations.\\
+
+Deux procédés : \begin{enumerate}
+    \item \textbf{restauration :} les dislocations de signes opposés migrent avec la chaleur pour réduire leur longueur et être plus stable\\
+    \item \textbf{recristallisation :} plus efficace; la germination et croissance de nouveaux grains avec la même composition et structure mais plus stable. La taille des grains dépend du taux d'écrouissage : plus il est grand plus les grains seront fins.\\
+\end{enumerate}
+
+On peut donc adoucir un métal pour y réduire la densité de dislocations : \textbf{recuit}. Diminue la résistance et augmente la ductilité.\\
+Si des grains sont plus grands que d'autres : \textbf{croissance de grains anormale} : les gros grains absorbent les plus petits.\\
+
+\quad \underline{Combinaisons :}\\
+La combinaison de l'écrouissage et du recuit n'est pas indépendante de la trajectoire : une déformation suivie d'un recuit partiel donne de meilleurs propriétés.\\
+
+\quad \underline{Mécanismes de durcissements :}\\
+\begin{itemize}
+    \item Écrouissage et son contraire le recuit\\
+    \item Durcissement par solution solide\\
+    \item Durcissement structural\\
+\end{itemize}
+
+\quad \underline{Système Al-Si :}\\
+Ce système surtout présent dans les alliages de fonderie car facile à couler et peu onéreux.\\
+De plus, il ne souffre pas de \textbf{retassures} : le retrait de volume lors de la solidification.\\
+Un autre problème est l'oxygène présent, qui dissout dans le métal crée des bulles néfastes.\\
+
+\quad \underline{Forme de AlSi :}\\
+Hypereutectique : on aura de \textbf{grands cristaux de Si}. \\
+Sinon on aura de fines plaquettes irrégulières.\\
+Si la vitesse de solidification est élevée ou si on ajoute de petites quantités de strontium/sodium, on aura \textbf{de fines branches}.\\
+
+\textbf{Trois précipités durcissant stables principaux :} $Al_2Cu, Mg_2Si, MgZn_2$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        1xxx & non allié, de pureté > 99$\%$. Les deux derniers chiffres pour la pureté. \\
+        2xxx & Cuivre et souvent magnésium\\
+        3xxx & Manganèse, souvent magnésium\\
+        4xxx & Silicium\\
+        5xxx & Magnésium\\
+        6xxx & Magnésium et Silicium\\
+        7xxx & Zinc\\
+        8xxx & tous les autres\\
+        \hline
+    \end{tabular}
+    \caption{Alliages de corroyage}
+     
+\end{table}
+
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        1xx.x & non allié, de pureté > 99$\%$. Les deux derniers chiffres pour la pureté. \\
+        2xx.x & Cuivre et souvent magnésium\\
+        3xx.x & Silicium et magnésium/cuivre\\
+        4xx.x & Silicium\\
+        5xx.x & Magnésium\\
+        6xx.x & non utilisé\\
+        7xx.x & Zinc\\
+        8xx.x & Étain\\
+        9xx.x & tous les autres\\
+        \hline
+    \end{tabular}
+    \caption{Alliages de fonderie}
+     
+\end{table}
+
+Pour le traitement thermiques, on a :\\
+F : comme fabriqué\\
+O : remis à zéro\\
+H : écroui tel que Hxy, x:1(écroui) ou 2(recuit), y:8(dur) ou 4(mi dur)\\
+T : traitement thermique : 4 mise en solution plus revenu naturel; 6 mise en solution plus revenu; 8 mise en solution plus écrouissage plus revenu.\\
+
+\subsubsection{Métallurgie du cuivre}
+Il a une densité plus élevée que celle de l'aluminium. C'est un mono-cristal anisotrope. Il a un taux d'écrouissage élevé. C'est un grand conducteur mais cela chute s'il est allié.\\
+
+Le cuivre dissous de l'oxygène qui se solidifie sous forme d'oxydule $Cu_2O$\\
+Le cuivre ETP (conducteur) conduit bien mais si on le chauffe avec de l'hydrogène, il réduit l'oxydule et forme des bulles de vapeur néfastes. Pour parer cela on allie le cuivre avec un élément plus stable ou on enlève l'oxygène du cuivre \textbf{OFHC}.\\
+
+Les alliages de cuivre sont :\\
+les \textbf{laitons : Cu+Zn} ainsi que tous les bronzes.\\
+
+Dans le diagramme de phase de laitons, on a du côté du cuivre un inter-métallique $\beta$ et $\beta'$.\\
+La transition de $\beta$(désordonné) à $\beta'$(ordonné) est une transition désordre-ordre. \\
+En général, un inter-métallique est plus fragile car les dislocations ont du mal à passer à travers les mailles qui sont imbriquées.\\
+
+On distingue les \textbf{laitons monophasés} (0 à 30$\%$pds Zn). La couleur allant de l'orange au jaune. Ils sont malléables et peuvent être mis en forme à froid. Ils sont durcis par le zinc en solution solide.\\
+
+\textbf{Laitons biphasés} sont mis en forme à chaud dans le domaine où ils sont monophasés $\beta$ car cette phase est ductile à chaud.\\
+
+La phase $\beta'$ est plus dure que la phase $\alpha$ mais moins ductile. C'est pourquoi les laitons biphasés ont des résistances mécaniques plus élevées mais une ductilité moindre.\\
+
+\textbf{Quatrième mécanisme de durcissement :}une phase plus rigide au sein d'une autre phase.\\
+
+\quad \underline{Problèmes :}\\
+Les laitons sont sujets à plusieurs problèmes : \\
+\textbf{le désalliage :}(dézincification) dissolution sélective du zinc laissant du cuivre poreux.\\
+\textbf{la crique/corrosion saisonnière :} fissuration du cuivre sous l'action de certains produits chimiques comme l'ammoniaque. C'est une corrosion sous contrainte causée par la présence de contraintes internes.\\
+
+\subsection{Le fer et ses alliages}
+Son oxyde est moins stable que celui de l'aluminium mais surtout que celui du carbone. Il peut donc facilement être réduit par le carbone.\\
+En réduisant le minerai dans les haut-fourneau, on obtient de la \textbf{fonte}, fer fondu riche en carbone. Puis en soufflant de l'air dans la fonte, on obtient de l'acier\\
+
+\subsubsection{Le carbone dans le fer}
+Le fer pur est complexe, il subit \textbf{deux transformations allotropiques} (d'abord CC puis CFC puis CC). On parle de \textbf{ferrite (CC)} : $\alpha$ (basse température) et $\delta$ (haute température). Ainsi que de \textbf{austénite (CFC)} : $\gamma$\\
+
+Les atomes de carbones sont plus petits que le fer et se logent dans les sites interstitiels présents dans les mailles de fer.\\
+Ainsi \textbf{le carbone diffuse facilement}. Ce qui implique qu'il n'y a pas de ségrégation mineure du carbone dans les acier/fontes.\\
+
+On appelle \textbf{acier si $\%$pdsC <2.1$\%$}. Fonte sinon.\\
+
+Le carbone combiné au fer solide peut :\\
+$\bullet$ être en solution solide\\
+$\bullet$ prendre la forme de carbure $Fe_3C$(cémentite) ou de graphite (thermodynamiquement plus stable)\\
+La cémentite est malgré tout observée dans les acier. On parle de \textbf{fontes grises} si graphite, et \textbf{fontes blanches} si cémentite.\\
+
+Les aciers passent de 100$\%$ d'austénite à un autre état. Pas les fontes.\\
+\textbf{L'acier eutectique : .77$\%$pds C}.\\
+Au niveau de l'eutectique, on a formation de la \textbf{perlite} qui est un mélange de cémentite et de ferrite.\\
+
+\subsubsection{Martensite}
+Il existe une autre transformation des alliages Fe-C : transformation martensitique. Elle est différente des transformations diffusives. Elle procède par le mouvement d'un mur de quasi-dislocations qui déforment le matériau.\\
+On passe d'une maille CFC à une CC. La maille quadratique centrée inscrite dans deux mailles CFC devient CC si on la comprime.\\
+La vitesse de croissance de la martensite est donc très rapide (proche de celle du son).\\
+La formation de martensite à un coût énergétique : la déformation qui l'accompagne est résistée par l'austénite.\\
+\warning La martensite crée toujours une interface cohérente avec la phase parent.\\
+C'est une transformation athermale : elle commence à une température $M_s$ et se termine à une température $M_f$ à laquelle toute l'austénite est transformée en martensite.\\
+Lors de la transformation, les atomes de carbone n'ont pas le temps de bouger et empêchent l'affaissement de la maille CFC. De ce fait, la maille CC formée reste quadratique centrée au lieu de devenir CC.\\
+Ainsi la transformation martensitique a lieu à des températures d'autant plus basses que l'acier contient de carbone. On a la relation : \\
+\begin{equation}
+    M_s[^{\circ}C] = 539-423 C[\% pds] - 30.4 Mn[\% pds] - 17.7 Ni[\% pds] - 12.1 Cr[\% pds] - 7.5 Mo[\% pds]
+\end{equation}
+Dès lors, la martensite est très dure.\\
+
+\subsubsection{Diagrammes TTT, TRC}
+Le point de départ du traitement thermique des aciers est leur transformation en austénite.\\
+Si on veut former de la martensite, il faut éviter la formation de perlite, c'est à dire éviter le nez du diagramme TTT (dans ce cas, il faut tremper en moins de une seconde pour éviter de former autre chose que de la martensite). En plus de la martensite, il existe une autre forme que peuvent prendre les alliages Fe-C : \textbf{bainite}.\\
+
+La bainite est biphasée (plus fine que la perlite), elle est riche en fer et ressemble à la martensite.\\
+
+Diagramme TRC (transformation en refroidissement continu) : décrivent les transformations ayant lieu lors de certains refroidissement. Sur le diagramme, le pourcentage indique le volume de chaque phase indiquée.\\
+
+Quelques points clés : le nez des diagrammes TRC est décalé à droite de ceux du TTT.\\
+les courbes avec leurs nez migrent vers les temps plus longs quand la présence et la proportion d'éléments d'alliage augmente\\
+perlite et bainite donnent deux nez différents\\
+
+Si $M_f$ est inférieur à l'ambiante, l'acier contient alors de l'austénite résiduelle. Si $M_s$ est inférieur à l'ambiante alors l'acier trempé est 100$\%$ austénitique. Cette austénite est instable.\\
+
+\subsubsection{Trempabilité des aciers}
+\quad \underline{La trempabilité des aciers :} se mesure par la lenteur de formation de la ferrite/ cémentite/perlite/bainite.\\
+Elle augmente généralement avec les éléments d'alliages ainsi qu'avec l'augmentation de la taille de grain de l'austénite.\\
+
+Soit la taille de grain : $m = 8 \cdot2^G$, avec m le nombre de grains visibles par $cm^2$ et G un "nombre de grain".\\
+Une grand trempabilité permet de former de la martensite plus uniformément et à plus grande profondeur dans le matériau.\\
+De plus, moins on refroidit vite, moins grand seront les gradients de température. Important car former de la martensite crée des contraintes internes.\\
+
+Pour la mesurer : \textbf{essai Jominy}\\
+On trempe un barreau et on mesure la profondeur à partir de laquelle la dureté chute. \color{gray} On parle en général de bande de Jominy due à l'imprécision des mesures\color{black}\\
+
+\subsubsection{Revenu des aciers}
+La martensite n'est pas stable car sa micro-structure comporte des contraintes internes importantes, les atomes de carbones sont coincés entre les atomes de fer et elle est remplie de dislocations.\\
+Si on la chauffe, la martensite se décompose et les atomes de carbones migrent et se logent le long des dislocations. Ils vont germiner des petits précipités de carbure cohérent qui entraîne un niveau de durcissement structural.\\
+Si temps trop long et températures plus élevées, on aura maturation des carbures formés et l'élimination des dislocations.\\
+C'est le revenu de la martensite : l'acier est moins dur mais surtout moins fragile.\\
+
+On a aussi du durcissement secondaire : dans les aciers alliés à des températures élevées il y a apparition d'autres carbures stables.\\
+
+N.B: Si $M_f$ est inférieur à l'ambiante, il faudra alors faire plusieurs revenus.\\
+
+\quad \underline{Fragilisation de revenu :} lors du revenu, certaines impuretés combinées avec des éléments d'alliages peuvent réduire la ductilité de l'alliage.\\
+
+\subsubsection{Trempes étagées/Traitement de surface}
+Pour éviter la fissuration ou obtenir les phases désirées, on peut faire des trempes étagées.\\
+On peut aussi durcir les aciers trempables le long de leur surface mais pas à coeur (pour avoir une surface dure et un coeur moins fragile) en chauffant uniquement la surface. Ou en chauffant la pièce aux températures austénitiques dans une atmosphère riche en carbone (cémentation) pour la rendre plus dure et plus trempable.En chauffant la pièce dans une atmosphère riche en azote lequel durcit la pièce en surface (nitruration).\\
+
+\subsubsection{Les familles des aciers}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        Métal & Utilisation \\
+        Low-carbon steel & construction, soudure\\
+        Medium-carbon steel & pièce de machines\\
+        High-carbon steel & ressort, outils de découpe\\
+        Low-alloy steel & Pièce aéronautique \\
+        High-alloy steel & haute température\\
+        Cast iron & tuyauterie\\
+        \hline
+    \end{tabular}
+    \caption{Principales familles des aciers}
+     
+\end{table}
+
+\quad \underline{Les aciers au carbone :}\\
+Les plus simple niveaux composition : Fe, C, manganèse pour capturer le soufre.\\
+Il durcit via un nouveau moyen :\\
+\textbf{durcissement par affinage du grain :} il se base sur le fait que les joints de grains sont des obstacles au mouvement des dislocations. En diminuant la taille moyenne du grain on augmente la résistance sans pour autant changer la ductilité. On a la relation :\\
+\begin{equation}
+    \sigma = \sigma_0 + kD^{-\frac{1}{2}}
+\end{equation}
+La température de transition ductile-fragile diminue avec l'affinage du grain.\\
+Très efficace dans les métaux!\\
+Pour ce faire, on fait une \textbf{normalisation} : on chauffe la structure au-dessus de la ligne de transformation en austénite pour refroidir ensuite et former davantage de grains de ferrite.\\
+
+
+La grande mobilité du carbone donne des particularités pendant la déformation : \\
+\textbf{amorçage de la déformation de manière in-homogène} formation puis croissance de bandes où la déformation se concentre : \textbf{Lüders dans un barreau, vermiculures dans les tôles}. Pour les éviter, on déforme avant d'emboutir. Celles-ci sont dues au fait que les atomes de carbone bloquent les dislocations puis quand elles ont emmagasinés assez d'énergie, elles bougent. Ceci cause le crochet de déformation.\\
+
+Une autre particularité est que les dislocations dans la ferrite voient leur mobilité décroître en dessous d'une certaine température. Il y a une \textbf{transition ductile-fragile} quand on baisse la température d'essai. \textbf{Uniquement sur structure CC}. La \textbf{température de transition ductile/fragile} dépend de la composition de l'alliage, elle augmente quand augmente la teneur en carbone.\\
+
+La perlite est une série de plaquette de ferrite et cémentite, si sous forme de fil, c'est un des matériau des plus résistants qui soit.\\
+
+\quad \underline{Low-alloy :}\\
+Aciers exempt d'impuretés alliés à des éléments formant de petits précipités qui durcissent l'alliage par durcissement structural et par affinage des grains.\\
+
+\quad \underline{Medium-alloy :}\\
+Entre .25 et .5$\%$pds C et jusqu'à 5$\%$ods d'autres éléments. Ils sont destinés à être trempés.\\
+
+\quad \underline{High-alloy, acier outils :}\\
+Certains sont "auto-trempants" car ils se transforment en martensite par refroidissement à l'air. Beaucoup de carburigènes.\\
+
+\quad \underline{Aciers inoxydables :}\\
+Si teneur > 12$\%$pds de chrome alors le fer se couvre au contact de l'air d'une fine couche d'oxyde de chrome imperméable qui l'empêche de s'oxyder. Le chrome favorise la ferrite et en présente de carbone forme des carbures de chrome, ce qui diminue sa concentration. Ils peuvent avoir une trempabilité élevée.\\
+Selon leur composition, ils peuvent avoir une vaste gamme de micro-structures. Pour prédire leur structure, pour une vitesse de refroidissement donnée, on peut décomposer leurs éléments d'alliages en deux catégories :
+
+\quad \underline{Alphagènes/gammagènes :}\\
+On différentie les éléments favorisant l'austénite, les \textbf{gammagènes} de ceux favorisant la ferrite \textbf{les alphagènes}.\\
+On traduit l'influence des alphagènes avec un $\%$ de chrome équivalent et l'influence des gammagènes par un $\%$ de nickel équivalent.\\
+
+Pour les alliages refroidis aux vitesses caractéristiques de leur fabrication, on a le \textbf{diagramme de Pryce and Andrews} : \\
+$C_{Cr, eq} = \% pds Cr + \% pds Mo + 1.5\% pds Si + 0.5\% pds Nb + 2\% pds Ti$\\
+$C_{Ni, eq} = \%pds Ni + 21\% pds C + 11.5\% pds N$\\
+On peut ainsi lire sa structure.\\
+
+\subsubsection{Les fontes}
+Le graphite dans le fer est une phase très stable, plus que la cémentite. Sa formation est favorisé par des éléments d'alliages comme le carbone. La formation de la cémentite est favorisée par des vitesses de refroidissement élevées.\\
+
+Selon la composition on aura formation d'eutectique : austénite + graphite ou austénite + cémentite. Puis l'austénite se transforme en ferrite+graphite ou ferrite+cémentite = perlite\\
+\warning Les fontes sont plutôt fragiles et le matériau est amortissant : les ondes se propagent mal.\\
+
+Suivant la composition, le graphite prend plusieurs formes. Par ajout de magnésium/cérium à une fonte, sans soufre et phosphore on rend le graphite sphéroïdal, ce qui améliore la ductilité. Par appauvrissement en carbone de l'austénite on peut faire basculer le diagramme vers un état méta-stable.\\
+
+\subsection{Polymères}
+
+\subsubsection{Naissance et production des polymères}
+Un polymère est un matériau constitué de molécules très longues : \textbf{macromolécules} faites d'entités répétées beaucoup de fois.\\
+La colonne qui sous-tend ces macromolécules sont faites de carbone.\\
+
+Les polymères sont produits par réaction d'addition à partir de monomères avec au moins deux sites réactifs pouvant former des chaînes. Elles sont initiées propagées et terminées par divers procédés chimiques dont la nature détermine la longueur des chaînes.\\
+
+\subsubsection{Nature et structure des polymères}
+Un point important est la fonctionnalité des monomères : \textbf{le nombre de points d'attache qu'ils offrent à d'autres monomères}.\\
+
+\begin{itemize}
+    \item Monomère bifonctionnel : ne peut produire que des macromolécules linéaires. De longues chaînes liées entre elles par des liaisons secondaires\\
+    \item Monomère tri-polyfonctionnel : peut produire des macromolécules à branches voire un réseau moléculaire tridimensionnel : \textbf{relativement rigide}. Structure des polymères thermodurcissable.\\
+\end{itemize}
+
+Plusieurs types de polymères synthétiques : \\
+\begin{itemize}
+    \item Thermoplastiques : \textbf{chaînes peu/non liées} par des liaisons covalentes. Deviennent des fluides à chaud et solide à basse température. Il n'y a que des liaisons secondaires.\\
+    \item Thermodurcissables : \textbf{chaînes fortement liées} entre elles, structure en trois dimensions. Si chauffé, leur module chute et elles se décomposent au lieu de fondre.\\
+    \item Élastomères : Entre les deux, un nombre faible de liaisons entre les longues chaînes moléculaires. Elles peuvent subir une forte déformation réversible à contrainte constante.\\
+\end{itemize}
+Toutes les matières du vivant sont faites de polymères naturels.\\
+
+Une caractéristique importante est la taille des macromolécules. On a plusieurs mesures : \\
+\begin{itemize}
+    \item Degré de polymérisation : nombre moyen d'unités moléculaires (nombre de monomères) constituant les chaînes\\
+    \item Masse moléculaire : masse molaire des macromolécules $\simeq$ degré polymérisation x $M_{molaire}$\\
+\end{itemize}
+
+Plus un polymère est long, plus on va du liquide au solide. \\
+
+\quad \underline{Problème :} la formule ne suffit pas pour trouver leur caractéristiques. Il existe plusieurs types de polymères : \\
+\begin{itemize}
+    \item Isomères : même constitution chimique mais structure différente. Si l'enchaînement d'atomes diffère : isomères de constitution\\
+    \item Stéréisomères : diffèrent par séquences d'emplacement des mêmes groupes moléculaires le long des macromolécules : \begin{itemize}
+        \item isotactiques : du même côté\\
+        \item syndiotactiques : en alternance\\
+        \item atactiques : aléatoires \\
+    \end{itemize}
+    \item copolymères : combinent différents types de monomères dans une même macromolécule.\\
+\end{itemize}
+
+\warning Beaucoup de polymères sont amorphes : structure hors équilibre, pas méta-stable et comporte un excédent de volume par molécule. Dépend de son historique de formation et change les propriétés mécaniques.\\
+
+\warning Certaines molécules peuvent cristalliser. Cette cristallisation n'occupe pas 100$\%$ du volume : \textbf{taux de crystallinité}. On a donc une cristallisation partielle puis amorphe à côté. A longue distance, on a croissance de \textbf{structure sphérulitique :} sphère composée de zone cristalline et amorphes.\\
+
+\subsubsection{Propriétés mécaniques des polymères}
+$10^{-3} < E < 10 GPa$, $30 < \rho < 10^3$, $.01 < \sigma_y < 100MPa$, $.01 < K_{1c} < 10MPa.m^{\frac{1}{2}}$
+
+\subsubsection{Comportement à haute température}
+Contrairement aux céramiques et métaux, la cohésion est assurée par combinaison de liaisons fortes(covalentes) et faibles (secondaires).\\
+Cependant, à $T$ proche de $T_g$ : les \textbf{liaisons secondaires fondent}. De ce fait, le comportement des polymères dépend de la température et du temps autour de la température de transition vitreuse. Cette dépendance dépend aussi de la répartition des liaisons.\\
+
+\quad \underline{Température de transition vitreuse $T_g$ :} température au dessus de laquelle les chaînes peuvent glisser les unes sur les autres sans opposition par les liaisons secondaires qui fondent. On a donc une discontinuité de la pente des courbes des propriétés mécaniques. \textbf{$T_g$ dépend de la vitesse de refroidissement}.\\
+
+\quad \underline{Thermoplastiques :} ils se déforment facilement et deviennent plastique. $E$ diminue proche de $T_g$. \\
+\begin{minipage}{.5\textwidth}
+Ils peuvent être cristallins et ont une température de fusion $T_m$. Si $T>T_m$, ils deviennent amorphes.\\
+\end{minipage}
+\vline
+\begin{minipage}{.5\textwidth}
+$E$ dépend de la facilité des chaînes à glisser l'une sur l'autre qui est fonction de :\\
+\begin{itemize}
+    \item leur longueur\\
+    \item leur structure : présence de groupes moléculaires complexes/aromatiques capable de former des points d'ancrage\\
+    \item présence de liaisons plus fortes\\
+\end{itemize}
+\end{minipage}
+
+\warning Une structure cristalline est plus dense, plus rigide et plus résistante.\\
+
+\quad \underline{Thermodurcissables :} les liaisons secondaires fondent mais les covalentes assurent une rigidité à l'ensemble. Leur module chute aussi mais moins que les thermoplastiques.\\
+
+\quad \underline{Élastomères :} entre les deux. Macromolécule linéaire pontées par des liaisons covalentes les liant tous les 100 carbones. \textbf{Structure tri-dimensionnelle} : les liaisons C-C peuvent tourner. Entre deux points séparés par une distance elle peut prendre un grand nombre de géométries.\\
+Ainsi, l'entropie d'une telle macromolécule vaut : $S = k \ln{\Omega}$. En traction uniaxiale, on a \\
+\begin{equation}
+    \sigma = \frac{\partial F}{\partial \lambda} = \frac{\rho R T}{M_c} (\lambda - \frac{1}{\lambda^2}) \rightarrow \sigma = 3\frac{\rho R T}{M_c}\varepsilon
+\end{equation}
+Avec $\lambda = 1+\varepsilon$. \warning A volume constant!\\
+Cette formule ne prédit cependant pas une montée de la force aux grandes déformations. Ceci est due au fait que les molécules voient une altération de leurs longueurs et angles de liaisons.\\
+\textbf{La rigidité est proportionnel à la température}. Plus les chaînes sont courtes, plus le matériau est rigide. Le travail apporté ne change pas l'énergie interne donc il est relâché sous forme de chaleur.\\
+$M_c$ est déterminé par le nombre de points d'ancrage créés par le soufre. Avec un grand $M_c$, le matériau se déforme sous faible contrainte.\\
+
+\subsubsection{Viscoélasticité}
+A $T < T_g$ : liaisons secondaires deviennent plus rigides. La rigidité du matériau augmente et les molécules glissent entre elles et il se déforme progressivement. La loi de déformation des polymères se situe donc entre celle des solides élastiques et celle des fluides visqueux. On les caractérise avec des essais complémentaires :\\
+\begin{itemize}
+    \item Essai relaxation : déformation imposée : on regarde l'évolution de $\sigma$ dans le temps. Module de relaxation : $\sigma(t) = E(t) \varepsilon_0$\\
+    \item Essai de fluage : on impose une contrainte et on regarde la déformation dans le temps. Complaisance au fluage : $\varepsilon(t) = D(t) \sigma_0$.\\
+\end{itemize}
+Le temps est donc un paramètre important! Ainsi à température fixe, on a $F(\sigma, \frac{d\sigma}{dt}, \dots, \varepsilon, \frac{d\varepsilon}{dt}, \dots) = 0$. Une solution est donc $p_0 \sigma + p1 \frac{d\sigma}{dt}+\dots+q_0 \varepsilon + \dots = 0$\\
+\textbf{Un tel solide est dit viscoélastique linéaire.}\\
+En viscolinéaire si ,$(\sigma(t), \varepsilon(t))$ décrivent l'historique de contrainte/déformation dans le temps, alors $(\alpha \sigma(t), \alpha \varepsilon(t))$ est aussi une solution! Ainsi, pour t fixe on peut résoudre des problèmes de conception. \\
+On a : \\
+\begin{equation}
+    \sigma(t) = \varepsilon_0 E(t) + \int_{0+}^t E(t-\tau) \frac{d \varepsilon(\tau)}{d\tau} d\tau
+\end{equation}
+Soit $\varepsilon = Rt$, si $\varepsilon_0 = 0$, on a $\sigma(t) = R\int_0^t E(t-\tau)d\tau$\\
+
+Influence de la température est importante et traitée d'une façon semi-empirique avec utilisation de courbes TTSP. On suppose qu'il n'y ait pas de changements de mécanisme de déformation avec la température et que la vitesse de déformation du polymère à une contrainte donnée soit une fonction de la température.\\
+
+\textbf{Si à $T_0$ la déformation met $t_0$ secondes à avoir lieu alors à T, la même évolution mettre t secondes pour avoir lieu}\\
+\begin{equation}
+    \log(t) = \log(t_0) + \log(a_T)
+\end{equation}
+Avec $a_T$ une fonction de la température par laquelle on décale la courbe donnant la déformation en fonction du temps à une température connaissant $T_0$. Empiriquement :\\
+\begin{equation}
+    \log(a_T) = \frac{-17(T-T_0)}{51+(T-T_0)}
+\end{equation}
+\warning Vrai uniquement pour $T>T_g$. \\
+
+\subsubsection{Déformation et rupture des polymères}
+Si la déformation est supérieur au domaine viscoélastique : le polymère casse si fragile ou se déforme plastiquement si ductile.\\
+
+\quad \underline{Seuil de plasticité :} souvent de la forme d'une inflexion notable/c'est un maximum sur une courbe. Elle diffère entre traction et compression.\\
+
+Contrairement aux autres matériaux, les polymères sont différents selon le fabricant. Après le seuil de plasticité, un polymère ductile continue à s'allonger. La contrainte d'écoulement n'augmente pas beaucoup voire diminue. \textbf{Déformation in-homogène} : apparition d'une zone de déformation forte. La déformation peut se concentrer dans des bandes de cisaillements à 45$^{\circ}$ qui grandissent et se propage à travers le matériau. \\
+On a aussi formation de \textbf{craquelures} : pas des fissures mais des zones comprenant :\\
+\begin{itemize}
+    \item \textbf{vacuoles, pores allongés :} épaisseur microscopique et représentant environ par moitié le volume des craquelures (proche des micro-fissures)\\
+    \item microfibrilles : bandes de macromolécules orientées et allongées traversant les bandes augmentant la résistance à la traction.\\
+\end{itemize}
+
+Dans un polymère, bandes de cisaillements et craquelures se forment en même temps. 
+
+\quad \underline{Facteurs importants :} \\
+$\bullet$ degré de cristallinité : cristaux durcissent et raidissent les polymères. \\
+$\bullet$ déformation préalable : tend à aligner les macromolécules. Ce qui mène à une amélioration des propriétés dans certaines directions : \textbf{anisotropie du matériau}. Très utilisé pour produire des fibres polymères\\
+
+\subsection{Composites}
+
+C'est un matériau combinant deux matériaux différents à petite échelle. Il est composé de deux phases :\\
+$\bullet$ renfort : éléments isolés, convexes séparés (ex. fibre)\\
+$\bullet$ matrice : englobe le renfort pour créer un matériau continu.\\
+
+\subsubsection{Matériaux fibreux}
+Beaucoup de matériaux peuvent être produits sous forme de fibres : verre/acier perlitique et carbone graphitique. \\
+Beaucoup de procédés sont possible pour les produire : le principal : à partir de fibres de polymères polyacrilonitrile \textbf{PAN} puis on le pyrolyse (chauffe du matériau pour ne garder que le carbone). \\
+
+Il existe aussi des fibres d'autres polymères/céramiques, naturelles.\\
+
+\subsubsection{Matériaux composite renforcés}
+Fibre haute performance constituent un renfort évident mais il en existe d'autres : fibres naturelles, acier dans le béton précontraint, particules pour durcir la matrice, etc.\\
+
+Les matrices des matériaux composites peuvent être de trois classes :\\
+polymériques, métalliques, céramiques\\
+
+\quad \underline{Loi des mélange :}\\
+Si traction selon axe perpendiculaire aux fibres :\\
+\begin{equation}
+    \frac{1}{E_c} = \frac{V_1}{E_1} + \frac{V_2}{E_2}
+\end{equation}
+
+Si traction selon axe parallèle aux fibres :\\
+\begin{equation}
+    E_c = V_1 E_1+V_2E_2
+\end{equation}
+\warning Valable uniquement pour fibre longue.\\
+Ces deux formules sont des bornes supérieures et inférieures du module du composite!\\
+
+Composite à fibres longues sont très \textbf{anisotropes} et peuvent avoir un grand nombre de constante d'élasticité (<21). Ce nombre diminue s'il y a des symétries.\\
+Si la sollicitation n'est pas parallèle aux fibres, celles ci changent leur orientation pour accommoder leur déformation. On produit donc des \textbf{composites laminés} : couches de fibres dans des directions différentes.\\
+
+Ainsi, si les fibres ne sont pas toutes parallèles : facteur efficacité B : $E_c = B V_fE_f + V_mE_m$\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|c|c|}
+        \hline
+         & Toutes alignées & perpendiculaires entre elles & aléatoire dans le plan & aléatoire en 3D \\
+        B & 1 & $\frac{1}{2}$ & $\frac{3}{8}$ & $\frac{1}{5}$\\
+        \hline
+    \end{tabular}
+    \caption{facteur d'efficacité}
+\end{table}
+
+\quad \underline{Fibres courtes :}\\
+Permet de produire des pièces de forme complexe par aspersion/moulage par injection/compression.\\
+On suppose que la matrice transfère sa contrainte à la fibre par cisaillement. On a donc : $P\tau_i dx = Ad\sigma_f$ soit pour une fibre cylindrique : $\frac{P}{A} = \frac{2}{R}$.\\
+On a donc :\\
+\begin{equation}
+    \sigma_{f,max} = (\frac{P}{A}) (\frac{L}{2})\tau_i \Rightarrow \overline{\sigma_f} = \frac{\sigma_{f,max}}{2}
+\end{equation}
+Ceci est valide tant que $\sigma_{f,max} < E_f \varepsilon_m$. Avec $\varepsilon_m$ l'allongement élastique de la matrice près de la fibre. Si l'inégalité n'est pas vraie, la contrainte atteint un plateau : $\sigma_{f,max} = E_f\varepsilon_m$ \\
+\begin{equation}
+    \overline{\sigma_f} = E_f\varepsilon_m(1-\frac{\lambda}{L}, \lambda = (\frac{A}{P}) (\frac{E_f}{\tau_i}) \varepsilon_m
+\end{equation}
+
+Pour des composites à fibres longues, on a $\sigma_c = V_fE_f\varepsilon_c + V_m\varepsilon_m$ car les fibres restent dans le domaine linéaire. \\
+
+Le renfort casse avant la matrice : la courbe de traction a donc deux maxima\\
+Un lorsque : $\sigma_c = V_f \sigma_f^* + V_m \sigma_m$\\
+Un autre lorsque : $\sigma_c = V_m \sigma_m^*$\\
+
+Pour les fibres courtes, les fibres ne cassent pas forcément, il faut que $\sigma_{f,max} > \sigma_p^* \Rightarrow L > L^* = (\frac{\sigma_f^*}{\tau_i})(\frac{2A}{P})$\\
+
+En général, les fibres n'ont pas une contrainte à rupture fixe (fragiles), il y a donc une statistique de Weibull. En compression, les composites à fibres longues se rompent en cisaillement par un mécanisme (flambage) coordonné le long d'une bande de plissement.\\
+
+\subsubsection{Interface et ténacité des composites}
+L'interface entre renfort et matrice est une zone d'importance.\\
+C'est une surface qui peut être rugueuse, il peut y avoir une épaisseur si réaction chimique entre renfort et matrice. L'interface peut aussi altérer la matrice : modification de cristallisation du polymère vers les fibres.\\
+
+Si une fissure approche l'interface, il y a deux choix :\\
+\begin{itemize}
+    \item continuer à travers la fibre\\
+    \item bifurquer et dé-laminer l'interface\\
+\end{itemize}
+
+De ce fait, avec une interface suffisamment faible, une fissure vers une fibre va bifurquer et va donc augmenter la superficie de la fissure. De plus, beaucoup d'énergie est dépensée pour extraire les fibres. C'est pour cela que la combinaison de deux matériaux fragiles peut être tenace. \\
+Ce mécanisme fonctionne aussi dans les composites à fibres courtes alignées selon l'axe des contraintes.\\
+
+
+\subsubsection{Matériaux poreux}
+Beaucoup de matériaux sont poreux : on peut les voir comme un composite entre solide et gaz.\\
+Ils peuvent être isotropes ou anisotropes. Leur comportement mécanique est une fraction de celui du solide qui les constitue. Cette fraction dépend de la géométrie interne du matériau et de sa densité.\\
+
+Pour des mousses à cellules ouvertes : $E_m = k E_s (\frac{\rho_m}{\rho_s})^2 = k E_s V_s^2$, k<1\\\
+En compression : le plateau est étendu si le matériau dont il est fait n'est pas fragile.\\
+
+\end{document}

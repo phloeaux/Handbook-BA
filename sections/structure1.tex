@@ -1,0 +1,240 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{Definitions}
+\quad \underline{Bars :} struts and cables, for truss structures; forces are parallel to element. It is a two forces elements.\\
+
+\quad \underline{Beams :} For bending and torsion elements, for frame. It is a N-force elements. It is an elongated structure of elements which are submitted to one or more internal loads, offering resistance to bending due to applied load.\\
+
+\quad \underline{Moments :} tendency of a force to induce rotation : $\vec{M} = \vec{r} \wedge \vec{F} = Fr \sin(\alpha)$ : \\
+
+\quad \quad About a point : $\vec{M_0} = \sum \vec{OP} \wedge \vec{F}$\\
+
+\quad \quad About an axis : $\vec{M_{\lambda}} = (\vec{M_0}\cdot \hat{n}) \hat{n} = \begin{vmatrix}
+    \alpha & \beta & \gamma\\
+    r_x & r_y & r_z\\
+    F_x & F_y&F_z\\
+\end{vmatrix}$
+
+\quad \underline{Couple :} It is a pair of equal and opposite forces that produces a moment that is independent of the placement of the origin.\\
+
+\quad \underline{Wrench resultant :} The resultant couple is parallel to the resultant force. It is a positive wrench if they are in the same direction. Negative if not.\\
+
+\quad \underline{Point of intersection :} between line of action and resultant (2D)\\
+
+\quad \quad with x-axis : $x = \frac{M}{r_y}$\\
+
+\quad \quad with y-axis : $y = -\frac{M}{r_x}$\\
+We have : $M = r_x F_y - y F_x$\\
+
+\quad \underline{Free Body Diagram :}\\
+\begin{enumerate}
+    \item Identify which body should be isolated\\
+    \item Sketch a drawing for external boundary\\
+    \item Apply external forces\\
+    \item Choose a coordinate system\\
+\end{enumerate}
+
+\quad \underline{Instantaneous center of rotation :} Point around which a rigid body in a given configuration could rotate without violating the boundary condition.\\
+
+\subsection{Statical determinacy}
+If : $N^{\circ}$ of constraints and DOF match $\rightarrow$ No ICR $\rightarrow$ \textbf{Isostatic :} kinematically and statically determinate\\
+If : $N^{\circ}$ of constraints and DOF doesn't match  with too many constraints $\rightarrow$ No ICR $\rightarrow$ \textbf{Hyperstatic :} kinematically determinate\\
+If : $N^{\circ}$ of constraints and DOF doesn't match  with too few constraints $\rightarrow$ With redundant constraints $\rightarrow$ \textbf{Hypostatic :} Statically and kinematically indeterminate.\\
+
+If : there is an ICR or redundant constraints(while not enough constraints) $\rightarrow$ both \textbf{hypostatic and hyperstatic :} system can move and we have redundant constraints, the system is statically and kinematically indeterminate.\\
+
+\quad \underline{Isostatic system :} Support reactions can be computed.\\
+
+\quad \underline{Joints :} Connection between member of a structure.\\
+
+\quad \underline{Support :} Connection between structure and its surroundings.\\
+
+\quad \underline{Transmissibility :} A force can be applied along any point of its line of action without altering the resultant effect of the force external to the rigid body.\\
+
+\quad \underline{Constraints :} Degrees of freedom blocked by a support.\\
+
+\quad \underline{Varighon's theorem :} The moment of a force about any point is equal to the sum of the moments of the components of the force about the same point.\\
+
+\subsection{Truss}
+\quad \underline{Structure :} Part of a more complex built ensemble of simple engineering element providing mechanical coherence.\\
+
+\quad \underline{Frames :} Arrangement of beams designed to support loads fixed in position.\\
+
+\quad \underline{Trusses :} Arrangement of bars and triangle. It is a structure comprising bars that are assembled at their extremities through articulations called joints.\\
+
+\quad \quad All bars are in the same plane.\\
+
+Both frames and trusses are built to carry loads and are typically static.\\
+
+\quad \underline{Mechanisms :} structure with mobile elements. They transfer force and moment between input and output.\\
+
+\quad \underline{Ideal truss :} Members are connected through smooth pins and external forces are applied at pins only.\\
+
+\quad \underline{Internal loads :} The external forces are exclusively applied at the joints, members of the truss are uniquely in either tension or compression. They behave as bars.\\
+
+\quad \underline{Determinacy :} truss has m bars, a supports, j joints $\rightarrow$ \\
+isostatic if : $m+a = 2j(3j$, in 3D); hypostatic if : $< 2j$; hyperstatic if :$> 2j$\\
+
+\subsubsection{Distributed forces}
+\underline{2D :}\\
+$x_c = \frac{\int xq(x) dx}{\int q(x)dx}$\\
+
+\underline{3D :}\\
+$x_c = \frac{\int x q(x,y)dA}{\int q(x,y)dA}$\\
+
+\subsubsection{Centroids and center of mass}
+\begin{minipage}{.5\textwidth}
+    \quad \underline{Centroids :} ($\rho$ constant)\\
+$x = \frac{\int xdL}{L}$\\
+$x= \frac{\int xdA}{A}$\\
+$x = \frac{\int xdV}{V}$\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \quad \underline{Center of mass :}\\
+    $x = \frac{\int xdw}{\int dw} = \frac{\int xdw}{w}$(si $\rho$ constant)\\
+    $dw = dm = \rho A dL$ (1D) $ = \rho L dA$(2D) $= \rho dV$(3D)\\
+\end{minipage}
+
+\subsubsection{Zero-force members}
+If no load on joint and two forces not parallel then both are zero-force members.\\
+If the action line of a force is aligned with one of the members, the others are zero force members.\\
+If two members have the same direction, the third one is a zero force member.\\
+
+
+
+
+\subsection{Cuts}
+On positive face (facing right)  we have $N(x)$ pointing right; $V(x)$ pointing down and $M(x)$ counter clock-wise.\\
+$V(x) = A_y - \sum F_i$ ($F_i$ points downwards)\\
+$M(x) = xA_y - \sum (x-a_i)F_i - \sum M_i$ ($M_i$ positive and $a_i$ the distance between point of application of the force and the beginning of the bar).\\
+
+We get that : $\frac{dM}{dx} = V(x) \Rightarrow \frac{dV}{dx} = -q(x) \Rightarrow \frac{d^2M(x)}{dx^2} = -q(x)$\\
+$V(x) = -\int q(x)dx + C_1$ \\
+$M(x) = \int V(x)dx + C2$\\
+
+V is discontinuous where $F_i$ is applied and constant otherwise.\\
+M changes slope where $F_i$ is applied and discontinuous where $M_i$ is applied.\\
+
+\subsubsection{Typical boundary conditions}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+         & pin & parallel motion & sliding sleeve & clamped & free \\
+        \hline 
+        V & $\neq 0$ & $=0$ & $\neq 0$&$\neq 0$&$=0$ \\
+        \hline
+        M & $=0$&$\neq 0$&$\neq 0$&$\neq0$&$=0$\\
+    \end{tabular}
+    \caption{Boundary conditions}
+    
+\end{table}
+
+
+\subsubsection{Virtual work}
+Work : $U = Fr[J] = \int \vec{F} \cdot d\vec{r} \rightarrow \delta U = \vec{F}\cdot d\vec{r} = \vec{M} \cdot d\vec{\phi}$\\
+Potential energy : $V = -U = -\int \vec{F}\cdot d\vec{r}$ \\
+
+
+\quad \underline{Principle of virtual work :} A mechanical system if in equilibrium if the virtual work of the external load vanishes during any arbitrary virtual displacement.\\
+To compute reaction load with PVW, we remove one support(not taken into account in the PVW) and replace it by a support reaction.\\
+
+\subsection{Stability}
+Criteria for stability : $\Delta V > 0 \Rightarrow \Ddot{V}(x_0) >0$ stable.\\
+$\Delta V < 0 \Rightarrow \Ddot{V}(x_0) <0$ unstable. Else neutral.\\
+
+\quad \underline{Principle of superposition :} The effect produced by several mechanical action is equal to the sum of the effect of each of them. Only valid for small deformation and when there is linear elastic response (doesn't work with springs).\\
+
+\subsection{Deformation}
+$\sigma = E \varepsilon \Rightarrow \frac{N}{A} = E \frac{\Delta l}{l}$\\
+Assumption : all elongation are small with respect to the length of all elongated members. $\frac{\Delta l}{l} \ll 1$\\
+
+\subsubsection{Usual values}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c||c|c|c|c|c|c|c}
+        Material & Steel & Copper & Aluminium & Concrete & Wood & Acrylic & Rubber \\
+        $E[GPa]$ & 210 & 120 & 70 & 30 & 10& 3 & 1$[MPa]$\\ 
+    \end{tabular}
+    \caption{Young's modulus}
+    
+\end{table}
+
+We have : $\sigma_{ns}$ : s the direction of the component and n the direction of the unit normal of plane of interest.\\
+
+$\overline{\overline{\sigma}} = \begin{pmatrix}
+    \sigma_x & \tau_{xy} & \tau_{xz}\\
+    \tau_{xy} & \sigma_y & \tau_{yz}\\
+    \tau_{xz} & \tau_{yz} & \sigma_z\\
+\end{pmatrix}$
+We define the traction vector :$\vec{t}(n) = \overline{\overline{\sigma}}\hat{n}$ the total sum of force per unit area acting on a plane that has unit normal $\hat{n}$\\
+
+In order to stay static we must have : $\tau_{xy} = \tau_{yx}$\\
+
+The strain tensor is defined by : 
+\begin{equation}
+    \overline{\overline{\varepsilon}} = \frac{1}{2} [(\nabla \vec{U}) + (\nabla \vec{U})^T] = \begin{pmatrix}
+        \frac{\partial U_x}{x} & \frac{1}{2}(\frac{\partial U_y}{\partial x} + \frac{\partial U_x}{\partial y})\\
+        \frac{1}{2}(\frac{\partial U_y}{\partial x} + \frac{\partial U_x}{\partial y}) & \frac{\partial U_y}{y}
+    \end{pmatrix}
+\end{equation}
+With U the displacement vector.\\
+
+\subsubsection{Uniaxial loading}
+Brief reminder : $\varepsilon_x = \frac{1}{E} (\sigma_x - \nu (\sigma_y + \sigma_z))$\\
+And : $\varepsilon_{yz} = \frac{1}{2G} \sigma_{yz}$ With $G = \frac{E}{2(1+\nu)}$ the shear modulus\\
+Finally the bulk modulus : $\kappa = \frac{E}{3(1-2\nu)}$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        Material & Steel & Silicon & Titanium & Aluminium & PMMA(acrylic) & Rubber \\
+        $\nu$ & .27&.28&.34&.33&.4&.5\\
+    \end{tabular}
+    \caption{Poisson ration}
+    
+\end{table}
+
+
+\subsubsection{Differential equation of deformation}
+We have $M = EI\kappa$.\\
+With I the moment of inertia : $I = \iint y^2 dydz$\\
+And $\kappa = \frac{\Ddot{w}}{(1+\dot{w}^2)^{\frac{3}{2}}} \simeq \frac{d^2w}{dx^2}$ With $w$ the deformation.\\
+Thus, $\sigma_x = -\frac{M y}{I}$\\
+Pure bending moment : only produces internal moments. General bending : we may also have shear force. This equation doesn't take into consideration the shear deformation.\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        \diagbox[width=30mm,height=5mm, dir=SW]{}{} & w & w' & M & V\\
+        \hline
+        pin & $=0$ & $\neq 0$&$=0$&$\neq 0$\\
+        \hline
+        parallel motion & $\neq 0$ & $=0$ & $\neq 0$ & $=0$\\
+        \hline
+        Clamped & $=0$&$=0$ & $\neq 0$& $\neq 0$\\
+        \hline
+        Free end & $\neq 0$&$\neq 0$&$=0$&$=0$\\
+    \end{tabular}
+    \caption{Boundary conditions}
+    
+\end{table}
+
+\subsection{Buckling}
+When an axial compression induces an instability and causes bending.\\
+We get the solution for the deformation : $w(x) = C_1 \sin(\sqrt{\frac{P}{EI}}x) + C_2 \cos(\sqrt{\frac{P}{EI}}x)$\\
+
+Therefore, the Euler's equation : \\
+\begin{equation}
+    P_{cr} = n^2 \frac{\pi^2EI}{(\kappa L)^2}
+\end{equation}
+Where n is usually 1 (number of solutions prevented) and $\kappa$ depends on boundary conditions.\\
+(We can also say that $\kappa L$ corresponds to half the length of the sin wave)\\
+
+Clamped-clamped : $\kappa = \frac{1}{2}$\\
+Fixed-free : $\kappa = 2$\\
+Clamped-pin : $\kappa = .7$
+\end{document}

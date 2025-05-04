@@ -1,0 +1,616 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+
+\begin{document}
+\localtableofcontents
+\subsection{A body}
+\quad \underline{Eulerian description of space :}\\
+\begin{equation}
+    \underline{x} = f(\underline{X}, t)
+\end{equation}
+$f$ is continuous and single valued. Here the vector x isn't attached to a particle X.\\
+
+\quad \underline{Lagrangian description of space :}\\
+\begin{equation}
+    \underline{X} = \underline{x}(\underline{X}, t=t_0)
+\end{equation}
+Here if the particle X moves, the x vector follows it.\\
+
+\quad \underline{Deborah's number :} \\
+\begin{equation}
+    De = \frac{\tau}{t_m}
+\end{equation}
+With $\tau$ the observational timescale and $t_m$ the material relaxation timescale. It describes how a solid reacts to forces.\\
+
+\subsubsection{Transformation of vector components and law}
+$\underline{a} = \sum_{i=1}^3 a_i \hat{e_i} = a_i \hat{e_i} = a_j' \hat{e_j'}$\\
+$a_j' = Q_{ji} a_i$, $Q_{ij} = \hat{e_i'}\cdot \hat{e_j}$\\
+\begin{equation}
+    [\underline{\underline{Q}}] = \begin{pmatrix}
+        \hat{e_1'}\cdot \hat{e_1} & \hat{e_1'}\cdot \hat{e_2} & \hat{e_1'}\cdot \hat{e_3}\\
+        \hat{e_2'}\cdot \hat{e_1} & \hat{e_2'}\cdot \hat{e_2} & \hat{e_2'}\cdot \hat{e_3}\\
+        \hat{e_3'}\cdot \hat{e_1} & \hat{e_3'}\cdot \hat{e_2} & \hat{e_3'}\cdot \hat{e_3}\\
+    \end{pmatrix}
+\end{equation}
+
+
+\subsubsection{Mass conservation}
+We use here a right tetrahedron, with the area of oblique face being $\Delta \Sigma$.\\
+Over a time $\Delta t$ a certain amount of mass $\Delta Q$ passes through this surface. \\
+The density flux of continuum :\\
+\begin{equation}
+    j_n = \lim_{\substack{\Delta \Sigma \to 0\\ \Delta t \to 0 } } \frac{\Delta Q}{\Delta t \Delta \Sigma}
+\end{equation}
+The total mass being : $\int_{\Omega} \rho(\underline{x}, t)dV$.\\
+The mass varies as the body moves : $(\frac{\partial}{\partial t} \int_{\Omega} \rho(\underline{x}, t)dV)dt$\\
+It can vary in two ways :\\
+\begin{enumerate}
+    \item $-dt \int_{\partial \Omega} j_n d\Sigma'$\\
+    \item $dt \int_{\Omega} Q(\underline{x},t)dV$ where Q is i.e. a chemical/nuclear reaction\\
+\end{enumerate} 
+\begin{equation}
+    \frac{\partial}{\partial t} \int_{\Omega} \rho(\underline{x},t)dV = -\int_{\partial \Omega} j_n d\Sigma + \int_{\Omega}Q(\underline{x},t)dV
+\end{equation}
+
+If we let $\Omega \rightarrow 0$ then we get :\\
+$\int_{\partial \Omega} j_n d\Sigma = j_1n_1d\Sigma + j_2n_2d\Sigma + j_3n_3 d\Sigma - j_nd\Sigma = (j_1n_1 + j_2n_2+j_3n_3 -j_n)d\Sigma \simeq 0$\\
+\begin{equation}
+    j_n = j_in_i
+\end{equation}
+With $n_i$ components of $\hat{\underline{n}}$. Thus, we have $j_i n_i = j_m' n_m'$ with the relation $n_i = n_m' Q_{mi}$\\
+Therefore : $j_m' = j_i Q_{mi}$\\
+The velocity is defined by :\\
+\begin{equation}
+    \underline{u} = \frac{\underline{j}}{\rho} = \frac{\partial \underline{x}}{\partial t} \Rightarrow \underline{j} = \rho \underline{u}
+\end{equation}
+
+We also now have the relation : $\int_{\partial \Omega} j_nd\Sigma = \int_{\partial \Omega} \underline{j}\cdot \underline{n}d\Sigma = \int_{\Omega} \underline{\nabla}\cdot \underline{j}dV$.\\
+
+The mass conservation now becomes :\\
+\begin{equation}
+    \int_{\Omega}(\frac{\partial}{\partial t} \rho + \underline{\nabla}\cdot \underline{j} -Q)dV = 0
+\end{equation}
+The locality principle is now :\\
+\begin{equation}
+    \frac{\partial}{\partial t} \rho + \underline{\nabla}\cdot \underline{j} -Q = 0
+\end{equation}
+
+\subsection{Momentum conservation in continuum}
+Consider a sub-volume $\Omega$ within a continuum body referenced to the laboratory coordinate frame such that the continuum body can flow through it.\\
+The moment of the region $\Omega$ at time t is :\\
+\begin{equation}
+    \int_\Omega \rho \underline{u}dV
+\end{equation}
+The variation of the momentum of $\Omega$ in time interval dt is :\\
+\begin{equation}
+    (\frac{\partial}{\partial t} \int_\Omega \rho \underline{u} dV)dt
+\end{equation}
+
+The moment of region $\Omega$ varies in two ways :\\
+\begin{itemize}
+    \item momentum can be injected from a mass force : $(\int_\Omega \rho \underline{F}dV)dt$ (F is an acceleration)\\
+    \item via influx of momentum through $\partial \Omega$ : $-(\int_{\partial\Omega} (\rho \underline{u} \cdot \underline{n})\underline{u}d\Sigma)dt$\\
+\end{itemize}
+We also have $(\rho \underline{u} \cdot \underline{n}) \underline{u} = \rho u_i u_j n_j = \rho \underline{u} \underline{u} \underline{n}$\\
+
+If we perform cuts in the volume, we can define a stress vector $\underline{t_n} = \lim_{dA\to 0} \frac{\mathcal{F}}{dA}$\\
+
+\color{gray} $\underline{t_n}$ is a vector that has three components for the cut that we selected.\color{black}\\
+
+By doing so along three axis, we need a new object that has the following properties :\\
+\begin{itemize}
+    \item independent of coordinate system (obey objectivity)\\
+    \item map vectors (normal vectors) onto other vectors (stress vectors)\\
+\end{itemize}
+
+Therefore, we get the \textbf{stress tensor}. It codifies objectivity with a transformation law :\\
+\begin{equation}
+\begin{split}
+    \underline{\underline{\sigma}}\\
+    \sigma_{kl}' = Q_{ki} Q_{lj} \sigma_{ij}
+\end{split}
+\end{equation}
+Each component of $\underline{\underline{\sigma}}$ has unit of stress.\\
+
+Thus, the momentum injected into $\Omega$ in time interval dt is :\\
+\begin{equation}
+    -(\int_{\partial \Omega} (\rho \underline{u} \underline{u}-\underline{\underline{\sigma}})\underline{n}d\Sigma)dt
+\end{equation}
+
+Bringing back everything together we get :\\
+\begin{equation}
+    \frac{\partial}{\partial t} \int_\Omega \rho \underline{u} dV = \int_\Omega \rho \underline{F}dV- \int_{\partial \Omega} (\rho \underline{u} \underline{u}-\underline{\underline{\sigma}})\underline{n}d\Sigma
+\end{equation}
+
+Applying the divergence theorem, we get :\\
+\begin{equation}
+    \int_\Omega \frac{\partial}{\partial t} (\rho \underline{u}) + \underline{\nabla}\cdot (\rho \underline{u} \underline{u}-\underline{\underline{\sigma}}) - \rho \underline{F} dV= 0
+\end{equation}
+
+Because the volume is arbitrary, we get the local expression :\\
+\begin{equation}
+    \frac{\partial}{\partial t} (\rho \underline{u}) + \underline{\nabla}\cdot (\rho \underline{u} \underline{u}-\underline{\underline{\sigma}}) - \rho \underline{F} =0
+\end{equation}
+
+For a Cartesian coordinate system we can write : $\frac{\partial}{\partial t}(\rho u_i) + \frac{\partial}{\partial x_j}(\rho u_j u_j - \sigma_{ji}) = \rho F_i$\\
+
+Or even : \\
+\begin{equation}
+    \frac{\partial \underline{u}}{\partial t} + (\underline{u}\cdot \underline{\nabla})\underline{u} = \underline{F} + \frac{1}{\rho} \underline{\nabla}\cdot \underline{\underline{\sigma}}
+\end{equation}
+
+We define the acceleration term as :\\
+$(\frac{\partial }{\partial t} + (\underline{u}\cdot \underline{\nabla}) \underline{u})$. With the term in between the parentheses the material derivative ($\frac{d}{dt}$)\\
+
+Thus, we get the local equation for linear momentum : \\
+\begin{equation}
+    \frac{d \underline{u}}{dt} = \underline{F} + \frac{1}{\rho} \underline{\nabla}\cdot \underline{\underline{\sigma}}
+\end{equation}
+
+
+From angular momentum balance, we get $\int_\Omega \sigma_{ij}\sigma_{ji}dV = 0 \Leftrightarrow \sigma_{ij} = \sigma_{ji}$\\
+
+\subsection{Indicial notation}
+We have $\delta_{ii} = 3$, $\delta_{im} T_{mj} = T_{ij}$, $\hat{e_i} \cdot \hat{e_j} = \delta_{ij}$\\
+
+\subsubsection{Levi-civita symbol}
+$\varepsilon_{ijk} = \begin{cases}+1 & \text{if ijk form an even permutation of 1,2,3} \\
+-1 & \text{if it forms and odd one}\\
+0 & \text{else}\\
+\end{cases}$\\
+
+\quad \underline{cross product}\\
+$\Vec{a}\times \Vec{b} = (a_i \hat{e_i}) \times (b_j \hat{e_j}) = a_ib_j (\hat{e_i} \times \hat{e_j}) = a_ib_j \varepsilon_{ijk} \hat{e_k}$\\
+
+\subsection{Stress vector/tensor components}
+We define two types of components in the stress tensor : \\
+\begin{itemize}
+    \item normal component : along the normal of the face\\
+    \item shear component : in the plane of the face\\
+\end{itemize}
+
+We also define the $\underline{t}_{\hat{n}}$ components by : \\
+\begin{equation}
+    \underline{t}_{\hat{n}} = \hat{n} \cdot \underline{\underline{\sigma}} = \sigma_{nj}\hat{e}_j
+\end{equation}
+In most circumstances, $\underline{\underline{\sigma}}$ is symmetric : $\underline{\underline{\sigma}} \underline{n} = \underline{n}\cdot \underline{\underline{\sigma}}$\\
+
+\subsubsection{Transformation of tensor components}
+\begin{equation}
+    \lambda_{ij} = \hat{e}_i' \cdot \hat{e}_j \Leftrightarrow \underline{\underline{\lambda}} = \hat{e}_i' \hat{e}_j = \hat{e}_i' \otimes \hat{e}_j
+\end{equation}
+
+Therefore, we have $\hat{e}_i' = \lambda_{ij} \hat{e}_j$ and $\hat{e}_i = \lambda_{ji} \hat{e}_j'$\\
+
+We can also define $\lambda_{ij} \lambda_{kj} = \delta_{ik}$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Rank/order & Transformation law \\
+        \hline
+        0 (scalar) & $\alpha'=\alpha$\\
+        1 (vector) & $a_i' = \lambda_{ij} a_j$\\
+        2 (tensor) & $T_{ij}' = \lambda_{ik} \lambda_{jl} T_{kl}$\\
+        3 & $S_{ijk}' = \lambda_{in} \lambda_{jm} \lambda_{kl} S_{nml}$\\
+        4 & $C_{ijkl}' = \lambda_{in} \lambda_{jm} \lambda_{kr} \lambda_{ls} C_{nmrs}$\\
+    \end{tabular}
+    %\caption{Transformation laws}
+\end{table}
+\color{gray}Some helpful rules : \begin{itemize}
+    \item addition : the sum of two tensors is a tensor\\
+    \item multiplication : we can define a variety of different products : $a_i a_j$, $a_i a_j a_k$, $T_{ij} = T_{kl}$\\
+    \item quotient : if $a_i$ and $T_{ij}$ are vector and tensor components, and $a_i = T_{ij} b_j$ then $b_j$ are components of a vector\\
+\end{itemize} \color{black}
+
+\subsubsection{Principle stresses and characteristics equation for stress tensor}
+The transformation laws and symmetry of $\underline{\underline{\sigma}}$ ensure that \textbf{3 perpendicular directions} along which there are no shear stresses can be found.\\
+In matrix form, we can find a basis where $[\underline{\underline{\sigma}}]$ is diagonal. These directions are \textbf{eigenvectors} and the principle stresses are \textbf{eigenvalues}.\\
+If we order $\sigma_I \leq \sigma_{II} \leq \sigma_{III}$ then for a face oriented along $\hat{n}$ : \\
+\begin{equation}
+    \sigma_I \leq \sigma_{\hat{n}} \leq \sigma_{III} \Leftrightarrow \sigma_{\hat{n}} = \hat{n}\cdot \underline{t}_{\hat{n}}
+\end{equation}
+
+The eigenvalues are defined by : $\sigma_{ij}n_j- \sigma n_i = 0 $\\
+If $\underline{\underline{\sigma}}$ is real valued and symmetric then :\\
+the determinant of the coefficient matrix should vanish :\\
+\begin{equation}
+    \det \begin{bmatrix}
+    \sigma_{11}-\sigma & \sigma_{12} & \sigma_{13}\\
+    \sigma_{21} &\sigma_{22}-\sigma & \sigma_{23}\\
+    \sigma_{31} & \sigma_{32} & \sigma_{33}-\sigma\\
+    \end{bmatrix} = -\sigma^3 + I_1 \sigma^2 + I_2 \sigma + I_3 = 0
+\end{equation}
+With $I_1 = \sigma_{ii}$ the trace\\
+$I_2 = \frac{1}{2}(\sigma_{ij}\sigma_{ji} - (I_1)^2)$\\
+$I_3 = \det(\underline{\underline{\sigma}})$\\
+
+$\mathbf{I_1, I_2, I_3}$ \textbf{are invariant}.\\
+
+\subsection{Fields}
+\subsubsection{Scalar field and its gradient}
+\quad For a scalar valued function of a vector, $\phi(\Vec{r})$, associated with $\phi$ is a vector field formed by calculating the gradient of $\phi$.\\
+$\Vec{\nabla}\phi = \Vec{\nabla} \phi \cdot d\Vec{r} = \phi(\Vec{r}+d\Vec{r}) - \phi(\Vec{r})$, let $dr = \lvert d\Vec{r}\rvert$, $\hat{n}$ the unit vector along $d\Vec{r}$ such that $\hat{n} = \frac{d\Vec{r}}{dr}$ : $\frac{d\phi}{dr} = \Vec{\nabla} \phi \cdot \hat{n}$\\
+The component of $\Vec{\nabla} \phi$ in a direction $\hat{e_i}$ gives the rate of change of $\phi$ along $\hat{e_i}$. With indicial notation :\\
+$\frac{\partial \phi}{\partial x_i} = \frac{\partial \phi}{\partial r}\rvert_{\hat{e_i}} = \Vec{\nabla}\phi \cdot \hat{e_i}$, or $\Vec{\nabla} \phi = \phi_{,i} \hat{e_i}$\\
+
+\color{gray}\underline{Geometric interpretation :} suppose $\phi$ represents the temperature along a surface of constant temperature : $\phi =$constant. If $\Vec{r}$ is a point on this isothermal surface, all points along the surface at $\Vec{r}+d\Vec{r}$ corresponds to $d\phi=0$ $\Rightarrow \Vec{\nabla}\phi \cdot d\Vec{r} = 0$ on isosurface $\Rightarrow \Vec{\phi}$ is a vector perpendicular to isosurface at point $\Vec{r}$. For any isosurface, the maximum gradient is normal to it.\color{black}\\
+
+ \subsubsection{Gradient of vector field}
+\quad Given $\Vec{v}$ a vector valued function of space : $\Vec{v}(\Vec{r})$. The gradient of $\Vec{v}(\Vec{r})$ : $\Vec{\nabla} \Vec{v}$ is a second order tensor that, when operating on a differential space vector, $d\Vec{r}$ : \\
+\begin{equation}
+    d\Vec{v} = \Vec{v}(\Vec{r}+d\Vec{r})-\Vec{v}(\Vec{r}) = (\Vec{\nabla}\Vec{v})d\Vec{r}
+\end{equation}
+In Cartesian coordinates, we get $\frac{d\Vec{v}}{dr}\rvert_{\hat{n}} = \frac{\partial\Vec{v}}{\partial x_j} = (\Vec{\nabla} \Vec{v})\hat{e_j}$ or : $(\Vec{\nabla}\Vec{v})_{ij} = \frac{\partial v_i}{x_j} = v_{i,j}$\\
+\begin{equation}
+    \Vec{\nabla} \Vec{v} = \frac{\partial v_i}{\partial x_j} \hat{e_i}\otimes \hat{e_j}
+\end{equation}
+
+\subsubsection{Divergence and its theorem}
+\quad \underline{Definition of divergence :} \\
+\begin{equation}
+    \text{div} \Vec{F} = \lim_{\Omega \rightarrow 0} \frac{1}{\Omega} \int_{\partial \Omega} \Vec{F}\cdot \hat{n}d\Sigma
+\end{equation}
+We therefore get : \\
+\begin{equation}
+    \text{div}\Vec{F} = \frac{\partial F_1}{\partial x_1} + \frac{\partial F_2}{\partial x_2} + \frac{\partial F_3}{\partial x_3} = \Vec{\nabla} \cdot \Vec{F} = F_{i,i}
+\end{equation}
+
+For a tensor, we get the divergence theorem : \\
+\begin{equation}
+    \int_{\partial \Omega_i}\hat{n} \cdot \underline{\underline{\sigma}} d\Sigma \simeq \sum_{i=1}^N (\Vec{\nabla}\cdot \underline{\underline{\sigma}})_i \Omega_i = \int_{\Omega} \Vec{\nabla} \cdot \underline{\underline{\sigma}} d\Omega \quad \text{Assuming, $\Omega_i\rightarrow 0$, $N\rightarrow \infty$} 
+\end{equation}
+ 
+\quad \underline{Divergence of a tensor :} We define the divergence of a tensor as :\\
+\begin{equation}
+    \Vec{\nabla} \cdot \underline{\underline{T}} = T_{ji,j} \hat{e_i}
+\end{equation}
+Also : $(\Vec{\nabla} \cdot \underline{\underline{T}}) \cdot \Vec{a} = \Vec{\nabla} (\Vec{a} \cdot \underline{\underline{T}}^T) = (a_i T_{ji})_{,j}$\\
+And : $(\Vec{\nabla} \cdot \underline{\underline{T}})_i \hat{e_i} \cdot a_k \hat{e_k} = (\Vec{\nabla} \cdot \underline{\underline{T}})_i \delta_{ik} a_k = (\Vec{\nabla} \cdot \underline{\underline{T}})_i a_i = T_{ji,j}a_i$\\
+
+\subsection{Kinematics of continua}
+\subsubsection{Time-dependant motion}
+
+A particle's path is defined with respect to a given basis $\hat{e}_i$ : \\
+\begin{equation}
+    \underline{r}(t) = x_1(t) \hat{e}_1 + x_2(t) \hat{e}_2 + x_3(t) \hat{e}_3
+\end{equation}
+For a given collection of N particles, we can define the path for each of them : $\underline{r}_n = \underline{r}_n(t)$ for $n=1,\dots, N$.\\
+The motion of a continuum can be described in the limit $N\rightarrow \infty$.\\
+
+In a continuous body, the particle of interest is identified by its instantaneous coordinates : $x_1, x_2,x_3$.\\
+By extension, the path-lines for each particles are described by the equation : \\
+\begin{equation}
+    \underline{x} = \underline{x}(\underline{X},t)
+\end{equation}
+Where $\underline{X} = \underline{x}(\underline{X},t_0)$.\\
+
+Here, $\underline{X}$ denotes the material coordinates of each particle in the continua and $x_i(\underline{X},t)$ defines the path lines for each particles $X_i$.\\
+
+\subsubsection{Material, spatial description of continua, transport in continua}
+We know that quantities such as temperature ($\theta$), velocity ($\underline{v}$), stress ($\underline{\underline{\sigma}}$), can change in time. However, when a continuum is in motion, there are two main ways to describe changes in these quantities over time : \\
+\begin{enumerate}
+    \item Material or Lagrangian description : changes are calculated with respect to the bodie's material coordinates. We associate these quantities with the material particle\\
+    \item Spatial or Eularian description : changes are calculated with respect to the laboratory coordinates.\\
+\end{enumerate}
+
+The time rate of change of some property of a material particle, $\theta, \underline{v}, \underline{\underline{\sigma}}$, is given by its material derivative. This is denoted by $\frac{d}{dt}$ or $\frac{D}{Dt}$ : \\
+\begin{enumerate}
+    \item In the material description : $\frac{d \theta}{dt} = \frac{\partial \theta}{\partial t}$\\
+    \item In the spatial description : $\frac{d\theta}{dt} = \frac{\partial \theta}{\partial t} + \frac{\partial \theta}{\partial x_i} \frac{\partial x_i}{\partial t}$, for Cartesian coordinates we have :\begin{equation}
+        \frac{d\theta}{dt} = \frac{\partial \theta}{\partial t} + (\underline{v} \cdot \underline{\nabla}) \theta
+    \end{equation}
+\end{enumerate}
+For a material particle, we are interested to know its acceleration. To calculate a particle's acceleration, we evaluate the material derivative of the particle's velocity.\\
+\begin{equation}
+    \underline{a} = \frac{d \underline{v}}{dt} = \frac{\partial \underline{v}}{\partial t} + (\underline{v} \cdot \underline{\nabla}) \underline{v} 
+\end{equation}
+
+\subsubsection{Displacement and deformation}
+The vector connecting a particle at reference position $\underline{X}$ to its current location $\underline{x}$ is called the \textbf{displacement vector} $\underline{u}(\underline{X},t)$\\
+
+Once the path-lines $\underline{x}(\underline{X},t)$ are known, we also know the displacement vector field \begin{equation}
+    \underline{u} (\underline{X},t) = \underline{x}(\underline{X},t)-\underline{X}
+\end{equation}
+
+The deformation of the gradient tensor is therefore defined as :\\
+\begin{equation}
+    \underline{\underline{F}} = \underline{\underline{I}} + \underline{\nabla} \underline{u}
+\end{equation}
+With the relation $d\underline{x} = \underline{\underline{F}} d\underline{X}$\\
+
+Also, we have $dS = \lvert d\underline{X}\rvert $, $ds = \lvert d\underline{x}\rvert$\\
+The \textbf{right Cauchy-Green deformation tensor} is defined as :\begin{equation}
+    \underline{\underline{C}} = \underline{\underline{F}}^T\underline{\underline{F}}
+\end{equation}
+
+\quad \underline{Stretch :} \begin{equation}
+    \frac{\lvert d\underline{x}\rvert}{\lvert d\underline{X}\rvert} = \lambda
+\end{equation}
+
+Pure translation : $\underline{\underline{F}}$ is the identity matrix\\
+Pure rotation : $\lvert \underline{\underline{F}} \rvert = 1$\\
+Pure shear deformation : $\underline{\underline{F}}$ isn't symmetric\\
+
+\quad \underline{General planar deformation :}\\
+We can rewrite (stretch plus rotation) :
+\begin{equation}
+\underline{\underline{F}} = \underline{\underline{R}} \underline{\underline{U}}
+\end{equation}
+With $\underline{\underline{R}}$ the rotation and $\underline{\underline{U}}$ the stretches.\\
+
+We have $\underline{\underline{U}}$ diagonal with its coefficients $\lambda_i = \frac{\lvert d\underline{x}_i\rvert}{\lvert d\underline{X}_i\rvert}$ With $d\underline{x}_i =\underline{\underline{F}} d\underline{X}_i $\\
+
+Therefore, $\underline{\underline{R}} = \underline{\underline{F}}\underline{\underline{U}}^{-1}$
+
+
+Also, we can have a rotation plus stretch :\\
+\begin{equation}
+    \underline{\underline{F}} = \underline{\underline{V}} \underline{\underline{R}}
+\end{equation}
+With $\underline{\underline{R}}$ the same matrix. And $\underline{\underline{V}} = \underline{\underline{F}} \underline{\underline{R}}^{-1} = \underline{\underline{F}} \underline{\underline{R}}^T$\\
+
+\warning As $\underline{\underline{R}}$ is a rotation tensor, we have that $\underline{\underline{R}}^{-1} = \underline{\underline{R}}^T$. Also, $\underline{\underline{U}}$ is symmetric.\\
+
+\subsubsection{Infinitesimal strain tensor}
+We have by definition : $\underline{\underline{C}} = \underline{\underline{I}} + \underline{\nabla}\underline{u} + (\underline{\nabla}\underline{u})^T+ (\underline{\nabla} \underline{u})^T(\underline{\nabla} \underline{u})$\\
+We therefore define the \textbf{Lagrange strain tensor } \begin{equation}
+    \underline{\underline{E}}^* = \frac{1}{2} (\underline{\nabla}\underline{u} + (\underline{\nabla}\underline{u})^T+ (\underline{\nabla} \underline{u})^T(\underline{\nabla} \underline{u}))
+\end{equation}
+
+For infinitesimal deformation : \begin{equation}
+    \underline{\underline{E}} = \frac{1}{2}(\underline{\nabla} \underline{u} + (\underline{\nabla} \underline{u})^T)
+\end{equation}
+The infinitesimal strain tensor.\\
+In Cartesian coordinates : $E_{ij} = \frac{1}{2}(\frac{\partial u_i}{\partial X_j} + \frac{\partial u_j}{\partial X_i})$\\
+
+\subsubsection{Principle of strain}
+$\underline{\underline{E}}$ is symmetric with real components. Therefore, we have three mutually perpendicular eigenvectors and we can diagonalise E.\\
+The geometric interpretation of \textbf{eigenvectors}, $\{\hat{n}_i\}$, direction along which the deformation is purely elongation/contraction.\\
+The \textbf{eigenvalues} are the principle strains $E_i$\\
+The principle strains contain the maximum and minimum strain along any direction.\\
+Given $\underline{\underline{E}}$, $E_i$ are calculated as the roots of the characteristic polynomial : $\lambda^3-I_1 \lambda^2+I_2 \lambda - I_3 = 0$. \\
+The invariants of $\underline{\underline{E}}$ are therefore :\begin{itemize}
+    \item $I_1 = E_{ii}$\\
+    \item $I_2 = \begin{bmatrix}
+        E_{11} & E_{12}\\
+        E_{21} & E_{22}\\
+    \end{bmatrix} + \begin{bmatrix}
+         E_{22} & E_{23}\\
+        E_{32} & E_{33}\\
+    \end{bmatrix} + \begin{bmatrix}
+        E_{11} & E_{13}\\
+        E_{31} & E_{33}\\
+    \end{bmatrix}$\\
+    \item $I_3 = \det (\underline{\underline{E}})$\\
+\end{itemize}
+
+\quad \underline{Dilatation :} allows us to interpret $E_{ii}$ geometrically by considering three material lines, emanating from a point P in the continuum along $\underline{\underline{E}}$'s eigenvectors.\\
+
+The change in volume is given by $\Delta (dV) = dS_1 dS_2 dS_3(1+E_1)(1+E_2)(1+E_3)-dS_1dS_2dS_3 \simeq dS_1dS_2dS_3(E_1+E_2+E_3)$\\
+
+The unit volumetric change : \begin{equation}
+    e = \frac{\Delta (dV)}{dV} = E_{ii}
+\end{equation}
+This is defined as the \textbf{dilatation}.\\
+
+\quad \underline{Geometric interpretation of $\underline{\underline{E}}$'s components :}\\
+Suppose we have a material vector, $d\underline{X} = dS \hat{n}$, $\hat{n}$ is a unit vector along $d\underline{X}$. $dS$ is the magnitude of $d\underline{X}$. After deformation, we get : \\
+$ds^2 = dS^2+2dS^2(\hat{n}\cdot \underline{\underline{E}} \hat{n})$ $\Rightarrow \frac{ds-dS}{dS} = \hat{n}\cdot \underline{\underline{E}} \hat{n} = E_{nn}$(no sum)\\
+
+\underline{Diagonal :} elements of $\underline{\underline{E}}$ represents unit elongation on their respective coordinates direction \\
+
+\underline{Off-diagonal :} components of shear. consider two material vector $d\underline{X}^{(1)} = dS_1 \hat{m}$ and $d\underline{X}^{(2)} = dS_2 \hat{n}$, m and n are orthogonal.\\
+\begin{equation}
+    \gamma = 2(\underline{m}\cdot \underline{\underline{E}}\underline{n})
+\end{equation}
+
+\subsection{Constitutive laws and hookean solid}
+We will focus on linearly elastic material such that : \begin{itemize}
+    \item deform slightly upon application of stress\\
+    \item resume their under-formed state when stress is removed\\
+\end{itemize}
+
+To properly normalize, we define the stress as the load divided by the initial cross section area : $\sigma = \frac{P}{A_0}$ and the strain as : $\frac{\Delta l}{l}$\\
+We also define Young's modulus as $E_y$\\
+
+\quad \underline{Poisson ratio :} $\varepsilon_d = \frac{\Delta d}{d}$ the diametric strain. We have that $\frac{\varepsilon_d}{\varepsilon_a} = C$ a constant which is Poisson's ratio\\
+
+For elasticity theory, we will consider material that are isotropic and homogeneous.\\
+
+An applied torque/torsion generates angular displacement.\\
+
+Therefore, the shear modulus is defined as : $\mu = \frac{M_t l}{I_p \theta} \Rightarrow I_p =  \frac{\pi r^4}{2}$ the second area moment.\\
+
+We also have other constitutive response : \begin{itemize}
+    \item ideal gaz law : PV=nkT\\
+    \item Newtonian fluid : $\tau \propto \dot{\gamma} \Rightarrow \tau = \eta \dot{\gamma}$ \color{gray}Note : shear thickening : $\tau \propto \dot{\gamma}^n$,n>1\\
+    shear thinning : $\tau \propto \dot{\gamma}^n$, n<1\color{black}\\
+    \item Yielding behaviour\\
+\end{itemize}
+
+\subsubsection{Linear elastic solid}
+Common features of our though experiment : \begin{enumerate}
+    \item linear relation between applied loading and deformation\\
+    \item loading rate does not change the measurements\\
+    \item deformation go away when the force is released\\
+    \item deformations are small\\
+\end{enumerate}
+
+\quad \underline{Stress function of strain/elasticity tensor :}\\
+The cauchy stress tensor is : $\underline{\underline{\sigma}} = \underline{\underline{\sigma}}(\underline{\underline{\varepsilon}})$\\
+
+\begin{equation}
+    \sigma_{ij} = C_{ijkl} \varepsilon_{kl}
+\end{equation}
+
+$\underline{\underline{\underline{\underline{C}}}}$ obeys tensor transformation laws : =$C_{ijkl}' = \lambda_{im} \lambda_{jn} \lambda_{kr} \lambda_{ls} C_{mnrs}$\\
+This 4-th order tensor has 81 unique components.\\
+
+\quad \underline{Symmetry of stress strain tensor :}\\
+
+We have $\sigma_{ij} = \sigma_{ji}$ and $\varepsilon_{kl} = \varepsilon_{lk}$ Therefore, $C_{ijkl} = C_{jikl} = C_{ijlk}$ which means that the number of independent components reduced to 36.\\
+
+Now, we use the strain energy density function $W(\varepsilon_{ij})$ such that $\sigma_{ij} = \frac{\partial W}{\partial \varepsilon_{ij}}$ this implies $C_{ijkl} = C_{klij}$ which again reduces the number of independent components to 21.\\
+
+\quad \underline{Isotropic solids and the Lamé coefficients :}\\
+For isotropic medium elasticity tensor cannot depend on coordinate direction : $C_{ijkl}' = C_{ijkl}$ for all orthogonal bases\\
+
+The only isotropic 2D- tensor is : $\underline{\underline{I}}$\\
+For a 4-th order tensor, there are 3 isotropic tensors : \begin{equation}
+    A_{ijkl} = \delta_{ij} \delta_{kl}, B_{ijkl} = \delta_{ik} \delta_{jl}, H_{ijkl} = \delta_{il} \delta_{jk}
+\end{equation}
+We can therefore reduce the number of components of $\underline{\underline{\underline{\underline{C}}}}$ to two independent components for linear, homogeneous, isotropic solid.\\
+\begin{equation}
+    C_{ijkl} = \lambda A_{ijkl} + \alpha B_{ijkl} + \beta H_{ijkl}
+\end{equation}
+We can now define Hooke's law as :\\
+\begin{equation}
+    \sigma_{ij} = C_{ijkl} \varepsilon_{kl} = \lambda \delta_{ij} \varepsilon_{kk} + 2\mu \varepsilon_{ij} \Rightarrow \underline{\underline{\sigma}} = \lambda e \underline{\underline{I}}+2 \mu \underline{\underline{\varepsilon}} 
+\end{equation}
+Where $e$ is the dilatation $e = \varepsilon_{kk}$ and $\lambda$ and $\mu$ are Lamé coefficients\\
+
+\quad \underline{$\underline{\underline{\varepsilon}}(\underline{\underline{\sigma}})$ :}\\
+\begin{equation}
+    \varepsilon_{ij} = \frac{1}{2\mu} [\sigma_{ij} - \frac{\lambda}{3\lambda + 2\mu} \sigma_{kk} \delta_{ij}]
+\end{equation}
+
+From that, we can extract : $e = \frac{1}{3\lambda + 2\mu} \sigma_{kk}$\\
+
+Suppose we have a uniaxial stress state : $\varepsilon_{11} = \frac{\lambda+\mu}{\mu(3\lambda+2\mu)}\sigma_{11}$ which leads to : \begin{equation}
+    \frac{1}{E_y} = \frac{\lambda+\mu}{\mu(3\lambda + 2\mu)}
+\end{equation}
+
+We also have : $\varepsilon_{22} = \varepsilon_{33} = -\frac{\lambda}{2(\lambda+\mu)} \varepsilon_{11}$. This in turn leads to :\\
+\begin{equation}
+    \nu = \frac{\lambda}{2(\lambda+\mu)}
+\end{equation}
+
+\quad \underline{Simple shear and shear modulus :}\\
+Taking a sheet of material and displacing one side of it such that only one pair of shear stresses is non zero, we get :\\
+The \textbf{shear modulus} : $G = \frac{\tau}{2 \varepsilon_{12}}$\\
+
+The lamé coefficient $\mu$ is the shear modulus. \\
+
+If we consider a hydro-static state of stess : $\sigma = p \underline{\underline{I}}$. The deformation geometry will be essentially dilatation : $e = \frac{1}{3\lambda + 2\mu} \sigma_{kk}$\\
+The bulk modulus is therefore defined as : \begin{equation}
+    K = \frac{3\lambda+2\mu}{3}
+\end{equation}
+
+\quad \underline{Incompressible solid :}\\
+An incompressible fluid does not change its volume under any stress state. An isotropic linearly elastic solid that is also incompressible with a Young's modulus $E_y$ as the following properties :\begin{itemize}
+    \item $\nu = \frac{1}{2}$\\
+    \item $\mu = \frac{E_y}{3}$\\
+    \item $K\rightarrow \infty$, $\lambda \rightarrow \infty$ and $K-\lambda = \frac{2\mu}{3}$\\
+\end{itemize}
+
+\subsubsection{Introduction to boundary value problems}
+\quad \underline{Governing equation (linear moment balance) :}\\
+\begin{equation}
+    \rho \underline{b} + \underline{\nabla}\cdot \underline{\underline{\sigma}} = \rho \underline{a}
+\end{equation}
+
+The structure of this equation is vectorial (set of 3 equations), describes 9 to 13 variables and is not closed.\\
+
+A lot of structural application are static ($\rho \underline{a} = 0$). The structure can be efficient where the self weight of the structure is small compared with typical stresses ($\rho \underline{b} = 0$).\\
+This leaves us with the \textbf{equilibrium equation} : \begin{equation}
+    \underline{\nabla} \cdot \underline{\underline{\sigma}} = 0
+\end{equation}
+This problem is still not closed (3equations for 6 unknowns). In order to solve problems, we therefore need the appropriate boundary data.\\
+Any function that satisfies the following 3 criteria is a solution : \begin{itemize}
+    \item satisfies the governing equations : $\underline{\nabla} \cdot \underline{\underline{\sigma}}$\\
+    \item satisfies any boundary conditions\\
+    \item must have a compatible strain field\\
+\end{itemize}
+
+\quad \underline{Typical BC :}\\
+\begin{itemize}
+    \item stress BC : prescribed traction vector over a portion of the surface\\
+    \item displacement BC : the displacement is prescribed along a portion of the body's boundary\\
+\end{itemize}
+
+\warning We cannot simultaneously describe a stress BC and displacement BC along the same portion of the body's boundary\\
+
+\quad \underline{Compatibility :}\\
+The relation between strain and displacement is : $\varepsilon_{ij} = \frac{1}{2}( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i})$\\
+
+The integrability of the strain displacement equations is ensured by the compatibility equations : \\
+\begin{equation}
+    \begin{gathered}
+        \varepsilon_{ipm} \varepsilon_{jqn} \frac{\partial^2 \varepsilon_{mn}}{\partial x_p \partial x_q} = 0\\
+        \text{equivalently } \frac{\partial^2 \varepsilon_{ij}}{\partial x_k \partial x_l} + \frac{\partial^2 \varepsilon_{kl}}{\partial x_i \partial x_j} - \frac{\partial^2 \varepsilon_{il}}{\partial x_j \partial x_k} - \frac{\partial^2 \varepsilon_{jk}}{\partial x_i \partial x_l} = 0
+    \end{gathered}
+\end{equation}
+
+It can be shown that : \begin{itemize}
+    \item if strain do not satisfies compatibility then no displacement can be found by integration\\
+    \item if these equations are satisfied and the body is simply connected (no holes) then the displacement vector can be found by integration\\
+    \item if the solid is not simply connected, any displacement vector may not be unique\\
+\end{itemize}
+
+\color{gray}Note : all compatibility equations are second order derivatives, thus if you are given a strain field is proportional to $\underline{x}$, they are automatically satisfied. \color{black}\\
+
+\subsection{Scaling analysis}
+This approach is deeply connected to the principle of objectivity - that any physically relevant theory is independent of the reference frame used to describe it.\\
+In other words, no matter whether a physical quantity is represented in one set of units or another, its underlying properties exist independent of the units used to measure it.\\
+A key consequence of objectivity is the generalized homogeneity\footnote{why we can non-dimensionalize an equation and know it represents the system we wish to describe nonetheless}. This property of physical laws motivates a procedure called dimensional analysis.\\
+
+\textbf{Theory of similitude}. In example : the fundamental equation of motion is valid, irrespective of my local "g"; the gravitational acceleration. \\
+
+\color{gray}Note : M mass, T time, L length are fundamental physical dimension whereas quantities like $\rho$, acceleration are derived quantities. For derived units, we have to appropriately re-scale each quantity involved self-consistently. \color{black}\\
+
+We can usually do an dimensional analysis as follow : $\Pi = \frac{q}{f(p)}$ where $q$ is the parameter we want to approximate and $p$ are the parameters. $\Pi$ is a constant ranging from 0.1 to 10\\
+
+There is a systematic method to make dimensional analysis more robust and useful for model design.\\
+This method is codified by the \textbf{Buckingham-$\pi$ theorem}. This theorem relates  : \begin{itemize}
+    \item the total \textbf{number of dimensional parameters in our system}, n\\
+    \item the \textbf{number of fundamental dimensions}, m\\
+\end{itemize}
+To the \textbf{number of dimensionless groups that we required to completely describe} our system.\\
+\begin{equation}
+    \# \text{of dimensionless groups} = n-m
+\end{equation}
+
+Suppose we have n parameters $a_1,\dots, a_n$ and a property of interest, $a$.\\
+We can write : \begin{equation}
+    a = f(a_1,\dots, a_n)
+\end{equation}
+By writing down the dimensions of each $a_1,\dots, a_n$ we can find $m$.\\
+We can also assume that the $m$ independent parameters appear in the first $m$ parameters $a_1, \dots, a_m$. Thus, we can write : \\
+\begin{equation}
+    \begin{matrix}
+        [a] = [a_1]^p\dots [a_m]^r\\
+        [a_{m+1}] = [a_1]^{p_{m+1}}\dots [a_m]^{r_{m+1}}\\
+        \dots\\
+        [a_n] = [a_1]^{p_n} \dots [a_m]^{r_n}\\
+    \end{matrix}
+\end{equation}
+
+Here, the p's and n's are the exponents of powers of the dimensions of $a_1,\dots, a_m$ that together compose the dimensions of $a_{m+1}\dots a_n$\\
+
+We therefore have the equation : \begin{equation}
+    \Pi = \Phi(\Pi_1, \dots, \Pi_{n-m})
+\end{equation}
+Where each $\Pi$ and $\Phi$ are dimensionless.\\
+
+We form each $\Pi$ by dividing the dimensional group of fundamental parameters that match the dimensions of $a_{m+1},\dots, a_n$ : \begin{equation}
+    \Pi = \frac{a}{a_1^p\dots a_m^r} \Rightarrow \Pi_1 = \frac{a_{m+1}}{a_1^{p_{m+1}} \dots a_m^{r_{m+1}}},\quad  \dots , \quad \Pi_{n-m} = \frac{a_{n}}{a_1^{p_{n}} \dots a_m^{r_{n}}}
+\end{equation}
+
+\quad \underline{Prototyping :}\\
+For a prototype (desired design at scale) we get : \begin{itemize}
+    \item prototype : $a^{(p)} = f(a_1^{(p)},\dots, a_n^{(p)})$ a scaled model shares the same function, $\Pi^{(p)} = \Phi(\Pi_1^{(p)}, \dots, \Pi_{n-m}^{(p)})$\\
+    \item model : $a^{(M)} = f(a_1^{(M)},\dots, a_n^{(M)})$, $\Pi^{(M)} = \Phi(\Pi_1^{(M)}, \dots, \Pi_{n-m}^{(M)})$\\
+\end{itemize}
+
+In order to match the operational conditions of our prototype we must use the same values of $\Pi^{(M)}$ as they occur in our prototype.\\
+
+\begin{equation}
+    a^{(p)} = a^{(M)} (\frac{a_1^{(p)}}{a_1^{(M)}})^p \dots (\frac{a_m^{(p)}}{a_m^{(M)}})^r
+\end{equation}
+A similar relation can be developed for all dimensionless groups : $\Pi_1,\dots, \Pi_{n-m}$\\
+\begin{equation}
+    \Pi_1^{(M)} = \Pi_2^{(p)} \Rightarrow a_{m+1}^{(M)} = a_{m+1}^{(p)} (\frac{a_1^{(M)}}{a_1^{(p)}})^{p_{m+1}} \dots (\frac{a_m^{(M)}}{a_m^{(p)}})^{r_{m+1}}
+\end{equation}
+\end{document}

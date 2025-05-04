@@ -1,0 +1,522 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+
+\localtableofcontents
+\subsection{Opérateurs différentiels}
+\quad \underline{Notation :} Pour $n \in \mathbb{N}$ tel que $n > 1$ on note $x=(x_1, \dots, x_n)$ un \textbf{n-tuplet} de nombre réels.\\
+
+\underline{Champ scalaire :} Une fonction à valeurs réelles définies sur $\Omega \subset \mathbb{R}^n$. $f: \Omega \subset \mathbb{R}^n \rightarrow \mathbb{R}$ :\\
+$x\mapsto f(x) = f(x_1, \dots, x_n)$ qui dépend de n variables $x_1, \dots, x_n$ est appelé un \textbf{champ scalaire}.\\
+\underline{Champ vectoriel :} Une fonction à valeurs dans $\mathbb{R}^n$ définie sur $\Omega \subset \mathbb{R}^n$ $F:\Omega \subset \mathbb{R}^n \rightarrow \mathbb{R}^n$ \\
+$x \mapsto F(x) = (F_1(x)x, \dots , F_n(x))$ avec $F_i : \Omega \subset \mathbb{R}^n \rightarrow \mathbb{R}$ $x\mapsto F_1(x) = F_i(x_1, \dots, x_n) \forall i=1,\dots, n$ est appelé un \textbf{champ vectoriel}. Un champ vectoriel est définit par n champs scalaires.\\
+
+Soit nabla l'opérateur différentiel : $\nabla = (\frac{\partial }{\partial x_1}, \dots, \frac{\partial}{\partial x_n})$\\
+
+\subsubsection{Gradient}
+Soit $\Omega \subset \mathbb{R}^n$ un ouvert et $f:\Omega \rightarrow \mathbb{R}^n$ :\\
+$x\mapsto f(x) =f(x_1, \dots, x_n)$ un champ scalaire tel que $f\in C^1(\Omega)$\\
+\begin{equation}
+    grad f(x) = (\nabla f)(x) = (\frac{\partial f}{\partial x_1}(x), \dots, \frac{\partial f}{\partial x_n}(x))
+\end{equation}
+Ainsi, le gradient est un champ vectoriel $\Omega \rightarrow \mathbb{R}^n$\\
+
+\subsubsection{Divergence}
+Soit F un champ vectoriel tel que $F \in C^1(\Omega, \mathbb{R}^n)$\\
+\begin{equation}
+    div F(x) = (\nabla \cdot F)(x) = \frac{\partial F_1(x)}{\partial x_1} + \dots + \frac{\partial F_n(x)}{\partial x_n}
+\end{equation}
+Ainsi la divergence est un champ scalaire.\\
+
+\subsubsection{Rotationnel}
+Soit F un champ vectoriel tel que $F\in C^1(\Omega, \mathbb{R}^n$\\
+
+\quad \underline{Si n=2 :} \\
+\begin{equation}
+    rot F(x,y) = \frac{\partial F_2}{\partial x}(x,y) - \frac{\partial F_1}{\partial y}(x,y)
+\end{equation}
+Ainsi lorsque n=2, le rotationnel est un champ scalaire.\\
+
+\quad \underline{Si n=3 :}\\
+\begin{equation}
+    rot F(x,y,z) = \begin{vmatrix}
+        e_1 & e_2 & e_3\\
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}\\
+        F_1 & F_2 & F_3\\
+    \end{vmatrix}
+\end{equation}
+Si n=3 on a donc un champ vectoriel.\\
+Si n>3, il est complique de faire quoi que ce soit.\\
+
+\subsubsection{Laplacien}
+Soit $f$ un champ scalaire tel que $f\in C^2(\Omega)$.\\
+\begin{equation}
+    \Delta f(x) = \frac{\partial^2 f}{\partial x_1^2} + \dots + \frac{\partial^2 f}{\partial x_n^2}
+\end{equation}
+
+\subsubsection{Relations}
+\begin{minipage}{.5\textwidth}
+    div$(f $grad $g)$ = $f \Delta g$ + grad $f\cdot $grad$ g$\\
+    grad$(fg)$ = $f$ grad $g$ + $g$ grad $f$\\
+    div$(fF)$ = $f$ div$F$ + $F\cdot$ grad $f$\\
+    div grad $f$ = $\Delta f \forall n \in \mathbb{N}$ tel que $n\geq 1$\\
+    div rot $F = 0$\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    rot rot $F$ = $-\Delta F$ + grad div $F$\\
+    Avec $\Delta F = (\Delta F_1, \dots, \Delta F_n)$\\
+    rot$(fF)$ = grad $f\wedge F + f $rot$ F$\\
+    rot grad$f = 0$ si $n=2$\\
+    rot grad$f = \begin{pmatrix}
+        0\\
+        0\\
+        0\\
+    \end{pmatrix}$ si $n=3$\\
+\end{minipage}
+
+\subsection{Intégrales curvilignes}
+\subsubsection{Courbes}
+Soient $n\in \mathbb{N}$ tel que n>1\\
+
+$\Gamma \subset \mathbb{R}^n$ est une \textbf{courbe simple régulière} s'il existe un intervalle $[a,b] \subset \mathbb{R}$ et une fonction $\gamma : [a,b] \rightarrow \mathbb{R}^n$\\
+$t\mapsto \gamma(t) = (\gamma_1(t), \dots, \gamma_n(t))$ tel que\\
+$\Gamma = \gamma([a,b])$; $\gamma$ est injective sur $[a,b[$; $\gamma\in C^1([a,b], \mathbb{R}^n)$ et $\parallel \gamma'(t)\parallel \neq 0$.\\
+
+$\Gamma \subset \mathbb{R}^n$ est une \textbf{courbe simple régulière fermée} si en plus $\gamma(a) = \gamma(b)$\\
+
+$\Gamma \subset \mathbb{R}^n$ est une \textbf{courbe simple régulière par morceau} s'il existe $\Gamma_1, \dots, \Gamma_k$ des courbes simples régulières tel que $\Gamma = \cup_{i=1}^k \Gamma_i$\\
+
+\subsubsection{Intégrales curvilignes}
+Soit $\Gamma \subset \mathbb{R}^n$ une courbe simple régulière de paramétrisation $\gamma:[a,b] \rightarrow \mathbb{R}^n$\\
+
+Soit $f : \Gamma \rightarrow \mathbb{R}$ un champ scalaire continu. L'intégrale de $f$ le long de $\Gamma$ est défini par :\\
+\begin{equation}
+    \int_{\Gamma} fdl = \int_a^b f(\gamma(t)) \parallel \gamma'(t) \parallel dt
+\end{equation}
+
+Soit$F : \Gamma \rightarrow \mathbb{R}^n$. L'intégrale de F le long de $\Gamma$ est définie par :\\
+\begin{equation}
+    \int_{\Gamma} F\cdot dl = \int_a^b F(\gamma(t)) \cdot \gamma'(t)dt
+\end{equation}
+
+Si $\Gamma$ est une courbe simple régulière par morceau, alors on peut sommer les différentes intégrales.\\
+
+\subsubsection{Champs qui dérivent d'un potentiel}
+Un ensemble $\Omega \subset \mathbb{R}^n$ est \textbf{convexe} si $\forall A, B \in \Omega$, le segment de droite joignant A et B est entièrement contenu dans $\Omega$.\\
+
+Un même ensemble est \textbf{connexe} s'il existe une courbe $\Gamma$ continue joignant A et B qui est entièrement dans $\Omega$.\\
+
+Un même ensemble est \textbf{simplement connexe} s'il est connexe et si deux courbes simples $\Gamma_1, \Gamma_2$ quelconques contenues dans $\Omega$ joignant A et B peuvent être déformés continûment l'une en l'autre sans quitter $\Omega$.
+
+On a donc : Convexe $\Rightarrow$ simplement Connexe $\Rightarrow$ Connexe\\
+
+\subsubsection{Champs conservatifs}
+Soient $\Omega \subset \mathbb{R}^n$ un ouvert et $F:\Omega \rightarrow \mathbb{R}^n$ un champ vectoriel.\\
+On dit que \textbf{F dérive d'un potentiel} sur $\Omega$ s'il existe un champ scalaire $f:\Omega \rightarrow \mathbb{R} \in C^1(\Omega)$ tel que :\\
+\begin{equation}
+    F(x) = grad f(x) = (\frac{\partial f}{\partial x_1}(x), \dots, \frac{\partial f}{\partial x_n}(x)) \forall x\in \Omega
+\end{equation}
+F est appelé un champ conservatif et $f$ un potentiel de F.\\
+
+\subsubsection{Résultats importants}
+\begin{theorem}
+Soient $\Omega \subset \mathbb{R}^n$ un ouvert et F un champ vectoriel tel que $F\in C^1(\Omega, \mathbb{R}^n)$ :\\
+a) condition nécessaire : si F dérive d'un potentiel sur $\Omega$ alors,:\\
+\begin{equation}
+    \frac{\partial F_i}{\partial x_j}(x) = \frac{\partial F_j}{\partial x_i}(x)
+\end{equation}
+b) condition suffisante : si a) a lieu et si $\Omega$ est simplement connexe alors F dérive d'un potentiel sur $\Omega$.\\
+\warning La condition a) est nécessaire mais pas suffisant pour garantir l'existence d'un potentiel. Et est équivalent au fait que rot$(F(x)) = 0$.
+\end{theorem}
+
+\begin{theorem}
+    Soit $\Omega \subset \mathbb{R}^n$ un ouvert connexe et soit F un champ vectoriel continu. Alors les affirmations suivantes sont équivalentes :\\
+\begin{enumerate}
+    \item F dérive d'un potentiel sur $\Omega$\\
+    \item $\int_{\Gamma_1} F\cdot dl = \int_{\Gamma_2} F\cdot dl$ Pour toutes les courbes simples régulières $\Gamma_1, \Gamma_2$ joignant deux points quelconques A et B de $\Omega$\\
+    \item $\int_{\Gamma} F\cdot dl =0$ Pour toutes les courbes simples fermées régulière.\\
+\end{enumerate}
+\end{theorem} 
+
+Le théorème 2 nous dit que pour tout champ vectoriel F conservatif, alors son travail est indépendant de la courbe suivie pour aller de A à B. De plus, le travail de F le long de n'importe quelle courbe fermée est nul.\\
+
+\quad \underline{Exemple :} $F(x,y,z) = (ye^x \sin{z}, 1+e^x\sin{z}, z+ye^x\cos{z})$\\
+On a rot(F)=0. On a : $\frac{\partial f}{x} = ye^x\sin{z} \Rightarrow f(x,y,z) = ye^x \sin{z} + \alpha(y,z)$\\
+Or, $\frac{\partial f}{\partial y} = e^x \sin{z} + \frac{\partial \alpha}{\partial y} \Rightarrow \frac{\partial \alpha}{\partial y} = 1$. De la même manière, $\frac{\partial \alpha}{\partial z} = z$\\
+Ainsi, $f(x,y,z) = ye^x\sin{z} + y+\frac{z^2}{2}+C$
+
+\subsubsection{Théorème de Green}
+Tous les résultats sont ici dans $\mathbb{R}^2$.\\
+
+Soit $\Omega \subset \mathbb{R}^2$ un ouvert borné tel que son bord $\partial \Omega$ est une courbe simple fermée régulière. On dit que $\partial \Omega$ est orienté \textbf{positivement} si lorsqu'on parcours $\partial \Omega$, on laisse $\Omega$ à gauche.\\
+
+\quad \underline{Signification orientation positive :} Pour une paramétrisation $\gamma :[a,b] \rightarrow \partial \Omega$\\
+$t\mapsto \gamma(t) = (\gamma_1(t), \gamma_2(t))$ de $\partial \Omega$. Le vecteur tangent au point x est :\\
+\begin{equation}
+    \tau(x) = (\dot{\gamma_1}(t), \dot{\gamma_2}(t))
+\end{equation}
+Et le vecteur normal à $\partial \Omega$ en x est donné par :\\
+\begin{equation}
+    \nu(x) = (\dot{\gamma_2}(t), -\dot{\gamma_1}(t))
+\end{equation}
+
+On dit qu'un ouvert borné $A\subset \mathbb{R}^2$ est un domaine régulier s'il existe des ouvertes bornés $A_0, \dots, A_m \subset \mathbb{R}^2$ où $m\in \mathbb{N}$ tel que : $\partial A_j = \Gamma_j$ Pour j=0,$\dots$, m sont les courbes simples, fermés régulières. De plus, $\overline{A_j} \subset A_0 \forall j=1, \dots, m$. $\overline{A_i} \cap \overline{A_j} = \varnothing$. Enfin, $A= A_0 \backslash \cup_{j=1}^m \overline{A_j}$.\\
+On dit alors que $\partial A = \Gamma_0 \cup \Gamma_1 \cup \dots \cup \Gamma_m$ est orienté positivement si le sens de parcours sur chaque $\Gamma_j$ laisse le domaine A à gauche. C'est à dire que $\Gamma_0$ est orienté positivement mais les $\Gamma_i$ sont orientés négativement.\\
+
+\quad \underline{Théorème de Green :}\\
+Soit $A\subset \mathbb{R}^2$ un domaine régulier dont le bord $\partial A$ est orienté positivement. Soit $F:\overline{A} \rightarrow \mathbb{R}^2$ un champ vectoriel tel que $F\in C^1(\overline{A}, \mathbb{R}^2)$. Alors :\\
+\begin{equation}
+    \iint_A rot F(x,y)dxdy = \int_{\partial A} F\cdot dl
+\end{equation}
+
+\quad \underline{Corollaire :}\\
+Soit $A\subset \mathbb{R}^2$ un domaine régulier dont le bord $\partial A$ est orienté positivement. Soit $\nu : \partial A \rightarrow \mathbb{R}^2$ un champ de normales unités extérieures à A. Soient $F:\overline{A} \rightarrow \mathbb{R}^2$ un champ vectoriel tel que $F\in C^1(\overline{A}, \mathbb{R}^2)$ et f un champ scalaire tel que $f\in C^2(\overline{A})$. Alors :\\
+\begin{equation}
+    \iint_A div F(x,y)dxdy = \int_{\partial A}(F\cdot \nu)dl
+\end{equation}
+\begin{equation}
+    \iint_A (\Delta f)(x,y)dxdy = \int_{\partial A} (grad f\cdot \nu)dl
+\end{equation}
+On a alors $\tau = \frac{\gamma'(t)}{\parallel \gamma'(t)\parallel} = \frac{(\gamma'_1(t), \gamma'_2(t))}{\parallel \gamma'(t)\parallel} = (\tau_1, \tau_2)$. Et le vecteur tangentiel qui suit l'orientation positive de $\partial A$ est :$\nu = (-\tau_2, \tau_1)$
+
+\subsection{Intégrale de surface, théorème de divergence et de Stokes}
+\subsubsection{Surfaces}
+On note maintenant $f^i$ pour dénoncer la i-ème composante de $f$ et $f_x$ pour dénoncer la dérivée de $f$ selon $x$.\\
+
+$\Sigma \subset \mathbb{R}^3$ est appelé une surface régulière si :\\
+a) Il existe $A\subset \mathbb{R}^2$ un ouvert borné tel que $\partial A$ soit une courbe simple, fermée, régulière\\
+b) Il existe une fonction $\sigma : \overline{A} \rightarrow \mathbb{R}^3$ avec $(u,v) \mapsto \sigma(u,v) = (\sigma^1(u,v), \sigma^2(u,v), \sigma^3(u,v))$. Satisfaisant les propriétés :\\
+$\sigma\in C^1(\overline{A}, \mathbb{R}^3), \sigma(\overline{A}) = \Sigma$ et $\sigma$ est injective sur A.\\
+Le vecteur \\
+\begin{equation}
+    \sigma_u \wedge \sigma_v = \begin{vmatrix}
+        e_1 & e_2 & e_3\\
+        \sigma_u^1 & \sigma_u^2 & \sigma_u^3\\
+        \sigma_v^1 & \sigma_v^2 & \sigma_v^3\\
+    \end{vmatrix}
+\end{equation}
+ est tel que $\parallel \sigma_u \wedge \sigma_v \parallel \neq 0 \forall (u,v) \in A$\\
+ $\sigma$ s'appelle une paramétrisation régulière sur A de la surface $\Sigma$.\\
+ Le vecteur $\nu(u,v) = \frac{\sigma_u \wedge \sigma_v}{\parallel \sigma_u \wedge \sigma_v \parallel}$ la normale unité à la surface $\Sigma $ au point $\sigma(u,v)$\\
+
+ On dit que $\Sigma \subset \mathbb{R}^3$ est une surface régulière par morceaux s'il existe $\Sigma_1, \dots, \Sigma_k$ des surfaces régulières telles que $\Sigma = \cup_{i=1}^k \Sigma_i$\\
+
+ Une surface régulière est dite orientable s'il existe un champ de normales unités $\nu : \Sigma \rightarrow \mathbb{R}^3$ continue. Un tel champ de normale est appelé une orientation de $\Sigma$.\\
+
+ \subsubsection{Paramétrisation usuelles}
+\quad \underline{Sphère de rayon R :} $\sigma(\theta, \phi) = (R\sin{\phi}\cos{\theta}, R\sin{\phi}\sin{\theta}, R\cos{\phi})$. Avec $A=]0, 2\pi[$x$]0,\pi[$\\
+$\sigma_{\theta}\wedge \sigma_{\phi} = \begin{pmatrix}
+    -R^2 \sin^2\phi \cos{\theta}\\
+    -R^2 \sin^2\phi \sin{\theta}\\
+    -R^2 \sin{\phi} \cos{\phi}\\
+\end{pmatrix}$\\
+Ici, on a une normale intérieure à la sphère.\\
+
+\quad \underline{Cylindre creux :} $\sigma(\theta, z) = (\cos{\theta}, \sin{\theta}, z)$\\
+$\sigma_{\theta}\wedge \sigma_z = \begin{pmatrix}
+    \cos{\theta}\\
+    \sin{\theta}\\
+    0\\
+\end{pmatrix}$\\
+Ici, on a une normale extérieure au cylindre.\\
+
+\quad \underline{Cône :} $\sigma(\theta, z) = (z\cos{\theta}, z\sin{\theta}, z)$\\
+$\sigma_{\theta}\wedge \sigma_z = \begin{pmatrix}
+    z\cos{\theta}\\
+    z\sin{\theta}\\
+    -z\\
+\end{pmatrix}$\\
+Ici, on a une normale extérieure au cône.\\
+
+\quad \underline{Paraboloïde symétrique de hauteur 1 :} $\sigma(\theta, r) = (r\cos{\theta}, r\sin{\theta}, r^2)$\\
+$\sigma_{\theta}\wedge \sigma_r = \begin{pmatrix}
+    2r^2\cos{\theta}\\
+    2r^2\sin{\theta}\\
+    -r\\
+\end{pmatrix}$\\
+Ici, on a une normale extérieure.\\
+
+\subsubsection{Intégrales de surfaces}
+Soit $\Sigma \subset \mathbb{R}^3$ une surface régulière paramétrée par une fonction $\sigma:\overline{A}\rightarrow \Sigma$ et soit $f:\Sigma  \rightarrow \mathbb{R}$ un champ scalaire continu. Ainsi, on a :\\
+\begin{equation}
+    \iint_{\Sigma} fds = \iint_A f(\sigma(u,v)) \parallel \sigma_u \wedge \sigma_v \parallel dudv
+\end{equation}
+
+Soit la même surface $\Sigma$ et F un champ vectoriel continu. L'intégrale de F sur $\Sigma$ dans la direction $\sigma_u \wedge \sigma_v$ :\\
+\begin{equation}
+    \int_{\Sigma} F\cdot ds = \iint_A [F(\sigma(u,v))\cdot(\sigma_u\wedge\sigma_v)] dudv = \iint_A[F(\sigma(u,v))\cdot\nu(u,v)]\parallel\sigma_u\wedge\sigma_v\parallel dudv
+\end{equation}
+
+\subsubsection{Théorème de la divergence}
+On dit qu'un ouvert borné $\Omega \in \mathbb{R}^3$ est un domaine régulier s'il existe des ouverts bornés $\Omega_0, \dots, \Omega_n \subset \mathbb{R}^3$ où $n\in \mathbb{N}$ tel que : $\partial \Omega_j = \Sigma_j$ sont des surfaces régulières orientables avec un champ de normales unités. $\overline{\Omega_j}\subset \Omega_0$. $\overline{\Omega_i}\cap \overline{\Omega_j} = \varnothing$. Enfin $\Omega = \Omega_0\backslash \cup_{j=1}^n \overline{\Omega_j}$ possède un champ de normales extérieures.\\
+
+\begin{theorem}
+Soit $\Omega\subset \mathbb{R}^3$ un domaine régulier et $\nu : \partial \Omega \rightarrow \mathbb{R}^3$ un champ de normales unités extérieures à $\Omega$ définit par $\nu = (\nu_1, \nu_2, \nu_3)$. Soit $F:\overline{\Omega} \rightarrow \mathbb{R}^3$ un champ vectoriel tel que $F\in C^1(\overline{\Omega}, \mathbb{R}^3)$ définit par $F=(F_1, F_2, F_3)$. Alors :\\
+\begin{equation}
+    \iiint_{\Omega} div F(x,y,z)dxdydz = \iint_{\partial \Omega} (F\cdot \nu) ds
+\end{equation}
+\end{theorem}
+
+\subsubsection{Théorème de Stokes}
+\quad \underline{Détermination du bord d'une surface}
+Si $\Sigma \subset \mathbb{R}^3$ est une surface régulière et $\sigma : \overline{A}\rightarrow \Sigma$ est une paramétrisation de $\Sigma$ alors le bord de $\Sigma$ est donné par $\partial \Sigma = \sigma(\partial A)$ et est indépendant du choix de la paramétrisation.\\
+
+Le sens de parcours de $\partial \Sigma$ induit par la paramétrisation $\sigma$ est celui obtenu en parcourant le bord de A dans le sens positif.\\
+
+Si $\partial A$ est une courbe simple, fermée, régulière alors on a que \\
+$\sigma(\partial A) = \Gamma_1 \cup \dots \cup \Gamma_n$ et pour obtenir $\partial \Sigma$ on procède :\\
+On supprime de $\sigma(\partial A)$ les courbes $\Gamma_i$ qui se réduisent à un point et celles qui sont parcourues deux fois dans un sens opposé.\\
+
+\underline{Exemple du cylindre :} On a $\Sigma = \{(x,y,z) \in \mathbb{R}^3 : x^2+y^2 = 1, 0\leq z \leq 1\}$\\
+Qui peut être paramétrisé par : $\Sigma = \{\sigma(\theta, z) = (\cos{\theta}, \sin{\theta}, z) : (\theta, z) \in \overline{A}\}$ avec A= $]0,2\pi[$x$]0,1[$\\
+On a $\sigma(\partial A) = \sigma(L_1 \cup L_2 \cup L_3 \cup L_4) = \Gamma_1 \cup \Gamma_2 \cup \Gamma_3 \cup \Gamma_4$\\
+Ainsi : $\Gamma_1 = \sigma(L_1) = \{\gamma_1(\theta) = \sigma(\theta, 0) = (\cos{\theta}, \sin{\theta}, 0)$ avec $\theta : 0\rightarrow 2\pi\}$ De même pour les autres.\\
+
+\begin{theorem}
+Soit $\Sigma \subset \mathbb{R}^3$ une surface régulière par morceaux et orientable. Soit $F:\Sigma \rightarrow \mathbb{R}^3$ un champ vectoriel tel que $F\in C^1(\Sigma, \mathbb{R}^3)$. Alors :\\
+\begin{equation}
+    \iint_{\Sigma} rot F\cdot ds=\int_{\partial \Sigma} F\cdot dl
+\end{equation}
+\end{theorem}
+
+\subsection{Série de Fourier}
+On cherche à représenter une fonction périodique en l'écrivant comme une somme infinie de sinus et cosinus.\\
+
+Une fonction $f:\mathbb{R} \rightarrow \mathbb{R}$ est dite \textbf{T périodique} s'il existe T>0 tel que $f(x+T) = f(x) \forall x\in \mathbb{R}$. La restriction de la fonction à l'intervalle $[0,T]$ caractérise complètement la fonction $f$. On définit la période de $f = \inf\{T>0 : f$est T périodique$\}$\\
+
+Une fonction $f:\mathbb{R}\rightarrow \mathbb{R}$ est dite continue par morceaux sur $[a,b]$ s'il existe des points $\{x_i \in[a,b]\}_{i=0}^{n+1}$ avec $a=x_0 < x_1 < \dots < x_n < x_{n+1} = b$ tel que, pour $i=0,\dots, n$ on ait : $f$ est continue sur chaque intervalle $]x_i, x_{i+1}[$ et la limite à droite en $x_i$ de $f$ notée $f(x_i +0)$ et la limite à gauche en $x_{i+1}$ de $f$ notée $f(x_{i+1}-0)$ existent et soient finies.\\
+
+On dit que $f$ est régulière par morceaux sur $[a,b]$ si de plus on a : $f'$ existe et est continue par morceaux sur chaque intervalles $]x_i, x_{i+1}[$ et la limite à droite $f'(x_i+0)$ ainsi que la limite à gauche $f'(x_{i+1}-0)$ existent et soient finies.\\
+
+Une fonction T périodique est continue/régulière par morceaux si elle l'est sur l'intervalle $[0,T]$\\
+
+\quad \underline{Résultats importants :}\\
+\begin{equation}
+    \frac{2}{T}\int_0^T \cos{(\frac{2\pi n}{T}x)} \cos{(\frac{2\pi m}{T}x)}dx = \frac{2}{T}\int_0^T \sin{(\frac{2\pi n}{T}x)} \sin{(\frac{2\pi m}{T}x)}dx
+\end{equation}
+Deux solutions: \textbf{=0 si $n\neq m$} et \textbf{= 1 si $n=m$}\\
+
+De plus, les fonctions de la forme $u_n(x) = \cos{(\frac{2\pi n}{T}x)}$ et $v_n(x) = \sin{(\frac{2\pi n}{T}x)}$ sont $\frac{T}{n}$ périodiques.\\
+
+Si $f$ est T périodique, alors $\int_a^{a+T} f(x)dx = \int_0^T f(x)dx \forall a\in \mathbb{R}$\\
+
+\subsubsection{Série de Fourier d'une fonction périodique}
+soit $f:\mathbb{R} \rightarrow \mathbb{R}$ T périodique, continue par morceaux pour $N \in \mathbb{N}^*$, la série partielle d'ordre N de $f$ est :\\
+\begin{equation}
+    F_N f(x) = \frac{a_0}{2}+\sum_{n=1}^N [a_n \cos{(\frac{2\pi n}{T}x)} + b_n \sin{(\frac{2\pi n}{T}x)}]
+\end{equation}
+Où les coefficients $a_n; b_n$ sont les coefficients de Fourier de $f$ et sont données par :\\
+\begin{equation}
+    a_n = \frac{2}{T} \int_0^T f(x) \cos{(\frac{2\pi n}{T}x)} dx, n=0,1,\dots \& b_n = \frac{2}{T} \int_0^T f(x) \sin{(\frac{2\pi n}{T}x)}dx, n=1,\dots
+\end{equation}
+
+On appelle la \textbf{série de Fourier de $f$}, la limite lorsque $N\rightarrow \infty$. On a alors :\\
+$F f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}[a_n \cos{(\frac{2\pi n}{T}x)} + b_n \sin{(\frac{2\pi n}{T}x)}]$\\
+
+\subsubsection{Théorème de Dirichlet}
+Soit $f:\mathbb{R}\rightarrow \mathbb{R}$ T périodique, régulière par morceaux. Alors $F f(x)$ existe $\forall x\in \mathbb{R}$. De plus, on a \\
+\begin{equation}
+    F f(x) = \frac{f(x+0)+f(x-0)}{2}
+\end{equation}
+En particulier, si $f$ est continu en $x$ : $f(x+0) = f(x-0)=f(x) \Rightarrow Ff(x) = f(x)$\\
+
+\subsubsection{Notation complexe des séries de Fourier}
+La série de Fourier d'une fonction $f:\mathbb{R}\rightarrow \mathbb{R}$ T périodique régulière par morceaux peut s'écrire sous la forme :\\
+\begin{equation}
+    Ff(x) = \sum_{n=-\infty}^{\infty}C_n e^{i\frac{2\pi n}{T}x}
+\end{equation}
+Où les coefficients $C_n \in \mathbb{C}$ sont des nombres complexes donnés par :\\
+$C_n = \frac{1}{T} \int_0^T f(x) e^{-i\frac{2\pi n}{T}x}dx$
+
+\subsubsection{Propriétés des séries}
+Soit $f:\mathbb{R} \rightarrow\mathbb{R}$ une fonction T périodique, régulière par morceaux. Alors:\\
+\begin{enumerate}
+    \item Sa série de Fourier est aussi T périodique.\\
+    \item Si $f$ est paire : alors $b_n = 0 \forall n\geq 0$\\
+    \item Si $f$ est impaire : alors $a_n = 0 \forall n\geq 0$\\
+\end{enumerate}
+De plus, $\int_0^{2\pi} |f(x) - F_N f(x)|^2dx = \int_0^{2\pi} f^2(x) dx-\pi [\frac{a^2_0}{2}+\sum_{n=1}^N(a_n^2+b_n^2)]$
+
+\subsubsection{Identité de Parseval}
+Soit $f:\mathbb{R} \rightarrow \mathbb{R}$ une fonction T périodique régulière par morceaux. Alors : \\
+\begin{equation}
+    \frac{2}{T}\int_0^T f^2(x)dx = \frac{a_0^2}{2} + \sum_{n=1}^{\infty} (a_n^2+ b_n^2)
+\end{equation}
+
+\subsubsection{Dérivation et intégration des séries}
+
+\quad \underline{Dérivation terme à terme :}\\
+Soit $f:\mathbb{R} \rightarrow \mathbb{R}$ une fonction T périodique \textbf{continue} telle que $f'$ est régulière par morceaux. Alors la série obtenue en dérivant terme à terme $Ff(x)$ converge $\forall x\in \mathbb{R}$ et on a :\\
+\begin{equation}
+    \sum_{n=1}^{\infty} \frac{2\pi n}{T} [-a_n \sin{(\frac{2\pi n}{T}x)} + b_n \cos{(\frac{2\pi n}{T}x)}] = \frac{1}{2}[f'(x+0) + f'(x-0)]
+\end{equation}
+Comme $f$ est supposée continue, alors $Ff(x) = f(x) \forall x\in \mathbb{R}$ et en particulier la série obtenue en dérivant terme à terme la série de Fourier de $f$ converge vers $f'(x) \forall x$ où $f'$ est continue.\\
+
+\quad \underline{Intégration terme à terme :}\\
+Soit $f:\mathbb{R}\rightarrow \mathbb{R}$ une fonction T périodique régulière par morceaux. Alors, $\forall x_0, x\in [0,T]$, on peut intégrer terme à terme :\\
+\begin{equation}
+    \int_{x_0}^x f(t) dt = \int_{x_0}^x \frac{a_0}{2}dt + \sum_{n=1}^{\infty} \int_{x_0}^x [a_n \cos{(\frac{2\pi n}{T}x)} + b_n \sin{(\frac{2\pi n}{T}x)}]dx
+\end{equation}
+
+\subsubsection{Séries de Fourier pour fonctions non périodiques}
+\quad \underline{Série de Fourier en cosinus :}\\
+Soit L>0 tel et $f:[0,l]$ à valeurs dans $\mathbb{R}$, une fonction continue telle que $f'$ soit continue par morceaux. Alors la série de $f$ vaut :\\
+\begin{equation}
+    F_c f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(\frac{\pi n}{L}x)
+\end{equation}
+Avec $a_n = \frac{2}{L}\int_0^L f(x) \cos(\frac{\pi n}{L}x) \forall n=0,1,\dots$. S'appelle la \textbf{série de Fourier en cosinus de $f$}. Elle converge vers $f(x)$ dans l'intervalle $[0,L]$.\\
+
+\quad \underline{Série de Fourier en sinus :}\\
+Soit L>0 et $f:[0,L]\rightarrow \mathbb{R}$ une fonction continue avec $f(0) = f(L) = 0$ telle que $f'$ soit continue par morceaux. Alors la série de $f$ vaut :\\
+\begin{equation}
+    F_s f(x) = \sum_{n=1}^{\infty} b_n \sin(\frac{\pi n}{L}x)
+\end{equation}
+Avec $b_n = \frac{2}{L} \int_0^L f(x) \sin(\frac{\pi n}{L}x)dx \forall n=1,2,\dots$. S'appelle la série de Fourier en sinus de $f$ et elle converge vers $f(x)$ dans l'intervalle $[0,L]$.\\
+
+\subsection{Transformée de Fourier}
+Soit $f:\mathbb{R} \rightarrow \mathbb{R}$ une fonction continue par morceaux telle que $\int_{-\infty}^{\infty} |f(x)dx <\infty$. Alors transformée de Fourier de $f$ est la fonction notée : $\mathcal{F}(f)$ ou $\hat{f}:\mathbb{R} \rightarrow \mathbb{C}$ définie par :\\
+\begin{equation}
+    \mathcal{F}(f)(\alpha) = \hat{f}(\alpha) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x) e^{-i\alpha x}dx
+\end{equation}
+
+\subsection{Transformée de Fourier inverse}
+Soit $g:\mathbb{R} \rightarrow \mathbb{C}$ une fonction continue par morceaux telle que $\int_{-\infty}^{\infty} |g(t)|dt < \infty$. Alors la transformée de Fourier inverse de $g$ est la fonction notée :$\mathcal{F}^{-1}(g) : \mathbb{R}\rightarrow \mathbb{C}$ définie par :\\
+\begin{equation}
+    \mathcal{F}^{-1}(g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}g(t) e^{itx}dt
+\end{equation}
+
+\subsubsection{Théorème de la réciprocité}
+Soit $f:\mathbb{R}\rightarrow \mathbb{R}$ une fonction telle que $f, f'$ sont continues par morceaux avec $\int_{-\infty}^{\infty} |f(x)|dx < \infty$ et $\int_{-\infty}^{\infty} |\hat{f}(x)|dx < \infty$\\
+Alors, $\forall x\in \mathbb{R}$ on a :\\
+\begin{equation}
+    \mathcal{F}^{-1}(\mathcal{F}(f))(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \mathcal{F}(f)(\alpha) e^{i\alpha x}d\alpha = \frac{f(x+0)+f(x-0)}{2}
+\end{equation}
+En particulier, si $f$ est continue en $x$ alors $\mathcal{F}^{-1}(\mathcal{F}(f))(x) = f(x)$.\\
+
+\subsubsection{Propriétés}
+\quad \underline{Continuité et linéarité :}\\
+$\mathcal{F}(f)$ est continue $\forall \alpha\in \mathbb{R}$ et on a : $\lim_{\alpha \rightarrow\pm \infty} |\mathcal{F}(f)(\alpha)| = 0$\\
+$\mathcal{F}(af+bg) = a\mathcal{F}(f)+b\mathcal{F}(g)$\\
+
+\quad \underline{Produit de convolution :}\\
+Soit $(f*g)(x) = \int_{-\infty}^{\infty} f(x-t)g(t)dt$. On a que :\\
+\begin{equation}
+    \mathcal{F}(f*g) = \sqrt{2\pi} \mathcal{F}(f) \mathcal{F}(g)
+\end{equation}
+
+\quad \underline{Dérivée d'une fonction :}\\
+Si $f\in C^n(\mathbb{R})$ et $\int_{-\infty}^{\infty} |f^{(k)}(x)|dx <\infty$. Alors on a :\\
+\begin{equation}
+    \mathcal{F}(f^{(k)})(\alpha) = i^k \alpha^k \mathcal{F}(f)(\alpha)
+\end{equation}
+
+\quad\underline{Décalage :}\\
+Si $a\in \mathbb{R}^*, b\in \mathbb{R}$ et $h(x) = e^{-ibx}f(ax)$ \\
+Alors : $\mathcal{F}(h)(\alpha) = \frac{1}{|a|} \mathcal{F}(f)(\frac{\alpha+b}{a})$\\
+
+\quad \underline{Identité de Plancherel :}\\
+\begin{equation}
+    \int_{-\infty}^{\infty} f^2(x) dx = \int_{-\infty}^{\infty} |\mathcal{F}(f)(\alpha)|^2d\alpha
+\end{equation}
+
+\quad \underline{Transformée de Fourier en cosinus :}\\
+Si $f$ est paire, alors on a $\mathcal{F}(f)(\alpha) = \sqrt{\frac{2}{\pi}} \int_0^{\infty} f(x) \cos(\alpha x)dx$\\
+$f(x) = \sqrt{\frac{2}{\pi}} \int_0^{\infty} \hat{f}(\alpha) \cos(\alpha x)d\alpha$\\
+
+\quad \underline{Transformée de Fourier en sinus :}\\
+Si $f$ est impaire, alors on a $\mathcal{F}(f)(\alpha) = -i\sqrt{\frac{2}{\pi}} \int_0^{\infty} f(x) \sin(\alpha x)dx$\\
+$f(x) = -i\sqrt{\frac{2}{\pi}} \int_0^{\infty} \hat{f}(\alpha) \sin(\alpha x)d\alpha$\\
+
+\subsection{Transformée de Laplace}
+La théorie de Fourier est insuffisante pour résoudre les problèmes de régimes transitoires avec des conditions initiales.\\
+
+Soit $g:\mathbb{R}_+ = [0, +\infty[ \rightarrow \mathbb{R}$ une fonction continue par morceaux définie par $t\mapsto f(t)$ étendue à $\mathbb{R}$ en posant $f(t) = 0$ pour t<0 et soit $\gamma_0 \in \mathbb{R}$ tel que $\int_0^{\infty} |f(t)| e^{-\gamma_0 t}dt<\infty$. La transformée de Laplace de $f$ est la fonction notée : $\mathcal{L}(f)$ ou $F:\mathbb{C}\rightarrow\mathbb{C}$ définit par :\\
+\begin{equation}
+    \mathcal{L}(f)(z) = F(z) = \int_0^{\infty} f(t) e^{-zt}dt
+\end{equation}
+Pour tout z$\in \mathbb{C}$ tel que Re(z)$\geq \gamma_0$. $\gamma_0$ s'appelle l'abscisse de convergence de $f$.\\
+
+\subsubsection{Propriétés}
+On considère deux fonctions : $f, g :\mathbb{R}_+ \rightarrow \mathbb{R}$ continues par morceaux (étendues à $\mathbb{R}$ en posant $f(t), g(t) = 0 \forall t<0)$\\
+
+\quad \underline{Linéarité et décalage :}\\
+$\mathcal{L}(af+bg) = a\mathcal{L}(f) + b\mathcal{L}(g) \forall a,b\in \mathbb{R}$\\
+Si $a\in \mathbb{R}^*_+, b\in \mathbb{R}$ et $h(t) = e^{-bt}f(at)$ Alors on a :$\mathcal{L}(h)(z) = \frac{1}{a} \mathcal{L}(\frac{z+b}{a})$\\
+
+\quad \underline{Produit de convolution :}\\
+$\mathcal{L}(f*g)(z) = \mathcal{L}(f)(z)\mathcal{L}(g)(z)$\\
+
+\quad \underline{Dérivée de la transformée:}\\
+$\mathcal{L}'(f)(z) = -\mathcal{L}(h)(z)$ où $h(t) = tf(t)$\\
+
+\quad \underline{Transformée de la dérivée :}\\
+$\mathcal{L}(f^{(k)})(z) = z^k \mathcal{L}(f)(z) - z^{k-1} f(0) - z^{k-2}f'(0)-\dots$\\
+
+\quad \underline{Transformée d'une primitive de $f$ :}\\
+Si $\varphi$ est une primitive de $f$ alors on a : $\mathcal{L}(\varphi)(z) = \frac{1}{z}\mathcal{L}(f)(z)$\\
+
+\subsubsection{Formule d'inversion de Laplace}
+Soit $f:\mathbb{R}_+ \rightarrow\mathbb{R}$ une fonction $f$ (étendue à $\mathbb{R}$ en posant $f(t)=0 \forall t<0$), continue pour t>0 et soit $\gamma_0\in \mathbb{R}$ tel que $\int_0^{\infty}|f(t)|e^{-\gamma_0 t}dt<\infty$\\
+\begin{equation}
+    \mathcal{L}^{-1}(F)(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}F(\gamma+is)e^{(\gamma+is)t}ds = f(t) \forall t \geq 0
+\end{equation}
+$\mathcal{L}^{-1}(F)$ s'appelle la transformée de la Laplace inverse et l'intégrale est indépendante de $\gamma$.\\
+
+\subsection{Applications de Fourier et Laplace}
+\subsubsection{Équations différentielles ordinaires}
+\quad \underline{Problème de Cauchy :}\\
+On veut trouver une solution à l'équation différentielle linéaire du deuxième ordre :\\
+\begin{equation}
+    a_2y''(t) + a_1 y'(t) + a_0 y(t) = f(t)
+\end{equation}
+$\forall t\in]0,\infty[$. Avec pour conditions initiales $y(0) = y_0 \in \mathbb{R}$, $y'(0) = y_1 \in \mathbb{R}$ où $a_0,a_1,a_2$ sont des constantes et $f(x)$ connue.\\
+
+Pour résoudre, on applique la transformée de Laplace à toute l'équation et on obtient au final : \\
+\begin{equation}
+    Y(z) = \frac{F(z) + a_2 y_0z + a_1 y_0 + a_2 y_1}{a_2z^2+a_1z+a_0}, z\in \mathbb{C}
+\end{equation}
+Pour trouver $y(t)$, on doit encore trouver la transformée inverse de Y.\\
+
+\quad \underline{Cas particulier :}\\
+On considère maintenant : $a_2 y''(t) + \lambda y(t) = 0$. Trois cas sont possibles :\\
+\begin{enumerate}
+    \item $\lambda = 0 \Rightarrow y(t) = y_0 + y_1t$\\
+    \item $\lambda < 0 \Rightarrow y(t) = y_0 \cosh{(\sqrt{-\lambda}t)} + \frac{y_1}{\sqrt{-\lambda}} \sinh(\sqrt{-\lambda}t)$\\
+    \item $\lambda>0 \Rightarrow y(t) = y_0 \cos(\sqrt{\lambda}t) + \frac{y_1}{\sqrt{\lambda}}\sin(\sqrt{\lambda}t)$\\
+\end{enumerate}
+
+\quad \underline{Problème de Sturm-Liouville :}\\
+On veut une solution de l'équation pour tout $t\in ]0,L[$, avec $y(0)=y(L) = 0$. Ainsi la seul solution non triviale nécessite $\lambda > 0$ et $\lambda = (\frac{n\pi}{L})^2$, $n\in \mathbb{N}^*$. On a donc $y_n(t) = \frac{y_1L}{n\pi} \sin(\frac{n\pi}{L}t) = \alpha_n \sin(\frac{n\pi}{L}t)$ avec $\alpha_n$ une constante arbitraire.\\
+Une version modifiée est si la condition initiale est sur les dérivées, à savoir $y'(0)=y'(L)=0$. On a maintenant : $y_n(t) = \beta_n \cos(\frac{n\pi}{L}t)$. Avec $\beta_n$ une constante arbitraire.\\
+
+\subsubsection{Applications aux dérivées partielles}
+\quad \underline{Équation de la chaleur :}\\
+L'équation de la chaleur est donnée par $\frac{\partial u}{\partial t}(x,t) = a^2 \frac{\partial^2 u}{\partial x^2}$, pour $x\in ]0,L[, t>0$. On a aussi les conditions aux limites $u(0,t)=u(L,t) = 0$ ainsi que $u(x,0) = f(x)$. \\
+Pour trouver une solution, on pose $u(x,t) = v(x)w(t) \Rightarrow \frac{v''(x)}{v(x)} = a^2 \frac{w'(t)}{w(t)} = -\lambda$. En effet lorsque deux fonctions de ce type sont égales, alors elles ne peuvent être égale qu'à une même constante.\\
+
+On a donc $u_n(x,t) = \alpha_n \sin(\frac{n\pi}{L}x) C_ne^{-(\frac{an\pi}{L})^2t}$ Or, si $u_n$ est une solution alors $\sum u_n$ en est une aussi.\\
+Dans ce cas, la solution générale de l'équation est : $u(x,t) = \sum_{n=1}^{\infty} A_n e^{-(\frac{an\pi}{L})^2} \sin(\frac{n\pi}{L}x)$, avec $A_n$ les coefficients de la série de Fourier de $f(x)$ (on trouve cela en appliquant la condition $u(x,0) = f(x)$\\
+
+Si longueur de barre infinie, alors on applique une transformation de Fourier sur l'une des deux variables.\\
+
+\subsection{Rappels des opérateurs}
+\subsubsection{Sphérique}
+\begin{itemize}
+    \item $\Vec{\nabla} t = \frac{\partial t}{\partial r} \hat{r} + \frac{1}{r} \frac{\partial t}{\partial \theta} \hat{\theta} + \frac{1}{r\sin{\theta}} \frac{\partial t}{\partial \varphi} \hat{\varphi}$\\
+    \item $\Vec{\nabla} \cdot \Vec{v} = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2 v_r) + \frac{1}{r\sin{\theta}} \frac{\partial}{\partial \theta}(\sin{\theta} v_{\theta}) + \frac{1}{r\sin{\theta}} \frac{\partial v_\varphi}{\partial \varphi}$\\
+    \item $\Vec{\nabla}\times \Vec{v} = \frac{1}{r\sin{\theta}}(\frac{\partial}{\partial \theta} (\sin{\theta} v_\varphi) - \frac{\partial v_\theta}{\partial \varphi})\hat{r} + \frac{1}{r}(\frac{1}{\sin{\theta}} \frac{\partial v_r}{\partial \varphi} - \frac{\partial}{\partial \theta}(r v_\varphi))\hat{\theta} + \frac{1}{r}(\frac{\partial}{\partial r} (r v_\theta) - \frac{\partial v_r}{\partial \theta})\hat{\varphi}$\\
+    \item $\nabla^2 t = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2 \frac{\partial t}{\partial r}) + \frac{1}{r^2 \sin{\theta}} \frac{\partial}{\partial \theta}(\sin{\theta} \frac{\partial t}{\partial \theta}) + \frac{1}{r^2\sin^2\theta} \frac{\partial^2 t}{\partial \varphi^2}$\\
+\end{itemize}
+
+\subsubsection{Cylindrique}
+\begin{itemize}
+    \item $\Vec{\nabla} t = \frac{\partial t}{\partial r} \hat{r} + \frac{1}{r} \frac{\partial t}{\partial \theta} \hat{\theta} + \frac{\partial t}{\partial z} \hat{z}$\\
+    \item $\Vec{\nabla} \cdot \Vec{v} = \frac{1}{r} \frac{\partial}{\partial r}(r v_r) + \frac{1}{r} \frac{\partial v_\varphi}{\partial \varphi} + \frac{\partial v_z}{\partial z}$\\
+    \item $\Vec{\nabla} \times \Vec{v} = (\frac{1}{r} \frac{\partial v_z}{\partial \varphi} - \frac{\partial v_\varphi}{\partial z}) \hat{r} + (\frac{\partial v_r}{\partial z} - \frac{\partial v_z}{\partial r}) \hat{\varphi} + \frac{1}{r}(\frac{\partial}{\partial r} (r v_\varphi) - \frac{\partial v_r}{\partial \varphi})\hat{z}$\\
+    \item $\nabla^2 t = \frac{1}{r} \frac{\partial}{\partial r}(r \frac{\partial t}{\partial r}) + \frac{1}{r^2} \frac{\partial^2 t}{\partial \varphi^2} + \frac{\partial^2 t}{\partial z^2}$\\
+\end{itemize}
+
+
+\end{document}

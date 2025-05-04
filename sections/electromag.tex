@@ -1,0 +1,547 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+
+\localtableofcontents
+\subsection{Hydrostatique}
+On a l'équation de base pour tout fluide : \\
+\begin{equation}
+    \frac{dP}{dz} = -\rho g
+\end{equation}
+Que l'on peut en général simplifier : $P(z) = P_0 -\rho gz$\\
+
+De la, on a l'équation de continuité : \\
+\begin{equation}
+\begin{split}
+    \frac{\partial \rho}{\partial t} + \vec{\nabla} \cdot (\rho \vec{v}) = 0 \\
+    \iiint_V  \frac{\partial \rho}{\partial t} dV + \oiint_S \rho \vec{v} \cdot d \vec{a}
+\end{split}
+\end{equation}
+Pour un fluide incompressible : $\vec{\nabla} \cdot \vec{v} = 0$\\
+Pour un écoulement stationnaire : $\vec{\nabla} \cdot (\rho \vec{v}) = 0$\\
+
+On définit alors le flux d'un fluide comme $\phi = \iint_S \vec{A}\cdot d\vec{a}$, ainsi que $d\phi = \frac{dM}{dt}$\\
+
+On a dès lors l'équation de conservation de la masse : \\
+\begin{equation}
+    \begin{split}
+        \frac{\partial m}{\partial t} = \frac{\partial \rho}{\partial t} dV = -\vec{\nabla} \cdot (\vec{v} \rho)dV\\
+        \frac{dM}{dt} = -\oiint \rho \vec{v}\cdot d\vec{a} = -\phi_j
+    \end{split}
+\end{equation}
+
+\subsection{Hydrodynamique}
+Pour un fluide incompressible, \textbf{on a toujours la relation} : \\
+\begin{equation}
+    v_1S_1 = v_2 S_2
+\end{equation}
+Avec v une vitesse et S une surface.\\
+Il existe plusieurs types d'écoulement pour un fluide : \\
+$\bullet$ statique : $\vec{v} = 0$; $\bullet$ stationnaire : $\frac{\partial v}{\partial t} = 0$; $\bullet$ laminaire : les trajectoires sont des lignes de courant; $\bullet$ irrotationnel : $\vec{\nabla}\times \vec{v} = 0$\\
+
+\subsubsection{Fluide en rotation}
+Soit le vecteur tourbillon : $\vec{T} = \vec{\nabla} \times \vec{v}$\\
+Si le fluide est irrotationnel alors il sa vitesse provient d'un potentiel.\\
+
+\subsubsection{Fluide parfait incompressible}
+Si le fluide est parfait, sans viscosité, que l'écoulement est stationnaire, qu'il n'y a pas de travail interne ni de chaleur échangée, alors on peut trouver l'équation de bernoulli :\\
+\begin{equation}
+    P + \rho gh + \rho \frac{v^2}{2} = cste
+\end{equation}
+Valable sur toute une ligne de courant.\\
+
+Pour déterminer les lignes de courant, on utilise la relation $\frac{dy}{dx} = \frac{v_y}{v_x}$\\
+
+On a dès lors l'équation d'Euler qui caractérise tout fluide parfait : \\
+\begin{equation}
+    -\vec{\nabla}P - \vec{\nabla}u = \rho(\frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \vec{\nabla})\vec{v})
+\end{equation}
+Où les $-\vec{nabla}u$ sont les énergies des forces conservatives pouvant être remplacées par $+f_{ext}$\\
+Avec l'accélération du fluide donnée par : $\frac{d\vec{v}}{dt} = \frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \vec{\nabla})\vec{v}$
+
+\subsubsection{Fluide visqueux}
+Pour un fluide visqueux, l'équation d'Euler n'est pas valable et il faut maintenant utiliser l'équation de Navier-Stokes : \\
+\begin{equation}
+    -\vec{\nabla}P +\rho\vec{g} + \eta \nabla^2\vec{v}  = \rho(\frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \vec{\nabla})\vec{v})
+\end{equation}
+Avec $\eta$ le coefficient de viscosité.\\
+On définit la force visqueuse agissant sur un corps en mouvement comme : \\
+\begin{equation}
+    dF_{visc} = \eta \nabla^2\vec{v}dV
+\end{equation}
+Qui en bi-dimensionnel se simplifie en : $dF_{visc} = \eta \frac{\vec{v_B}-\vec{v_A}}{d}dS$\\ Où $v_A$ est la vitesse de l'objet entraîné.\\
+
+\quad \underline{Traînée et portance :}\\
+La traînée n'existe pas pour un fluide parfait. La force de portance est donnée par :\\
+\begin{equation}
+    F_p = \lvert \oint \vec{v}\cdot d\vec{l} \rvert \rho v_{\infty} L
+\end{equation}
+On trouve empiriquement les forces et coefficients suivants :\\
+$\bullet$ $\vec{F_p} = \frac{1}{2} \rho v_{\infty}^2 A C_y \hat{y}$\\
+$\bullet$ $\vec{F_t} = \frac{1}{2} \rho v_{\infty}^2 A C_x \hat{x}$\\
+$\bullet$ $C_p = \frac{F_p}{\frac{1}{2} \rho v_{\infty}^2 A}$ : [0.5, 3]\\
+
+\quad \underline{Écoulement dans un tube :}\\
+Par la loi de Poiseuille, la pression entre deux points du tube est donnée par :\\
+\begin{equation}
+    \Delta P = \frac{8\eta LD}{\pi R^4}
+\end{equation}
+Ainsi, l'écoulement de poiseuille est donné par : $v_A = A(R_A^2-r^2)$\\
+En effet, avec un fluide visqueux, la vitesse sur les parois est nulle. Celle-ci dépend donc de notre position vis à vis du centre.\\
+
+Dès lors, on obtient : $P(z) = P_{in} - \frac{P_{_in}-P_{out}}{L}z$ et $v_z(r) = \frac{P_{in}-P_{out}}{4\eta L} (R^2-r^2)$\\
+
+De manière générale, avec un fluide visqueux, la puissance totale nécessaire est de :\\
+\begin{equation}
+    P_{tot} = -\phi_E + P_{ext} - \lvert P_{diss} \rvert = 0
+\end{equation}
+Où $\phi_E$ est le potentiel de l'écoulement. Ainsi qu'en général : $P = \iiint \vec{f}\cdot \vec{v}dV = \iint \vec{P}\cdot \vec{v}dS$\\
+
+On définit maintenant le \textbf{nombre de Reynolds :}\\
+\begin{equation}
+    Re = \frac{f_{inertielles}}{f_{visqueuses}}
+\end{equation}
+Il existe alors deux cas possible :\\
+\begin{enumerate}
+    \item $Re \leq \frac{\rho \overline{v}R}{\eta}$ : l'écoulement est normal\\
+    \item $Re \geq \frac{\rho \overline{v}R}{\eta}$ : l'écoulement est turbulent\\
+\end{enumerate}
+
+\subsection{Electrostatique}
+On définit d'abord quelques constantes : la permittivité du vide $\varepsilon_0 = 8.8\cdot 10^{-12} [Fm^{-1}]$, la vitesse de la lumière $c = 3\cdot 10^8 [ms^{-1}]$, la constante magnétique : $\mu_0 = 4\pi \cdot 10^{-7}[Hm^{-1}]$\\
+
+Soit la force électrostatique :\\
+\begin{equation}
+    \vec{F_{12}} = \frac{1}{4\pi \varepsilon_0} \frac{q_1 q_2}{\lvert \vec{r_1}^2-\vec{r_2}^2\rvert} (\vec{r_1}^2-\vec{r_2}^2)
+\end{equation}
+
+On définit le \textbf{champ électrique} comme : $\vec{E} = \frac{\vec{F}}{q_1}$. Par la même occasion, définissons les densités de charges linéiques, surfaciques ainsi que volumiques :\\
+\begin{equation}
+    dq = \lambda dl = \sigma dS = \rho dV
+\end{equation}
+
+Par définition, on a $\vec{E} = \frac{1}{4\pi \varepsilon_0} \sum \frac{q_i}{\lvert \vec{r_1}^2-\vec{r_2}^2\rvert} (\vec{r_1}^2-\vec{r_2}^2) + \dots$\\
+
+Le plus important : \\
+\begin{equation}
+    dE = \frac{1}{4\pi \varepsilon_0} \frac{dq}{r^2}
+\end{equation}
+\warning \textbf{Toujours orienter E!}\\
+
+Par la loi de Gauss, on a : \\
+\begin{equation}
+    \phi = \oiint \vec{E}\cdot d\vec{a} = \frac{q_{int}}{\varepsilon_0}
+\end{equation}
+Ainsi que $\vec{\nabla} \cdot \vec{E} = \frac{\rho }{\varepsilon_0}$\\
+
+Quelques valeurs essentielles :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Différents cas possibles & Champs électriques \\
+        \hline
+        Fil infini & $E(r) = \frac{\lambda}{2\pi \varepsilon_0} \frac{1}{r}$\\
+        \hline
+        Coquille sphérique & $E(r) = \frac{Q}{4\pi \varepsilon_0} \frac{1}{r^2}$ si $r> r_0$, 0 sinon\\
+        \hline
+        Sphère & $E(r) = \frac{Q}{4\pi \varepsilon_0} \frac{r}{r_0^3}$ si $r<r_0$\\
+         & $E(r) = \frac{Q}{4\pi \varepsilon_0}\frac{1}{r^2}$ si $r> r_0$\\
+         \hline
+         Plan infini & $E(r) = \frac{\sigma}{2\varepsilon_0}$ $x>0$\\
+          & $E(r) = -\frac{\sigma}{2\varepsilon_0}$ $x<0$\\
+          \hline
+          Condensateur infini & $E_{int} = \frac{\sigma}{\varepsilon_0}$, $E_{ext} = 0$\\
+    \end{tabular}
+%    \caption{Champ électrique connus}
+\end{table}
+
+
+On peut aussi définir un potentiel électrique qui est "source" du champ électrique : $\vec{E}(\vec{r}) = -\vec{\nabla} V(\vec{r})$. On prend comme référence en général $V(\infty) = 0$\\
+On a \\
+\begin{equation}
+    dV = \frac{1}{4\pi \varepsilon_0} \frac{dq}{r}
+\end{equation}
+Par poisson $\nabla^2 V(\vec{r}) = -\frac{\rho}{\varepsilon_0}$\\
+
+On définit par ailleurs le travail électrostatique des charges :\\
+\begin{equation}
+    W = \frac{1}{2}\varepsilon_0 \iiint E^2dV = \frac{1}{2} \iiint \rho V(\vec{E}) dV
+\end{equation}
+\subsubsection{Conducteurs}
+Un conducteur n'a pas de charges liés, ainsi il n'a pas de champ électrique interne. Sa densité de charge volumique est donc nulle et son potentiel électrique est constant. Même dans une cavité le champ est nul!\\
+
+\subsubsection{Capacité}
+\begin{equation}
+    C = \frac{Q}{\Delta V} [F]
+\end{equation}
+L'énergie potentielle délivrée par un condensateur : $U = \frac{1}{2}qV = \frac{1}{2}CV^2$\\
+Si on met en parallèle des condensateurs : $C_t = \sum C_i$, sinon on a $\frac{1}{C_t} = \sum \frac{1}{C_i}$\\
+
+\subsubsection{Champ d'un dipôle}
+Le moment créé sur un dipôle électrique vaut : $\vec{p} = q\vec{a}$, avec a la distance entre les charges.\\
+
+Le moment de force s'exerçant sur un dipôle est donc : $\vec{\tau_p} = \vec{p} \times \vec{E_{ext}}$. Son énergie potentielle est alors de $E_p = \vec{p} \cdot \vec{E_{ext}}$\\
+
+\subsubsection{Diélectriques}
+Selon la loi d'Ohm :\\
+\begin{equation}
+    \vec{J} = \sigma \vec{E}
+\end{equation}
+Avec J : la densité de courant, $\sigma$ la conductivité.\\
+De cela, on obtient l'usuel $\Delta V = RI$. Où $i(t) = \frac{dq}{dt}$\\
+Si le courant est stationnaire, on a $E = \frac{\Delta V}{l}$\\
+
+\subsubsection{Polarisation}
+Lorsqu'un matériaux est soumis à un champ externe, ses charges peuvent s'orienter et créer des dipôles. Ce qui change le champ électrique interne.\\
+On a donc le vecteur polarisation $\vec{P} = \frac{\vec{p}}{V}$, moment de dipôle par volume.\\
+On a aussi l'équivalence $\vec{P} = n \langle \vec{p}\rangle$. \\
+On a ainsi $\langle \vec{E}_{int} \rangle= \vec{E}_{ext} + \langle \vec{E}_{pl}\rangle$. Souvent $E_{ext}$ et $E_{int}$ sont dans le même sens. \\
+On a dès maintenant l'apparition d'une densité de charge à la surface $\sigma_b$. Cependant, si $\vec{P}$ n'est pas uniforme, alors on a l'apparition d'une densité de charge de volume $\rho_b$\\
+
+$\sigma_b= \vec{P}\cdot \hat{n}$\\
+$\rho_b = -\vec{\nabla} \cdot \vec{P}$\\
+
+Soit la permittivité du matériaux : $\varepsilon_r = (1+\chi)$. Ainsi que la densité de charge volumique totale du matériaux : $\rho = \rho_b + \rho_f$, où $\rho_f$ est la densité volumique de charges libres.\\
+\warning Un diélectrique n'a pas de charges libres!
+
+Dès lors, on a $\vec{P} = \varepsilon_0 \chi \langle \vec{E}\rangle$\\
+
+On définit à cet égard le vecteur déplacement : \\
+\begin{equation}
+    \vec{D} = \varepsilon_0 \vec{E} + \vec{P} = \varepsilon_r \varepsilon_0 \vec{E} = \varepsilon \vec{E}
+\end{equation}
+On a maintenant les relations :\\
+\begin{equation}
+    \begin{split}
+        \vec{\nabla} \cdot \vec{D} = \rho_f\\
+        \iint \vec{D} \cdot d\vec{a} = Q_{fincl}
+    \end{split}
+\end{equation}
+
+Le travail nécessaire pour assembler les charges est alors de : $W = \frac{1}{2} \iiint_V \vec{D} \cdot \vec{E} dV$\\
+
+
+\subsection{Magnétostatique}
+Soit le champ magnétique B [Tesla$=\frac{N}{Am}$]\\
+On a les force de Lorentz :\\
+\begin{equation}
+\begin{split}
+        \vec{F} = I\int d\vec{l} \times \vec{B}\\
+        \vec{F} = q(\vec{E} + \vec{v}\times \vec{B})
+\end{split}
+\end{equation}
+
+Une particule dans un champ B homogène aura une trajectoire circulaire uniforme avec pour rayon : $r = \frac{mv_{\perp}}{qB_0}$. Sa fréquence est de $\vec{\omega} = -\frac{q}{m}\vec{B_0}$. Enfin, son accélération est de $\vec{a} = -\frac{v^2}{r} \hat{r}$\\
+
+Pour calculer B, on utilise en général :\\
+\begin{equation}
+    d\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{I} \times \vec{r}}{r^3}dl
+\end{equation}
+
+
+Si on possède une densité de courant de surface : $\vec{K} = \frac{dI}{dl} = \sigma \vec{v}$. On a alors les relations :\\
+$\bullet$ $\vec{F} = \iint (\vec{K}\times \vec{B})da$\\
+$\bullet$ $d\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{K}(\vec{r}) \times \vec{r}}{r^3}da$\\
+
+Si on possède une densité de courant de volume : $\vec{J} = \frac{dI}{da} = \rho \vec{v}$. Alors on a les relations :\\
+$\bullet$ $\vec{F} = \iint (\vec{J}\times \vec{B})dV$\\
+$\bullet$ $d\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{J}(\vec{r}) \times \vec{r}}{r^3}dV$\\
+
+Quelques valeurs intéressantes :\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c}
+        Cas différents & Champs magnétiques \\
+        \hline
+        Fil infini & $B(r) = \frac{\mu_0}{2\pi} \frac{I}{r} \hat \varphi$\\
+        \hline
+        Boucle circulaire & $B(z) = \frac{\mu_0 I}{2} \frac{R^2}{(R^2+z^2)^{\frac{3}{2}}}$\\
+        \hline
+        Bobine & $B = \mu_0 nI \hat{z}$ $r<r_0$, 0 en  dehors\\        
+    \end{tabular}
+%    \caption{Champs caractéristiques}
+\end{table}
+
+On a aussi la relation :\\
+\begin{equation}
+    \vec{B}(\vec{r}) = \frac{1}{c^2} \vec{v}\times \vec{E}
+\end{equation}
+Tout comme le champ électrique, il existe un potentiel vecteur magnétique A : $\vec{A} = \frac{\mu_0}{4\pi} \frac{\vec{m}\times \vec{r}}{r^2}$\\
+
+Par la loi d'Ampère : \\
+\begin{equation}
+    \oint_{\Gamma} \vec{B}\cdot d\vec{l} = \mu_o \iint \vec{J}\cdot d\vec{a} = \mu_o I_{incl}
+\end{equation}
+
+\subsubsection{Dipôles magnétiques}
+Soit le moment de dipôle magnétique : $\vec{m} = I\vec{a}$. On a les équivalences suivantes :\\
+$\vec{m} = q\frac{\omega}{2\pi}a \hat{n} = \frac{q}{2m} \vec{L} = \frac{q}{2}\nu R \hat{n}$\\
+Où $\vec{L}$ est le moment cinétique : $\vec{L} = m\omega R^2 \hat{n}$\\
+
+Avec $I = q\nu = q\frac{\omega}{2\pi}$.\\
+
+Sans champ magnétique extérieur, la majorité des matériaux n'ont pas de champ magnétique interne \underline{sauf} les \textbf{ferromagnétiques}.\\
+Sous champ magnétique extérieur, on a un champ B interne, qui peut soit être \underline{plus grand que celui à l'extérieur} : \textbf{Paramagnétique}, soit \underline{plus petit que le champ externe} : \textbf{diamagnétique}. 
+
+On a dès lors le moment de dipôle : $\vec{\tau} = \vec{m} \times \vec{B}$. Son énergie potentielle est donnée par $E_p = -\vec{m}\cdot \vec{B}$\\
+
+\warning Si le champ B n'est pas uniforme, on a alors une nouvelle formule pour la force :\\
+\begin{equation}
+    \vec{F} = \vec{\nabla} (\vec{m} \cdot \vec{B}(\vec{r}))
+\end{equation}
+
+\subsubsection{Aimantation}
+Soit le vecteur aimantation (moment de dipôle par volume):\\
+\begin{equation}
+    \vec{M} = \frac{\sum \vec{m_k}}{\Delta V }
+\end{equation}
+
+Il y a plusieurs cas possibles, on peut soit avoir une densité de courant liée par volume : $\vec{J_b} = \vec{\nabla} \times \vec{M}$\\
+Ou de surface : $\vec{K_b} = \vec{M} \times \hat{n}$\\
+Si M est constant, alors le courant s'annule dans le volume.\\
+
+\subsubsection{Les différents champs}
+\quad \underline{Magnétisant H :}\\
+\begin{equation}
+    \frac{1}{\mu_0} (\vec{\nabla} \times \vec{B}) = \vec{J}_{libre} + \vec{\nabla} \times \vec{M} \Rightarrow \vec{H} = \frac{1}{\mu_0} \vec{B} - \vec{M}
+\end{equation}
+$\vec{\nabla} \times \vec{H} = \vec{J}_{libre}$\\
+$\oint \vec{H}\cdot d\vec{l} = I_{libre,incl} = K_{libre}l$\\
+
+On a donc $\vec{M} = \chi_m \vec{H}$ $\vec{B} = \mu \vec{H}$\\
+Avec $\mu = \mu_0 \mu_r = \mu (1+\chi_m)$\\
+
+\warning Si ferromagnétique : H=0 ($K_{libre}=0$). L'aimantation est constante ($I_{libre} = 0$) Pas de champ si $T>T_{curie}$\\
+
+
+\subsection{Electrodynamique}
+On décrit la force électromotrice $\varepsilon$ : \\
+\begin{equation}
+    \varepsilon = \oint \vec{f}\cdot d\vec{l} = \oint \vec{f}_s \cdot d\vec{l}
+\end{equation}
+Avec $\vec{f} = \vec{f}_s + \vec{E}$. Si stationnaire, $\oint Edl = 0$.\\
+
+\warning Ici $\Delta V = \varepsilon$\\
+
+On a $\Delta V_{ab} = V_a - V_b = -\int_b^a \vec{E}\cdot d\vec{l}$\\
+De plus, $\phi = \iint_S \vec{B}\cdot d\vec{a}$. On a alors :\\
+$\varepsilon_B = -\frac{d\phi}{dt}$\\
+
+Un circuit peut avoir une self-inductance L[H] : $\varepsilon_L = -L\frac{dI}{dt}$ (positif si du côté des utilisateurs) \color{gray} Pour une bobine, on a $L = \mu_02 I n^2IA$. Pour un câble coaxial, on a $L = 2\cdot 10^{-7}l \ln{\frac{b}{a}}$ \color{black}\\
+
+Pour une capacité, on a $\varepsilon = \frac{Q}{C}$\\
+
+Dans un circuit, le travail à fournir est de \\
+\begin{equation}
+    W = \frac{1}{2} LI^2 = \frac{1}{2\mu_0} \iiint B^2dV
+\end{equation}
+La puissance électrique est donc de $P = \Delta V I$.\\
+
+\subsubsection{Relations de Maxwell}
+Ici, une énumération de toutes les relations de Maxwell utiles pour l'électrodynamique :\\
+
+\begin{minipage}{.25\textwidth}
+\begin{equation}
+    \vec{\nabla} \cdot \vec{D} = \rho_{libre}
+\end{equation}
+\end{minipage}
+\hfill
+\begin{minipage}{.25\textwidth}
+    \begin{equation}
+        \vec{\nabla} \times \vec{H} = \vec{J}_{libre} + \frac{\partial \vec{D}}{\partial t}
+    \end{equation}
+\end{minipage}
+\hfill
+\begin{minipage}{.25\textwidth}
+    \begin{equation}
+        \vec{J}_D = \frac{\partial \vec{D}}{\partial t}
+    \end{equation}
+\end{minipage}
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|}
+    \hline
+        Intégrale & Locale \\
+        \hline
+        $\oiint \vec{E}\cdot d\vec{a} = \frac{Q_{incl}}{\varepsilon_0}$ & $\vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_0}$\\
+        $\oiint \vec{B}\cdot d\vec{a} = 0$ & $\vec{\nabla} \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$\\
+        $\oint \vec{E}\cdot d\vec{l} = -\frac{d\phi}{dt} = -\frac{d}{dt}\iint_S \vec{B}\cdot d\vec{a}$ & $\vec{\nabla} \cdot \vec{B} = 0$\\
+        $\oint \vec{B}\cdot d\vec{l} = \mu_0 I_{incl} + \mu_0 \varepsilon_0 \frac{\partial}{\partial t} \iint_S \vec{E}\cdot d\vec{a}$& $\vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0 \varepsilon_0 \frac{\partial \vec{E}}{\partial t}$\\
+        $\vec{E} = -\vec{\nabla} V - \frac{\partial \vec{A}}{\partial t}$ & $\vec{B} = \vec{\nabla} \times \vec{A}$\\
+        \hline
+    \end{tabular}
+    \caption{Relations de Maxwell}
+\end{table}
+
+\subsection{Ondes}
+Les ondes transportent de l'énergie pas de la masse!\\
+L'équation de d'Alembert des ondes :$\frac{\partial^2 f}{\partial z^2} = \frac{1}{v^2} \frac{\partial^2f}{\partial t^2}$. Ou en 3D :\\
+
+\begin{equation}
+(\vec{\nabla}^2 - \frac{1}{v^2}\frac{\partial^2}{\partial t^2})f = 0
+\end{equation}
+
+Par exemple, pour une corde sous tension T, on a $v=\sqrt{\frac{T}{\mu}}$. Pour un barreau compressé : $v = \sqrt{\frac{E}{\rho}}$. Pour du gaz dans une colonne $v=\sqrt{\frac{\kappa}{\rho_0}}$.\\
+
+Une solution générale à l'équation est donnée par : $f(z,t) = A\cos{(kz-\omega t + \delta)}$. Ou en complexe : $\Tilde{f}(z,t) = \Tilde{A}e^{i(kz-\omega t)}$, avec $\Tilde{A} = A e^{i\delta}$.\\
+
+On définit alors le \textbf{nombre d'onde} $k = \frac{2\pi}{\lambda}$. La vitesse de phase $\frac{\lambda}{T}$ ainsi que la pulsation $\omega = \frac{2\pi}{T}$. On a aussi la relation : $c^2 = \frac{1}{\mu_0 \varepsilon_0}$\\
+
+Soit la vitesse de groupe : $v_g = \frac{d\omega}{dk} = v(1-\frac{k}{n} \frac{dn}{dk})$
+
+On a alors le \textbf{vecteur de Poynting} : \\
+\begin{equation}
+    \vec{S} =  \frac{1}{\mu_0} (\vec{E} \times \vec{B}) = \vec{E} \times \vec{H} [Wm^{-2}]
+\end{equation}
+Ainsi que le théorème de Poynting : $\frac{\partial u}{\partial t} + \frac{1}{\mu_0} \vec{\nabla} \cdot (\vec{E}\times \vec{B}) = 0$\\
+
+
+L'intensité de l'onde est définit par : $I = \frac{1}{A} \langle \frac{\partial w}{\partial t} \rangle= v\langle u\rangle$.\\
+Avec la puissance moyenne transportée par une onde : $\langle \frac{\partial w}{\partial t}\rangle = vA \langle u \rangle$. 
+
+Dans le vide, on a c=v soit $I = \langle S\rangle = \frac{1}{2}c\varepsilon_0 E_0^2$\\
+De plus, $\langle u \rangle = \langle u_{cin} \rangle + \langle u_{pot} \rangle = 2\langle u_{cin}\rangle = \frac{1}{2}\rho \omega^2 \xi_0^2$\\
+De plus, $\langle u_{em} \rangle = \langle u_e\rangle + \langle u_m\rangle = 2\langle u_e\rangle = \frac{1}{2}\varepsilon_0E^2 + \frac{1}{2\mu_0}B^2 = \varepsilon_0 E^2$\\
+
+Si il y a un milieu : $v = \frac{c}{n}$.\\
+
+On définit alors plusieurs coefficients :\\
+Coefficient de transmission : $T = \frac{4n_1n_2}{(n_1+n_2)^2}$\\
+Coefficient de réflexion : $R = (\frac{n_1-n_2}{n_1+n_2})^2$\\
+
+Normalement, B et E sont en phase et polarisés (ondes de directions perpendiculaires à la direction de propagation). De plus $\Tilde{B} = \frac{1}{c}\Tilde{E}$\\
+
+\subsubsection{Pression radiation}
+Si l'onde est absorbée entièrement : $\langle P_{rad}\rangle = \langle u\rangle$\\
+Si l'onde est réfléchie : $\langle P_{rad}\rangle = 2\langle u\rangle $\\
+
+\subsubsection{Lois de l'optique}
+Trois lois :\\
+\begin{enumerate}
+    \item $\vec{k_I}\cdot \vec{r_I} = \vec{k_T}\cdot \vec{r_T} = \vec{k_R}\cdot \vec{r_R}$\\
+    \item $\theta_I = \theta_R$\\
+    \item $\frac{\sin{\theta_T}}{\sin{\theta_I}} = \frac{n_1}{n_2}$\\
+\end{enumerate}
+\warning Les angles sont vis à vis de la normal à la surface.\\
+
+\subsubsection{Doppler}
+On a ici une relation pour évaluer la vitesse d'un objet en fonction de la fréquence que l'on reçoit :\\
+\begin{equation}
+    f' = f\frac{v-v_0}{v-v_s}
+\end{equation}
+Avec : v la vitesse de l'onde dans le milieu;\\
+$v_0 > 0$ si l'observateur s'éloigne de la source S\\
+$v_s > 0$ si la source se rapproche de l'observateur \\
+
+
+\subsubsection{Guide d'onde rectangulaire}
+On a ici un déphasage entre B et E.\\
+On a le déphasage : $k = \sqrt{\frac{w^2}{c^2}-\omega_{lim}^2}$, avec $\omega_{lim} = c\pi \sqrt{(\frac{m}{a})^2 + (\frac{n}{b})^2}$. Où a et b sont les dimensions du guide, m et n des entiers\\
+
+Ainsi, on a $v = \frac{c}{\sqrt{1-(\frac{\omega_{lim}}{\omega})^2}}$ et $v_g = c\sqrt{1-(\frac{\omega_{lim}}{\omega}}$\\
+
+\subsubsection{Rayonnement}
+La puissance de rayonnement d'une source :\\
+\begin{equation}
+    P(r,t) = \oiint \vec{S} \cdot d\vec{a} = \frac{1}{\mu_0} \oiint (\vec{E} \times \vec{B})\cdot d\vec{a}
+\end{equation}
+La puissance de radiation est ensuite donnée par : $P_{rad}(t_0) = \lim_{r\rightarrow \infty} P(r,t_0+\frac{r}{c})$\\
+
+\warning Les charges stationnaires ne rayonnent pas. Seuls les termes en $\frac{1}{r}, \frac{1}{r^2}$ contribuent à la pression de radiation.\\
+
+\quad \underline{Dipôle oscillant électrique :}\\
+On a ici :$\vec{E} (r,\theta, t) = -\frac{\mu_0 p_0 \omega^2}{4\pi} (\frac{\sin{\theta}}{r}) \cos(\omega(t-\frac{r}{c})) \hat{\theta}$\\
+Ainsi que $\vec{B} = \frac{E}{c} \hat{\varphi}$\\
+
+\begin{equation}
+    \langle P\rangle = \frac{\mu_0 p_0^2 \omega^4}{12\pi c}
+\end{equation}
+
+
+\quad \underline{Dipôle oscillant magnétique :}\\
+On a ici :$\vec{E} (r,\theta, t) = -\frac{\mu_0 m_0 \omega^2}{4\pi c} (\frac{\sin{\theta}}{r}) \cos(\omega(t-\frac{r}{c})) \hat{\varphi}$\\
+Ainsi que $\vec{B} = \frac{E}{c} \hat{\theta}$\\
+
+\begin{equation}
+    \langle P\rangle =  \frac{\mu_0 m_0^2 \omega^4}{12\pi c^3}
+\end{equation}
+
+Dès lors, le rapport des puissances électrique et magnétique vaut : \\
+$\frac{P_{mag}}{P_{el}} = (\frac{m_0}{p_{0c}})^2 = (\frac{\omega b}{c})^2 \ll 1$\\
+
+Dans un matériaux sans charges ni courants, on a $v_g = \frac{v}{1-k\frac{dv}{d\omega}} = \frac{c}{n+\omega \frac{dn}{d\omega}}$\\
+
+\subsubsection{Diffraction}
+\underline{Principe de Huygens :} chaque particule d'une surface d'onde devient source d'onde sphérique secondaire.\\
+\underline{Principe de Malus :} l'intervalle de temps entre les points correspondants de deux surfaces d'onde est égale pour deux même points.\\
+
+Types d'ondes : \\
+$\bullet$ cohérente : la relation de phase ne change pas dans le temps : $\langle I\rangle = I_1 + I_2 + 2\sqrt{I_1I_2} \cos{\delta}$\\
+$\bullet$ incohérente : le déphasage dépend du temps.\\
+
+Soit le déphasage $\delta = k\sum (r_{1i}-r_{2i}) - (\varphi_1-\varphi_2)$. S'il y a plusieurs milieux : $\delta = k_0 \sum n_i (r_{1i}-r_{2i})$\\
+\warning Entre maxima principaux(pour N sources cohérentes), on trouve toujours N-1 zéros et N-2 maximum secondaires.\\
+\color{gray} En général, on a pour les fentes $\delta = ka\sin{\theta}$\color{black}\\
+
+Trois moyens de trouver l'intensité de deux ondes à un point donné : soit par les complexes (somme de phaseurs), soit par les E soit les perturbations $\xi$.\\
+
+$E = E_1+E_2$, avec $E_1 = E_{01} \sin{(\omega t+\alpha_1)} \Rightarrow \lvert \Tilde{E_0}\rvert^2 = E_{01}^2 + E_{02}^2 + 2E_{01}E_{02} \cos(\delta)$\\
+$\xi = \frac{\xi_0}{r} \sin(\omega t - kr + \varphi) \Rightarrow \xi_t = A \sin{(\omega t -kr)}$, Avec $A = 2\frac{\xi_0}{r} \cos{\frac{\delta}{2}}$\\
+
+On a bien entendu la relation ! $I = A^2$ :\\
+\begin{equation}
+    I = I_0 \cos^2(\frac{\delta}{2})
+\end{equation}
+
+\quad \underline{Résolution d'une fente :}\\
+On utilise le critère de Rayleigh :\\
+\begin{equation}
+    \theta \geq \frac{\lambda}{b}
+\end{equation}
+Deux rayons entre dans une fente avec un angle $\theta$ entre les deux. On arrive à les distinguer si l'angle est supérieur à $\frac{\lambda}{b}$. Avec b la largeur de la fente.\\
+
+\quad \underline{Les fentes en général :}\\
+Le déphasage causé vaut : $\delta = \frac{2\pi b}{\lambda} \sin{\theta}$\\
+Avec b la largeur de la fente\\
+$I = I_0 [\frac{\sin{(\pi b \sin{(\frac{\theta}{\lambda})})}}{\pi b \sin{(\frac{\theta}{\lambda})}}]^2$
+
+\quad \underline{Fente rectangulaire :}\\
+\begin{equation}
+    I = I_0 [\frac{\sin{(\pi b_x \sin{(\frac{\theta_x}{\lambda})})}}{\pi b_x \sin{(\frac{\theta_x}{\lambda})}}]^2 [\frac{\sin{(\pi b_y \sin{(\frac{\theta_y}{\lambda})})}}{\pi b_y \sin{(\frac{\theta_y}{\lambda})}}]^2
+\end{equation}
+Avec $b_x$ et $b_y$ les dimensions selon les axes des fentes.\\
+
+\quad \underline{Fente circulaire :}\\
+Le premier anneau sombre est donné par : $\frac{2\pi R}{\lambda} \sin{\theta} = 3.83$\\
+Le critère de Rayleigh vaut ici : $\theta \geq 1.22 \frac{\lambda}{2R}$\\
+
+\quad \underline{Deux fentes rectangulaires de largeur b et espacé de a :}\\
+$I = I_0 [\frac{\sin{(\pi b \sin{(\frac{\theta}{\lambda})})}}{\pi b \sin{(\frac{\theta}{\lambda})}}]^2 \cos^2(\frac{\pi a \sin{(\theta)}}{\lambda})$\\
+
+\quad \underline{Réseau de diffraction :}\\
+$I = I_0 [\frac{\sin{(\pi b \sin{(\frac{\theta}{\lambda})})}}{\pi b \sin{(\frac{\theta}{\lambda})}}]^2$\\
+
+\quad \underline{N fentes parallèles de largeur b espacées de a :}\\
+$I = I_0 [\frac{\sin{(N\pi a \sin{(\frac{\theta}{\lambda})})}}{\sin(\pi a \sin{(\frac{\theta}{\lambda})})}]^2 [\frac{\sin{(\pi b \sin{(\frac{\theta}{\lambda})})}}{\pi b \sin{(\frac{\theta_x}{\lambda})}}]^2$\\
+
+\subsubsection{Dispersion}
+Les ondes diffractés n'ont pas la même longueur d'onde $\lambda$ : \\
+\begin{equation}
+    D = \frac{d\theta}{d\lambda} = \frac{m}{a\cos(\theta)}
+\end{equation}
+De ce fait, la déviation est plus grande lorsque $\lambda$ est grand\\
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

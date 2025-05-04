@@ -1,0 +1,956 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+
+\subsection{Index notation and Cartesian Tensors}
+A vector is uniquely defined from the properties of operations on its elements. The vector space $E^3$ is then the set of elements denoted $\mathbf{u}, \mathbf{v}, \dots$ such that : \begin{itemize}
+    \item $\mathbf{u}+\mathbf{v} \in E^3$, $a\mathbf{u}\in E^3$\\
+    \item $(\mathbf{u}+\mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$, $1\mathbf{u} = \mathbf{u}$\\
+    \item $\exists \mathbf{0} \in E^3 \lvert \mathbf{u}+ \mathbf{0} = \mathbf{u}$, $a(b\mathbf{u}) = (ab)\mathbf{u}$\\
+    \item $\exists -\mathbf{u}\in E^3 \lvert \mathbf{u} + (-\mathbf{u})=\mathbf{0}$, $(a+b)\mathbf{u} = a\mathbf{u} + b\mathbf{u}$\\
+    \item $\mathbf{u}+ \mathbf{v} = \mathbf{v} + \mathbf{u}$, $a(\mathbf{u}+\mathbf{v}) = a\mathbf{u} + a\mathbf{v}$\\
+\end{itemize}
+By providing $E^3$ with a scalar product, it takes the name Euclidean space: The scalar product associates with every pair of vectors $\mathbf{u}, \mathbf{v} \in E^3$ a scalar denoted $\mathbf{u}\cdot \mathbf{v}$ with the following properties : $\mathbf{u}\cdot \mathbf{v} = \mathbf{v} \cdot \mathbf{u}$, $\mathbf{u} \cdot (\alpha \mathbf{v}+ \beta \mathbf{w}) = \alpha (\mathbf{u}\cdot \mathbf{v})+\beta (\mathbf{u}\cdot \mathbf{w})$, $\mathbf{u}\cdot \mathbf{u}\geq 0$.\\
+
+Physical quantities in continuum mechanics : \\
+\begin{itemize}
+    \item Scalars : Quantities for which only one value can be associated\\
+    \item Vectors : Quantities have not only a value but also a direction\\
+    \item Tensors : consider a stress is a force per unit surface : (a) force is a vector (b) an element of a surface is also a vector: The tensor is a mathematical object which yields the stress at a point and is of order 2. It is associated with two spatial directions.
+    \\
+\end{itemize}
+
+\quad \underline{Summation convention :}\\
+\begin{itemize}
+    \item $L_{ii} = \sum_i L_{ii}$\\
+    \item $A_iB_kC_i = B_k \sum_i A_iC_i$\\
+    \item $ds^2 = dx_idx_i$\\
+\end{itemize}
+
+\warning The order of the tensor is equivalent to the number of free indices\\
+
+The index over which we sum is a dummy index; we can change the notation of this index without changing the significance of the sum : a dummy index does not appear more than twice in a product.\\
+
+\quad \underline{Kronecker delta :}\\
+\begin{equation}
+    \delta_{ij} = \begin{cases}
+        1 & i=j\\
+        0 & i\neq j\\
+    \end{cases}
+\end{equation}
+
+With that, we have orthogonality conditions : $c_{ij}c_{qj} = \delta_{iq}$. The components $c_{ij}$ form an orthogonal matrix such that : $[C][C]^{-1} = [C][C]^T = [I]$\\
+with $det(C) = \mathbf{e_1} \cdot (\mathbf{e_2}\times \mathbf{e_3})$\\
+$det(C) = \pm 1$(+ indicates a direct rotation and - a reflection)\\
+
+\subsubsection{Scalars}
+If the value F(P) does not depend on the coordinate system, then F is called a scalar function, or scalar, or a tensor of order 0. \\
+Suppose P has coordinates $x_i$ and if F(P) has a value $f(x_i)$ then the change of coordinate system $x_i = c_{ij}x_j'$ for the scalar F(P) leads to : $F(P) = f(x_i) = f'(x_j')$\\
+The values remains the same but the form of the function can vary in the new coordinate system.\\
+
+\subsubsection{Vectors}
+The vector itself is independent of the coordinate system : i.e. $v_i' = c_{ij}v_j$\\
+
+\begin{equation}
+    \frac{\partial x_i'}{\partial x_j} = c_{ij} = \frac{\partial x_j}{\partial x_i'}
+\end{equation}
+
+The scalar product of two vectors is independent of an orthogonal change of coordinates.
+
+\quad \underline{Permutation symbol :}\\
+
+\begin{equation}
+    \varepsilon_{ijk} = \begin{cases}
+        1 & \text{if ijk is an even permutation of 1 2 3}\\
+        -1 & \text{if ijk is an odd permutation of 1 2 3}\\
+        0 & \text{else}\\
+    \end{cases}
+\end{equation}
+
+We have the relationship : $\varepsilon_{ijk}\varepsilon_{ilm} = \delta_{jl}\delta_{km} - \delta_{jm}\delta_{kl}$\\
+
+The vector product of two vectors are : \begin{equation}\begin{gathered}
+    \mathbf{w} = \mathbf{u} \times \mathbf{v} \\
+    w_i = \varepsilon_{ijk}u_jv_k\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Tensor of order 2 :}\\
+
+Let L be a linear mapping on $E^3$ that transforms a vector to another : $\begin{matrix}
+    L : E^3 \rightarrow E^3\\
+    s.t. u\mapsto Lu\\
+\end{matrix}$\\
+If L transforms two arbitrary vectors and has the properties $L(u_1+u_2) = Lu_1 + Lu_2$, $L(\alpha u_1) = \alpha Lu_1$ then we say that L is a linear transformation. It is also a tensor of order 2. \\
+
+The tensor product or dyadic product $a\otimes b$ is defined as : \begin{equation}
+    \begin{gathered}
+        (a\otimes b)v = (b\cdot v)a = a(b\cdot v)\\
+        (a\otimes b)_{ij} = e_i \cdot (a\otimes b)e_j = a_ib_j\\
+        (u\otimes v) \neq (v\otimes u)\\
+        L = L_{ij}(e_i\otimes e_j)\\
+    \end{gathered}
+\end{equation}
+
+In matrix form, we have the transformation rule : $[L'] = [C][L][C]^T$\\
+Or more generally : \begin{equation}
+\mathcal{T}_{i_1, \dots, i_n} = \frac{\partial x_{i_1}'}{\partial x_{j_1}} \dots \frac{\partial x_{i_2}'}{\partial x_{j_2}} \mathcal{T}_{j_1, \dots, j_n}
+\end{equation}
+
+\subsubsection{Tensor properties}
+
+Important rules of $n^{th}$ order tensors : \begin{itemize}
+    \item Multiplication by a scalar : it is carried out by multiplying each component of the tensor by the scalar. The result is a tensor of order n\\
+    \item Linear combination : a tensor of the same order is obtained\\
+    \item Equivalent tensors : two tensors of the same order are equal term by term in a coordinate system, then they are equal in every other system. \\
+    \item Exterior product of tensors : $A_{i_1, \dots, i_n}B_{j_1, \dots, j_m}$ form a tensor C of order n+m\\
+    \item Tensor contraction : consider a tensor A of order n. The contraction consists of setting equal two indices of the tensor and summing over these indices to form a tensor of order n-2.\\
+\end{itemize}
+
+Useful relations of interior product :
+\begin{itemize}
+    \item $L(a\otimes b) = (La \otimes b)$\\
+    \item $(u\otimes v)(a\otimes b) = (v\cdot a)u\otimes b = u\otimes b(v\cdot a)$\\
+\end{itemize}
+
+\quad \underline{Transpose of a tensor :}\\
+\begin{equation}
+    u\cdot L^T v = Lu\cdot v = v\cdot Lu
+\end{equation}
+
+It can be proven that all second order tensors can be uniquely decomposed into the sum of symmetric $L^S$ and anti symmetric $L^A$ tensors : $L_{ij} = L_{ij}^S + L_{ij}^A$\\
+
+Trace of a tensor : sum of its diagonal elements $tr(L) = L_{ii}$\\
+$tr(a\otimes b) = a\cdot b$\\
+
+\begin{itemize}
+    \item $tr(L)= tr(L^T)$\\
+    \item $tr(L+T) = tr(L) + tr(T)$\\
+    \item $tr(\alpha L) = \alpha tr(L)$\\
+    \item tr(AL) = tr(LA)\\
+\end{itemize}
+
+\quad \underline{Deviatoric tensor :}\\
+A tensor L can be decomposed into a spherical tensor $L^s$ and a tensor with 0 trace $L^d$ called the deviatoric tensor : $L = L^s + L^d$\begin{equation}
+    \begin{gathered}
+        L_{ij}^s = \frac{1}{3}L_{kk} \delta_{ij}\\
+        L_{ij}^d = L_{ij} - \frac{1}{3}tr(L) \delta_{ij}\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Scalar product of two tensors :}\\
+\begin{equation}
+\begin{gathered}
+    a = S_{ij}T_{ij} = S:T\\
+    \lvert \lvert L \rvert \rvert = (L:L)^{\frac{1}{2}} \geq 0\\
+    \end{gathered}
+\end{equation}
+
+Properties : \begin{itemize}
+    \item $L:(ST) = (S^TL):T = (LT^T):S$\\
+    \item $(u\otimes v) : (a\otimes b) = (u\cdot a)(v\cdot b)$\\
+    \item $L:(a\otimes b) = a\cdot Lb = (a\otimes b):L$\\
+\end{itemize}
+
+The dual vector components $d_i$ of a tensor L : \begin{equation}
+    d_i = \frac{1}{2} \varepsilon_{ikj}L_{jk} = -\frac{1}{2}\varepsilon_{ijk}L_{jk}
+\end{equation}
+
+The dual vector has zero components if L is symmetric. \\
+
+The eigenvalues of a real nxn symmetric matrix are all real. The corresponding eigenvectors are orthogonal.\\
+Eigenvectors are normalized to vectors n of unit length (unit eigenvector).\\
+
+The characteristic equation is given by : $(L_{ij} - \lambda \delta_{ij})n_j = 0$, we get a third order polynomial : $\lambda^3 - I_1(L)\lambda^2 + I_2(L)\lambda - I_3(L) = 0$\\
+
+With the invariants : \begin{itemize}
+    \item $I_1(L) = L_{ii}$\\
+    \item $I_2(L) = \frac{1}{2}((tr(L))^2 - tr(L^2))$\\
+    \item $I_3(L) = det(L)$\\
+\end{itemize}
+
+\quad \underline{Positive definite tensor :}\\
+It satisfies $\forall v\in E^3$, $v\cdot Lv>0$\\
+The eigenvalues of a positive definite tensor are all positive. \\
+
+\textbf{Spectral decomposition :} \\
+for a tensor L with eigenvalues $\lambda_i$ and corresponding eigenvectors $n_i$. \begin{equation}
+    L = \sum_i \lambda_i n_i\otimes n_i
+\end{equation}
+
+\quad \underline{Polar decomposition :}\\
+
+\begin{theoremen}
+    For a symmetric, positive definite tensor C with eigenvalues $\lambda_i^2$ and corresponding $n_i$, there is a symmetric positive definite tensor U such that : \begin{equation}
+        \begin{gathered}
+            U^2 = C\\
+            C = \sum_i \lambda_i^2 n_i \otimes n_i\\
+            U = \sum_i \lambda_i n_i \otimes n_i\\
+        \end{gathered}
+    \end{equation}
+\end{theoremen}
+
+\begin{theoremen}
+    For a tensor F with det(F)>0 there exist symmetric positive definite tensor U and V and a rotation (an orthogonal tensor with a det equal to 1) R such that : \begin{equation} \begin{gathered}
+        F = RU = VR\\
+        U = \sqrt{F^TF}\\
+        V = \sqrt{F F^T}\\
+        \end{gathered}
+    \end{equation}
+\end{theoremen}
+
+$F = RU$ is called right decomposition and $F = VR$ is called left decomposition.\\
+
+\quad \underline{Gradient :}\\
+
+Scalar field :
+\begin{equation}
+    \nabla F = \frac{\partial F}{\partial x_i} e_i
+\end{equation}
+
+Vector field :
+\begin{equation}
+    (\nabla v)_{ij} = \frac{\partial v_i}{\partial x_j}
+\end{equation}
+
+\quad \underline{Divergence :}\\
+Vector field :
+\begin{equation}
+    div(v) = \frac{\partial v_i}{\partial x_i} = tr(\nabla v) = \nabla \cdot v
+\end{equation}
+
+If the divergence of a vector field $v(x)$ is zero then v(x) is called a solenoidal field.\\
+
+Tensor field :
+\begin{equation}
+    div(L) = \frac{\partial L_{ij}}{\partial x_j} e_i
+\end{equation}
+
+\quad \underline{Curl of a vector field :}\\
+\begin{equation}
+\begin{gathered}
+    \nabla \times v = curl(v)\\
+    (\nabla \times v)_i = \varepsilon_{ijk} \frac{\partial v_k}{\partial x_j}\\
+\end{gathered}
+\end{equation}
+
+The field is called irrotational ($\nabla \times v = 0$)\\
+
+\quad \underline{Laplacian :}\\
+
+Scalar field :
+\begin{equation}
+    \nabla \cdot (\nabla F) = \nabla^2 F = \frac{\partial^2 F}{\partial x_i \partial x_i}
+\end{equation}
+
+Laplace's equation : $\nabla^2 F=0$, the function is said to be harmonic.\\
+Poisson's equation : $\nabla^2 F = f$\\
+
+Vector field :
+\begin{equation}
+    \nabla \cdot (\nabla v) = \nabla^2 v \Rightarrow \frac{\partial^2 v_j}{\partial x_i \partial x_i}
+\end{equation}
+
+\quad \underline{Gauss Theorem :}\\
+\begin{equation}
+    \int_\omega \frac{\partial T_{jk \dots}}{\partial x_i}dv = \int_{\partial \omega} n_i T_{jk\dots}ds
+\end{equation}
+
+\subsection{Kinematics}
+Kinematics is the motion of a continuous medium.\\
+Strain tensors provide metrics that can be used to measure changes in length during the motion of the solid.\\
+
+We denote the initial position vector $X$ and the current position vector $x$.\\
+
+The motion of a body $\mathcal{B}$ is described by a vector function $\xi$ defined over time t that depends on $X$ : $x=\xi(X,t)$\\
+
+We define the \textbf{vector displacement u} as : \begin{equation}
+    u = x-X = \xi(X,t) - X = x-\xi^{-1} (x,t)
+\end{equation}
+
+\subsubsection{Material and Spatial description}
+\begin{itemize}
+    \item Material/Lagrangian description is the study of physical/mechanical phenomena by observing a particle P of the body ; components of the initial vector position X are independent spatial variables, \textbf{capital letters}\\
+    \item Spatial/Eularian description consists of observing the events occurring at a fixed point in space; components of the vector position at later times x are independent spatial variables, \textbf{small letters}\\
+\end{itemize}
+
+\begin{equation}
+    \begin{gathered}
+        x = X+U(X,t) \text{ material coordinates}\\
+        u(x,t) = U(X,t) \text{ spatial coordinates}\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Velocity of a material particle :}\\
+
+\begin{itemize}
+    \item Material description : $V(X,t) = \frac{\partial U(X,t)}{\partial t}$\\
+    \item Spatial description : $v(x,t) = V(X,t)$\\
+\end{itemize}
+
+For a spatial field, we get that the materiel derivative is equal to : \begin{equation}
+    \frac{D\varphi(x,t)}{D t} = \frac{\partial \varphi(x,t)}{\partial t} + v_j \frac{\partial \varphi(x,t)}{\partial x_j}
+\end{equation}
+
+The material derivative for a vector field is : $\dot{w}_i = \frac{\partial w_i(x,t)}{\partial t} + v_j \frac{\partial w_i(x,t)}{\partial x_j}$\\
+
+Material derivative for acceleration :
+\begin{equation}
+\begin{gathered}
+    A_i = \dot{V}_i = \frac{\partial^2 \xi(X,t)}{\partial t^2} \text{ material description}\\
+    a_i = \dot{v}_i = \frac{\partial v_i(x,t)}{\partial t} + \frac{\partial v_i(x,t)}{\partial x_j}v_j(x,t) \text{ spatial description}\\
+\end{gathered}
+\end{equation}
+
+
+\subsubsection{Deformation tensor}
+Consider a particle in configuration $\mathcal{R}_0$ with position $X^0$ and a small neighborhood around it $\mathcal{V}$.\\
+By a Taylor series, we get \begin{equation} \begin{gathered}
+    x_i = \xi_i(X_k^0, t) + F_{ij}\lvert_{X_k^0} (X_j-X_j^0) + O(\lvert \lvert X-X^0\rvert \rvert^2)\\
+    F_{ij} = \frac{\partial \xi_i}{\partial X_j}\\
+\end{gathered}
+\end{equation}
+Where F is the deformation gradient tensor.\\
+
+
+We can rewrite it as : $dx = FdX$\\
+To ensure continuity of the material and the existence of continuous derivative, we need the following : \begin{equation}
+    0 < J = det(\frac{\partial \xi_i}{\partial X_j}) = det F < \infty
+\end{equation}
+
+Also, from the motion, we get : \begin{equation}
+    \begin{gathered}
+        F_{ij} = \delta_{ij} + \frac{\partial U_i}{\partial X_j}\\
+        F_{ij}^{-1} = \delta_{ij} - \frac{\delta u_i}{\delta x_j}\\
+    \end{gathered}
+\end{equation}
+
+Therefore, the deformation gradient tensor can be written in two forms : \begin{itemize}
+    \item $F = RU$ : right polar decomposition\\
+    \item $F = VR$ : left polar decomposition\\
+\end{itemize}
+
+Where R expresses a rotation and U and V are called right and left stretch tensor.\\
+
+We can now define the square ds of the vector dx as $ds^2 = \lvert \lvert dx\rvert \rvert^2 = F_{mi}F_{mj}dX_idX_j$\\
+
+\textbf{Symmetric right Cauchy-Green deformation tensor :}\begin{equation}
+    C = F^TF = (F^TF)^T = U^2
+\end{equation}
+
+\textbf{Symmetric left Cauchy-Green deformation tensor c :}\begin{equation}
+    c^{-1} = F^{-T}F^{-1} = (F^{-T}F^{-1})^T = V^{-2}
+\end{equation}
+
+Also : \begin{equation}
+    \begin{gathered}
+        \lvert \lvert dx\rvert \rvert^2 - \lvert \lvert dX\rvert \rvert^2 = 2E_{ij} dX_idX_j = 2e_{ij} dx_idx_j\\
+        E_{ij} = \frac{1}{2}(C_{ij}-\delta_{ij})\\
+        e_{ij} = \frac{1}{2}(\delta_{ij} - c_{ij}^{-1})\\
+    \end{gathered}
+\end{equation}
+
+With :\begin{itemize}
+    \item $E_{ij}$ the Green-Lagrange strain tensor : $E_{ij} = \frac{1}{2}(\frac{\partial U_i}{\partial X_j} + \frac{\partial U_j}{\partial X_i} + \frac{\partial U_m}{\partial X_j}\frac{\partial U_m}{\partial X_i})$\\
+    \item $e_{ij}$ the Euler-Almansi strain tensor : $e_{ij} = \frac{1}{2}(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} - \frac{\partial u_j}{\partial x_i}\frac{\partial u_i}{\partial x_j})$\\
+\end{itemize}
+
+\warning The rotation R does not affect the deformation and strain tensors.\\
+
+The \textbf{stretch ration at X in the direction N} is given by : \begin{equation} \begin{gathered}
+    \lambda_N^2 = N\cdot CN = \frac{\lvert \lvert dx\rvert \rvert^2}{\lvert \lvert dX\rvert \rvert^2}\\
+    \lambda_N = \lvert \lvert UN\rvert \rvert\\
+\end{gathered}
+\end{equation}
+
+For two linear elements dX and dY that intersect with angle $\Theta$, we have $\cos \Theta = \frac{dX\cdot dY}{\lvert \lvert dx\rvert \rvert \lvert \lvert dY\rvert \rvert}$\\
+After the motion, they intersect with angle $\theta$\\
+
+We have $\cos \theta = \frac{N_x \cdot CN_y}{(N_x\cdot CN_x)^{\frac{1}{2}}(N_y\cdot CN_y)^{\frac{1}{2}}}$
+
+\warning The difference $\Theta-\theta$ is attributed to shear.\\
+
+Consider 3 non-co-planar linear elements dX dY and dZ. The volume element is defined as $dV = dX\cdot (dY\times dZ)>0$\\
+We have \begin{equation}
+    dv = det FdV = JdV
+\end{equation}
+
+
+\quad \underline{Nanson's formula :} surface element between two configurations\\
+
+\begin{equation}
+    ds = JF^{-T}NdS
+\end{equation}
+
+\subsubsection{Homogeneous deformation}
+The deformation is defined as homogeneous if the corresponding deformation gradient F is independent of the particle's position X.\\
+
+It defines an affine transformation and is of the form $x_i = x_i^0(t) + M_{ij}(t) (X_j-X_j^0)$\\
+
+Cases :
+\begin{enumerate}
+    \item Translation : M is the unit tensor I and if $X^0=0$\\
+    \item Rotation about the origin : $X^0 = x^0 =0$ and M is the rotation tensor R\\
+    \item homogeneous deformation $M = mI$\\
+\item simple shear : $x = MX$\\
+\end{enumerate}
+
+\subsubsection{Small displacement}
+Consider a displacement field dependent on a small real number $U(X) = \varepsilon W(X)$\\
+As $\varepsilon \rightarrow 0$, \begin{equation}\begin{gathered}
+    E_{ij} = \frac{1}{2} (\frac{\partial U_i}{\partial X_j} + \frac{\partial U_j}{\partial X_i})\\
+    e_{ij} = \frac{1}{2}(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i})\\
+    \end{gathered}
+\end{equation}
+
+Also, $\frac{\partial U_i}{\partial X_j} \simeq \frac{\partial u_i}{\partial x_j}$\\
+$F_{ij} = F_{ij}^{-1} = \delta_{ij} \Rightarrow J \simeq 1$\\
+
+\quad \underline{Infinitesimal strain tensor :}\\
+\begin{equation}\begin{gathered}
+    \varepsilon_{ij} = \frac{1}{2}(\frac{\partial U_i}{\partial X_j} + \frac{\partial U_j}{\partial X_i})\\
+\varepsilon = \frac{1}{2}(\nabla U + (\nabla U)^T) = \frac{1}{2}(\nabla u + (\nabla u)^T)\\
+    \end{gathered}
+\end{equation}
+
+We can rewrite the differential of the displacement field as : \begin{equation}
+    du = \nabla u dx = \frac{1}{2}(\nabla u + (\nabla u)^T)dx + \frac{1}{2}(\nabla u - (\nabla u)^T)dx = \varepsilon + w
+\end{equation}
+
+The infinitesimal displacement can be decomposed into a sum of a pure strain tensor and a pure rotation.\\
+
+We also have $\frac{1}{2}\nabla \times u = w_{21}e_1 + w_{13} e_2 + w_{21}e_3$\\
+
+We need the compatibility equations. They are necessary and sufficient for a unique displacement field when the body is simply connected : \begin{equation}
+    \begin{gathered}
+        \frac{\partial^2 \varepsilon_{11}}{\partial x_2 \partial x_3} = \frac{\partial}{\partial x_1}(-\frac{\partial \varepsilon_{23}}{\partial x_1} + \frac{\partial \varepsilon_{31}}{\partial x_2} + \frac{\partial \varepsilon_{12}}{\partial x_3})\\
+        \frac{\partial^2 \varepsilon_{22}}{\partial x_3 \partial x_1} = \frac{\partial}{\partial x_2}(-\frac{\partial \varepsilon_{31}}{\partial x_2} + \frac{\partial \varepsilon_{12}}{\partial x_3} + \frac{\partial \varepsilon_{23}}{\partial x_1})\\
+        \frac{\partial^2 \varepsilon_{33}}{\partial x_1 \partial x_2} = \frac{\partial}{\partial x_3}(-\frac{\partial \varepsilon_{12}}{\partial x_3} + \frac{\partial \varepsilon_{23}}{\partial x_1} + \frac{\partial \varepsilon_{31}}{\partial x_2})\\
+        \frac{\partial^2 \varepsilon_{12}}{\partial x_1 \partial x_2} = \frac{1}{2}(\frac{\partial^2 \varepsilon_{11}}{\partial x_2^2} + \frac{\partial^2 \varepsilon_{22}}{\partial x_1^2})\\
+        \frac{\partial^2 \varepsilon_{23}}{\partial x_2 \partial x_3} = \frac{1}{2}(\frac{\partial^2 \varepsilon_{22}}{\partial x_3^2} + \frac{\partial^2 \varepsilon_{33}}{\partial x_2^2})\\
+        \frac{\partial^2 \varepsilon_{31}}{\partial x_3 \partial x_1} = \frac{1}{2}(\frac{\partial^2 \varepsilon_{33}}{\partial x_1^2} + \frac{\partial^2 \varepsilon_{11}}{\partial x_3^2})\\
+    \end{gathered}
+\end{equation}
+
+\begin{enumerate}
+    \item Interpretation of the component $\varepsilon_{11}$ : we have $\lvert \lvert dx\rvert \rvert^2 = (1+2E_{11}) \lvert \lvert dX\rvert \rvert^2 \Rightarrow \lvert \lvert dx\rvert \rvert \simeq (1+\varepsilon_{11})\lvert\lvert dX\rvert \rvert$, \begin{equation}
+        \varepsilon_{11} \simeq \frac{\lvert \lvert dx\rvert \rvert - \lvert \lvert dX\rvert \rvert}{\lvert \lvert dX\rvert \rvert}
+    \end{equation}
+    It is the relative extension of a material line element aligned with direction 1\\
+    \item Interpretation of the component $\varepsilon_{12}$ : the angle between two vectors are \begin{equation}
+        \cos \gamma_{12} = 2\varepsilon_{12}
+    \end{equation}
+    With $\varphi_{12} = \frac{\pi}{2}-\gamma_{12}$ as a slip angle\\
+    \item Relative variation of a volume element : \begin{equation}
+        \begin{gathered}
+            dv = (1+\varepsilon_{11})(1+\varepsilon_{22})(1+\varepsilon_{33})dV\\
+            \frac{dv-dV}{dV} = \varepsilon_{11} + \varepsilon_{22} + \varepsilon_{33} = \varepsilon_{ii}\\
+        \end{gathered}
+    \end{equation}
+\end{enumerate}
+
+\subsubsection{Objectivity of kinematic parameters}
+\begin{itemize}
+    \item Change of coordinate system for the same event for a single observer; all laws of continuum physics must be independent of the choice of coordinate system by the observer\\
+    \item Change of the observer or reference frame; a reference frame must have an observer to record the event as well as coordinate system\\
+\end{itemize}
+
+The most general transformation between the two observations of the same event is given by : $x^* = Q(t) + c(t)$ where $t^* = t-\alpha$\\
+Here Q(t) is an orthogonal tensor with time as a parameter, c(t) is a vector.\\
+
+Also, for a rigid body, we have $u^* = Qu$.\\
+
+\begin{itemize}
+    \item A scalar quantity is objective iif $\varphi^* = \varphi$\\
+    \item A vector quantity is materially objective iif $f^* = f$\\
+    \item A vector quantity is spatially objective iif $f^* = Qf$\\
+    \item A tensor quantity is materially objective iif $T^*= T$\\
+    \item A tensor quantity is spatially objective iif $T^*= QTQ^T$\\
+\end{itemize}
+
+\subsection{Dynamics}
+We consider a quantity $\varphi(x,t)$ occupying a volume $w(t)$ of a body in motion with velocity $v(x,t)$\\
+
+From Raynolds Transport Theorem $\frac{DI(t)}{Dt} = \frac{d}{dt}\int_w \varphi(x,t) dx_1dx_2dx_3 = \int_w (\frac{D\varphi (x,t)}{Dt} + \varphi(x,t) \nabla \cdot v(x,t))dx_1dx_2dx_3$\\
+
+\quad \underline{Conservation of Mass}\\
+
+In local form the principle of conservation of mass is : \begin{equation}
+    \frac{D\rho(x,t)}{Dt} + \rho(x,t) \nabla \cdot v(x,t)=0
+\end{equation}
+For an incompressible material : div$v(x,t)=0$\\
+
+The material form of the conservation is used in solid mechanics while the spatial description in fluid mechanics.\\
+
+\subsubsection{Body forces}
+The time volume force acting on $\Pi$ at time t : $f^b(w,t) = \int_w \rho(x,t) b(x,t)dv$\\
+$b(x,t)$ is a vector function called \textbf{spatial volume force density}.\\
+
+Material form is : $F^b(\Omega, t) = \int_\Omega P_0(X)B(X,t)dV$\\
+$F^b(\Omega, t)=f^b(w,t)$\\
+
+Volume force density : $B(X,t) = b(\xi(X,t), t)$\\
+
+\subsubsection{Contact forces}
+Cauchy's postulate : $t(x,t,\Gamma) = t(x,t,n)$\\
+
+We define the spatial stress vector : $t(x,t,\Gamma) = \lim_{\delta_s \rightarrow 0} \frac{\delta f^c(x,t,\Gamma)}{\delta s(x)}$
+
+\subsubsection{Conservation of momentum}
+
+We have $\overline{m} = mv$\\
+\begin{equation}
+    \frac{D\overline{m}(w,t)}{Dt} = \int_w \rho(x,t) a(x,t) dv
+\end{equation}
+
+We also have the principle of Conservation of Momentum : \begin{equation}
+    \int_w \rho(x,t) a(x,t)dv = \int_w \rho(x,t) b(x,t) dv + \int_{\partial w} t(x,t,n)ds
+\end{equation}
+It leads to the equation of motion.\\
+
+From Cauchy's theorem : \begin{equation}
+    \int_w (\rho(x,t) a_i(x,t)-\rho(x,t) b_i(x,t) - \sigma_{ij,j}(x,t))dv = 0
+\end{equation}
+
+
+
+\subsubsection{Conservation of angular momentum}
+$\hat{m} = mx\times v$\\
+\begin{equation}
+    \frac{D\hat{m}(w,t)}{Dt} = \int_w \rho(x,t)x\times a(x,t)dv
+\end{equation}
+
+We also have the principle of conservation of angular momentum : \begin{equation}
+    \int_w \rho(x,t) x \times a(x,t)dv = \int_w \rho(x,t) x \times b(x,t)dv + \int_{\partial w} x\times t(x,t,n)ds
+\end{equation}
+
+It leads to the symmetry of the stress tensor.\\
+
+\begin{equation}
+    \int_w \varepsilon_{ijk} x_j(\rho(x,t) a_k(x,t) - \rho(x,t) b_k(x,t) - \sigma_{km,m}(x,t))dv = \int_w \varepsilon_{ijk} \sigma_{kj}(x,t) dv
+\end{equation}
+
+\quad \underline{Cauchy's Theorem :}\\
+If the stress tensor $t(x,t,n)$ is continuous with respect to $x$ the principle of conservation of momentum implies that there exists a second order stress tensor $\sigma(x,t)$ : \begin{equation}
+    t_i(x,t,n) = \sigma_{ij}(x,t) n_j
+\end{equation}
+
+Also, $\varepsilon_{ij} = e_i \cdot t_{e_j}$, $i$ : direction and $j$: the surface\\
+
+\quad \underline{Properties of the Stress tensor :}\\
+When the stress vector acts along in the direction on the vector normal to the surface : $\sigma n = \lambda n$, we can find eigenvalues.\\
+
+We can decompose the stress vector into a normal and tangential component : \begin{equation}
+    \begin{gathered}
+        t_N = n \cdot t = n_it_i = \sigma_{ij}n_in_j\\
+        t_T = (t_it_i-t_N^2)^{\frac{1}{2}}\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Octahedral plane :}\\
+It is a special plane, its unit normal vector has equal components with respect to all three principal directions : \begin{equation}
+    m = \frac{1}{\sqrt{3}} n_1 + \frac{1}{\sqrt{3}} n_2 + \frac{1}{\sqrt{3}} n_3
+\end{equation}
+
+We can also define the \textbf{deviatoric stress tensor} : $s = \sigma-\sigma_0 I$, with $\sigma_0 = \frac{1}{3}\sigma_{kk}$\\
+
+On the octahedral plane, we have two stress components : \begin{equation}
+\begin{gathered}
+t_N = \frac{I_1}{3}\\
+t_T = \sqrt{\frac{2}{3} I_2} = \frac{1}{3}\sqrt{(\sigma_1-\sigma_2)^2 + (\sigma_2-\sigma_3)^2 + (\sigma_1-\sigma_3)^2}
+\end{gathered}
+\end{equation}
+
+We can also define the \textbf{Von Mises stress} : $\sigma_e = \sqrt{\frac{1}{3} I_2}$\\
+
+The \textbf{equilibrium equations} are : \begin{equation}
+    \frac{\partial \sigma_{ij}}{\partial x_j} + \rho b_i = 0
+\end{equation}
+
+\begin{itemize}
+    \item Uniform tension/compression in a direction m : \begin{equation}
+        \sigma = \sigma(m\otimes m) \Rightarrow \sigma_{ij} = \sigma m_im_j
+    \end{equation}
+    \item Uniform shear (applied in direction 1 on the planes perpendicular to $e_2$) : \begin{equation}
+        \sigma = \tau( e_1 \otimes e_2 + e_2\otimes e_1)
+    \end{equation}
+    \item Pure bending : $\sigma = \alpha(x_2 - h_0) e_1 \otimes e_1$\\
+    \item Hydrostatic pressure : $\sigma = -p(x)I$, equilibrium equations are reducing to $-\nabla p + \rho b = 0$\\
+    \item Plane stress : defined when $\sigma_{11}, \sigma_{22}, \sigma_{12} = \sigma_{21} \neq 0$ while the other components are zero\\
+\end{itemize}
+
+\quad \underline{Mohr's circle :}\\
+We have the change of coordinates : \begin{equation}
+    \begin{gathered}
+        \sigma_{11}' = \sigma_{11} \cos^2 \theta + \sigma_{22} \sin^2 \theta + 2\sigma_{12} \cos \theta \sin \theta = \frac{\sigma_{11}+\sigma_{22}}{2} + \frac{\sigma_{11}-\sigma_{22}}{2}\cos(2\theta) + \sigma_{11}\sin(2\theta)\\
+        \sigma_{22}' = \sigma_{11} \sin^2 \theta + \sigma_{22} \cos^2 \theta - 2\sigma_{12} \cos \theta \sin \theta\\
+        \sigma_{12}' = (\sigma_{22}-\sigma_{11}) \cos \theta \sin \theta + \sigma_{12}(\cos^2 \theta - \sin^2 \theta) = -\frac{\sigma_{11}-\sigma_{22}}{2}\sin \theta + \sigma_{12} \cos(2\theta) = R\sin(2\theta - 2\varphi_0)\\
+        R = \sqrt{(\frac{\sigma_{11}-\sigma_{22}}{2})^2 + \sigma_{12}^2}\\
+        \cos(2\varphi_0) = \frac{\sigma_{11}-\sigma_{22}}{2R}\\
+        \sin(2\varphi_0) = \frac{\sigma_{12}}{R}\\
+    \end{gathered}
+\end{equation}
+
+\subsubsection{Piola-Kirchhoff Stress Tensor}
+Measurements of stresses in the undeformed configuration have been proposed for the study of problems in solid mechanics. These are the first and second Piola-Kirchhoff stress tensors.\\
+
+We define the Piola-Kirchhoff stress vector : $T(X,t,N(X))dS = t(x,t,n(x,t))ds$\\
+With Nanson's formula, $nds = JF^{-T} NdS$\\
+
+We get the \textbf{First Piola-Kirchhoff stress tensor} : \begin{equation}
+    P(X,t) = J(X,t) \sigma(\xi(X,t), t)F^{-T}
+\end{equation}
+
+\warning The first Piola-Kirchhoff stress tensor is not objective.\\
+
+We can also define the \textbf{second Piola-Kirchhoff tensor} : \begin{equation}
+    S(X,t) = F^{-1}(X,t) P(X,t)
+\end{equation}
+Which is symmetric.\\
+
+\subsection{Energy principles}
+The motion of a continuum is governed by two laws of thermodynamics : conservation of energy and the entropy of a continuum.\\
+
+Energy and power involved during the motion of a continuum : \begin{itemize}
+    \item Kinetic energy : $E_k (t) = \int_w \rho(x,t) \frac{v \cdot v}{2}dv$\\
+    \item Internal energy : $E_{int}(t) = \int_w \rho u dv$\\
+    \item Volume forces : $\int_w \rho b \cdot v dv$\\
+    \item Contact forces : $\int_{\partial w} t\cdot v ds = \int_{\partial w} \sigma n \cdot v ds = \int_w ((div \sigma) \cdot v + \sigma : \nabla v)dv$\\
+\end{itemize}
+
+Heat transfer involved : \begin{itemize}
+    \item Production/consumption $\int_w r(x,t)dv$\\
+    \item Heat flow to the body : $-\int_{\partial w} q\cdot n ds = -\int_w div qdv$\\
+\end{itemize}
+
+Energy balance : \begin{equation}\begin{gathered}
+    \frac{d}{dt} \int_w \rho (\frac{v\cdot v}{2}+u)dv = \int_w (\rho b \cdot v+ div(\sigma v)-div q + r)dv\\
+    \rho \frac{Du}{Dt} = \sigma : \nabla v - div q + r\\
+    \end{gathered}
+\end{equation}
+
+We can define : $\sigma_{ij} \frac{\partial v_i}{\partial x_j} = \sigma_{ij} d_{ij}$ with : \begin{equation}
+    d_{ij} = \frac{\varepsilon_{ij}}{dt}
+\end{equation}
+
+By ignoring the thermal effects, we get : $\rho \dot{u} = \sigma : d$\\
+
+The second principle of thermodynamics, we have the entropy s per unit mass : \begin{equation}\begin{gathered}
+    \frac{d}{dt} \int_w \rho s dv \geq \frac{r}{T}dv - \int_{\partial w} \frac{q\cdot n}{T}ds\\
+    \rho \frac{Ds}{Dt} \geq \frac{r}{T} - div(\frac{q}{T})\\
+    \rho \frac{Ds}{Dt} \geq \frac{1}{T}(\rho \frac{Du}{Dt} - \sigma : d) + T^2 q\cdot \nabla T\\
+    \end{gathered}
+\end{equation}
+
+By introducing the \textbf{Helmholtz specific free energy f} : $f = u-Ts$\\
+
+\begin{equation}
+    \rho \frac{Df}{Dt} \leq \sigma : d - \rho s \frac{DT}{Dt} - \frac{q \cdot \nabla T}{T}
+\end{equation}
+
+By considering an adiabatic process $q=0$, a reversible phenomena and small strain ($d = \dot{\varepsilon}$ : $\rho(\frac{Du}{Dt} - T \frac{Ds}{Dt}) = \sigma : \dot{\varepsilon} = \rho(\frac{Df}{Dt} + s\frac{DT}{Dt})$\\
+
+We also have the relation : $\sigma_{ij} = \rho \frac{\partial f}{\partial \varepsilon_{ij}}$\\
+
+\begin{equation}
+    \sigma_{ij} = \frac{\partial W}{\partial \varepsilon_{ij}}
+\end{equation}
+
+\subsubsection{Elasticity}
+We consider a solid, of an isotropic homogeneous linearly elastic material, subjected to body forces.\\
+
+\begin{equation}
+    \begin{gathered}
+        \sigma_{ij} = \lambda \varepsilon_{kk} \delta_{ij} + 2\mu \varepsilon_{ij}\\
+        \varepsilon_{ij} = \frac{1}{2\mu} [ \sigma_{ij} - \lambda \frac{\sigma_{kk}}{3\lambda + 2\mu} \delta_{ij}]\\
+        \frac{\nu}{E} = \frac{\lambda}{2\mu(3\lambda + 2\mu)}\\
+        \frac{1+\nu}{E} = \frac{1}{2\mu}\\
+    \end{gathered}
+\end{equation}
+
+We have a potential function : $W(\varepsilon_{ij}) = \frac{1}{2} \lambda \varepsilon_{ii} \varepsilon_{kk} + \mu \varepsilon_{ij} \varepsilon_{ij} = \frac{1}{2}\sigma_{ij} \varepsilon_{ij} = \frac{1+\nu}{E}\sigma_{ij}\sigma_{ij} - \frac{\nu}{2E}\sigma_{nn} \sigma_{ii} $\\
+
+We can also write \textbf{Navier's equations} in order to 3 equations : $\sigma_{ij} = \lambda u_{k,k}\delta_{ij} + \mu(u_{i,j} + u_{j,i}) \Rightarrow (\lambda +\mu) u_{k,ki} + \mu u_{i,jj} + f_i = 0$\\
+\warning No need anymore to check for the compatibility equations.\\
+
+
+Or we can derive \textbf{Beltrami-Michell compatibility equations} : $\varepsilon_{ij} = -\frac{\nu}{E}\sigma_{kk} \delta_{ij} + \frac{1+\nu}{E}\sigma_{ij}$\\
+Or even : \begin{equation}
+    \sigma_{ij,kk} + \frac{1}{1+\nu} \sigma_{mm,ij} + f_{i,j} + f_{j,i} + \frac{\nu}{1-\nu} f_{n,n} \delta_{ij}=0
+\end{equation}
+
+
+\subsubsection{Theorem of Work and Energy}
+\begin{equation}
+    \frac{1}{2}(\int_{\partial \Omega} t_i u_i ds + \int_{\Omega} f_i u_i dv) = \int_\Omega W(\varepsilon_{ij}
+\end{equation}
+Valid for an isotropic linearly elastic solid.\\
+
+\quad \underline{Potential Energy :}\\
+
+We have the strain energy being the total energy : $U = \int_\Omega W(\varepsilon_{ij} dv$\\
+
+The work done by the applied forces : $\mathbb{W} = 2U = \int_{\partial \Omega} t_i u_ids + \int_\Omega f_iu_i dv$\\
+
+The \textbf{potential energy} is defined as the difference between the previous two energy : \begin{equation}
+    \Pi = U-\mathbb{W} = -\frac{1}{2} \mathbb{W} = -U
+\end{equation}
+
+By using the deviatoric components, we get $W(\varepsilon) = \frac{1}{2}\lambda (\varepsilon_{kk})^2+ \mu \varepsilon_{ij} \varepsilon_{ij} = \frac{9}{2} K(\varepsilon_0)^2 + \mu \varepsilon_{ij}^d \varepsilon_{ij}^d$\\
+
+\quad \underline{Principle of Virtual Work :}\\
+
+It is an arbitrary displacement which does not affect the force system acting on the body. $\delta u$ are small, continuous and single valued. All forces remain constant in magnitude and direction.\\
+
+The virtual displacement satisfies : \begin{itemize}
+    \item $\delta u_i = 0$ on $S_u$\\
+    \item $\delta \varepsilon_{ij} = \frac{1}{2}(\delta u_{i,j} + \delta u_{j,i})$\\
+\end{itemize}
+
+\quad \underline{Principle of minimum potential energy :}\\
+
+The actual displacement field makes the potential energy a stationary value.\\
+
+\begin{equation}
+    \begin{gathered}
+        \delta U = \int_\Omega \sigma_{ij} \delta \varepsilon_{ij} dv = \int_{S_t} \overline{t}_i \delta u_i ds+ \int_\Omega f_i \delta u_i dv\\
+        \delta \mathbb{W} = \int_{\partial \Omega} \sigma_{ij} n_j \delta u_i ds + \int_\Omega f_i \delta u_idv\\
+        \delta \Pi = \delta U - \delta \mathbb{W} = 0\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Rayleigh-Ritz :}\\
+Suppose we have the displacement field $u(\dots, a_1,\dots, a_n, \dots)$. We have \begin{equation}
+    \frac{\partial \Pi}{\partial a_1} = \dots = \frac{\partial \Pi}{\partial a_n} = 0
+\end{equation}
+
+\subsubsection{Boundary conditions}
+We usually have three of them. $S_u$ : represents the part where displacements are prescribed. $S_t$ : represents the part where the stress vector is prescribed.\\
+
+\begin{enumerate}
+    \item Type I (mixed) : we have to specify tractions and displacements on the corresponding parts of boundaries : $\lambda u_{k,k} n_i + \mu (u_{i,j} + u_{j,i}) n_j = \overline{t}_i$ on $S_t$ and $u_i = \overline{u}_i$ on $S_u$\\
+    \item Type II (displacement) : $u_i = \overline{u}_i$\\
+    \item Type III (traction) : $\lambda u_{k,k} n_i + \mu (u_{i,j} + u_{j,i}) n_j = \overline{t}_i$ on $S_u$\\
+\end{enumerate}
+
+We have the following equations to constitute the problem with traction BVP : \begin{itemize}
+    \item equilibrium : $\sigma_{ij,j} + f_i = 0$\\
+    \item compatibility equations : $\sigma_{ij,kk} + \frac{1}{1+\nu} \sigma_{mm,ij} + f_{i,j} + f_{j,i} + \frac{\nu}{1-\nu} f_{n,n} \delta_{ij} = 0$\\
+    \item prescribed tractions on surface : $t_i = \sigma_{ij} n_j = \overline{t}_i$ on $S_t$\\
+\end{itemize}
+
+\quad \underline{Plane isotropic Linear Elasticity :}\\
+Sometimes, the elasticity equations can be considered as functions of only two spatial variables : \begin{itemize}
+    \item State of plane strain : we have $u_1(x_1,x_2)$, $u_2(x_1,x_2)$, $u_3(x_3)$ (long prismatic bar)\\
+    \item State of plane stress : we have $\sigma_{33} = \sigma_{13} = \sigma_{23} = 0$ (thin plates)\\
+\end{itemize}
+
+In case of plane strain, we can reduce to three equations : \begin{itemize}
+    \item $-2\frac{\partial^2 \sigma_{12}}{\partial x_1 \partial x_2} = (\frac{\partial^2 \sigma_{11}}{\partial x_1^2} + \frac{\partial^2 \sigma_{22}}{\partial x_2^2}) + (\frac{\partial f_1}{\partial x_1} + \frac{\partial f_2}{\partial x_2})$\\
+    \item $2\frac{\partial^2 \sigma_{12}}{\partial x_1 \partial x_2} = \frac{\partial^2}{\partial x_2^2} ((1-\nu)\sigma_{11} - \nu \sigma_{22}) + \frac{\partial^2}{\partial x_1^2}((1-\nu)\sigma_{22} - \nu \sigma_{11})$\\
+    \item $(\frac{\partial^2}{\partial x_1^2} + \frac{\partial^2}{\partial x_2^2})(\sigma_{11} + \sigma_{22}) = -\frac{1}{1-\nu}(\frac{\partial f_1}{\partial x_1} + \frac{\partial f_2}{\partial x_2})$\\
+\end{itemize}
+
+This can further be reduced to one equation : \begin{equation}
+    \Delta \Delta \Phi + \frac{1-2\nu}{1-\nu}\Delta V = 0
+\end{equation}
+
+With \textbf{$\Phi$ the Airy stress function}.\\
+
+We here assume that the volume forces are derived from a potential V : $\sigma_{11} = V+\frac{\partial^2 \Phi}{\partial x_2^2}$\\
+
+\subsubsection{Thermal stress}
+\begin{equation}
+    \begin{gathered}
+        \varepsilon = \frac{1}{2\mu} (\sigma+ (2\mu \alpha (T-T_0) - \frac{\lambda}{3\lambda + 2\mu} tr\sigma)I)\\
+        \sigma_{ij} = \lambda \varepsilon_{kk} \delta_{ij} + 2\mu \varepsilon_{ij} - (3\lambda + 2\mu) \alpha (T-T_0) \delta_{ij}\\
+    \end{gathered}
+\end{equation}
+
+In plane stress, we have $\sigma_{11} = \frac{E}{1-\nu^2} (\varepsilon_{11}+ \nu \varepsilon_{22}) - \frac{E\alpha \Delta T}{1-\nu}$, $\sigma_{12} = 2G\varepsilon_{12}$\\
+
+Or in other words (no body forces) : $\nabla^4 \Phi + \alpha E \nabla^2 (\Delta T)=0$\\
+
+\warning The stresses in plane strain and plane stress are the same, the difference appears in the stress-strain relations.\\
+
+\subsubsection{Potential or displacement functions}
+We can write $u = \nabla \varphi + \nabla \times \psi$\\
+Which gives $(\lambda + 2\mu) \nabla(\nabla^2\varphi) + \mu \nabla \times(\nabla^2 \psi)=0$\\
+
+\quad \underline{Lamé strain potential :}\\
+$\psi = 0$ such that $u = \frac{1}{2\mu} \nabla \varphi$\\
+
+
+\subsubsection{Thermoelastic Relations}
+We have : \begin{equation}
+    \begin{gathered}
+        \varepsilon = \frac{1}{2\mu} (\sigma + (2\mu \alpha \Delta T - \frac{\lambda}{3\lambda + 2\mu} tr\sigma) I)\\
+        \sigma_{ij} = \lambda \varepsilon_{kk} \delta_{ij} + 2\mu \varepsilon_{ij} - (3\lambda + 2\mu) \alpha \Delta T \delta_{ij}\\
+    \end{gathered}
+\end{equation}
+
+
+We can also define a potential function such that $\nabla^4 \Phi + \alpha E \nabla^2 (\Delta T)=0$\\
+
+\subsection{Anisotropy}
+
+If the material is linearly elastic, we have : \begin{equation}
+    \sigma(x) = C(x) \varepsilon(x)
+\end{equation}
+With C a 9x9 matrix called the \textbf{Stiffness matrix}.\\
+
+We can also inverse it and get the \textbf{Compliance matrix}.\\
+
+Both S and C are symmetric : $C_{klmn} = C_{lkmn} = C_{klnm}$ which reduces the number of unknown to 36.\\
+
+More over, because the constraints come from strain energy density, we have further symmetries : $C_{klmn} = C_{mnkl}$ (21 unknown)\\
+
+The symmetry of an elastic material depends on the symmetry of its structure.
+
+\quad \underline{Basic cases of elastic symmetry :}\\
+\begin{itemize}
+    \item Symmetry wrt one plane : material is \textbf{monoclinic} (two last rows and columns are zero except for a 2x2 square at their intersection)\\
+    \item symmetry wrt two orthogonal planes : material is \textbf{orthotropic} (three last rows and columns to zero except for the diagonal)\\
+    \item symmetry wrt one axis : material \textbf{isotropic} same as previous but term in 4,4 is equal to $\frac{1}{2}(C_{1111} - C_{1122})$\\
+    \item Symmetry wrt all axes : material \textbf{isotropic} $C_{1111} = \lambda+2\mu$, $C_{1122} = \lambda$, $C_{1212} = (C_{1111} - C_{1212}) = 2\mu$\\
+\end{itemize}
+
+For an isotropic material, we have : $\sigma_{kl} = C_{klmn} \varepsilon_{mn}$ with $C_{klmn} = \lambda\delta_{kl} \delta_{ml} + \mu(\delta_{km} \delta_{ln} + \delta_{kn} \delta_{lm})$\\
+
+For \textbf{Lamina : orthotropic material},\\
+there is no coupling between :
+\begin{itemize}
+    \item normal stresses and shear strains\\
+    \item shear stresses and normal strains\\
+    \item shear stress acting on one plane and a shear stress acting on a different plane\\
+\end{itemize}
+
+\begin{equation}
+    \begin{pmatrix}
+        \varepsilon_{11}\\ \varepsilon_{22}\\ \varepsilon_{33}\\ \varepsilon_{12}\\ \varepsilon_{13}\\ \varepsilon_{23}\\ 
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{1}{E_1} & -\frac{\nu_{21}}{E_2} & -\frac{\nu_{31}}{E_3} & 0 & 0 & 0\\
+        -\frac{\nu_{12}}{E_1} & \frac{1}{E_2} & -\frac{\nu_{32}}{E_3} & 0 & 0 & 0\\
+        -\frac{\nu_{13}}{E_1} & -\frac{\nu_{23}}{E_2} & \frac{1}{E_3} & 0 & 0 & 0\\
+        0 & 0 & 0 & \frac{1}{4G_{12}} & 0 & 0\\
+        0 & 0 & 0 & 0 & \frac{1}{4G_{13}} & 0\\
+        0 & 0 & 0 & 0 & 0 & \frac{1}{4G_{23}}\\
+    \end{pmatrix} = \begin{pmatrix}
+        \sigma_{11}\\ \sigma_{22}\\\sigma_{33}\\ 
+        2\sigma_{12}\\ 2\sigma_{13}\\ 2\sigma_{23}\\
+    \end{pmatrix}
+\end{equation}
+
+With $\frac{\nu_{21}}{E_2} = \frac{\nu_{12}}{E_1}$, $\frac{\nu_{13}}{E_1} = \frac{\nu_{31}}{E_3}$, $\frac{\nu_{23}}{E_2} = \frac{\nu_{32}}{E_3}$\\
+
+For plane stress, we have : $\begin{pmatrix}
+    \varepsilon_{11}\\ \varepsilon_{22}\\ \varepsilon_{12}\\
+\end{pmatrix} = \begin{pmatrix}
+    \frac{1}{E_1} & -\frac{\nu{21}}{E_2} & 0\\
+    -\frac{\nu_{12}}{E_1} & \frac{1}{E_2} & 0\\
+    0 & 0 & \frac{1}{4G_{12}}\\
+\end{pmatrix} \begin{pmatrix}
+    \sigma_{11} \\ \sigma_{22} \\ 2\sigma_{21}\\
+\end{pmatrix}$\\
+
+
+\subsection{Non-linear elasticity}
+\begin{itemize}
+    \item A scalar quantity is objective iif : $\phi^* = \phi$\\
+    \item A vector quantity is materially objective iif $f^* = f$\\
+    \item A vector quantity is spatially objective iif $f^* = Qf$\\
+    \item A tensor quantity is materially objective iif $T^* = T$\\
+    \item A tensor quantity is spatially objective iif $T^* = QTQ^T$\\  
+\end{itemize}
+
+Therefore, we have : $J^* = J$, $C^* = C$, $E^* = E$, $c^* = QcQ^T$, $e^* = QeQ^T$\\
+
+The first Piola-Kirchhoff tensor is defined as : $P = J\sigma F^{-T}$ as $\sigma$ is symmetric, we have $PF^T = FP^T$\\
+
+
+It is not objective as $P^* = QP$ but the Cauchy's stress tensor is objective.\\
+
+The second Piola-Kirchhoff tensor is given by : \begin{equation}
+    S = F^{-1}P
+\end{equation}
+It is symmetric.\\
+
+With the linearization of the stress tensors, we get : $P_{mk} \simeq P_{km}$, $S_{ij} \simeq P_{ij}$, $\sigma_{ij} \simeq P_{ij}$\\
+
+\underline{Two approaches to constitutive equations for isotropic elastic material :}\\ \begin{itemize}
+    \item Cauchy elasticity : $\sigma = K(e) = k_0 (I_1(e), I_2(e), I_3(e)) I + k_1 e + k_2 e^2$, with $k_p$ scalars of the invariants of the Euler-Almansi strain tensor.\\
+    \item Finite hyper-elasticity (existence of an energy function) $P = \frac{\partial W(F)}{\partial F} \Rightarrow \sigma = J^{-1} \frac{\partial W(F)}{\partial F} F^T$\\
+\end{itemize}
+
+We have $W(F) = W(U) = \hat{W}(C)$ (constraint on the energy function as it should be independent of the reference frame).\\
+
+$S = 2 \frac{\partial \hat{W}(C)}{\partial C}$\\
+
+In case of isotropic medium, we have $\hat{W}(C) = \hat{W}(QCQ^T) = \Phi(I_1(C), I_2(C), I_3(C))$\\
+
+Therefore : \begin{equation}\begin{gathered}
+    S = 2(I_3 \frac{\partial \Phi}{\partial I_3} C^{-1} + (\frac{\partial \Phi}{\partial I_1} + I_1 \frac{\partial \Phi}{\partial I_2})I - \frac{\partial \Phi}{\partial I_2} C)\\
+    \sigma = 2J^{-1} (I_3(c) \frac{\partial \Phi}{\partial I_3(c)} I + (\frac{\partial \Phi}{\partial I_1(c)} + I_1(c) \frac{\partial \Phi}{\partial I_2(c)})c - \frac{\partial \Phi}{\partial I_2(c)} c^2)
+    \end{gathered}
+\end{equation}
+
+For incompressible hyper-elastic materials, we have $J = 1$ and $I_3 = 1$\\
+\begin{equation}\begin{gathered}
+    S=  -pC^{-1} + 2(\frac{\partial \phi}{\partial I_1} + I_2 \frac{\partial \phi}{\partial I_2})I - 2\frac{\partial \phi}{\partial I_2} C\\
+    \sigma = -pI + 2(\frac{\partial \phi}{\partial I_1} + I_2 \frac{\partial \phi}{\partial I_2})c - 2\frac{\partial \phi}{\partial I_2} c^2\\
+    \end{gathered}
+\end{equation}
+
+We have : $\phi(I_1,I_2) = \sum_{i=0,j=0} C_{ij} (I_1-3)^i(I_2-3)^j$.\\
+The \textbf{Neo-Hookean model} is defined as $\phi(I_1) = C_{10} (I_1-3)$ (good for stretch ratio less than 2) and the \textbf{Mooney-Rivlin strain energy function} $\phi(I_1,I_2) = C_{10} (I_1-3)+ C_{01}(I_2-3)$ (good for stretch ratio less than 4)\\
+
+\quad \underline{Biaxial stretch :}\\
+\begin{equation}
+    \begin{gathered}
+        \sigma_1 = 2(\lambda_1^2 - \frac{1}{\lambda_1^2 \lambda_2^2}) (\frac{\partial \phi}{\partial I_1} + \lambda_2^2 \frac{\partial \phi}{\partial I_2})\\
+        \sigma_2 = 2(\lambda_2^2 - \frac{1}{\lambda_1^2 \lambda_2^2}) (\frac{\partial \phi}{\partial I_1} + \lambda_1^2 \frac{\partial \phi}{\partial I_2})\\
+    \end{gathered}
+\end{equation}
+
+\quad \underline{Equibiaxial stretch :}\\
+We have $\sigma =  2(\lambda^2 - \frac{1}{\lambda^4}) (\frac{\partial \phi}{\partial I_1} + \lambda^2 \frac{\partial \phi}{\partial I_2})$\\
+
+\quad \underline{Uniaxial stretch :}\\
+We have $\sigma = 2(\lambda^2 - \frac{1}{\lambda}) (\frac{\partial \phi}{\partial I_1} + \frac{1}{\lambda} \frac{\partial \phi}{\partial I_2})$\\
+
+
+We can also define the \textbf{Ogden's model} : \begin{equation}
+    \phi = \sum_{i=1}^N \frac{\mu_i}{\alpha_i} (\lambda_1^{\alpha_i} + \lambda_2^{\alpha_i} + \lambda_3^{\alpha_i}-3)
+\end{equation}
+Good for results when N>3\\
+
+\subsection{Viscoelasticity}
+
+We suppose infinitesimal strains. A linear viscoelastic response suggests a linearity between stresses and strains. However, the relationship is a function of the load-time history.\\
+
+Define the input I and the response R such that $R = R[I]$. For a linear viscoelastic material, we have \begin{itemize}
+    \item proportionnality : $R[cI] = cR[I]$\\
+    \item superposition : $R[I_a + I_b] = R[I_a] + R[I_b]$\\
+\end{itemize}
+
+We have two different kind of tests : \begin{enumerate}
+    \item Creep testing : input stress is known $J(t) = \frac{\varepsilon(t)}{\sigma_0}$\\
+    \item Relaxation testing : input strain is known $G(t) = \frac{\sigma(t)}{\varepsilon_0}$\\
+\end{enumerate}
+
+By doing some consecutive creep loads/relaxation loads we have \begin{equation}
+    \begin{gathered}
+        \varepsilon(t) = \int_{-\infty}^t J(t-\tau) \frac{d\sigma(\tau)}{d\tau}d\tau\\
+        \sigma(t) = \int_{-\infty}^t E(t-\tau) \frac{d\varepsilon(\tau)}{d\tau} d\tau\\
+    \end{gathered}
+\end{equation}
+
+
+
+
+
+
+
+\end{document}

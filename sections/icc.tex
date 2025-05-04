@@ -1,0 +1,529 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+\begin{document}
+\localtableofcontents
+\subsection{ICC-C}
+Code pour compiler dans visual studio :\\
+gcc -Wall nom.c -o nom\\
+
+\subsubsection{Déclaration des variables}
+\textbf{int} : nombre entier; \textbf{float} : nombre décimal (si plus de précision : \textbf{double})\\
+Toujours mettre au début : \\
+\# include <stdio.h>\\
+int main()\\
+printf() : afficher à l'écran\\
+scanf("\%f", \&nom-variable) : demande un caractère à l'utilisateur.\\
+
+Extension pour les variables : \%c : pour les caractères; \%d : nombre entier; \%f : les float et \%lf pour les double\\
+On a aussi : \%m.pX : m nombre de caractère minimum à imprimer et p la précision. \\
+$\backslash$t pour tabuler ; $\backslash$n : nouvelle ligne; \%\% pour pourcent; $\backslash \backslash$ pour obtenir un backslash; $\backslash$' pour apostrophe; $\backslash$" pour guillemet.\\
+
+\quad \underline{Opérateur logiques :}
+Lorsqu'il y a une équation, on a le résultat égal à 1 si l'affirmation est vraie et 0 sinon.\\
+
+\quad \underline{Opérateur ternaire :} \\
+Vrai si résultat $\neq 0$ faux si résultat $=0$.\\
+res = a?b:c $\Rightarrow$ res = b si a est vrai =c sinon.\\
+
+\quad \underline{Control flow :}\\
+\begin{minipage}{.5\textwidth}
+    \underline{If-else :}\\
+    if(expression1)$\{$\\
+    body;\\
+    $\}$\\
+    else if(exp2) $\{$\\
+    body;
+    $\}$\\
+    else $\{$\\
+    body;
+    $\}$
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \underline{Switch :} (compare deux valeurs pour trouver celles égales)\\
+    switch(exp) $\{$\\
+    case constant1:\\
+        code1; break;\\
+    case ...\\
+    default :\\
+        code;\\
+    $\}$
+\end{minipage}
+Si pas de break, on passe au code block suivant sans vérifier la constante.\\
+
+\quad \underline{Loops :}\\
+\begin{minipage}{.5\textwidth}
+    \underline{Do-while :}\\
+    do $\{$\\
+    body;\\
+    $\}$while(condition)\\
+    L'intérieur est réalisé avant de vérifier la condition.\\
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \underline{While :}\\
+    while(condition) $\{$\\
+    body;\\
+    $\}$\\
+    La condition est vérifiée avant de réaliser la boucle.\\
+\end{minipage}
+\underline{For :}\\
+for(initialization; condition; update) $\{$\\
+body;\\
+$\}$\\
+
+Si on veut terminer une boucle avant sa fin : break;\\
+Pour recommencer une boucle du début sans la continuer : continue;\\
+
+\subsubsection{Collection de données}
+Tableau : tous les éléments sont de même type. \\
+Pour déclarer : data-type nom-tab$[$longueur$]$\\
+Le tableau va donc de 0 à n-1.\\
+Si plusieurs dimensions, rajouter des crochets après. \\
+
+\subsubsection{Structures}
+Comme dans les tableaux mais on peut y stocker des données de types différentes. Les membres ont des noms.\\
+struct nom-struct $\{$\\
+member-type name;\\
+.... $\}$\\
+Il faut déclarer avant le main!\\
+
+\subsubsection{Fonctions}
+Doit être écrit en dehors du main et avant qu'elle ne soit appelé.\\
+return-type name(parameters) $\{$\\
+body;\\
+return return-value; $\}$\\
+
+Pour appeler la fonction :\\
+variable = fonction(arguments);\\
+On peut soit la déclarer et la définir en même temps, soit la déclarer au début puis la définir à la fin.\\
+
+\subsubsection{Pointers}
+Pour connaître taille d'un élément : sizeof(.)\\
+Pour trouver l'adresse d'un élément : \%p\\
+Un pointer est une variable qui stock l'adresse d'une variable.\\
+On a ainsi, *pointer = valeur de la variable; pointer = adresse de la variable\\
+Dans un tableau, l'élément 0 : t est équivalent à $\&$t$[0]$\\
+Dans structure : (*pointer).nom-struct\\
+
+\subsubsection{Strings}
+Un tableau de caractère un peu spécial. \%s : conversion d'un mot en tableau.\\
+char s2$[]$ = "....";\\
+\begin{minipage}{.5\textwidth}
+    strcpy(dest, source) : copie un string à un autre\\
+    strlen : longueur d'un string\\
+    strcat(dest, source) : Associe deux strings\\
+
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    strcmp(str1, str2) : Compare deux strings (fait la soustraction en Asci)\\ 
+    strstr(where, what) : localise un string : retourne le texte qui se trouve après\\
+    strncat(dest, source, n) : comme strcat mais avec un nombre de caractère choisi\\
+\end{minipage}
+atoi : converti string en entier/atof : converti string en décimal\\
+
+\subsubsection{Text files}
+Quand on travaille avec des fichier, on doit déclarer un pointer de type fichier :\\
+FILE *fp;\\
+Pour ouvrir fichier : fopen(filename, mode)\\
+
+ \begin{table}[hbt!]
+     \centering
+     \begin{tabular}{c|c}
+         r & Ouvre un fichier pour lecture \\
+         w & Crée un fichier vide pour lecture\\
+         a & Ajoute à la fin d'un fichier\\
+         r$^+$ & Ouvre un fichier pour lecture et édition\\
+         w$^+$ & Crée un fichier vide pour lecture et édition\\
+         a$^+$ & Ouvre un fichier et ajoute à la fin\\
+     \end{tabular}
+     \caption{Modes d'accès}
+     
+ \end{table}
+
+Pour fermer un fichier : fclose(filename)\\
+\textbf{fgetc(fp)} : lit caractère par caractère;\\
+\textbf{fgets(char line, int size, fp)} : Prend une ligne de taille size et la met dans le string line, avance l'indicateur fp;\\
+\textbf{fscanf(fp, const char format, var pr sauvegarder les extractions)} : Pareil pour fichier; \\
+\textbf{sscanf(string, format, var pour sauvegarder)}; \textbf{fputc(int c, fp)} écrit un caractère c à la position fp et avance l'indicateur;\\
+\textbf{fputs(const char str, fp)} : écrit un string à une position spécifié par fp et avance fp; \\
+\textbf{fprintf(fp, format, variable)} impression pour fichier; \\
+\textbf{fseek(fp, long int offset, int position)} pour bouger le fp (avec int position SEEK\_SET début du fichier, SEEK\_CUR position de maintenant, SEEK\_END fin du fichier);\\
+\textbf{rewind(fp)} remet à 0 fp.\\
+\textbf{ftell(fp)} nous donne la position de fp;\\
+\textbf{feof(fp)} Si EOF(end of file) on nous retourne un entier $\neq 0$. 0 sinon\\
+\textbf{ferror(fp)} Si une erreur à été identifiée, la fonction retourne des valeurs $\neq 0$. Retourne 0 sinon. \\
+
+\subsection{ICC-T}
+Un algorithme n'est pas un programme (implémentation d'un algorithme dans un système)\\
+Structure de contrôle : branchement conditionnels (si... alors... sinon...)\\
+itération : Pour i allant de 1 à n\\
+boucles conditionnelles : Tant que \\
+
+\subsubsection{Sous-algorithme}
+Un algorithme principale avec dedans des sous-algorithmes.\\
+Pour trier une liste, on a une méthode : tri par insertion :\\
+\begin{minipage}{.5\textwidth}
+    entrée : liste de nombre de taille n\\
+sortie : liste L triée dans l'ordre croissant\\
+Pour i allant de 2 à n :\\
+|Si L(i) < L(i-1) alors \\
+||L$\leftarrow$ insérer (L,i)\\
+Sortir : L
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \underline{insérer :}\\
+    entrée : liste de nombre, nombre entier positif i\\
+    sortie : liste L avec l'élément L(i) bien placé\\
+    j$\leftarrow$ i \\
+    Tant que j>1 \& L(j)<L(j-1)\\
+    |L$\leftarrow$ permuter(L,j,j-1)\\
+    |j$\leftarrow$ j-1\\
+    sortir : L
+\end{minipage}
+\underline{permuter :} entrée : nombre entier positif j,k, liste de nombre entier L\\
+sortie : liste avec L(j) et L(k) inversés\\
+temp $\leftarrow$ L(j)\\
+L(j) $\leftarrow$ L(k)\\
+L(k) $\leftarrow$ temp\\
+sortir : L\\
+
+\subsubsection{Complexité temporelle}
+C'est le temps d'exécution d'un algorithme. Plus précisément, c'est le nombre d'opérations élémentaires effectuées dans le pire des cas.\\
+
+\quad \underline{Notation $\theta$(.) :}\\
+En général on évalue la complexité d'un algorithme en fonction d'un paramètre lié à la taille des données d'entrées. On veut des ordres de grandeurs.\\
+Soient $f,g : \mathbb{N} \rightarrow \mathbb{R}_+$ deux fonctions non négatives.\\
+On dit que $f(n)$ est un grand theta de $g(n)$ et on écrit $f(n) = \theta(g(n))$ s'il existe $c_1 g(n) \leq f(n) \leq c_2g(n) \forall n \geq N$\\
+Deux boucles imbriquées : $\theta(n^2)$\\
+Une boucle : $\theta(n)$\\
+Formule aritmétique : $\theta(1)$\\
+
+\subsubsection{Récursivité}
+C'est un algorithme qui résout un problème en calculant des solutions d'instances plus petites du même problème (l'algorithme s'invoque lui même de façon répétitive)\\
+
+Fibonacci récursivité : $\theta(2^{\frac{n}{2}}) \simeq \theta(2^n)$\\
+
+ \quad \underline{Recherche par dichotomie :} Identifier si un élément fait partie d'une liste ordonnée : 2cas\\
+ 1) recherche dans liste non ordonnée : il faut parcourir toute la liste\\
+ 2) recherche par dichotomie\\
+ \underline{dichotomie :}\\
+ entrée : liste ordonné L de nombre entiers de taille n, objet x\\
+ sortie : est-ce que $x\in L$?\\
+ Si n=1 alors : si x=L(1) sortir oui, sinon sortir non\\
+ m$\leftarrow [\frac{n}{2}]$\\
+ Si $x\leq L(m)$ alors sortir dichotomie(L(1:m), m,x)\\
+ Sinon sortir dichotomie (L(m+1; n), n-m, x)\\
+$\theta(\log_2(n))$ : très efficace\\
+
+
+\quad \underline{Tri par fusion :}
+On divise la liste en deux et on tri à chaque fois des parties plus petites : $\theta(n\log_2(n))$\\
+
+\subsubsection{Programmation dynamique}
+Étudier tous les choix avant de décider. Un gros défaut : à chaque étape on choisit entre deux chemins soit $\theta(2^n)$. Beaucoup de calculs répétés inutilement pendant l'exploration. Une solution : mémoriser les calculs.\\
+
+\subsubsection{Théorème de la calculabilité}
+Tous les problèmes ne sont pas soluble par un algorithme. \\
+Selon Turing : Il existe des problèmes de décision qu'il est impossible de résoudre au moyen d'un algorithme. Ces problèmes sont indécidables.\\
+
+\quad \underline{Classes de complexité des problèmes :}\\
+Soient $f, g : \mathbb{N} \rightarrow \mathbb{R}_+$ deux fonctions non négatives.\\
+On dit que $f(n)$ est un grand O de $g(n)$ si il existe c>0 et N>1 tel que $f(n) \leq c g(n) \forall n\geq N$\\
+
+\quad \underline{Deux classes de complexité importantes :}\\
+\underline{Classe P :} ensemble des problèmes qui peuvent être résolus en temps polynomial (pour lesquels il existe un algorithme de résolution avec complexité temporelle est un $O(n^p)$.\\
+\underline{Classe NP :} ensemble des problèmes pour lesquels si on propose une solution de problème, il est alors possible de vérifier en un temps polynomial si c'en est une ou pas.\\
+
+Tous les problèmes appartenant à la classe P appartient à NP.\\
+
+\subsubsection{Représentation de l'information}
+Il existe plusieurs moyen de représenter une information. En binaire : 0 circuit ouvert/1 circuit fermé avec n bits on peut représenter $2^n$ éléments différents.\\
+
+\quad \underline{Représentation binaire des entiers :}\\
+$N = \sum_0^{n-1} b_i 2^i$, $b_i \in \{0,1\}$. En n bits : $n=[\log_2(N+1)]$\\
+
+\quad \underline{Dépassement de capacité :}\\
+Le résultat est en dehors de l'intervalle des nombres représentables en n bits.\\
+Pour représenter les entiers relatifs : $N = -b_{n-1}2^{n-1} + \sum_{i=0}^{n-2} b_i 2^i$\\
+Une autre notation est de donner un bit pour le signe mais les calculs ne fonctionnent plus. \\
+
+\quad \underline{Nombre réels :}\\
+On peut représenter les réels de manière exacte. Soit $x_{rep}$ la valeur représentée du nombre x.\\
+On a donc l'erreur absolue : $|\Delta x| = |x-x_{rep}|$ et l'erreur relative : $\frac{|\Delta x|}{|x|}$\\
+On utilise la représentation en virgule fixe :\\
+si x<1 : $x\in [0,1] \Rightarrow x = \sum_{i=1}^n b_i 2^{-i}$.\\
+Si x>1 : on utilise n bits pour la partie entière et n bits pour la partie décimale.\\
+\begin{equation}
+    x = \sum_{i=0}^{n-1} b_i 2^i + \sum_{j=1}^n b_j 2^{-j}
+\end{equation}
+Pour les nombres négatifs on utilise donc un bit pour le signe.\\
+Ainsi, on obtient : $|\Delta x| \leq 2^{-n}$ parfait car précis mais $\frac{|\Delta x|}{|x|}$ peut être grand lorsque x est proche de 0.\\
+
+Représentation virgule flottante : on prend erreur relative : $\frac{|\Delta x|}{|x|} \leq 2^{-n}$ car $|x| \geq 1$. On est donc dans l'intervalle $[1,x]$\\
+
+\subsubsection{Signal}
+\quad \underline{Bande passante :}
+$B = f_{max} = \max\{f_1, \dots, f_n\}$
+Joue un rôle important dans le traitement du signal.\\
+
+\quad \underline{Spectre :} Représentation spectrale : axe horizontal fréquences présentes; axe vertical amplitudes correspondantes.\\
+
+\quad \underline{Filtrage d'un signal :}\\
+Lorsqu'un signal rentre dans un filtre, il en ressort une version déformée. Les filtres \textbf{passe-bas} enlèvent les hautes fréquences du son. \\
+
+\quad \underline{Filtre passe-bas idéal :} Il supprime les fréquences supérieures à une fréquence de coupure $f_c$.\\
+
+\quad \underline{Filtre à moyenne mobile :}\\
+\begin{equation}
+    \hat{X}(t) = \frac{1}{T_c} \int_{t-T_c}^t X(s) ds \Rightarrow \hat{X}(t) = \frac{\sin{(\pi fT_c)}}{\pi fT_c} \sin{(2\pi ft-\pi fT_c)}
+\end{equation}
+On suppose ici $X(t) = \sin{(2\pi ft)}$ et $T_c$ la période sur laquelle on moyenne le signal.\\
+
+\quad \underline{Échantillonage d'un signal :}\\
+Comment représenter la réalité avec des bits? En échantillonnant un signal :\\
+\underline{Échantillonage :}\\
+$T_e$ : période d'échantillonage, $f_e = \frac{1}{T_e}$\\
+Quelle est la meilleure $T_e$ ? $f_e > 2f$ pour pouvoir le reconstruire.\\
+Effet stroboscopique : reconstruction pas la même que la réalité : on a un sous échantillonage d'un signal\\
+
+\underline{Reconstruction d'un signal :}\\
+Par interpolation : $X_l(t) = \sum_{m\in \mathbb{Z}} X(mT_e) F(\frac{t-mT_e}{T_e})$ Où F:$\mathbb{R}\rightarrow\mathbb{R}$ une fonction telle que $F(0) = 1$ et $F(k)=0 \forall k \in \mathbb{Z}^*$.\\
+Ainsi : $F(t) = sinc(t) = 1$ si t=0; $=\frac{\sin{(\pi t)}}{\pi t}$ si $t\neq 0$\\
+
+\subsubsection{Théorème d'échantillonage}
+Soient (X(t), t$\in \mathbb{R}$) un signal avec comme bande passante $f_{max}$, (X($nT_e$), n$\in \mathbb{Z}$) échantillonné avec une période $T_e$\\
+Alors si $f_e > 2f_{max}$ alors $X_l(t) = X(t)  \forall t \in \mathbb{R}$\\
+
+\subsubsection{Compression}
+\quad \underline{Entropie :}\\
+classer par nombre de répétition et séparer la liste en deux parties égales à chaque fois $\Rightarrow \log_2$\\
+Avec le nombre moyen de questions pour trouver une lettre : entropie.\\
+Pour deviner si une lettre qui apparaît avec une probabilité p on a besoin de \textbf{$\log_2(\frac{1}{p})$ questions}\\
+
+Soit X une séquence de lettres provenant d'un alphabet A=$\{a_1, \dots, a_n\}$. Soit $p_j$ la probabilité d'apparition de la lettre $a_j$ dans la séquence X.\\
+L'entropie est définie comme : $H(X) = \sum_{i=1}^n p_i \log_2(\frac{1}{p_i})$\\
+Probabilité d'apparition : $\frac{apparition}{total}$.\\
+En général, l'entropie mesure la quantité d'informations contenue dans un signal.\\
+$0\leq H(X) \leq \log_2(n)$\\
+
+\quad \underline{Pourquoi compresser?} Pour réduire l'espace de mémoire utilisée\\
+Pour réduire le temps de transmission. \\
+
+On a des compressions sans pertes et avec pertes(un peu de distorsion).\\
+
+Le principe de base est de supprimer la redondance. Les mots et lettres qui reviennent souvent sont abrégés. On minimise le nombre de lettres.\\
+\warning Dans le dictionnaire aucun mot de code n'est la préfixe d'un autre. Il faut lire le code de gauche à droite.\\
+
+Le nombre de bits moyen par lettre : H(X).\\
+
+\subsubsection{Algorithme de compression sans pertes}
+\quad \underline{Algorithme de Shannon-Fano :}\\
+Classer les lettres par ordre décroissant d'apparition. Puis nombre de bits par lettre est égal au nombre de questions posées par lettre (dépend de l'ordre choisi)\\
+
+\quad \underline{Algorithme de Huffman :}\\
+Regrouper les deux lettres les moins probables. Plus rapide que Shannon. Ne dépend pas de l'ordre choisi.\\
+(On veut la somme d'apparition la plus petite toujours en partant du bas).\\
+
+Un code binaire est un ensemble C dont les éléments sont des suites de 0 et de 1 de longueur finie. On note $l_j$ la longueur d'un élément. Un code est dit sans préfixe si aucun mot de code n'est le préfixe d'un autre. Tous les mots de code sont différents. La longueur moyenne du code : $L(c) = \sum_{i=1}^n p_il_i$. Le code c=$\{c_1, \dots, c_n\}$ peut être utilisée comme un dictionnaire pour représenter une séquence X.\\
+
+\quad \underline{Théorème de Shannon :}\\
+Pour tout code binaire c : $H(X) \leq L(c)$ sans préfixe pour représenter une séquence X.\\
+
+\underline{Inégalité de Kraft :} $\sum_{j=1}^n 2^{-l_j} \leq 1$\\
+
+\subsubsection{Compression avec pertes}
+Pour photo, moyenner les couleurs sur des zones de plus ou moins grande taille. En utilisant un filtre à moyenne mobile. Plus le signal d'origine est déformé plus il y a de la distorsion.\\
+
+\subsubsection{Correction d'erreurs}
+Pendant l'enregistrement, des erreurs surviennent pendant l'écriture et pendant la transmission.\\
+Une solution est de rajouter de la redondance dans le message. \\
+\quad \underline{Codage par répétition :} Pour un message de longueur n, on envoie 2n bits. Coûteux!\\
+
+\quad \underline{Bit de parité :} dernier bit : somme modulo 2 des premiers bits. On envoie donc n+1 bits. Pour cela, on utilise le code de Hamming qui correspond à ajouter un bit de parité à la fin des paquets. On peut toujours corriger d-1 effacements et $\frac{d-1}{2}$ erreurs.\\
+Avec d la distance de Hamming : $d=\min d(c_i, c_j)$ le nombre de bits différents entre deux séquences.\\
+
+\quad \underline{Codes de Reed-Solomon :}\\
+Pour réduire le nombre d'erreurs lors de transfert de données.\\
+A et B parlent et se mettent d'accord sur un ensemble de n nombre réels différents : $\{t_1, \dots, t_n\}$\\
+A envoie un message composé d'une suite x de k nombre réels :$x = \{x_1, \dots, x_k\}$ $k<n$. A définit le polynôme : $p(t) = \sum_{i=1}^k x_i t^{i-1}$ et $deg(p) \leq k-1$\\
+A envoie ensuite $y = \{y_1 = p(t_1), \dots, y_n=p(t_n)\}$ On suppose n-k données effacés. B reçoit k nombre réels et peut quand même décrypter le message.\\
+
+\subsubsection{Protocoles}
+\quad \underline{TCP :} Établir une ligne de commande entre utilisateurs voulant se parler.\\
+Les données transmises par un utilisateur sont découpées en paquets et envoyé dans le réseau. A chaque paquet il y a sa destination et son identifiant.\\
+
+\underline{Deux protocoles :} TCP : transport d'un paquet d'une source A à une destination B;\\
+IP : acheminement du paquet à travers le réseau.\\
+
+TCP : A envoie un paquet à B\\
+B envoie un paquet à A pour notifier la bonne arrivée. \\
+"Time out" si après un certains temps cette notification n'est pas arrivée, A renvoie le premier paquet à B.\\
+Plusieurs problèmes : Le premier paquet peut se perdre/se détériorer\\
+Ce paquet peut rester bloqué dans le réseau et/ou la notification peut se détériorer.\\
+Dans tous les cas, A renvoie le paquet pour que l'information passe.\\
+
+\quad \underline{Comment éviter la congestion?}
+Bien régler l'intervalle de temps maximal. Si trop grand alors le temps de transmission sera plus long et surtout le réseau sera sous-utilisé.\\
+Si trop court alors on augmente les problèmes de congestion.\\
+
+Solutions :\\
+\quad \underline{Augmentation Additive Retrait Multiplication (AIMD) :}\\
+Soit :$W = \frac{1}{T}$ : le nombre de paquet transmis pas unité de temps.\\
+Tant que le noeud reçoit des notification à temps, W augmente : $W \rightarrow W+a$. \\
+Si un paquet est perdu alors on diminue fortement W : $W \rightarrow Wb$
+
+\quad \underline{IP :}(Internet Protocol) Comment acheminer un paquet d'un noeud A vers B?\\
+Recherche du chemin le plus court : algorithme BFS(breath first search)\\
+On suppose que le signal voyage aussi vite dans toutes les directions (la distante varie peu entre les différents points). \\
+\underline{Algorithme BFS :} Pour trouver le chemin le plus court on cherche tous les chemins les plus courts pour aller à B (on les tests tous).\\
+
+\quad \underline{Routage :} chaque noeud du réseau maintient une table de routage (suivant la destination, le router nous donne le prochain point à suivre)\\
+En pratique, chaque noeud tient seulement à jour les destinations proches de lui\\
+
+\subsubsection{Circuits logiques}
+Un ensemble de portes logiques reliées entre elles. Permet de réaliser des opérations élémentaires sur des bits. Chaque porte logique est caractérisée par une table de vérité établissant une correspondance entre entrées et sorties. Chaque porte est représenté par un symbole.\\
+
+\begin{minipage}{.3\textwidth}
+    \quad \underline{Porte NON (NOT) :}\\
+    Une seule entrée.\\
+    Donne en sortie l'inverse de la valeur en entrée. \\
+    \centering
+    \begin{tabular}{c|c}
+        \multicolumn{2}{c}{NON}\\
+        \hline
+        A & S\\
+        \hline
+        0 & 1\\
+        1 & 0\\            
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}{.3\textwidth}
+    \quad \underline{Porte ET (AND) :}\\
+    Plusieurs entrées.\\
+    Sortie = AB\\
+    \centering
+    \begin{tabular}{c|c|c}
+        \multicolumn{3}{c}{ET}\\
+        \hline
+        A & B&S\\
+        \hline
+        0&1&0\\
+        1&0&0\\
+        0&0&0\\
+        1&1&1\\            
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}{.3\textwidth}
+    \quad \underline{Porte OU (OR) :}\\
+    Plusieurs entrées.\\
+    S=1 si A+B $\geq 1$ \\
+    \centering
+    \begin{tabular}{c|c|c}
+        \multicolumn{3}{c}{OU}\\
+        \hline
+        A & B&S\\
+        \hline
+        1&0&1\\
+        0 & 1&1\\
+        0&0&0\\
+        1 & 1&1\\            
+    \end{tabular}
+\end{minipage}
+
+
+\begin{minipage}{.5\textwidth}
+    \quad \underline{Porte NON ET (NAND) :}\\
+    Plusieurs entrées.\\
+    Suite de ET et NON \\
+    \centering
+    \begin{tabular}{c|c|c}
+        \multicolumn{3}{c}{NON ET}\\
+        \hline
+        A & B&S\\
+        \hline
+        0 & 0&1\\
+        0&1&1\\
+        1 & 0&1\\
+        1&1&0\\
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+    \quad \underline{Porte NON OU(NOR) :}\\
+    Plusieurs entrées.\\
+    Suite de OU et NON \\
+    \centering
+    \begin{tabular}{c|c|c}
+        \multicolumn{3}{c}{NON OU}\\
+        \hline
+        A & B&S\\
+        \hline
+        0 & 0&1\\
+        1&1&0\\
+        0&1&0\\
+        1 & 0&0\\            
+    \end{tabular}
+\end{minipage}
+
+Avec NON, OU, ET, on peut créer tous les circuits possibles. En électricité, la porte NON ET, est la plus simple à faire.\\
+\quad \underline{Additionner deux bits :}\\
+\underline{Sans retenu :(XOR)}\\
+S = (A ET NON B) OU (NON A ET B) = $A\oplus B$\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c|c|c}
+        \multicolumn{3}{c}{XOR}\\
+        0&0&0\\
+        0 & 1&1\\
+        1&0&1\\
+        1&1&0\\
+    \end{tabular}
+    
+\end{table}
+\underline{Avec retenu :} R = AB\\
+
+\quad \underline{Transistors :} Découvert en 1947.\\
+\underline{n-mos :}Si la tension à la base est haute alors le courant passe entre émetteur et collecteur. Si la tension est faible alors le courant ne passe pas.\\
+\underline{p-mos :} Si la tension à la base est faible alors le courant passe. Sinon il ne passe pas.\\
+
+\quad \underline{Inverseur :}\\
+Si on a deux sources de tensions différentes (une à 5V l'autre à 0V par exemple), on peut créer un inverseur avec un transistor n-mos et un p-mos.\\
+
+\subsubsection{Cryptographie et clé secrète}
+secret $k_{partage}$(clé)\\
+\quad \underline{Clé à usage unique :}\\
+100\% sûr pour en-crypter un message M de n bits. On génère une clé secrète k composée de n bits avec chaque bits $k_i$ : hasard $p(k_i = 1) = p(k_i = 1) = \frac{1}{2}$. Indépendant du message M.\\
+
+On envoie x = $M\oplus k$ (XOR : bit par bit)\\
+Pour décrypter : $D ^c\oplus k = (M\oplus k)\oplus k = M$\\
+
+Défauts : il faut une clé de même longueur que le fichier. La clé doit être parfaitement aléatoire et on ne peut pas réutiliser la même clé deux fois. \\
+
+\quad \underline{Data Encryption Standard (DES) 1976 :}\\
+Soit M et K longueur 2n.\\
+$M = (M_a, M_b)$ $k = (k_a, k_b)$\\
+soit $f:\{0,1\}^n$x$\{0,1\}^n \rightarrow \{0,1\}^n$ une fonction non linéaire.\\
+On calcul $c_a = M_a\oplus f(k_a, M_b)$ et $c_b = M_b \oplus f(k_b, c_a)$\\
+On envoie $c=(c_a, c_b)$ et on calcul : $D_b = c_b \oplus f(k_b, c_a)$ et $D_a = c_a\oplus f(k_a, D_b)$\\
+
+En pratique, DES applique le principe huit fois de suite (k huit fois plus longue) pour chiffrer un message avec des permutations. \\
+
+\quad \underline{Cryptographie à clé publique :}\\
+On échange des informations sans partager une clé secrète. C'est possible avec des opérations irréversibles.\\
+\underline{Arithmétique modulaire :} Le modulo P est compliqué à renverser.\\
+Soit P un grand nombre premier. Sur l'ensemble $\{0,1,\dots, P-1\}$ on définit l'addition la multiplication l'exponentiation et le modulo P.\\
+$N_1^{N_2}(modP) = N_3$ est difficile à renverser! $\Rightarrow \theta(10^n)$\\
+
+\underline{Protocole d'échange de clé de Diffie-Hellman :} A et B se mettent d'accord sur un grand nombre premier P et Q : $1<Q<P-1)$ les deux étant publique.\\
+A choisit $N_1$ et B choisit $N_2$\\
+A envoie $N_3 = q^{N_1}(modP)$ et B envoie $N_4 = Q^{N_2}(modP)$\\
+A fait $N_a^{N_1}(modP) = Q^{N_2N_1}(modP) = k$\\
+B fait $N_3^{N_2}(modP) = Q^{N_2N_1}(modP) = k$
+\end{document}

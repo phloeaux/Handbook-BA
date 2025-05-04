@@ -1,0 +1,371 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../IMAGES/}}}
+
+
+
+\begin{document}
+\localtableofcontents
+\subsection{Introduction}
+A turbo-machine designates any device consisting of a rotating element (rotor) which extracts or transfers energy from a fluid in motion (can be liquid or gas).\\
+There exists multiple types of hydro-power plants : \begin{itemize}
+    \item Storage power-plants : \begin{itemize}
+        \item Made of large reservoir and exploit the water elevation
+        \item Water flows through a large pipe (penstock/tunnel) from the reservoir to the power station
+        \item Water returns back to the river
+    \end{itemize}
+    \item Run-of-river power-plants : built on rivers and exploit energy of flowing water. They are characterized by a low head an large flow rate
+    \item Pumped storage power-plants : \begin{itemize}
+        \item Use reversible machines (pump-turbines) to move water between lower and upper reservoirs
+        \item They can store extra electricity and switch to generating mode
+    \end{itemize}
+    \item Tidal power-plants : convert energy from tides into electricity. Tides are more predictable than the wind/sun but they cost higher and have limited sites available
+    \item Wave energy converters (oscillating water column) : \begin{itemize}
+        \item Use the power of ocean waves to generate electricity
+        \item Use periodic air compression and expansion to run a turbine and generate electricity
+        \item Low power density
+    \end{itemize}
+\end{itemize}
+For a typical hydro-power plant, we have :\begin{equation}
+    P = \rho g \Delta H Q
+\end{equation}
+With $P [W]$ the power, $\Delta H [m]$ the water head and $Q [m^3/s]$ the flow rate.\\
+About $60\%$ of electricity production is provided by hydro-power in Switzerland.\\
+Advantages of hydro-power plants : \begin{itemize}
+    \item Suitable to follow the market trend
+    \item Suitable for energy storage and power grid stability
+\end{itemize}
+
+\subsection{Basics of Fluid Dynamics}
+
+\subsubsection{Reynolds number}
+\begin{equation}
+    R_e = \frac{UD}{\nu}
+\end{equation}
+It represents the ratio of inertia over viscous forces. We have three different modes : \begin{itemize}
+    \item $R_e \leq 2000$ : laminar flow
+    \item $2000 \leq R_e \leq 4000$ : transition to turbulence
+    \item $R_e \geq 4000$ : turbulent flow
+\end{itemize}
+\warning The flow in most of turbo-machines is highly turbulent.\\
+
+We define $u^* = \frac{u}{U_\infty}$, $\nu^* = \frac{\nu}{U_\infty}$, $p^* = \frac{p}{\rho U_\infty^2}$, $x^* = \frac{x}{L}$, $y^* = \frac{y}{L}$, $t^* = \frac{t}{L/U_\infty}$, with $U_\infty$ the characteristic velocity and $L$ the characteristic length.\\
+The non dimensional form of momentum conservation is then expressed as : \begin{equation}
+    \frac{DU^*}{Dt^*} = -\nabla p^* + \frac{1}{R_e} \nabla^2 U^*
+\end{equation}
+
+\subsubsection{Vortex flow}
+
+For a free vortex (potential flow), we have : \begin{itemize}
+    \item Velocity field : $\Vec{u} = (0, \frac{\Gamma}{2\pi r},0)$ with $\Gamma$ the vortex intensity ($\Gamma = \oint_C u_\theta(r)dl$)
+    \item Irrotational flow : $\Vec{\nabla} \times \Vec{u} = (0,0,\frac{1}{r} \frac{\partial (ru_\theta)}{\partial r}) = (0,0,0) \quad \forall r>0$
+    \item Pressure field : \begin{itemize}
+        \item Navier-Stokes : $\frac{\partial p}{\partial r} = \rho \frac{u_\theta^2}{r} = \rho \frac{\Gamma^2}{4\pi^2 r^3}$, or $p(r) = p_\infty - \frac{\rho \Gamma^2}{8\pi^2 r^2}$
+        \item Alternate method (Bernoulli equation with irrotational and steady flow) : $\begin{matrix}
+            \forall r>0 & p(r) + \rho \frac{u_\theta^2}{2} = cste\\
+            \Rightarrow \forall r>0 & p(r) = p_\infty - \frac{\rho \Gamma^2}{8\pi^2 r^2}
+        \end{matrix}$
+    \end{itemize}
+\end{itemize}
+
+We can also define the Rankine model : \begin{itemize}
+    \item Close the axis, viscous forces limit the velocity
+    \item Velocity field : $\begin{cases}
+        r\geq a & u_\theta = \frac{\Gamma}{2\pi r}\\
+        r\leq a & u_\theta = \omega r\\
+    \end{cases}$
+    with $\Gamma = \int_0^{2\pi} u_\theta r d\theta$ the circulation
+    \item For continuity : $\Gamma = 2\pi \omega a^2$
+    \item Pressure field : $\begin{cases}
+        r\geq a & p(r) = p_\infty - \frac{\rho \Gamma^2}{8\pi^2 r^2}\\
+        r \leq a & p(r) = p_\infty - \frac{\rho \Gamma^2}{8\pi^2 a^2}(2-\frac{r^2}{a^2})
+    \end{cases}$
+\end{itemize}
+
+\subsubsection{Boundary layer}
+It is defined as the fluid layer next to a solid surface, where the viscous forces are dominant. Velocity at the wall is 0 and the flow outside the boundary layer is assumed in-viscid.\\
+The limit of the BL is defined as the position where the speed reaches $99\%$ of $U_\infty$. Displacement thickness is then : $\delta_1 = \int_0^\delta (1-\frac{u}{U_\infty})dy$, the momentum thickness is then $\delta_2 = \int_0^\delta (1-\frac{u}{U_\infty})\frac{u}{U_\infty}dy$ and the form factor is $H_{12} = \frac{\delta_1}{\delta_2}$.\\
+
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{||c|c|c|}
+    \hline
+        Symbol & Laminar flow & Turbulent flow \\ \hline
+        $\delta (x)$ & $5 R_{ex}^{-1/2}$ & $0.37 x R_{ex}^{-1/5}$\\ \hline
+        $\delta_1(x)$ & $0.344 \delta(x) $ & $0.125 \delta(x)$ \\ \hline
+        $\delta_2(x)$ & $0.133 \delta(x) $ & $0.097 \delta(x)$\\ \hline
+        $H_{1,2} $ & $2.59$ & $1.3-1.4$\\ \hline
+        $c_f$ & $0.664 R_{ex}^{-1/2}$ & $0.0576 R_{ex}^{-1/5}$\\ \hline
+    \end{tabular}
+\end{table}
+With $R_{ex} = \frac{\rho C_{ref} x}{\mu}$ and $c_f = \frac{\tau_w}{\frac{1}{2}\rho C_{ref}^2}$.\\
+
+\subsubsection{Flow in pipes}
+We consider a steady, axisymmetric and incompressible flow in an infinitely long circular pipe of radius R. The flow remains parallel to the pipe axis. The solution of Poiseuille flow is then \begin{equation}
+u_x(r) = -\frac{1}{4\mu} (\frac{dp}{dx}) (R^2-r^2) \end{equation}
+
+The velocity profile of Poiseuille flow is a parabolic function of r which is maximum on the pipe axis : $\max(u_x) = -\frac{R^2}{4\mu} (\frac{dp}{dx})$.\\
+The flow rate Q and mean velocity are given by : \begin{equation}
+    \begin{gathered}
+        Q = \int_0^R u_x 2\pi r dr = -\frac{\pi R^4}{8\mu} (\frac{dp}{dx})\\
+        \overline{u}_x = \frac{\max(u_x)}{2}\\
+    \end{gathered}
+\end{equation}
+
+The shear stress can then be expressed as : $4\tau_w = -2R \frac{dp}{dx}$. The \textbf{friction factor} $c_f$ is a normalized wall shear stress : \begin{equation}
+    c_f = -\frac{2R \frac{dp}{dx}}{\frac{1}{2} \rho \overline{u}_x^2} = \frac{32\mu}{\rho R \overline{u}_x} = \frac{64}{R_e}
+\end{equation}
+\warning The last equality is only valid for laminar flow! When the flow is turbulent, the velocity profile is no more quadratic and flattens (Moody diagram).
+
+\subsubsection{Flow around a profiled body}
+\begin{itemize}
+    \item Chord line : straight line connecting the leading and trailing edge
+    \item Mean camber line : located halfway between the upper and lower surfaces
+    \item Camber : maximum distance between mean camber line and chord line
+    \item Span : width of the foil
+\end{itemize}
+
+The pressure coefficient can be expressed as : $c_p = \frac{p_m-p_0}{\frac{1}{2}\rho U_0^2}$. At stagnation point : $c_p = 1$. \\
+Lift and drag : \begin{itemize}
+    \item Angle of attack $\alpha$ : angle between the upstream flow direction and chord line
+    \item Total force due to the flow can be decomposed into 2 components : \begin{itemize}
+        \item Lift : L component of the force perpendicular to upstream flow direction $C_L = \frac{L}{q_\infty S}$
+        \item Drag : D component of the force parallel to upstream flow direction $C_D = \frac{D}{q_\infty S}$
+    \end{itemize}
+\end{itemize}
+With $q_\infty = \frac{1}{2} \rho U_\infty^2$ and $S$ the reference surface (chord x span). We can also define the Aero(Hydro)dynamic efficiency : \begin{equation}
+    \eta = \frac{C_L}{C_D}
+\end{equation}
+
+\quad \underline{Thin Airfoil Theory :}\\
+Airfoil thickness < $12\%$ of the chord length, small incidence angle ($\alpha<<\alpha_{stall}$), in-viscid and incompressible flow. \begin{equation}
+    \frac{dC_L}{d\alpha} = 2\pi
+\end{equation}
+
+The \textbf{Aero/Hydro dynamic center (AC)} is the point where the moment of forces does not depend on incidence angle. The \textbf{center of pressure (CP)} is the point where the moment of forces is zero (might be outside the foil).\\
+
+\subsection{Energy conservation}
+We denote $gH_{1:2}$ the head loss.\\
+In case of flows exchanging with outside world, we have for Bernoulli's equation : Specific energy $= \frac{p}{\rho} + \frac{u^2}{2} + gz$ or, along a stream line : $\frac{p_1}{\rho} + \frac{u_1^2}{2} + gz_1 = \frac{p_2}{\rho} + \frac{u_2^2}{2} + gz_2 + gH_{1:2}$\\
+
+For unsteady potential flow ($\Vec{u} = \Vec{\nabla} \varphi$ and $\Delta \varphi = 0$), we have : \begin{equation}
+    \frac{\partial \varphi}{\partial t} + \frac{p}{\rho} + \frac{u^2}{2} + gz = f(t)
+\end{equation}
+
+\warning Need to take into account head loss in most turbo-machines!\\
+For example, in a turbine, the specific energy available is : $E = gH_I - gH_{\overline{I}} = g(Z_B - Z_{\overline{B}}) - \sum_{\text{Upstream + downstream}} gH_r$.\\
+The available power for the turbine in a power-plant depends on the available flow rate Q : $P = \rho E Q$.\\
+
+\subsection{Main types of Hydraulic Machines}
+Large variety of hydraulic turbines : \begin{itemize}
+    \item Action turbines : Pelton
+    \item Reaction turbines : Francis (radial and axial), Kaplan (axial), Propeller
+    \item Cross-flow turbine : double action, simple design and low cost
+    \item Hydro-kinetic turbine : they produce a base load for the micro-grid power systems and are installed underwater. The efficiency cannot exceed a theoretical value (Betz limit) that is reached when $\frac{v_2}{v_1} = \frac{1}{3}$ which leads to $\eta_{max} = 59.3\%$
+\end{itemize}
+
+\subsubsection{Impulse-type turbines}
+The rotor is made of several buckets and the motion is obtained by high speed jets (Pelton). They are the most used turbines in Switzerland. The jet is deviated almost $180^\circ$ after hitting the bucket. They are well-suited for high heads. Horizontal shaft can withstand 1 to 3 jets whereas vertical jets can accommodate from 1 to 6 jets.\\
+
+\subsubsection{Reaction turbines}
+The most known types are Francis turbines. They are the most powerful turbines (>800MW). The flow rotates in the spiral casing, causing the runner to rotate with and then exits at the center of the turbine. The runner is highly efficient (>$95\%$)but only work in one specific condition. At optimal condition, the flow leaves the runner axially. \\
+
+One other type is called Kaplan turbine. Suited for low heads and large flow rates. They are axial machines with adjustable blade pitch. They are high cost but can operate at wider range at optimum conditions. They are similar to a Francis turbine.\\
+
+Finally, another type is Bulb turbine. Suited for very low heads and high flow rates. No spiral casing, just a straight tube with a propeller in the middle. 
+
+\subsubsection{Specific speed}
+\begin{itemize}
+    \item Case of a turbine : $N_s$ is the speed of a similar turbine which would develop 1kW under 1m head at its optimum operation : \begin{equation}
+        N_s = N \frac{P^{1/2}}{H^{5/4}}
+    \end{equation}
+    With $[N] = RPM$, $[P] = kW$ and $[H] = m$
+    \item Case of a pump : the specific speed is expressed the same way as for the turbine
+    \item Unit specific speed $N_Q$ : \begin{equation}
+        N_Q = N \frac{Q^{1/2}}{H^{3/4}}
+    \end{equation}
+    With $[Q] = m^3/s$. $N_Q$ is the speed of a similar pump which produces a unit flow rate against 1m head
+\end{itemize}
+
+\subsection{Cavitation in Hydraulic Machines}
+Cavitation is the formation of cavities filled with vapor and gas within a liquid due to a pressure decrease without heat exchanged. Condition : \begin{equation}
+    \begin{gathered}
+        p_M < p_v \Leftrightarrow c_p < -\sigma\\
+        c_p = \frac{p_M - p_{ref}}{\frac{1}{2} \rho C_{ref}^2}\\
+        \sigma = \frac{p_{ref} - p_v}{\frac{1}{2} \rho C_{ref}^2}\\
+    \end{gathered}
+\end{equation}
+
+Effects : \begin{itemize}
+    \item Alteration of hydrodynamic performances
+    \item Noise and vibration
+    \item Erosion
+\end{itemize}
+
+Types of cavitation : \begin{itemize}
+    \item Bubble cavitation : they grow in low pressure zone and collapse violently
+    \item Leading edge cavitation : a main cavity is formed at the leading edge, can cause severe erosion
+    \item Vortex cavitation
+\end{itemize}
+
+Cavitation is the main obstacle that limits the speed of sailing boats. Cavitation may occur in any body moving in water at speed over $50$knots.\\
+
+We now use the Rayleigh model to quantify the erosion. Assume bubble of initial radius $R_0$. They may be empty $p=0$ or filled with vapour $p = p_v$. Only spherical deformation can happen, the fluid is Newtonian and incompressible. No heat transfer across the bubble interference, no surface tension and no gravity. We then have : $R \Ddot{R} + \frac{3}{2} \dot{R}^2 = -\frac{p_\infty - p_v}{\rho}$.\\
+The interface velocity during the collapse and the collapse time are therefore : \begin{equation}
+\begin{gathered}
+    \dot{R} = \sqrt{ \frac{2}{3} \frac{p_\infty - p_v}{\rho} (\frac{R_0^3}{R^3}-1)}\\
+    T_R = 0.915 \frac{\rho}{p_\infty - p_v}\\
+    \end{gathered}
+\end{equation}
+
+Cavitation is believed to originate from a combined action of shock waves ($\simeq GPa$) and micro-jetting. 
+Typical steps of cavitation erosion process : \begin{enumerate}
+    \item Incubation period (deformation without mass loss)
+    \item Acceleration period (increase of mass loss rate)
+    \item Stationary period (the rate of mass loss remains constant)
+    \item Deceleration period (decrease of mass loss rate)
+\end{enumerate}
+
+\subsection{Similarity rules and Model Testing}
+Is defined similarity between a model (M) and a prototype (P) when both have similar geometric, kinematic and dynamic properties. \begin{itemize}
+    \item Geometric similarity : $\lambda_r = \frac{L_M}{L_P} = \frac{D_M}{D_P}$
+    \item Kinematic similarity : $C_r = \frac{C_M}{C_P}$ with $C$ a velocity
+    \item Dynamic similarity : $F_r = \frac{(F_i)_M}{(F_i)_P} = \frac{(F_v)_M}{(F_v)_P} = \frac{(F_g)_M}{(F_g)_P}$, $F_i$ inertial forces, $F_v$ viscous forces and $F_g$ gravitational forces
+\end{itemize}
+
+Two key views are used in turbo-machinery for 2D representation : \begin{enumerate}
+    \item Cascade view : excellent way to represent the energy transfer. It is obtained by developing a cylindrical surface located at the tip or mid span of the blades
+    \item Meridional view : leading and trailing edge of the blades are projected on a meridional plane using a circumferential line
+\end{enumerate}
+
+\subsubsection{Velocity triangle}
+\warning The flow leaves the rotor and the stator parallel to the camber line.\\
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{c||c|c}
+        & Inlet & Outlet \\ \hline \hline
+        Absolute velocity & $\Vec{C}_1$ & $\Vec{C}_{\overline{1}}$\\ \hline
+        Relative velocity (rotating frame) & $\Vec{W}_1$ & $\Vec{W}_{\overline{1}}$\\ \hline
+        Circumference velocity of the blades & $\Vec{U}_1$ & $\Vec{U}_{\overline{1}}$ \\\hline
+        Absolute velocity in the meridional plane & $\Vec{Cm}_1$ & $\Vec{Cm}_{\overline{1}}$\\ \hline
+        Tangential component of absolute velocities & $\Vec{Cu}_1$ & $\Vec{Cu}_{\overline{1}}$\\
+    \end{tabular}
+\end{table}
+We have $\vec{C}_1 = \vec{U}_1 + \vec{W}_1$. We can define the incidence angles : \begin{itemize}
+    \item $\alpha_1 = (\widehat{C_1 U_1})$ imposed by the guide vanes
+    \item $\beta_{\overline{1}} = (\hat{W_{\overline{1}}, U_{\overline{1}}})$ imposed by the runner blades
+\end{itemize}
+Both depends on the blade inlet geometry and operating conditions. \\
+
+$\lvert \lvert \vec{Cu}_i \rvert \rvert = Cu_i = \frac{\vec{C}_i \vec{U}_i}{U_i} = \frac{Cm_i}{\tan \alpha} = U_i - \frac{Cm_i}{\tan \beta}$.\\
+
+\quad \underline{Euler theory of turbo-machines :}\\
+The specific energy balance can be written as : $E_t = [\frac{p_i}{\rho} + gz_i + \frac{\vec{c}_i^2}{2}]_{\overline{1}}^1 - E_r$. Along a streamline in the rotating frame : $[\frac{p_i}{\rho} + gz_i]_{\overline{1}}^1 = - [-\frac{\overline{U}_i^2}{2} + \frac{\vec{W}_i^2}{2}]_{\overline{1}}^1 + E_r$. The \textbf{Euler equation} (also valid for pumps) is : \begin{equation}
+    E_t = U_1 Cu_1 - U_{\overline{1}} Cu_{\overline{1}}
+\end{equation}
+
+The incidence angles have an influence on the flow pattern at the runner outlet and turbine performance. The best efficiency point happens for $\vec{Cu}_{\overline{1}} = 0$\\
+
+\subsubsection{Dynamic similarity}
+There are three dimensionless numbers relevant in hydraulic turbo-machines : \begin{itemize}
+    \item Reynolds number : $Re = \frac{\pi n D^2}{\nu}$
+    \item Froude number : $Fr = \sqrt{\frac{E}{gD}}$, $Fr_P = Fr_M$
+    \item Thoma number : $\sigma_{TH} = \frac{NPSE}{E}$
+\end{itemize}
+With n the rotational speed, E the specific energy, NPSE the Net Positive Suction Energy.\\
+We have \begin{equation}
+\begin{gathered}
+    NPSE = gH_{\overline{I}} - \frac{p_v}{\rho} - gZ_{ref}\\
+    E = gH_I - gH_{\overline{I}}\\
+    hG_r = \frac{C_{\overline{I}}^2}{2}
+    \end{gathered}
+\end{equation}
+
+\subsection{Centrifugal pumps}
+Two main types of pumps : \begin{itemize}
+    \item Positive displacement pumps : fluid is moved by periodically closing a fixed volume and moving it mechanically through the system
+    \item Centrifugal pump : fluid is moved by the conversion of rotational kinetic energy of an impeller to hydrodynamic energy of the fluid flow. The fluid enters the impeller near to the rotating axis and is accelerated by the impeller
+\end{itemize}
+
+In multi stage pumps, several impeller are stacked in series to increase the pressure. Double suction pumps utilizes a pair of impellers arranged in a back-to-back configuration. They are more balanced and run smoother. \\
+
+The performance is given by : $\eta = \frac{P_u}{P} = \frac{\rho g H Q}{P}$. The impeller loss is given by : $Z_{La} = \frac{1}{2g}(U_2^2 - U_1^2 + W_1^2 - W_2^2) - H_P$ and the diffuser loss by : $Z_{Le} = \frac{1}{2g} (C_2^2-C_6^2)-(H_{s,6}-H_{s,2})$.\\
+
+Part load re-circulation causes an increase in vibration levels, an instability in the performance curve. Zone with highest erosion risk is usually the impeller eye. 
+
+\subsubsection{Hydraulic forces}
+
+\quad \underline{Axial thrust :}\\
+Resulting thrust consists of : force on hub, force on shroud ($F_{H,S} = 2\pi \int p(r)rdr$, impulse force due to flow redirection on impeller ($F_I = \rho Q (c_{1m} - c_{2m} \cos \varepsilon_2)$), unbalanced shaft force ($F_w = \frac{\pi}{4} d_w^2 (p_{amb} - p_1)$. Therefore, $F_{ax} = F_H - F_S - F_I + F_W$.\\
+
+For single stage pumps, we can use balance holes and backvanes. For multistage pumps, we can use balance piston/disk and back-to-back impellers. 
+
+\subsubsection{Applications}
+They can be found in thermal power plants : high pressure multistage pumps as boiler feed pumps, single stage double suction pumps as booster pumps.\\
+They can also be found in oil exploration, oil transport, for desalination, treatment of waste water, paper production.\\
+
+\subsection{Marine propellers}
+\subsubsection{Propeller genealogy}
+Multiple kinds exists : \begin{itemize}
+    \item Mono block propellers : made from metal block and CNC'ed or cast. They are low cost with no removable parts.
+    \item Built up propellers : they have individual blades, better quality than full casting and can easily be replaced.
+    \item Ducted propellers : made with an annular duct around the propeller. It has an improved thrust at low speed but a high drag resistance at high speeds.
+    \item Podded and azimuthal propulsors : mechanically complex. Improved inflow velocity (no rudder). 
+    \item Contra-rotating propellers : mechanically complex. Compact design and high power. 
+    \item Overlapping propellers : they are not mounted coaxially. Exploits more of the low speed flow in the wake of the hull.
+    \item Tandem propellers : shaft is subject to large bending moments. Propellers are mounted axially on the same shaft and rotate in the same direction.
+\end{itemize}
+
+\subsubsection{Propeller geometry}
+We have the following terms used : \begin{itemize}
+    \item Root : intersection between blade and hub
+    \item Tip : radially outermost point on blade 
+    \item Leading edge : edge of blade that enters water
+    \item Trailing edge : edge of blade from which water exits
+    \item Blade back : upstream face of blade (suction side)
+    \item Blade face : downstream face of blade (pressure side)
+    \item Propeller reference line : line normal to the shaft axis
+    \item Generator line : intersection line between a longitudinal plane passing through the propeller reference line and the blade surface
+    \item Blade reference line : line defined by all mid-points between leading edge and trailing edge on a curvilinear line of the intersection between blade surface and cylinder coaxial with x-axis. It extends from root to tip.
+\end{itemize}
+We have different kinds of pitch. Constant (the pitch is equal for each radius), progressive (pitch increases along the radial line from leading edge to trailing edge), regressive (it decreases along the radial line from leading edge to trailing edge), variable. The pitch angle is defined by : $\tan \alpha = \frac{P}{2\pi r}$.\\
+
+The density of water is variable. It increases with salinity and pressure but decreases when the temperature increases. The vapor pressure also changes with temperature such that : \begin{equation}
+    p_v(T) = 610.94 e^{17.625 \frac{T}{T+243.04}} \quad [T] = {}^\circ C 
+\end{equation}
+
+\subsubsection{Propeller performance}
+Let T be the open water thrust, $V_s$ the ship advance velocity, $n$ the rotation rate (rps or Hz), $Q$ the torque, $R$ the ship resistance, $P_D$ the propeller power and $P_E$ the effective power. We have the following : \begin{itemize}
+\item Advance coefficient : $J = \frac{V_a}{nD}$
+\item Thrust coefficient : $K_t = \frac{T}{\rho n^2 D^4}$
+\item Torque coefficient : $K_q = \frac{Q}{\rho n^2 D^5}$
+\item Propeller efficiency : $\eta_0 = J \frac{K_t}{2\pi K_q}$
+\item Reynolds number : $Re = \frac{V_a D}{\nu}$
+\item Rotational Reynolds number : $Re_n = \frac{nD^2}{\nu}$
+    \item Thrust deduction coefficient : $t = \frac{T-R}{T}$
+    \item Wake fraction : $w = \frac{V_s - V_a}{V_s}$
+    \item Hull efficiency : $\eta_H = \frac{1-t}{1-w}$
+    \item Behind-hull efficiency : $\eta_B = \frac{TV_a}{P_D}$
+    \item Relative rotative efficiency : $\eta_R = \frac{\eta_B}{\eta_0}$
+    \item Propulsive efficiency : $\eta_D = \eta_H \eta_0 \eta_R = \frac{1-t}{1-w} \eta_0 \eta_R$
+\end{itemize}
+
+\subsection{Pelton Turbines}
+The produced power is defined as $P = \rho g H Q \eta$, with H the head and Q the discharge. The rotating speed is at maximum power conditions equal to half the jet speed.\\
+Let $D_1$ be the pitch diameter and $B_2$ the inner bucket width. The higher $\frac{D_1}{B_2}$, the higher the efficiency.\\
+Layout of a Pelton turbine given H and Q : \begin{enumerate}
+    \item Definition of net head : $H = (Z_B - Z_{\overline{B}}) - \sum H_r^T$
+    \item Calculation of the jet speed : $c_{jet} = \sqrt{2gH}$
+    \item Choose an appropriate speed
+    \item Calculation of the pitch circle : $ku_1 = \frac{n\pi D_1}{\sqrt{2gH}} \simeq 0.48$
+    \item Assumption of the jet number : $z_0$
+    \item Discharge per nozzle : $Q_D = \frac{Q}{z_0}$
+    \item Jet diameter : $d_0 = \sqrt{\frac{4Q_D}{\pi c_{jet}}}$
+    \item Bucket width : $\varphi_{B_2} = \frac{Q}{z_0 B_2^2 \frac{\pi}{4} \sqrt{2gH}} \simeq 0.1$
+    \item Calculation of $\frac{D_1}{B_2}>2.7$ ratio (check feasibility)
+    \item Define efficiency
+    \item Compute output
+\end{enumerate}
+
+
+
+\end{document}
